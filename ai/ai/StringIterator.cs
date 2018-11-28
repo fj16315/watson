@@ -1,19 +1,19 @@
-﻿using System;
+// ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Text;
+// using System.Threading.Tasks;
 
-namespace game_ai
+namespace GameAI
 {
     public class StringIterator : IEnumerable
     {
-	    private string[] _inputString;
+	    private string[] words;
 
 	    public StringIterator(string inputString)
 	    {
-		    _inputString = inputString.Split(' ');
+		    words = inputString.Split(' ');
 	    }
 
 	    IEnumerator IEnumerable.GetEnumerator()
@@ -23,15 +23,10 @@ namespace game_ai
 
 	    public IEnumerator GetEnumerator( )
 	    {
-		    foreach (string word in _inputString)
+		    foreach (var word in words)
 		    {
 			    yield return word;
 		    }
 	    }
-
-        static void Main()
-        {
-
-        }
     }
 }
