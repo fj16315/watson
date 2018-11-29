@@ -3,867 +3,835 @@ guid: 05da6f57793e20245a06b49d73882b27
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: floor_lower
-    100002: //RootNode
-    100004: wall1
-    100006: wall2
-    100008: wall3
-    100010: wall4
-    100012: wall5
-    100014: walls_entry
-    100016: entry
-    100018: transform1
-    100020: transform2
-    100022: transform3
-    100024: transform4
-    100026: wall5 1
-    100028: wall6
-    100030: wall7
-    100032: wall8
-    100034: wall9
-    100036: east
-    100038: east 1
-    100040: entry 1
-    100042: rear
-    100044: rear 1
-    100046: transform2 1
-    100048: transform3 1
-    100050: wall1 1
-    100052: wall10
-    100054: wall10 1
-    100056: wall11
-    100058: wall11 1
-    100060: wall12
-    100062: wall12 1
-    100064: wall13
-    100066: wall13 1
-    100068: wall14
-    100070: wall14 1
-    100072: wall15
-    100074: wall15 1
-    100076: wall16
-    100078: wall16 1
-    100080: wall17
-    100082: wall17 1
-    100084: wall18
-    100086: wall18 1
-    100088: wall19
-    100090: wall19 1
-    100092: wall2 1
-    100094: wall20
-    100096: wall20 1
-    100098: wall21
-    100100: wall21 1
-    100102: wall22
-    100104: wall22 1
-    100106: wall23
-    100108: wall23 1
-    100110: wall24
-    100112: wall24 1
-    100114: wall26
-    100116: wall26 1
-    100118: wall27
-    100120: wall27 1
-    100122: wall28
-    100124: wall28 1
-    100126: wall29
-    100128: wall29 1
-    100130: wall3 1
-    100132: wall30
-    100134: wall30 1
-    100136: wall4 1
-    100138: wall6 1
-    100140: wall7 1
-    100142: wall8 1
-    100144: wall9 1
-    100146: walls_working
-    100148: west
-    100150: west 1
-    100152: door_mesh1
-    100154: walls_working_entry_wall1
-    100156: door_frame
-    100158: door_hole
-    100160: door_hole1
-    100162: images
-    100164: img_lower
-    100166: pPlane1
-    100168: set
-    100170: wall31
-    100172: wall31 1
-    100174: wall_test
-    100176: walls
-    100178: door_frame 1
-    100180: door_hole2
-    100182: floor_test
-    100184: history
-    100186: transform5
-    100188: transform6
-    100190: transform7
-    100192: wall_test2
-    100194: door_hole3
-    100196: transform8
-    100198: transform9
-    100200: wall_test 1
-    100202: pCube1
-    100204: pCube10
-    100206: pCube11
-    100208: pCube12
-    100210: pCube13
-    100212: pCube14
-    100214: pCube15
-    100216: pCube2
-    100218: pCube3
-    100220: pCube4
-    100222: pCube5
-    100224: pCube6
-    100226: pCube7
-    100228: pCube8
-    100230: pCube9
-    100232: stairs
-    100234: set1
-    100236: transform27
-    100238: transform28
-    100240: transform28 1
-    100242: transform29
-    100244: transform29 1
-    100246: transform30
-    100248: transform30 1
-    100250: transform31
-    100252: transform31 1
-    100254: transform32
-    100256: transform32 1
-    100258: transform33
-    100260: transform33 1
-    100262: transform34
-    100264: transform34 1
-    100266: transform35
-    100268: transform35 1
-    100270: transform36
-    100272: transform36 1
-    100274: transform37
-    100276: transform37 1
-    100278: transform38
-    100280: transform38 1
-    100282: transform39
-    100284: transform39 1
-    100286: transform40
-    100288: transform40 1
-    100290: transform41
-    100292: transform41 1
-    100294: transform42
-    100296: transform42 1
-    100298: transform43
-    100300: transform43 1
-    100302: transform44
-    100304: transform44 1
-    100306: transform45
-    100308: transform45 1
-    100310: transform46
-    100312: transform46 1
-    100314: transform47
-    100316: transform47 1
-    100318: transform48
-    100320: transform48 1
-    100322: transform49
-    100324: transform49 1
-    100326: transform50
-    100328: transform50 1
-    100330: transform51
-    100332: transform51 1
-    100334: transform52
-    100336: transform52 1
-    100338: transform53
-    100340: transform53 1
-    100342: transform54
-    100344: transform54 1
-    100346: transform55
-    100348: transform55 1
-    100350: transform56
-    100352: transform56 1
-    100354: transform57
-    100356: transform57 1
-    100358: transform58
-    100360: transform58 1
-    100362: transform59
-    100364: transform59 1
-    100366: transform60
-    100368: transform60 1
-    100370: transform61
-    100372: transform61 1
-    100374: transform62
-    100376: transform62 1
-    100378: transform63
-    100380: transform63 1
+    100000: billiards_door
+    100002: billiards_door 1
+    100004: dining_door
+    100006: dining_door 1
+    100008: door
+    100010: door 1
+    100012: door 2
+    100014: door 3
+    100016: door 4
+    100018: door 5
+    100020: door 6
+    100022: door 7
+    100024: door 8
+    100026: door_frame
+    100028: door_frame 1
+    100030: door_frame 2
+    100032: door_frame 3
+    100034: door_frame 4
+    100036: door_frame 5
+    100038: door_frame 6
+    100040: door_frame 7
+    100042: door_frame 8
+    100044: door_frame 9
+    100046: door_frame2
+    100048: door_hole
+    100050: door_hole 1
+    100052: door_hole 2
+    100054: door_hole 3
+    100056: door_hole 4
+    100058: door_hole 5
+    100060: door_hole 6
+    100062: door_hole 7
+    100064: door_hole 8
+    100066: door_hole1
+    100068: door_hole2
+    100070: door_hole3
+    100072: door_hole4
+    100074: doors
+    100076: doors 1
+    100078: downstairs
+    100080: east
+    100082: entry
+    100084: floor_lower
+    100086: floor_test
+    100088: floor_upper
+    100090: frame1
+    100092: frame2
+    100094: history
+    100096: history 1
+    100098: kitchen_door
+    100100: kitchen_door 1
+    100102: //RootNode
+    100104: platform_left
+    100106: platform_right
+    100108: polySurface1
+    100110: polySurface10
+    100112: polySurface11
+    100114: polySurface12
+    100116: polySurface13
+    100118: polySurface14
+    100120: polySurface15
+    100122: polySurface16
+    100124: polySurface17
+    100126: polySurface18
+    100128: polySurface19
+    100130: polySurface2
+    100132: polySurface20
+    100134: polySurface21
+    100136: polySurface22
+    100138: polySurface23
+    100140: polySurface24
+    100142: polySurface25
+    100144: polySurface26
+    100146: polySurface27
+    100148: polySurface28
+    100150: polySurface29
+    100152: polySurface3
+    100154: polySurface30
+    100156: polySurface31
+    100158: polySurface32
+    100160: polySurface33
+    100162: polySurface34
+    100164: polySurface35
+    100166: polySurface36
+    100168: polySurface37
+    100170: polySurface38
+    100172: polySurface39
+    100174: polySurface4
+    100176: polySurface40
+    100178: polySurface41
+    100180: polySurface42
+    100182: polySurface43
+    100184: polySurface43 1
+    100186: polySurface44
+    100188: polySurface45
+    100190: polySurface46
+    100192: polySurface47
+    100194: polySurface48
+    100196: polySurface49
+    100198: polySurface5
+    100200: polySurface50
+    100202: polySurface51
+    100204: polySurface52
+    100206: polySurface52 1
+    100208: polySurface53
+    100210: polySurface54
+    100212: polySurface54 1
+    100214: polySurface55
+    100216: polySurface55 1
+    100218: polySurface56
+    100220: polySurface57
+    100222: polySurface58
+    100224: polySurface59
+    100226: polySurface6
+    100228: polySurface60
+    100230: polySurface61
+    100232: polySurface62
+    100234: polySurface7
+    100236: polySurface8
+    100238: polySurface9
+    100240: rear
+    100242: s1
+    100244: s14
+    100246: s15
+    100248: s2
+    100250: s3
+    100252: s4
+    100254: s5
+    100256: s6
+    100258: s7
+    100260: s8
+    100262: s9
+    100264: salon_door
+    100266: salon_door 1
+    100268: set
+    100270: single
+    100272: stairs1
+    100274: stairs_left
+    100276: stairs_left_history
+    100278: stairs_mesh
+    100280: stairs_middle
+    100282: stairs_right
+    100284: transform10
+    100286: transform11
+    100288: transform16
+    100290: transform2
+    100292: transform23
+    100294: transform24
+    100296: transform25
+    100298: transform26
+    100300: transform27
+    100302: transform28
+    100304: transform29
+    100306: transform3
+    100308: transform30
+    100310: transform31
+    100312: transform32
+    100314: transform33
+    100316: transform34
+    100318: transform35
+    100320: transform36
+    100322: transform37
+    100324: transform38
+    100326: transform39
+    100328: transform4
+    100330: transform40
+    100332: transform41
+    100334: transform42
+    100336: transform43
+    100338: transform44
+    100340: transform45
+    100342: transform46
+    100344: transform47
+    100346: transform48
+    100348: transform49
+    100350: transform5
+    100352: transform50
+    100354: transform51
+    100356: transform52
+    100358: transform53
+    100360: transform54
+    100362: transform55
+    100364: transform56
+    100366: transform57
+    100368: transform58
+    100370: transform59
+    100372: transform6
+    100374: transform60
+    100376: transform61
+    100378: transform62
+    100380: transform63
     100382: transform64
-    100384: transform64 1
-    100386: transform65
-    100388: transform65 1
-    100390: transform66
-    100392: transform66 1
-    100394: transform67
-    100396: transform67 1
-    100398: transform68
-    100400: transform68 1
-    100402: transform69
-    100404: transform69 1
-    100406: transform70
-    100408: transform70 1
-    100410: transform71
-    100412: transform71 1
-    100414: transform72
-    100416: transform72 1
-    100418: transform73
-    100420: transform73 1
-    100422: transform74
-    100424: transform74 1
-    100426: transform75
-    100428: transform75 1
-    100430: transform76
-    100432: transform76 1
-    100434: transform77
-    100436: transform77 1
-    100438: transform78
-    100440: transform78 1
-    100442: transform79
-    100444: transform79 1
-    100446: transform80
-    100448: transform80 1
-    100450: transform81
-    100452: transform81 1
-    100454: transform82
-    100456: transform82 1
-    100458: transform83
-    100460: transform83 1
-    100462: transform84
-    100464: transform84 1
-    100466: transform85
-    100468: transform85 1
-    100470: stairs1
-    100472: transform12
-    100474: transform13
-    100476: transform14
-    100478: transform15
-    100480: transform16
-    100482: transform17
-    100484: transform18
-    100486: transform19
-    100488: transform20
-    100490: transform21
-    100492: transform22
-    100494: transform23
-    100496: transform24
-    100498: transform25
-    100500: transform26
-    100502: door_frame1
-    100504: door_frame2
-    100506: door_hole4
-    100508: stairs 1
-    100510: transform10
-    100512: transform11
-    100514: walls_working 1
-    100516: stair
-    100518: floor_upper
-    100520: platform_left
-    100522: platform_right
-    100524: s1
-    100526: s10
-    100528: s11
-    100530: s12
-    100532: s13
-    100534: s14
-    100536: s15
-    100538: s16
-    100540: s17
-    100542: s18
-    100544: s19
-    100546: s2
-    100548: s20
-    100550: s3
-    100552: s4
-    100554: s5
-    100556: s6
-    100558: s7
-    100560: s8
-    100562: s9
-    100564: stairs_left
-    100566: stairs_left_history
-    100568: stairs_middle
-    100570: stairs_right
-    100572: walls_combined
-    400000: floor_lower
-    400002: //RootNode
-    400004: wall1
-    400006: wall2
-    400008: wall3
-    400010: wall4
-    400012: wall5
-    400014: walls_entry
-    400016: entry
-    400018: transform1
-    400020: transform2
-    400022: transform3
-    400024: transform4
-    400026: wall5 1
-    400028: wall6
-    400030: wall7
-    400032: wall8
-    400034: wall9
-    400036: east
-    400038: east 1
-    400040: entry 1
-    400042: rear
-    400044: rear 1
-    400046: transform2 1
-    400048: transform3 1
-    400050: wall1 1
-    400052: wall10
-    400054: wall10 1
-    400056: wall11
-    400058: wall11 1
-    400060: wall12
-    400062: wall12 1
-    400064: wall13
-    400066: wall13 1
-    400068: wall14
-    400070: wall14 1
-    400072: wall15
-    400074: wall15 1
-    400076: wall16
-    400078: wall16 1
-    400080: wall17
-    400082: wall17 1
-    400084: wall18
-    400086: wall18 1
-    400088: wall19
-    400090: wall19 1
-    400092: wall2 1
-    400094: wall20
-    400096: wall20 1
-    400098: wall21
-    400100: wall21 1
-    400102: wall22
-    400104: wall22 1
-    400106: wall23
-    400108: wall23 1
-    400110: wall24
-    400112: wall24 1
-    400114: wall26
-    400116: wall26 1
-    400118: wall27
-    400120: wall27 1
-    400122: wall28
-    400124: wall28 1
-    400126: wall29
-    400128: wall29 1
-    400130: wall3 1
-    400132: wall30
-    400134: wall30 1
-    400136: wall4 1
-    400138: wall6 1
-    400140: wall7 1
-    400142: wall8 1
-    400144: wall9 1
-    400146: walls_working
-    400148: west
-    400150: west 1
-    400152: door_mesh1
-    400154: walls_working_entry_wall1
-    400156: door_frame
-    400158: door_hole
-    400160: door_hole1
-    400162: images
-    400164: img_lower
-    400166: pPlane1
-    400168: set
-    400170: wall31
-    400172: wall31 1
-    400174: wall_test
-    400176: walls
-    400178: door_frame 1
-    400180: door_hole2
-    400182: floor_test
-    400184: history
-    400186: transform5
-    400188: transform6
-    400190: transform7
-    400192: wall_test2
-    400194: door_hole3
-    400196: transform8
-    400198: transform9
-    400200: wall_test 1
-    400202: pCube1
-    400204: pCube10
-    400206: pCube11
-    400208: pCube12
-    400210: pCube13
-    400212: pCube14
-    400214: pCube15
-    400216: pCube2
-    400218: pCube3
-    400220: pCube4
-    400222: pCube5
-    400224: pCube6
-    400226: pCube7
-    400228: pCube8
-    400230: pCube9
-    400232: stairs
-    400234: set1
-    400236: transform27
-    400238: transform28
-    400240: transform28 1
-    400242: transform29
-    400244: transform29 1
-    400246: transform30
-    400248: transform30 1
-    400250: transform31
-    400252: transform31 1
-    400254: transform32
-    400256: transform32 1
-    400258: transform33
-    400260: transform33 1
-    400262: transform34
-    400264: transform34 1
-    400266: transform35
-    400268: transform35 1
-    400270: transform36
-    400272: transform36 1
-    400274: transform37
-    400276: transform37 1
-    400278: transform38
-    400280: transform38 1
-    400282: transform39
-    400284: transform39 1
-    400286: transform40
-    400288: transform40 1
-    400290: transform41
-    400292: transform41 1
-    400294: transform42
-    400296: transform42 1
-    400298: transform43
-    400300: transform43 1
-    400302: transform44
-    400304: transform44 1
-    400306: transform45
-    400308: transform45 1
-    400310: transform46
-    400312: transform46 1
-    400314: transform47
-    400316: transform47 1
-    400318: transform48
-    400320: transform48 1
-    400322: transform49
-    400324: transform49 1
-    400326: transform50
-    400328: transform50 1
-    400330: transform51
-    400332: transform51 1
-    400334: transform52
-    400336: transform52 1
-    400338: transform53
-    400340: transform53 1
-    400342: transform54
-    400344: transform54 1
-    400346: transform55
-    400348: transform55 1
-    400350: transform56
-    400352: transform56 1
-    400354: transform57
-    400356: transform57 1
-    400358: transform58
-    400360: transform58 1
-    400362: transform59
-    400364: transform59 1
-    400366: transform60
-    400368: transform60 1
-    400370: transform61
-    400372: transform61 1
-    400374: transform62
-    400376: transform62 1
-    400378: transform63
-    400380: transform63 1
+    100384: transform65
+    100386: transform66
+    100388: transform67
+    100390: transform68
+    100392: transform69
+    100394: transform7
+    100396: transform70
+    100398: transform71
+    100400: transform72
+    100402: transform73
+    100404: transform74
+    100406: transform75
+    100408: transform76
+    100410: transform77
+    100412: transform78
+    100414: transform79
+    100416: transform8
+    100418: transform80
+    100420: transform81
+    100422: transform82
+    100424: transform83
+    100426: transform84
+    100428: transform9
+    100430: upstairs
+    100432: wall1
+    100434: wall10
+    100436: wall11
+    100438: wall12
+    100440: wall13
+    100442: wall14
+    100444: wall15
+    100446: wall16
+    100448: wall17
+    100450: wall18
+    100452: wall19
+    100454: wall2
+    100456: wall20
+    100458: wall21
+    100460: wall22
+    100462: wall23
+    100464: wall24
+    100466: wall26
+    100468: wall27
+    100470: wall28
+    100472: wall29
+    100474: wall3
+    100476: wall30
+    100478: wall31
+    100480: wall4
+    100482: wall5
+    100484: wall6
+    100486: wall7
+    100488: wall8
+    100490: wall9
+    100492: wall_test
+    100494: wall_test2
+    100496: wall_test3
+    100498: walls_working
+    100500: walls_working 1
+    100502: walls_working_history
+    100504: west
+    100506: downstairs_walls_working
+    100508: transform100
+    100510: transform101
+    100512: transform102
+    100514: transform103
+    100516: transform104
+    100518: transform105
+    100520: transform106
+    100522: transform107
+    100524: transform108
+    100526: transform109
+    100528: transform110
+    100530: transform111
+    100532: transform112
+    100534: transform113
+    100536: transform85
+    100538: transform86
+    100540: transform87
+    100542: transform88
+    100544: transform89
+    100546: transform90
+    100548: transform91
+    100550: transform92
+    100552: transform93
+    100554: transform94
+    100556: transform95
+    100558: transform96
+    100560: transform97
+    100562: transform98
+    100564: transform99
+    100566: door_single
+    100568: stair_plane1
+    400000: billiards_door
+    400002: billiards_door 1
+    400004: dining_door
+    400006: dining_door 1
+    400008: door
+    400010: door 1
+    400012: door 2
+    400014: door 3
+    400016: door 4
+    400018: door 5
+    400020: door 6
+    400022: door 7
+    400024: door 8
+    400026: door_frame
+    400028: door_frame 1
+    400030: door_frame 2
+    400032: door_frame 3
+    400034: door_frame 4
+    400036: door_frame 5
+    400038: door_frame 6
+    400040: door_frame 7
+    400042: door_frame 8
+    400044: door_frame 9
+    400046: door_frame2
+    400048: door_hole
+    400050: door_hole 1
+    400052: door_hole 2
+    400054: door_hole 3
+    400056: door_hole 4
+    400058: door_hole 5
+    400060: door_hole 6
+    400062: door_hole 7
+    400064: door_hole 8
+    400066: door_hole1
+    400068: door_hole2
+    400070: door_hole3
+    400072: door_hole4
+    400074: doors
+    400076: doors 1
+    400078: downstairs
+    400080: east
+    400082: entry
+    400084: floor_lower
+    400086: floor_test
+    400088: floor_upper
+    400090: frame1
+    400092: frame2
+    400094: history
+    400096: history 1
+    400098: kitchen_door
+    400100: kitchen_door 1
+    400102: //RootNode
+    400104: platform_left
+    400106: platform_right
+    400108: polySurface1
+    400110: polySurface10
+    400112: polySurface11
+    400114: polySurface12
+    400116: polySurface13
+    400118: polySurface14
+    400120: polySurface15
+    400122: polySurface16
+    400124: polySurface17
+    400126: polySurface18
+    400128: polySurface19
+    400130: polySurface2
+    400132: polySurface20
+    400134: polySurface21
+    400136: polySurface22
+    400138: polySurface23
+    400140: polySurface24
+    400142: polySurface25
+    400144: polySurface26
+    400146: polySurface27
+    400148: polySurface28
+    400150: polySurface29
+    400152: polySurface3
+    400154: polySurface30
+    400156: polySurface31
+    400158: polySurface32
+    400160: polySurface33
+    400162: polySurface34
+    400164: polySurface35
+    400166: polySurface36
+    400168: polySurface37
+    400170: polySurface38
+    400172: polySurface39
+    400174: polySurface4
+    400176: polySurface40
+    400178: polySurface41
+    400180: polySurface42
+    400182: polySurface43
+    400184: polySurface43 1
+    400186: polySurface44
+    400188: polySurface45
+    400190: polySurface46
+    400192: polySurface47
+    400194: polySurface48
+    400196: polySurface49
+    400198: polySurface5
+    400200: polySurface50
+    400202: polySurface51
+    400204: polySurface52
+    400206: polySurface52 1
+    400208: polySurface53
+    400210: polySurface54
+    400212: polySurface54 1
+    400214: polySurface55
+    400216: polySurface55 1
+    400218: polySurface56
+    400220: polySurface57
+    400222: polySurface58
+    400224: polySurface59
+    400226: polySurface6
+    400228: polySurface60
+    400230: polySurface61
+    400232: polySurface62
+    400234: polySurface7
+    400236: polySurface8
+    400238: polySurface9
+    400240: rear
+    400242: s1
+    400244: s14
+    400246: s15
+    400248: s2
+    400250: s3
+    400252: s4
+    400254: s5
+    400256: s6
+    400258: s7
+    400260: s8
+    400262: s9
+    400264: salon_door
+    400266: salon_door 1
+    400268: set
+    400270: single
+    400272: stairs1
+    400274: stairs_left
+    400276: stairs_left_history
+    400278: stairs_mesh
+    400280: stairs_middle
+    400282: stairs_right
+    400284: transform10
+    400286: transform11
+    400288: transform16
+    400290: transform2
+    400292: transform23
+    400294: transform24
+    400296: transform25
+    400298: transform26
+    400300: transform27
+    400302: transform28
+    400304: transform29
+    400306: transform3
+    400308: transform30
+    400310: transform31
+    400312: transform32
+    400314: transform33
+    400316: transform34
+    400318: transform35
+    400320: transform36
+    400322: transform37
+    400324: transform38
+    400326: transform39
+    400328: transform4
+    400330: transform40
+    400332: transform41
+    400334: transform42
+    400336: transform43
+    400338: transform44
+    400340: transform45
+    400342: transform46
+    400344: transform47
+    400346: transform48
+    400348: transform49
+    400350: transform5
+    400352: transform50
+    400354: transform51
+    400356: transform52
+    400358: transform53
+    400360: transform54
+    400362: transform55
+    400364: transform56
+    400366: transform57
+    400368: transform58
+    400370: transform59
+    400372: transform6
+    400374: transform60
+    400376: transform61
+    400378: transform62
+    400380: transform63
     400382: transform64
-    400384: transform64 1
-    400386: transform65
-    400388: transform65 1
-    400390: transform66
-    400392: transform66 1
-    400394: transform67
-    400396: transform67 1
-    400398: transform68
-    400400: transform68 1
-    400402: transform69
-    400404: transform69 1
-    400406: transform70
-    400408: transform70 1
-    400410: transform71
-    400412: transform71 1
-    400414: transform72
-    400416: transform72 1
-    400418: transform73
-    400420: transform73 1
-    400422: transform74
-    400424: transform74 1
-    400426: transform75
-    400428: transform75 1
-    400430: transform76
-    400432: transform76 1
-    400434: transform77
-    400436: transform77 1
-    400438: transform78
-    400440: transform78 1
-    400442: transform79
-    400444: transform79 1
-    400446: transform80
-    400448: transform80 1
-    400450: transform81
-    400452: transform81 1
-    400454: transform82
-    400456: transform82 1
-    400458: transform83
-    400460: transform83 1
-    400462: transform84
-    400464: transform84 1
-    400466: transform85
-    400468: transform85 1
-    400470: stairs1
-    400472: transform12
-    400474: transform13
-    400476: transform14
-    400478: transform15
-    400480: transform16
-    400482: transform17
-    400484: transform18
-    400486: transform19
-    400488: transform20
-    400490: transform21
-    400492: transform22
-    400494: transform23
-    400496: transform24
-    400498: transform25
-    400500: transform26
-    400502: door_frame1
-    400504: door_frame2
-    400506: door_hole4
-    400508: stairs 1
-    400510: transform10
-    400512: transform11
-    400514: walls_working 1
-    400516: stair
-    400518: floor_upper
-    400520: platform_left
-    400522: platform_right
-    400524: s1
-    400526: s10
-    400528: s11
-    400530: s12
-    400532: s13
-    400534: s14
-    400536: s15
-    400538: s16
-    400540: s17
-    400542: s18
-    400544: s19
-    400546: s2
-    400548: s20
-    400550: s3
-    400552: s4
-    400554: s5
-    400556: s6
-    400558: s7
-    400560: s8
-    400562: s9
-    400564: stairs_left
-    400566: stairs_left_history
-    400568: stairs_middle
-    400570: stairs_right
-    400572: walls_combined
-    2100000: lambert1
-    2300000: floor_lower
-    2300002: wall1
-    2300004: wall2
-    2300006: wall3
-    2300008: wall4
-    2300010: wall5
-    2300012: wall8
-    2300014: wall9
-    2300016: wall10
-    2300018: wall10 1
-    2300020: wall11
-    2300022: wall11 1
-    2300024: wall12
-    2300026: wall12 1
-    2300028: wall13
-    2300030: wall13 1
-    2300032: wall14
-    2300034: wall14 1
-    2300036: wall15
-    2300038: wall15 1
-    2300040: wall16
-    2300042: wall16 1
-    2300044: wall17
-    2300046: wall17 1
-    2300048: wall18
-    2300050: wall18 1
-    2300052: wall19
-    2300054: wall19 1
-    2300056: wall2 1
-    2300058: wall20
-    2300060: wall20 1
-    2300062: wall21
-    2300064: wall21 1
-    2300066: wall22
-    2300068: wall22 1
-    2300070: wall23
-    2300072: wall23 1
-    2300074: wall24
-    2300076: wall24 1
-    2300078: wall26
-    2300080: wall26 1
-    2300082: wall27
-    2300084: wall27 1
-    2300086: wall28
-    2300088: wall28 1
-    2300090: wall29
-    2300092: wall29 1
-    2300094: wall3 1
-    2300096: wall30
-    2300098: wall30 1
-    2300100: wall4 1
-    2300102: wall5 1
-    2300104: wall6
-    2300106: wall6 1
-    2300108: wall7
-    2300110: wall7 1
-    2300112: wall8 1
-    2300114: wall9 1
-    2300116: walls_working_entry_wall1
-    2300118: door_frame
-    2300120: door_hole
-    2300122: door_hole1
-    2300124: pPlane1
-    2300126: wall31
-    2300128: wall31 1
-    2300130: wall_test
-    2300132: floor_test
-    2300134: wall_test2
-    2300136: pCube1
-    2300138: pCube10
-    2300140: pCube11
-    2300142: pCube12
-    2300144: pCube13
-    2300146: pCube14
-    2300148: pCube15
-    2300150: pCube2
-    2300152: pCube3
-    2300154: pCube4
-    2300156: pCube5
-    2300158: pCube6
-    2300160: pCube7
-    2300162: pCube8
-    2300164: pCube9
-    2300166: set1
-    2300168: stairs1
-    2300170: door_frame1
-    2300172: stairs
-    2300174: walls_working
-    2300176: floor_upper
-    2300178: platform_left
-    2300180: platform_right
-    2300182: stairs_left
-    2300184: stairs_middle
-    2300186: stairs_right
-    2300188: walls_combined
-    3300000: floor_lower
-    3300002: wall1
-    3300004: wall2
-    3300006: wall3
-    3300008: wall4
-    3300010: wall5
-    3300012: wall8
-    3300014: wall9
-    3300016: wall10
-    3300018: wall10 1
-    3300020: wall11
-    3300022: wall11 1
-    3300024: wall12
-    3300026: wall12 1
-    3300028: wall13
-    3300030: wall13 1
-    3300032: wall14
-    3300034: wall14 1
-    3300036: wall15
-    3300038: wall15 1
-    3300040: wall16
-    3300042: wall16 1
-    3300044: wall17
-    3300046: wall17 1
-    3300048: wall18
-    3300050: wall18 1
-    3300052: wall19
-    3300054: wall19 1
-    3300056: wall2 1
-    3300058: wall20
-    3300060: wall20 1
-    3300062: wall21
-    3300064: wall21 1
-    3300066: wall22
-    3300068: wall22 1
-    3300070: wall23
-    3300072: wall23 1
-    3300074: wall24
-    3300076: wall24 1
-    3300078: wall26
-    3300080: wall26 1
-    3300082: wall27
-    3300084: wall27 1
-    3300086: wall28
-    3300088: wall28 1
-    3300090: wall29
-    3300092: wall29 1
-    3300094: wall3 1
-    3300096: wall30
-    3300098: wall30 1
-    3300100: wall4 1
-    3300102: wall5 1
-    3300104: wall6
-    3300106: wall6 1
-    3300108: wall7
-    3300110: wall7 1
-    3300112: wall8 1
-    3300114: wall9 1
-    3300116: walls_working_entry_wall1
-    3300118: door_frame
-    3300120: door_hole
-    3300122: door_hole1
-    3300124: pPlane1
-    3300126: wall31
-    3300128: wall31 1
-    3300130: wall_test
-    3300132: floor_test
-    3300134: wall_test2
-    3300136: pCube1
-    3300138: pCube10
-    3300140: pCube11
-    3300142: pCube12
-    3300144: pCube13
-    3300146: pCube14
-    3300148: pCube15
-    3300150: pCube2
-    3300152: pCube3
-    3300154: pCube4
-    3300156: pCube5
-    3300158: pCube6
-    3300160: pCube7
-    3300162: pCube8
-    3300164: pCube9
-    3300166: set1
-    3300168: stairs1
-    3300170: door_frame1
-    3300172: stairs
-    3300174: walls_working
-    3300176: floor_upper
-    3300178: platform_left
-    3300180: platform_right
-    3300182: stairs_left
-    3300184: stairs_middle
-    3300186: stairs_right
-    3300188: walls_combined
-    4300000: floor_lower
-    4300002: wall1
-    4300004: wall2
-    4300006: wall3
-    4300008: wall4
-    4300010: wall5
-    4300012: wall8
-    4300014: wall9
-    4300016: wall27
-    4300018: wall11
-    4300020: wall10
-    4300022: wall7
-    4300024: wall6
-    4300026: wall23
-    4300028: wall28
-    4300030: wall12
-    4300032: wall13
-    4300034: wall14
-    4300036: wall15
-    4300038: wall16
-    4300040: wall17
-    4300042: wall18
-    4300044: wall22
-    4300046: wall26
-    4300048: wall24
-    4300050: wall29
-    4300052: wall30
-    4300054: wall19
-    4300056: wall20
-    4300058: wall21
-    4300060: wall2
-    4300062: wall3
-    4300064: wall4
-    4300066: wall27
-    4300068: wall11
-    4300070: wall10
-    4300072: wall9
-    4300074: wall8
-    4300076: wall7
-    4300078: wall6
-    4300080: wall5
-    4300082: wall23
-    4300084: wall28
-    4300086: wall12
-    4300088: wall13
-    4300090: wall14
-    4300092: wall15
-    4300094: wall16
-    4300096: wall17
-    4300098: wall18
-    4300100: wall22
-    4300102: wall26
-    4300104: wall24
-    4300106: wall29
-    4300108: wall30
-    4300110: wall19
-    4300112: wall20
-    4300114: wall21
-    4300116: walls_working_entry_wall1
-    4300118: wall31
-    4300120: wall31
-    4300122: wall_test
-    4300124: door_hole
-    4300126: door_frame
-    4300128: door_hole1
-    4300130: pPlane1
-    4300132: floor_test
-    4300134: wall_test2
-    4300136: pCube1
-    4300138: pCube2
-    4300140: pCube3
-    4300142: pCube4
-    4300144: pCube5
-    4300146: pCube6
-    4300148: pCube7
-    4300150: pCube8
-    4300152: pCube15
-    4300154: pCube14
-    4300156: pCube13
-    4300158: pCube12
-    4300160: pCube10
-    4300162: pCube11
-    4300164: pCube9
-    4300166: set1
-    4300168: stairs1
-    4300170: door_frame1
-    4300172: walls_working
-    4300174: stairs
-    4300176: floor_upper
-    4300178: stairs_left
-    4300180: platform_left
-    4300182: stairs_middle
-    4300184: platform_right
-    4300186: stairs_right
-    4300188: walls_combined
-    2186277476908879412: ImportLogs
+    400384: transform65
+    400386: transform66
+    400388: transform67
+    400390: transform68
+    400392: transform69
+    400394: transform7
+    400396: transform70
+    400398: transform71
+    400400: transform72
+    400402: transform73
+    400404: transform74
+    400406: transform75
+    400408: transform76
+    400410: transform77
+    400412: transform78
+    400414: transform79
+    400416: transform8
+    400418: transform80
+    400420: transform81
+    400422: transform82
+    400424: transform83
+    400426: transform84
+    400428: transform9
+    400430: upstairs
+    400432: wall1
+    400434: wall10
+    400436: wall11
+    400438: wall12
+    400440: wall13
+    400442: wall14
+    400444: wall15
+    400446: wall16
+    400448: wall17
+    400450: wall18
+    400452: wall19
+    400454: wall2
+    400456: wall20
+    400458: wall21
+    400460: wall22
+    400462: wall23
+    400464: wall24
+    400466: wall26
+    400468: wall27
+    400470: wall28
+    400472: wall29
+    400474: wall3
+    400476: wall30
+    400478: wall31
+    400480: wall4
+    400482: wall5
+    400484: wall6
+    400486: wall7
+    400488: wall8
+    400490: wall9
+    400492: wall_test
+    400494: wall_test2
+    400496: wall_test3
+    400498: walls_working
+    400500: walls_working 1
+    400502: walls_working_history
+    400504: west
+    400506: downstairs_walls_working
+    400508: transform100
+    400510: transform101
+    400512: transform102
+    400514: transform103
+    400516: transform104
+    400518: transform105
+    400520: transform106
+    400522: transform107
+    400524: transform108
+    400526: transform109
+    400528: transform110
+    400530: transform111
+    400532: transform112
+    400534: transform113
+    400536: transform85
+    400538: transform86
+    400540: transform87
+    400542: transform88
+    400544: transform89
+    400546: transform90
+    400548: transform91
+    400550: transform92
+    400552: transform93
+    400554: transform94
+    400556: transform95
+    400558: transform96
+    400560: transform97
+    400562: transform98
+    400564: transform99
+    400566: door_single
+    400568: stair_plane1
+    2100000: blinn1
+    2100002: lambert1
+    2100004: floor
+    2300000: door
+    2300002: door 1
+    2300004: door 2
+    2300006: door 3
+    2300008: door 4
+    2300010: door 5
+    2300012: door 6
+    2300014: door 7
+    2300016: door 8
+    2300018: door_frame 1
+    2300020: door_frame 2
+    2300022: door_frame 3
+    2300024: door_frame 4
+    2300026: door_frame 5
+    2300028: door_frame 6
+    2300030: door_frame 7
+    2300032: door_frame 8
+    2300034: door_frame 9
+    2300036: door_hole
+    2300038: floor_lower
+    2300040: floor_test
+    2300042: floor_upper
+    2300044: polySurface1
+    2300046: polySurface10
+    2300048: polySurface11
+    2300050: polySurface12
+    2300052: polySurface13
+    2300054: polySurface15
+    2300056: polySurface16
+    2300058: polySurface17
+    2300060: polySurface18
+    2300062: polySurface19
+    2300064: polySurface2
+    2300066: polySurface20
+    2300068: polySurface21
+    2300070: polySurface22
+    2300072: polySurface24
+    2300074: polySurface27
+    2300076: polySurface28
+    2300078: polySurface29
+    2300080: polySurface3
+    2300082: polySurface30
+    2300084: polySurface31
+    2300086: polySurface32
+    2300088: polySurface33
+    2300090: polySurface34
+    2300092: polySurface35
+    2300094: polySurface36
+    2300096: polySurface37
+    2300098: polySurface38
+    2300100: polySurface39
+    2300102: polySurface4
+    2300104: polySurface40
+    2300106: polySurface41
+    2300108: polySurface42
+    2300110: polySurface43
+    2300112: polySurface44
+    2300114: polySurface45
+    2300116: polySurface46
+    2300118: polySurface47
+    2300120: polySurface48
+    2300122: polySurface49
+    2300124: polySurface5
+    2300126: polySurface50
+    2300128: polySurface51
+    2300130: polySurface52
+    2300132: polySurface53
+    2300134: polySurface54
+    2300136: polySurface55
+    2300138: polySurface56
+    2300140: polySurface57
+    2300142: polySurface58
+    2300144: polySurface59
+    2300146: polySurface6
+    2300148: polySurface60
+    2300150: polySurface61
+    2300152: polySurface62
+    2300154: polySurface7
+    2300156: polySurface8
+    2300158: polySurface9
+    2300160: stairs_mesh
+    2300162: wall_test3
+    2300164: downstairs_walls_working
+    2300166: door_frame
+    2300168: stair_plane1
+    3300000: door
+    3300002: door 1
+    3300004: door 2
+    3300006: door 3
+    3300008: door 4
+    3300010: door 5
+    3300012: door 6
+    3300014: door 7
+    3300016: door 8
+    3300018: door_frame 1
+    3300020: door_frame 2
+    3300022: door_frame 3
+    3300024: door_frame 4
+    3300026: door_frame 5
+    3300028: door_frame 6
+    3300030: door_frame 7
+    3300032: door_frame 8
+    3300034: door_frame 9
+    3300036: door_hole
+    3300038: floor_lower
+    3300040: floor_test
+    3300042: floor_upper
+    3300044: polySurface1
+    3300046: polySurface10
+    3300048: polySurface11
+    3300050: polySurface12
+    3300052: polySurface13
+    3300054: polySurface15
+    3300056: polySurface16
+    3300058: polySurface17
+    3300060: polySurface18
+    3300062: polySurface19
+    3300064: polySurface2
+    3300066: polySurface20
+    3300068: polySurface21
+    3300070: polySurface22
+    3300072: polySurface24
+    3300074: polySurface27
+    3300076: polySurface28
+    3300078: polySurface29
+    3300080: polySurface3
+    3300082: polySurface30
+    3300084: polySurface31
+    3300086: polySurface32
+    3300088: polySurface33
+    3300090: polySurface34
+    3300092: polySurface35
+    3300094: polySurface36
+    3300096: polySurface37
+    3300098: polySurface38
+    3300100: polySurface39
+    3300102: polySurface4
+    3300104: polySurface40
+    3300106: polySurface41
+    3300108: polySurface42
+    3300110: polySurface43
+    3300112: polySurface44
+    3300114: polySurface45
+    3300116: polySurface46
+    3300118: polySurface47
+    3300120: polySurface48
+    3300122: polySurface49
+    3300124: polySurface5
+    3300126: polySurface50
+    3300128: polySurface51
+    3300130: polySurface52
+    3300132: polySurface53
+    3300134: polySurface54
+    3300136: polySurface55
+    3300138: polySurface56
+    3300140: polySurface57
+    3300142: polySurface58
+    3300144: polySurface59
+    3300146: polySurface6
+    3300148: polySurface60
+    3300150: polySurface61
+    3300152: polySurface62
+    3300154: polySurface7
+    3300156: polySurface8
+    3300158: polySurface9
+    3300160: stairs_mesh
+    3300162: wall_test3
+    3300164: downstairs_walls_working
+    3300166: door_frame
+    3300168: stair_plane1
+    4300000: stairs_mesh
+    4300002: polySurface1
+    4300004: polySurface2
+    4300006: polySurface3
+    4300008: polySurface4
+    4300010: polySurface5
+    4300012: polySurface6
+    4300014: polySurface7
+    4300016: polySurface8
+    4300018: polySurface9
+    4300020: polySurface10
+    4300022: polySurface11
+    4300024: polySurface12
+    4300026: polySurface13
+    4300028: polySurface15
+    4300030: polySurface16
+    4300032: polySurface17
+    4300034: polySurface18
+    4300036: polySurface19
+    4300038: polySurface20
+    4300040: polySurface21
+    4300042: polySurface22
+    4300044: polySurface24
+    4300046: polySurface27
+    4300048: polySurface28
+    4300050: polySurface29
+    4300052: polySurface59
+    4300054: polySurface60
+    4300056: polySurface61
+    4300058: polySurface62
+    4300060: floor_lower
+    4300062: door_frame
+    4300064: door
+    4300066: door_frame
+    4300068: door
+    4300070: door_frame
+    4300072: door
+    4300074: door_frame
+    4300076: door
+    4300078: floor_upper
+    4300080: polySurface30
+    4300082: polySurface31
+    4300084: polySurface32
+    4300086: polySurface33
+    4300088: polySurface34
+    4300090: polySurface35
+    4300092: polySurface36
+    4300094: polySurface37
+    4300096: polySurface38
+    4300098: polySurface39
+    4300100: polySurface40
+    4300102: polySurface41
+    4300104: polySurface42
+    4300106: polySurface44
+    4300108: polySurface45
+    4300110: polySurface46
+    4300112: polySurface47
+    4300114: polySurface48
+    4300116: polySurface49
+    4300118: polySurface50
+    4300120: polySurface51
+    4300122: polySurface53
+    4300124: polySurface56
+    4300126: polySurface57
+    4300128: polySurface58
+    4300130: door_frame
+    4300132: door
+    4300134: door_frame
+    4300136: door
+    4300138: door_frame
+    4300140: door
+    4300142: door_frame
+    4300144: door
+    4300146: polySurface55
+    4300148: polySurface54
+    4300150: polySurface52
+    4300152: polySurface43
+    4300154: floor_test
+    4300156: wall_test3
+    4300158: door_hole
+    4300160: door_frame
+    4300162: door
+    4300164: downstairs_walls_working
+    4300166: stair_plane1
+    7400000: Take 001
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -915,8 +883,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -940,7 +908,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
