@@ -27,7 +27,7 @@ namespace GameAI
   public class OutEdgeIter : IEnumerator
   {
     private readonly int from;
-    private readonly KnowledgeGraph graph;
+    private readonly ref KnowledgeGraph graph;
     int to;
 
     public OutEdgeIter( int _from, ref KnowledgeGraph _graph )
@@ -56,7 +56,7 @@ namespace GameAI
   public class InEdgeIter : IEnumerator
   {
     private readonly int to;
-    private readonly KnowledgeGraph graph;
+    private readonly ref KnowledgeGraph graph;
     int from;
 
     public InEdgeIter( int _to, ref KnowledgeGraph _graph )
