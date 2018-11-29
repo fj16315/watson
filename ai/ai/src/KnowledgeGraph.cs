@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 
 namespace GameAI
 {
+  [Serializable()]
   public class KnowledgeGraph
   {
     private Relationships[,] adj_matrix;
