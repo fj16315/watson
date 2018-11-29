@@ -7,11 +7,11 @@ using System.Collections;
 
 namespace GameAI
 {
-    public class StringIterator : IEnumerable
+    public class WordIterator : IEnumerable
     {
 	    private string[] words;
 
-	    public StringIterator(string inputString)
+	    public WordIterator(string inputString)
 	    {
 		    words = inputString.Split(' ');
 	    }
