@@ -261,6 +261,35 @@ ModelImporter:
     100510: transform10
     100512: transform11
     100514: walls_working 1
+    100516: stair
+    100518: floor_upper
+    100520: platform_left
+    100522: platform_right
+    100524: s1
+    100526: s10
+    100528: s11
+    100530: s12
+    100532: s13
+    100534: s14
+    100536: s15
+    100538: s16
+    100540: s17
+    100542: s18
+    100544: s19
+    100546: s2
+    100548: s20
+    100550: s3
+    100552: s4
+    100554: s5
+    100556: s6
+    100558: s7
+    100560: s8
+    100562: s9
+    100564: stairs_left
+    100566: stairs_left_history
+    100568: stairs_middle
+    100570: stairs_right
+    100572: walls_combined
     400000: floor_lower
     400002: //RootNode
     400004: wall1
@@ -519,6 +548,35 @@ ModelImporter:
     400510: transform10
     400512: transform11
     400514: walls_working 1
+    400516: stair
+    400518: floor_upper
+    400520: platform_left
+    400522: platform_right
+    400524: s1
+    400526: s10
+    400528: s11
+    400530: s12
+    400532: s13
+    400534: s14
+    400536: s15
+    400538: s16
+    400540: s17
+    400542: s18
+    400544: s19
+    400546: s2
+    400548: s20
+    400550: s3
+    400552: s4
+    400554: s5
+    400556: s6
+    400558: s7
+    400560: s8
+    400562: s9
+    400564: stairs_left
+    400566: stairs_left_history
+    400568: stairs_middle
+    400570: stairs_right
+    400572: walls_combined
     2100000: lambert1
     2300000: floor_lower
     2300002: wall1
@@ -608,6 +666,13 @@ ModelImporter:
     2300170: door_frame1
     2300172: stairs
     2300174: walls_working
+    2300176: floor_upper
+    2300178: platform_left
+    2300180: platform_right
+    2300182: stairs_left
+    2300184: stairs_middle
+    2300186: stairs_right
+    2300188: walls_combined
     3300000: floor_lower
     3300002: wall1
     3300004: wall2
@@ -696,6 +761,13 @@ ModelImporter:
     3300170: door_frame1
     3300172: stairs
     3300174: walls_working
+    3300176: floor_upper
+    3300178: platform_left
+    3300180: platform_right
+    3300182: stairs_left
+    3300184: stairs_middle
+    3300186: stairs_right
+    3300188: walls_combined
     4300000: floor_lower
     4300002: wall1
     4300004: wall2
@@ -784,6 +856,13 @@ ModelImporter:
     4300170: door_frame1
     4300172: walls_working
     4300174: stairs
+    4300176: floor_upper
+    4300178: stairs_left
+    4300180: platform_left
+    4300182: stairs_middle
+    4300184: platform_right
+    4300186: stairs_right
+    4300188: walls_combined
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
