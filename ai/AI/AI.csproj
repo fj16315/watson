@@ -48,6 +48,7 @@
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Relationships.cs" />
     <Compile Include="src\StringIterator.cs" />
+    <Compile Include="src\KnowledgeGraph.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
