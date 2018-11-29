@@ -11,9 +11,9 @@ namespace GameAI
       Owns = 2, Wants = 4
     };
 
-    public RelFlag rel_flag {
+      public RelFlag rel_flag {
       get;
       set;
-    };
+    }
   }
 }

@@ -42,7 +42,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\.gitignore" />
     <None Include="src\App.config" />
   </ItemGroup>
   <ItemGroup>
