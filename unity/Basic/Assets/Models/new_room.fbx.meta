@@ -367,6 +367,26 @@ ModelImporter:
     100722: walls_working 1
     100724: walls_working_history
     100726: west
+    100728: chair_1
+    100730: larry1
+    100732: s10
+    100734: s11
+    100736: s12
+    100738: s13
+    100740: s16
+    100742: s17
+    100744: s18
+    100746: s19
+    100748: s20
+    100750: stairs
+    100752: transform13
+    100754: transform14
+    100756: transform15
+    100758: transform19
+    100760: transform20
+    100762: transform21
+    100764: transform22
+    100766: group1
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -731,10 +751,34 @@ ModelImporter:
     400722: walls_working 1
     400724: walls_working_history
     400726: west
+    400728: chair_1
+    400730: larry1
+    400732: s10
+    400734: s11
+    400736: s12
+    400738: s13
+    400740: s16
+    400742: s17
+    400744: s18
+    400746: s19
+    400748: s20
+    400750: stairs
+    400752: transform13
+    400754: transform14
+    400756: transform15
+    400758: transform19
+    400760: transform20
+    400762: transform21
+    400764: transform22
+    400766: group1
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
     2100006: mat_door
+    2100008: lambert1
+    2100010: furniture_wood1
+    2100012: fabric_blue
+    2100014: lambert3
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -799,6 +843,9 @@ ModelImporter:
     2300122: polySurface58
     2300124: stairs_mesh
     2300126: wall_test3
+    2300128: chair_1
+    2300130: door_frame 2
+    2300132: larry1
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -863,6 +910,9 @@ ModelImporter:
     3300122: polySurface58
     3300124: stairs_mesh
     3300126: wall_test3
+    3300128: chair_1
+    3300130: door_frame 2
+    3300132: larry1
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -927,8 +977,11 @@ ModelImporter:
     4300122: door_frame
     4300124: door_l
     4300126: door_r
+    4300128: chair_1
+    4300130: larry1
     7400000: Take 001
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
