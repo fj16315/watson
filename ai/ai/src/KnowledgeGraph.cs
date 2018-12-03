@@ -6,17 +6,17 @@ namespace GameAI
   [Serializable()]
   public class KnowledgeGraph
   {
-    private Relationships[,] adj_matrix;
+    private Relationship[,] adj_matrix;
 
     public KnowledgeGraph( int size )
     {
-      adj_matrix = new Relationships[size,size];
+      adj_matrix = new Relationship[size,size];
     }
 
     public int GetSize()
       => adj_matrix.GetLength(0);
 
-    public ref Relationships RelationshipsFromTo(int from, int to)
+    public ref Relationship RelationshipsFromTo(int from, int to)
       => ref adj_matrix[from, to];
 
     public OutEdgeIter RelationshipsFrom(int from)
