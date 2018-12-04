@@ -1,32 +1,37 @@
-// ﻿using System;
 using System.Collections;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
 
 namespace GameAI
 {
-    public class WordIterator : IEnumerable
+  /// <summary>
+  /// For iterating over words in the input.
+  /// </summary>
+  /// <remarks>
+  /// Splits the incoming string into words which can then be iterated over.
+  /// </remarks>
+  public class WordIterator : IEnumerable
+  {
+  private readonly string[] words;
+
+    /// <summary>
+    /// Create a new WordIterator from some input string.
+    /// </summary>
+    /// <param name="inputString"> The input string. </param>
+    public WordIterator(string inputString)
+	{
+      words = inputString.Split(' ');
+	}
+
+    IEnumerator IEnumerable.GetEnumerator()
     {
-	    private string[] words;
+      return GetEnumerator();
+	}
 
-	    public WordIterator(string inputString)
-	    {
-		    words = inputString.Split(' ');
-	    }
-
-	    IEnumerator IEnumerable.GetEnumerator()
-	    {
-		    return GetEnumerator();
-	    }
-
-	    public IEnumerator GetEnumerator( )
-	    {
-		    foreach (var word in words)
-		    {
-			    yield return word;
-		    }
-	    }
-    }
+	public IEnumerator GetEnumerator( )
+	{
+	  foreach (var word in words)
+	  {
+	    yield return word;
+	  }
+	}
+  }
 }

@@ -8,7 +8,7 @@ namespace GameAI
   {
     private Relationship[,] adj_matrix;
 
-    public KnowledgeGraph( int size )
+    public KnowledgeGraph(int size)
     {
       adj_matrix = new Relationship[size,size];
     }
@@ -29,14 +29,14 @@ namespace GameAI
   public class OutEdgeIter : IEnumerator
   {
     private readonly int from;
-    private readonly ref KnowledgeGraph graph;
+    private readonly KnowledgeGraph graph;
     int to;
 
-    public OutEdgeIter( int _from, ref KnowledgeGraph _graph )
+    public OutEdgeIter(int _from, KnowledgeGraph _graph)
     {
       from = _from;
       graph = _graph;
-      Reset();
+      (this as IEnumerator).Reset();
     }
 
     object IEnumerator.Current
@@ -58,14 +58,14 @@ namespace GameAI
   public class InEdgeIter : IEnumerator
   {
     private readonly int to;
-    private readonly ref KnowledgeGraph graph;
+    private readonly KnowledgeGraph graph;
     int from;
 
-    public InEdgeIter( int _to, ref KnowledgeGraph _graph )
+    public InEdgeIter(int _to, KnowledgeGraph _graph)
     {
       to = _to;
       graph = _graph;
-      Reset();
+      (this as IEnumerator).Reset();
     }
 
     object IEnumerator.Current

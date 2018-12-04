@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Main.cs" />
-    <Compile Include="src\Relationships.cs" />
+    <Compile Include="src\Relationship.cs" />
     <Compile Include="src\WordIterator.cs" />
     <Compile Include="src\KnowledgeGraph.cs" />
   </ItemGroup>

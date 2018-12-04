@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace AITests
 {
     [TestClass]
-    public class UnitTest1
+    public class RelationshipTests
     {
         [TestMethod]
         public void TestMethod1()
