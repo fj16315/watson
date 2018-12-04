@@ -387,6 +387,35 @@ ModelImporter:
     100762: transform21
     100764: transform22
     100766: group1
+    100768: chair_2
+    100770: chimney
+    100772: fire
+    100774: fire 1
+    100776: fire_flames
+    100778: firelights
+    100780: fireplace1
+    100782: fireplace_combi
+    100784: hole
+    100786: illum
+    100788: larry2
+    100790: larry2 1
+    100792: larry3
+    100794: larry_sitting
+    100796: pointLight1
+    100798: pointLight3
+    100800: pointLight4
+    100802: polySurface92
+    100804: polySurface93
+    100806: polySurface94
+    100808: polySurface95
+    100810: polySurface96
+    100812: polySurface97
+    100814: pPyramid3
+    100816: transform148
+    100818: transform149
+    100820: transform150
+    100822: transform150 1
+    100824: end_table1_table_top
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -771,6 +800,35 @@ ModelImporter:
     400762: transform21
     400764: transform22
     400766: group1
+    400768: chair_2
+    400770: chimney
+    400772: fire
+    400774: fire 1
+    400776: fire_flames
+    400778: firelights
+    400780: fireplace1
+    400782: fireplace_combi
+    400784: hole
+    400786: illum
+    400788: larry2
+    400790: larry2 1
+    400792: larry3
+    400794: larry_sitting
+    400796: pointLight1
+    400798: pointLight3
+    400800: pointLight4
+    400802: polySurface92
+    400804: polySurface93
+    400806: polySurface94
+    400808: polySurface95
+    400810: polySurface96
+    400812: polySurface97
+    400814: pPyramid3
+    400816: transform148
+    400818: transform149
+    400820: transform150
+    400822: transform150 1
+    400824: end_table1_table_top
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -779,6 +837,19 @@ ModelImporter:
     2100010: furniture_wood1
     2100012: fabric_blue
     2100014: lambert3
+    2100016: black_matte
+    2100018: chimney_stone
+    2100020: fireplace_paint
+    2100022: shiny_stone_dark
+    2100024: fireplace_wood
+    2100026: blinn10
+    2100028: log_wood
+    2100030: log_wood_light
+    2100032: fire_orange
+    2100034: fire_yellow
+    2100036: dark_plate_metal
+    2100038: furniture_wood
+    2100040: table_top_shiny
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -846,6 +917,16 @@ ModelImporter:
     2300128: chair_1
     2300130: door_frame 2
     2300132: larry1
+    2300134: chimney
+    2300136: fireplace_combi
+    2300138: hole
+    2300140: polySurface92
+    2300142: polySurface93
+    2300144: polySurface94
+    2300146: polySurface95
+    2300148: polySurface96
+    2300150: polySurface97
+    2300152: end_table1_table_top
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -913,6 +994,16 @@ ModelImporter:
     3300128: chair_1
     3300130: door_frame 2
     3300132: larry1
+    3300134: chimney
+    3300136: fireplace_combi
+    3300138: hole
+    3300140: polySurface92
+    3300142: polySurface93
+    3300144: polySurface94
+    3300146: polySurface95
+    3300148: polySurface96
+    3300150: polySurface97
+    3300152: end_table1_table_top
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -979,8 +1070,22 @@ ModelImporter:
     4300126: door_r
     4300128: chair_1
     4300130: larry1
+    4300132: chimney
+    4300134: hole
+    4300136: fireplace_combi
+    4300138: polySurface93
+    4300140: polySurface94
+    4300142: polySurface95
+    4300144: polySurface96
+    4300146: polySurface97
+    4300148: polySurface92
+    4300150: end_table1_table_top
     7400000: Take 001
     9500000: //RootNode
+    10800000: illum
+    10800002: pointLight1
+    10800004: pointLight3
+    10800006: pointLight4
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
