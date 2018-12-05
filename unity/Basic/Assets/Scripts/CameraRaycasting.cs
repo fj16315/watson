@@ -14,6 +14,7 @@ public class CameraRaycasting : MonoBehaviour
     public float raycastDistance;
     RaycastHit objectHit;
     bool display = false;
+    bool converse = false;
     int type;
     Collider entity;
     public GUISkin skin;
@@ -38,6 +39,12 @@ public class CameraRaycasting : MonoBehaviour
             {
                 type = (int)ToM.CHARACTER;
                 display = true;
+
+                // Interact with character
+                if (Input.GetMouseButtonDown(0))
+                {
+                    converse = true;
+                }
             }
 
             Thing obj = objectHit.collider.GetComponent<Thing>();
@@ -57,9 +64,14 @@ public class CameraRaycasting : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.skin = skin;
+        // When conversing
+        if (converse == true)
+        {
+            Pause(true);
+        }
         if (display == true)
         {
+            GUI.skin = skin;
             string message = "";
 
             switch (type)
@@ -83,6 +95,19 @@ public class CameraRaycasting : MonoBehaviour
             }
             GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 25, 240, 60), message);
 
+        }
+    }
+
+    private void Pause(bool pause)
+    {
+        switch (pause)
+        {
+            case true:
+                Time.timeScale = 0;
+                break;
+            default:
+                Time.timeScale = 1;
+                break;
         }
     }
 }
