@@ -868,6 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 2
+  skin: {fileID: 11400000, guid: 90636ca7369a676419ae53be6f5a0ada, type: 2}
 --- !u!1 &1399954313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100854, guid: 05da6f57793e20245a06b49d73882b27,

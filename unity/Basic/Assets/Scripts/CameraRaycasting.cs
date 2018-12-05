@@ -16,6 +16,7 @@ public class CameraRaycasting : MonoBehaviour
     bool display = false;
     int type;
     Collider entity;
+    public GUISkin skin;
 
     // Use this for initialization
     void Start()
@@ -56,6 +57,7 @@ public class CameraRaycasting : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.skin = skin;
         if (display == true)
         {
             string message = "";
@@ -65,7 +67,7 @@ public class CameraRaycasting : MonoBehaviour
                 // NPC
                 case (int)ToM.CHARACTER:
                     NPCController npc = entity.GetComponent<NPCController>();
-                    message = "Press T to talk to " + npc.charName;
+                    message = "Talk to " + npc.charName;
                     break;
                 case (int)ToM.THING:
                     Thing thing = entity.GetComponent<Thing>();
@@ -79,8 +81,7 @@ public class CameraRaycasting : MonoBehaviour
                     display = false;
                     break;
             }
-
-            GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 12, 250, 24), message);
+            GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 25, 240, 60), message);
 
         }
     }
