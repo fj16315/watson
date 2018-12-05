@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4504919, g: 0.4983759, b: 0.56377286, a: 1}
+  m_IndirectSpecularColor: {r: 0.45049262, g: 0.49837673, b: 0.5637737, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -163,6 +163,26 @@ Prefab:
     - target: {fileID: 400138, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
       propertyPath: m_LocalScale.z
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 100794, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+      propertyPath: m_Name
+      value: larry_sititng
+      objectReference: {fileID: 0}
+    - target: {fileID: 100730, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+      propertyPath: m_Name
+      value: larry
+      objectReference: {fileID: 0}
+    - target: {fileID: 400730, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00903
+      objectReference: {fileID: 0}
+    - target: {fileID: 400730, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00015
+      objectReference: {fileID: 0}
+    - target: {fileID: 400730, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.03952
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
@@ -340,6 +360,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100730, guid: 05da6f57793e20245a06b49d73882b27,
     type: 3}
   m_PrefabInternal: {fileID: 212091939}
+--- !u!114 &975744706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975744705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab1b1d4fcf64554db84296c4e496075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: Larry
 --- !u!64 &975744707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -527,7 +559,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361230744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b283469837674f5a9063f775c84edc6, type: 3}
+  m_Script: {fileID: 11500000, guid: d5fafc3ec50e914488d5d5ead627a294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 3
