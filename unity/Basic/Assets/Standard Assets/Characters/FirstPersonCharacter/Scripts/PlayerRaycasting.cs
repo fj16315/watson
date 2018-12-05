@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerRaycasting : MonoBehaviour {
 
-	public float raycastDistance; 
-	RaycastHit objectHit;
-	bool display = false;	
+	//public float raycastDistance; 
+	//RaycastHit objectHit;
+	//bool display = false;	
 
 	// Use this for initialization
 	void Start () {

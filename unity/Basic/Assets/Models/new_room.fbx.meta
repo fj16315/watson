@@ -416,6 +416,59 @@ ModelImporter:
     100820: transform150
     100822: transform150 1
     100824: end_table1_table_top
+    100826: book1
+    100828: ceiling
+    100830: chair2
+    100832: end_table1
+    100834: end_table1 1
+    100836: end_table1_leg2
+    100838: fireplace_test
+    100840: fireplace_test2
+    100842: leg1
+    100844: leg2
+    100846: leg3
+    100848: leg5
+    100850: main_leg
+    100852: pointLight5
+    100854: scarlet
+    100856: table_top
+    100858: transform151
+    100860: transform152
+    100862: transform153
+    100864: transform154
+    100866: transform155
+    100868: transform156
+    100870: transform157
+    100872: transform158
+    100874: transform159
+    100876: transform160
+    100878: transform161
+    100880: transform162
+    100882: transform163
+    100884: transform164
+    100886: transform165
+    100888: transform166
+    100890: transform167
+    100892: transform168
+    100894: transform169
+    100896: transform170
+    100898: transform171
+    100900: transform172
+    100902: transform173
+    100904: transform174
+    100906: transform175
+    100908: transform176
+    100910: transform177
+    100912: transform178
+    100914: transform179
+    100916: transform180
+    100918: transform181
+    100920: transform182
+    100922: transform183
+    100924: transform184
+    100926: transform185
+    100928: transform186
+    100930: walls
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -829,6 +882,59 @@ ModelImporter:
     400820: transform150
     400822: transform150 1
     400824: end_table1_table_top
+    400826: book1
+    400828: ceiling
+    400830: chair2
+    400832: end_table1
+    400834: end_table1 1
+    400836: end_table1_leg2
+    400838: fireplace_test
+    400840: fireplace_test2
+    400842: leg1
+    400844: leg2
+    400846: leg3
+    400848: leg5
+    400850: main_leg
+    400852: pointLight5
+    400854: scarlet
+    400856: table_top
+    400858: transform151
+    400860: transform152
+    400862: transform153
+    400864: transform154
+    400866: transform155
+    400868: transform156
+    400870: transform157
+    400872: transform158
+    400874: transform159
+    400876: transform160
+    400878: transform161
+    400880: transform162
+    400882: transform163
+    400884: transform164
+    400886: transform165
+    400888: transform166
+    400890: transform167
+    400892: transform168
+    400894: transform169
+    400896: transform170
+    400898: transform171
+    400900: transform172
+    400902: transform173
+    400904: transform174
+    400906: transform175
+    400908: transform176
+    400910: transform177
+    400912: transform178
+    400914: transform179
+    400916: transform180
+    400918: transform181
+    400920: transform182
+    400922: transform183
+    400924: transform184
+    400926: transform185
+    400928: transform186
+    400930: walls
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -850,6 +956,8 @@ ModelImporter:
     2100036: dark_plate_metal
     2100038: furniture_wood
     2100040: table_top_shiny
+    2100042: generic_green_blinn
+    2100044: paper
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -927,6 +1035,14 @@ ModelImporter:
     2300148: polySurface96
     2300150: polySurface97
     2300152: end_table1_table_top
+    2300154: book1
+    2300156: ceiling
+    2300158: chair2
+    2300160: end_table1
+    2300162: fireplace_test2
+    2300164: scarlet
+    2300166: walls
+    2300168: walls_working 1
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -1004,6 +1120,14 @@ ModelImporter:
     3300148: polySurface96
     3300150: polySurface97
     3300152: end_table1_table_top
+    3300154: book1
+    3300156: ceiling
+    3300158: chair2
+    3300160: end_table1
+    3300162: fireplace_test2
+    3300164: scarlet
+    3300166: walls
+    3300168: walls_working 1
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -1080,12 +1204,21 @@ ModelImporter:
     4300146: polySurface97
     4300148: polySurface92
     4300150: end_table1_table_top
+    4300152: walls
+    4300154: fireplace_test2
+    4300156: end_table1
+    4300158: book1
+    4300160: walls_working
+    4300162: chair2
+    4300164: scarlet
+    4300166: ceiling
     7400000: Take 001
     9500000: //RootNode
     10800000: illum
     10800002: pointLight1
     10800004: pointLight3
     10800006: pointLight4
+    10800008: pointLight5
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
