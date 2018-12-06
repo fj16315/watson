@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GameAI;
-using GameAI.Relationships;
 
 namespace AITests
 {
+  using Flags = Relationships.Flags;
+
   [TestClass]
   public class RelationshipTests
   {
@@ -66,7 +67,7 @@ namespace AITests
     public void NotEqualsOverlap()
     {
       var lhs = new Relationships(Flags.Owns | Flags.Wants);
-      var lhs = new Relationships(Flags.Contains | Flags.Wants);
+      var rhs = new Relationships(Flags.Contains | Flags.Wants);
       Assert.AreNotEqual(lhs, rhs);
     }
 
@@ -92,7 +93,7 @@ namespace AITests
     {
       var lhs = new Relationships(Flags.Owns | Flags.Wants);
       var rhs = new Relationships(Flags.Contains);
-      var result = new Relationships(Flags.Contains | Flags.Owns | Flags.Wants);
+      var result = new Relationships();
       Assert.AreEqual(lhs & rhs, result);
     }
 
@@ -101,7 +102,7 @@ namespace AITests
     {
       var lhs = new Relationships(Flags.Owns | Flags.Wants);
       var rhs = new Relationships(Flags.Contains | Flags.Wants);
-      var result = new Relationships(Flags.Contains | Flags.Owns | Flags.Wants);
+      var result = new Relationships(Flags.Wants);
       Assert.AreEqual(lhs & rhs, result);
     }
 
@@ -126,7 +127,7 @@ namespace AITests
       var lhs = new Relationships(Flags.Wants);
       var rhs = new Relationships(Flags.Owns);
       var result = new Relationships(Flags.Wants | Flags.Owns);
-      Assert.AreEquals(lhs | rhs, result);
+      Assert.AreEqual(lhs | rhs, result);
     }
 
     [TestMethod]
@@ -135,7 +136,7 @@ namespace AITests
       var lhs = new Relationships(Flags.Wants | Flags.Owns);
       var rhs = new Relationships(Flags.Wants | Flags.Contains);
       var result = new Relationships(Flags.Contains | Flags.Owns | Flags.Wants);
-      Assert.AreEquals(lhs | rhs, result);
+      Assert.AreEqual(lhs | rhs, result);
     }
 
     [TestMethod]

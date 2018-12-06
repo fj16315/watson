@@ -18,7 +18,7 @@ namespace GameAI
     /// <param name="inputString"> The input string. </param>
     public WordIterator(string inputString)
 	{
-      words = inputString.Split(' ', System.StringSplitOptions.RemoveEmptyEntries);
+      words = inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
 	}
 
     IEnumerator IEnumerable.GetEnumerator()
