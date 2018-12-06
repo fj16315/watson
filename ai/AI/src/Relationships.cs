@@ -99,5 +99,26 @@ namespace GameAI
     // public static Relationships operator ^(Relationships lhs, Relationships rhs)
     //   => new Relationships(lhs.relationships ^ rhs.relationships);
 
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:GameAI.Relationships"/>.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:GameAI.Relationships"/>.</param>
+    /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+    /// <see cref="T:GameAI.Relationships"/>; otherwise, <c>false</c>.</returns>
+    public override bool Equals(object obj)
+    {
+      if ( obj is Relationships rel)
+      {
+        return this == rel;
+      }
+      return false;
+    }
+
+    /// <summary>
+    /// Serves as a hash function for a <see cref="T:GameAI.Relationships"/> object.
+    /// </summary>
+    /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
+    public override int GetHashCode()
+      => (int) relationships;
   }
 }
