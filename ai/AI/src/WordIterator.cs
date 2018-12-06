@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 
 namespace GameAI
 {
@@ -8,9 +9,10 @@ namespace GameAI
   /// <remarks>
   /// Splits the incoming string into words which can then be iterated over.
   /// </remarks>
-  public class WordIterator : IEnumerable
+  public class WordIterator : IEnumerable<string>
   {
-  private readonly string[] words;
+  //private readonly string[] words;
+      private string _inputString;
 
     /// <summary>
     /// Create a new WordIterator from some input string.
@@ -18,20 +20,24 @@ namespace GameAI
     /// <param name="inputString"> The input string. </param>
     public WordIterator(string inputString)
 	{
-      words = inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+      //words = inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+        _inputString = inputString;
 	}
+
+    public IEnumerator<string> GetEnumerator()
+    {
+        return new WordEnumerator(_inputString);
+    }
+
+    private IEnumerator GetEnumerator1()
+    {
+        return this.GetEnumerator();
+    }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-      return GetEnumerator();
+      return GetEnumerator1();
 	}
 
-	public IEnumerator GetEnumerator( )
-	{
-	  foreach (var word in words)
-	  {
-	    yield return word;
-	  }
-	}
   }
 }
