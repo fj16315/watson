@@ -11,30 +11,30 @@ namespace GameAI
   /// </remarks>
   public class WordIterator: IEnumerable<string>
   {
-      private string _inputString;
+    private string _inputString;
 
     /// <summary>
     /// Create a new WordIterator from some input string.
     /// </summary>
     /// <param name="inputString"> The input string. </param>
     public WordIterator(string inputString)
-	{
-        _inputString = inputString;
-	}
+	  {
+      _inputString = inputString;
+	  }
 
     public IEnumerator<string> GetEnumerator()
     {
-            string[] words = _inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < words.Length; i++)
-            {
-                yield return words[i];
-            }
-        }
+      string[] words = _inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+      for (int i = 0; i < words.Length; i++)
+      {
+        yield return words[i];
+      }
+    }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
       return GetEnumerator();
-	}
+	  }
 
   }
 }
