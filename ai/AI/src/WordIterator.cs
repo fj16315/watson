@@ -25,16 +25,13 @@ namespace GameAI
     public IEnumerator<string> GetEnumerator()
     {
       string[] words = _inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
-      for (int i = 0; i < words.Length; i++)
+      foreach (string i in words)
       {
-        yield return words[i];
+        yield return i;
       }
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return GetEnumerator();
-	  }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
   }
 }
