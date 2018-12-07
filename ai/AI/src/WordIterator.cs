@@ -9,9 +9,8 @@ namespace GameAI
   /// <remarks>
   /// Splits the incoming string into words which can then be iterated over.
   /// </remarks>
-  public class WordIterator : IEnumerable<string>
+  public class WordIterator: IEnumerable<string>
   {
-  //private readonly string[] words;
       private string _inputString;
 
     /// <summary>
@@ -20,23 +19,21 @@ namespace GameAI
     /// <param name="inputString"> The input string. </param>
     public WordIterator(string inputString)
 	{
-      //words = inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
         _inputString = inputString;
 	}
 
     public IEnumerator<string> GetEnumerator()
     {
-        return new WordEnumerator(_inputString);
-    }
-
-    private IEnumerator GetEnumerator1()
-    {
-        return this.GetEnumerator();
-    }
+            string[] words = _inputString.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < words.Length; i++)
+            {
+                yield return words[i];
+            }
+        }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-      return GetEnumerator1();
+      return GetEnumerator();
 	}
 
   }

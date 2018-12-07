@@ -10,7 +10,7 @@ namespace AITests
     [TestMethod]
     public void IterateOnEmpty()
     {
-      var empty = new WordIterator("").GetEnumerator();
+            var empty = new WordIterator("").GetEnumerator();
       Assert.IsFalse(empty.MoveNext());
     }
 

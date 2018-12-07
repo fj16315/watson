@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Relationships.cs" />
-    <Compile Include="src\WordEnumerable.cs" />
+    <Compile Include="src\WordIterator.cs" />
     <Compile Include="src\KnowledgeGraph.cs" />
     <Compile Include="src\WordEnumerator.cs" />
   </ItemGroup>
