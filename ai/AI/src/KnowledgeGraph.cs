@@ -3,84 +3,171 @@ using System.Collections;
 
 namespace GameAI
 {
+  /// <summary>
+  /// Represents the information known by an NPC
+  /// </summary>
   [Serializable()]
   public class KnowledgeGraph
   {
+    /// <summary>
+    /// An adjacency matrix used for representing the <see cref="GameAI.KnowledgeGraph"/>.
+    /// </summary>
     private Relationships[,] adj_matrix;
 
-    public KnowledgeGraph(int size)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameAI.KnowledgeGraph"/> class.
+    /// </summary>
+    /// <param name="node_count">The number of nodes in the graph.</param>
+    public KnowledgeGraph(int node_count)
     {
-      adj_matrix = new Relationships[size,size];
+      adj_matrix = new Relationships[node_count,node_count];
     }
 
-    public int GetSize()
+    /// <summary>
+    /// Gets the number of nodes in the graph.
+    /// </summary>
+    /// <returns>The number of nodes in the graph.</returns>
+    /// <remarks>The number of nodes is the same as the size of the adjacency matrix.</remarks>
+    public int GetNodeCount()
       => adj_matrix.GetLength(0);
 
+    /// <summary>
+    /// Returns the relationships from one node to another.
+    /// </summary>
+    /// <returns>The <see cref="GameAI.Relationships"/> from one node to another.</returns>
+    /// <param name="from">The node from which the relationships come.</param>
+    /// <param name="to">The node to which the relationships go.</param>
     public ref Relationships RelationshipsFromTo(int from, int to)
       => ref adj_matrix[from, to];
 
+    /// <summary>
+    /// Returns the relationships from a given node.
+    /// </summary>
+    /// <returns>An <see cref="GameAI.OutEdgeIter"/> containing the <see cref="GameAI.Relationships"/> from the given node, <paramref name="from"/>.</returns>
+    /// <param name="from">The node from which the relationships come.</param>
     public OutEdgeIter RelationshipsFrom(int from)
       => new OutEdgeIter(from, this);
 
+    /// <summary>
+    /// Returns the relationships to a given node.
+    /// </summary>
+    /// <returns>An <see cref="GameAI.InEdgeIter"/> containing the <see cref="GameAI.Relationships"/> to the given node, <paramref name="to"/>.</returns>
+    /// <param name="to">The node to which the relationships go.</param>
     public InEdgeIter RelationshipsTo(int to)
       => new InEdgeIter(to, this);
   }
 
+  /// <summary>
+  /// An iterator over the <see cref="GameAI.Relationships"/> coming out of a node.
+  /// </summary>
   public class OutEdgeIter : IEnumerator
   {
-    private readonly int from;
-    private readonly KnowledgeGraph graph;
-    int to;
+    /// <summary>
+    /// The node from which the <see cref="GameAI.Relationships"/> are coming.
+    /// </summary>
+    private readonly int _from;
+    /// <summary>
+    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
+    /// </summary>
+    private readonly KnowledgeGraph _graph;
+    /// <summary>
+    /// The node to which the current <see cref="GameAI.Relationships"/> goes.
+    /// </summary>
+    int _to;
 
-    public OutEdgeIter(int _from, KnowledgeGraph _graph)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameAI.OutEdgeIter"/> class.
+    /// </summary>
+    /// <param name="from">The node from which the <see cref="GameAI.Relationships"/> come.</param>
+    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
+    public OutEdgeIter(int from, KnowledgeGraph graph)
     {
-      from = _from;
-      graph = _graph;
+      _from = from;
+      _graph = graph;
       (this as IEnumerator).Reset();
     }
 
+    /// <summary>
+    /// The <see cref="GameAI.Relationships"/> from the initial node to the current node.
+    /// </summary>
+    /// <value>The <see cref="GameAI.Relationships"/> from the initial node to the current node.</value>
     object IEnumerator.Current
-      => graph.RelationshipsFromTo(from, to);
+      => _graph.RelationshipsFromTo(_from, _to);
 
+    /// <summary>
+    /// Advances to the next <see cref="GameAI.Relationships"/>.
+    /// </summary>
+    /// <returns><c>true</c> if a next <see cref="GameAI.Relationships"/> existed, <c>false</c> otherwise.</returns>
     bool IEnumerator.MoveNext()
     {
-      if ( to >= graph.GetSize() ) { return false; }
-      to += 1;
+      if ( _to >= _graph.GetNodeCount() ) { return false; }
+      _to += 1;
       return true;
     }
 
+    /// <summary>
+    /// Resets the node to which the <see cref="GameAI.Relationships"/> go.
+    /// </summary>
     void IEnumerator.Reset()
     {
-      to = -1;
+      _to = -1;
     }
   }
 
+  /// <summary>
+  /// An iterator over the <see cref="GameAI.Relationships"/> going into a node.
+  /// </summary>
   public class InEdgeIter : IEnumerator
   {
-    private readonly int to;
-    private readonly KnowledgeGraph graph;
-    int from;
+    /// <summary>
+    /// The node to which the <see cref="GameAI.Relationships"/> are going.
+    /// </summary>
+    private readonly int _to;
+    /// <summary>
+    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
+    /// </summary>
+    private readonly KnowledgeGraph _graph;
+    /// <summary>
+    /// The node from which the current <see cref="GameAI.Relationships"/> comes.
+    /// </summary>
+    int _from;
 
-    public InEdgeIter(int _to, KnowledgeGraph _graph)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameAI.InEdgeIter"/> class.
+    /// </summary>
+    /// <param name="to">The node to which the <see cref="GameAI.Relationships"/> go.</param>
+    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
+    public InEdgeIter(int to, KnowledgeGraph graph)
     {
-      to = _to;
-      graph = _graph;
+      _to = to;
+      _graph = graph;
       (this as IEnumerator).Reset();
     }
 
+    /// <summary>
+    /// The <see cref="GameAI.Relationships"/> from the current node to the initial node.
+    /// </summary>
+    /// <value>The <see cref="GameAI.Relationships"/> from the current node to the initial node.</value>
     object IEnumerator.Current
-      => graph.RelationshipsFromTo(from, to);
+      => _graph.RelationshipsFromTo(_from, _to);
 
+    /// <summary>
+    /// Advances to the next <see cref="GameAI.Relationships"/>.
+    /// </summary>
+    /// <returns><c>true</c> if a next <see cref="GameAI.Relationships"/> existed, <c>false</c> otherwise.</returns>
     bool IEnumerator.MoveNext()
     {
-      if ( from >= graph.GetSize() ) { return false; }
-      from += 1;
+      if ( _from >= _graph.GetNodeCount() ) { return false; }
+      _from += 1;
       return true;
     }
 
+    /// <summary>
+    /// Resets the node from which the <see cref="GameAI.Relationships"/> come.
+    /// </summary>
     void IEnumerator.Reset()
     {
-      from = -1;
+      _from = -1;
     }
   }
 }
