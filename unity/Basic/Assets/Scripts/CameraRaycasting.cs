@@ -18,6 +18,7 @@ public class CameraRaycasting : MonoBehaviour
     int type;
     Collider entity;
     public GUISkin skin;
+    public string stringToEdit = "Strike up a conversation!";
 
     // Use this for initialization
     void Start()
@@ -64,14 +65,17 @@ public class CameraRaycasting : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.skin = skin;
         // When conversing
-        if (converse == true)
+        if (converse)
         {
             Pause(true);
+            int width = 800;
+            int height = 600;
+            stringToEdit = GUI.TextArea(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height), stringToEdit);
         }
-        if (display == true)
+        if (display && !converse)
         {
-            GUI.skin = skin;
             string message = "";
 
             switch (type)

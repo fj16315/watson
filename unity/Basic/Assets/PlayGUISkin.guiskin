@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 12001, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: PlayGUISkin
   m_EditorClassIdentifier: 
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: d878f75c795ad6a4e9effb3d682bf642, type: 3}
   m_box:
     m_Name: box
     m_Normal:
@@ -350,9 +350,9 @@ MonoBehaviour:
   m_textArea:
     m_Name: textarea
     m_Normal:
-      m_Background: {fileID: 11024, guid: 0000000000000000e000000000000000, type: 0}
+      m_Background: {fileID: 2800000, guid: 5cfe1be753367b540be36ce65f91389c, type: 3}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 11026, guid: 0000000000000000e000000000000000, type: 0}
       m_ScaledBackgrounds: []
@@ -392,17 +392,17 @@ MonoBehaviour:
       m_Top: 4
       m_Bottom: 4
     m_Padding:
-      m_Left: 3
-      m_Right: 3
-      m_Top: 3
-      m_Bottom: 3
+      m_Left: 80
+      m_Right: 30
+      m_Top: 120
+      m_Bottom: 30
     m_Overflow:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_Font: {fileID: 12800000, guid: d878f75c795ad6a4e9effb3d682bf642, type: 3}
+    m_FontSize: 24
     m_FontStyle: 0
     m_Alignment: 0
     m_WordWrap: 1
