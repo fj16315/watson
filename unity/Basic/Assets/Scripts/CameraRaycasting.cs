@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using NPC;
 using Things;
+using Doors;
 
 // (T)ype (o)f (M)essage
-enum ToM : int {CHARACTER, THING};
+enum ToM : int {CHARACTER, THING, DOOR};
 
 public class CameraRaycasting : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class CameraRaycasting : MonoBehaviour
         {
             entity = objectHit.collider;
 
-            NPCController npc = objectHit.collider.GetComponent<NPCController>();
+            NPCController npc = entity.GetComponent<NPCController>();
             if (npc != null)
             {
                 type = (int)ToM.CHARACTER;
@@ -48,11 +49,22 @@ public class CameraRaycasting : MonoBehaviour
                 }
             }
 
-            Thing obj = objectHit.collider.GetComponent<Thing>();
+            Thing obj = entity.GetComponent<Thing>();
             if (obj != null)
             {
-                //Debug.Log("true");
                 type = (int)ToM.THING;
+                display = true;
+            }
+
+            Door door = entity.GetComponent<Door>();
+            if (door != null)
+            {
+                type = (int)ToM.DOOR;
+                // Interact with door
+                if (Input.GetMouseButtonDown(0))
+                {
+                    door.Activate();
+                }
                 display = true;
             }
         }
@@ -70,8 +82,8 @@ public class CameraRaycasting : MonoBehaviour
         if (converse)
         {
             Pause(true);
-            int width = 800;
-            int height = 600;
+            int width = 600;
+            int height = 200;
             stringToEdit = GUI.TextArea(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height), stringToEdit);
         }
         if (display && !converse)
@@ -85,6 +97,7 @@ public class CameraRaycasting : MonoBehaviour
                     NPCController npc = entity.GetComponent<NPCController>();
                     message = "Talk to " + npc.charName;
                     break;
+                // THING
                 case (int)ToM.THING:
                     Thing thing = entity.GetComponent<Thing>();
                     if (thing.CanPickUp())
@@ -93,6 +106,18 @@ public class CameraRaycasting : MonoBehaviour
                     }
                     message += thing.objName;
                     break;
+                // DOOR
+                case (int)ToM.DOOR:
+                    Door door = entity.GetComponent<Door>();
+                    if (door.open)
+                    {
+                        message = "Close door";
+                    } else
+                    {
+                        message = "Open door";
+                    }
+                    break;
+                // DEFAULT
                 default:
                     display = false;
                     break;
