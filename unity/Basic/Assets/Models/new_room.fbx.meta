@@ -469,6 +469,41 @@ ModelImporter:
     100926: transform185
     100928: transform186
     100930: walls
+    100932: base
+    100934: blue_room_walls
+    100936: centre
+    100938: end_table2
+    100940: fire_box
+    100942: fireplace_base
+    100944: fireplace_grate
+    100946: fireplace_grate_upper
+    100948: fireplace_inlay1
+    100950: fireplace_l
+    100952: fireplace_mantle
+    100954: fireplace_r
+    100956: fireplace_top
+    100958: gramophone1
+    100960: handle
+    100962: horn
+    100964: knob
+    100966: logs
+    100968: needle
+    100970: new_floor
+    100972: new_floor1
+    100974: pPyramid1
+    100976: pPyramid2
+    100978: record
+    100980: record_plate
+    100982: ring
+    100984: spike_center
+    100986: spike_center_l
+    100988: spike_center_r
+    100990: spike_corner_l
+    100992: spike_corner_l1
+    100994: spike_corner_l_b
+    100996: spike_corner_r_b
+    100998: stationary
+    101000: transform187
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -935,6 +970,41 @@ ModelImporter:
     400926: transform185
     400928: transform186
     400930: walls
+    400932: base
+    400934: blue_room_walls
+    400936: centre
+    400938: end_table2
+    400940: fire_box
+    400942: fireplace_base
+    400944: fireplace_grate
+    400946: fireplace_grate_upper
+    400948: fireplace_inlay1
+    400950: fireplace_l
+    400952: fireplace_mantle
+    400954: fireplace_r
+    400956: fireplace_top
+    400958: gramophone1
+    400960: handle
+    400962: horn
+    400964: knob
+    400966: logs
+    400968: needle
+    400970: new_floor
+    400972: new_floor1
+    400974: pPyramid1
+    400976: pPyramid2
+    400978: record
+    400980: record_plate
+    400982: ring
+    400984: spike_center
+    400986: spike_center_l
+    400988: spike_center_r
+    400990: spike_corner_l
+    400992: spike_corner_l1
+    400994: spike_corner_l_b
+    400996: spike_corner_r_b
+    400998: stationary
+    401000: transform187
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -958,6 +1028,12 @@ ModelImporter:
     2100040: table_top_shiny
     2100042: generic_green_blinn
     2100044: paper
+    2100046: wallpaper_blue
+    2100048: floor
+    2100050: silver
+    2100052: brass
+    2100054: dark_wood
+    2100056: fabric_red
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -1043,6 +1119,60 @@ ModelImporter:
     2300164: scarlet
     2300166: walls
     2300168: walls_working 1
+    2300170: base
+    2300172: blue_room_walls
+    2300174: centre
+    2300176: end_table2
+    2300178: fire_box
+    2300180: fireplace_base
+    2300182: fireplace_grate
+    2300184: fireplace_grate_upper
+    2300186: fireplace_inlay1
+    2300188: fireplace_l
+    2300190: fireplace_mantle
+    2300192: fireplace_r
+    2300194: fireplace_top
+    2300196: handle
+    2300198: horn
+    2300200: knob
+    2300202: logs
+    2300204: needle
+    2300206: new_floor
+    2300208: new_floor1
+    2300210: polySurface63
+    2300212: polySurface64
+    2300214: polySurface66
+    2300216: polySurface67
+    2300218: polySurface68
+    2300220: polySurface70
+    2300222: polySurface72
+    2300224: polySurface73
+    2300226: polySurface76
+    2300228: polySurface80
+    2300230: polySurface81
+    2300232: polySurface82
+    2300234: polySurface83
+    2300236: polySurface84
+    2300238: polySurface85
+    2300240: polySurface86
+    2300242: polySurface87
+    2300244: polySurface88
+    2300246: polySurface89
+    2300248: polySurface90
+    2300250: polySurface91
+    2300252: pPyramid1
+    2300254: pPyramid2
+    2300256: pPyramid3
+    2300258: record
+    2300260: record_plate
+    2300262: ring
+    2300264: spike_center
+    2300266: spike_center_l
+    2300268: spike_center_r
+    2300270: spike_corner_l
+    2300272: spike_corner_l1
+    2300274: spike_corner_l_b
+    2300276: spike_corner_r_b
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -1128,6 +1258,60 @@ ModelImporter:
     3300164: scarlet
     3300166: walls
     3300168: walls_working 1
+    3300170: base
+    3300172: blue_room_walls
+    3300174: centre
+    3300176: end_table2
+    3300178: fire_box
+    3300180: fireplace_base
+    3300182: fireplace_grate
+    3300184: fireplace_grate_upper
+    3300186: fireplace_inlay1
+    3300188: fireplace_l
+    3300190: fireplace_mantle
+    3300192: fireplace_r
+    3300194: fireplace_top
+    3300196: handle
+    3300198: horn
+    3300200: knob
+    3300202: logs
+    3300204: needle
+    3300206: new_floor
+    3300208: new_floor1
+    3300210: polySurface63
+    3300212: polySurface64
+    3300214: polySurface66
+    3300216: polySurface67
+    3300218: polySurface68
+    3300220: polySurface70
+    3300222: polySurface72
+    3300224: polySurface73
+    3300226: polySurface76
+    3300228: polySurface80
+    3300230: polySurface81
+    3300232: polySurface82
+    3300234: polySurface83
+    3300236: polySurface84
+    3300238: polySurface85
+    3300240: polySurface86
+    3300242: polySurface87
+    3300244: polySurface88
+    3300246: polySurface89
+    3300248: polySurface90
+    3300250: polySurface91
+    3300252: pPyramid1
+    3300254: pPyramid2
+    3300256: pPyramid3
+    3300258: record
+    3300260: record_plate
+    3300262: ring
+    3300264: spike_center
+    3300266: spike_center_l
+    3300268: spike_center_r
+    3300270: spike_corner_l
+    3300272: spike_corner_l1
+    3300274: spike_corner_l_b
+    3300276: spike_corner_r_b
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -1212,6 +1396,60 @@ ModelImporter:
     4300162: chair2
     4300164: scarlet
     4300166: ceiling
+    4300168: blue_room_walls
+    4300170: polySurface63
+    4300172: polySurface64
+    4300174: polySurface66
+    4300176: polySurface67
+    4300178: polySurface68
+    4300180: polySurface70
+    4300182: polySurface72
+    4300184: polySurface73
+    4300186: polySurface76
+    4300188: polySurface80
+    4300190: polySurface81
+    4300192: polySurface82
+    4300194: polySurface83
+    4300196: polySurface84
+    4300198: polySurface85
+    4300200: polySurface86
+    4300202: polySurface87
+    4300204: polySurface88
+    4300206: polySurface89
+    4300208: polySurface90
+    4300210: polySurface91
+    4300212: spike_corner_r_b
+    4300214: spike_corner_l_b
+    4300216: spike_center_r
+    4300218: spike_center_l
+    4300220: spike_corner_l1
+    4300222: spike_corner_l
+    4300224: spike_center
+    4300226: fireplace_grate_upper
+    4300228: fireplace_grate
+    4300230: fireplace_inlay1
+    4300232: fireplace_top
+    4300234: fireplace_mantle
+    4300236: fireplace_l
+    4300238: fireplace_r
+    4300240: fireplace_base
+    4300242: logs
+    4300244: fire_box
+    4300246: pPyramid1
+    4300248: pPyramid2
+    4300250: pPyramid3
+    4300252: new_floor
+    4300254: end_table2
+    4300256: needle
+    4300258: horn
+    4300260: centre
+    4300262: record_plate
+    4300264: knob
+    4300266: base
+    4300268: ring
+    4300270: record
+    4300272: handle
+    4300274: new_floor1
     7400000: Take 001
     9500000: //RootNode
     10800000: illum
