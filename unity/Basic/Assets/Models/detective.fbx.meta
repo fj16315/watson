@@ -120,6 +120,10 @@ ModelImporter:
     100228: transform8
     100230: transform9
     100232: Trousers2
+    100234: Model
+    100236: Rig
+    100238: Rig_And_Controlers
+    100240: Shoes
     400000: Body3
     400002: bottomnurbsSquare1
     400004: //RootNode
@@ -237,13 +241,19 @@ ModelImporter:
     400228: transform8
     400230: transform9
     400232: Trousers2
+    400234: Model
+    400236: Rig
+    400238: Rig_And_Controlers
+    400240: Shoes
     2100000: lambert1
     2100002: lambert4
     2100004: lambert5
     2300000: extrudedSurface6
     2300002: pCylinder1
+    2300004: Hat
     3300000: extrudedSurface6
     3300002: pCylinder1
+    3300004: Hat
     4300000: Hat
     4300002: Body3
     4300004: Trousers2
@@ -253,6 +263,7 @@ ModelImporter:
     4300012: Shoe1
     4300014: extrudedSurface6
     4300016: pCylinder1
+    4300018: Shoes
     7400000: Take 001
     9500000: //RootNode
     13700000: Body3
@@ -262,6 +273,8 @@ ModelImporter:
     13700008: Shoe1
     13700010: Tie2
     13700012: Trousers2
+    13700014: Shoes
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
