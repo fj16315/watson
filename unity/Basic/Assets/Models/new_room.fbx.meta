@@ -506,6 +506,20 @@ ModelImporter:
     101000: transform187
     101002: ceiling 1
     101004: yellow_room_walls
+    101006: bracket
+    101008: bulbs
+    101010: chandelier1
+    101012: main
+    101014: sconce1
+    101016: sconce2
+    101018: sconce3
+    101020: sconce4
+    101022: top
+    101024: bulb_light
+    101026: bulb_light1
+    101028: bulb_light2
+    101030: bulb_light3
+    101032: lights
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -1009,6 +1023,20 @@ ModelImporter:
     401000: transform187
     401002: ceiling 1
     401004: yellow_room_walls
+    401006: bracket
+    401008: bulbs
+    401010: chandelier1
+    401012: main
+    401014: sconce1
+    401016: sconce2
+    401018: sconce3
+    401020: sconce4
+    401022: top
+    401024: bulb_light
+    401026: bulb_light1
+    401028: bulb_light2
+    401030: bulb_light3
+    401032: lights
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -1180,6 +1208,14 @@ ModelImporter:
     2300276: spike_corner_r_b
     2300278: ceiling 1
     2300280: yellow_room_walls
+    2300282: bracket
+    2300284: bulbs
+    2300286: main
+    2300288: sconce1
+    2300290: sconce2
+    2300292: sconce3
+    2300294: sconce4
+    2300296: top
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -1321,6 +1357,14 @@ ModelImporter:
     3300276: spike_corner_r_b
     3300278: ceiling 1
     3300280: yellow_room_walls
+    3300282: bracket
+    3300284: bulbs
+    3300286: main
+    3300288: sconce1
+    3300290: sconce2
+    3300292: sconce3
+    3300294: sconce4
+    3300296: top
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -1461,6 +1505,14 @@ ModelImporter:
     4300274: new_floor1
     4300276: yellow_room_walls
     4300278: ceiling
+    4300280: bracket
+    4300282: top
+    4300284: main
+    4300286: sconce1
+    4300288: sconce2
+    4300290: sconce3
+    4300292: sconce4
+    4300294: bulbs
     7400000: Take 001
     9500000: //RootNode
     10800000: illum
@@ -1468,6 +1520,10 @@ ModelImporter:
     10800004: pointLight3
     10800006: pointLight4
     10800008: pointLight5
+    10800010: bulb_light
+    10800012: bulb_light1
+    10800014: bulb_light2
+    10800016: bulb_light3
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
