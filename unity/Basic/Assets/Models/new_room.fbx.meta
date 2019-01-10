@@ -542,6 +542,14 @@ ModelImporter:
     101072: window_frame_narrow
     101074: window_narrow1
     101076: blue_room_walls 1
+    101078: fireplace_panels
+    101080: flames
+    101082: chair
+    101084: end_table
+    101086: fireplace
+    101088: tabletop
+    101090: wooden
+    101092: terrain
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -1081,6 +1089,14 @@ ModelImporter:
     401072: window_frame_narrow
     401074: window_narrow1
     401076: blue_room_walls 1
+    401078: fireplace_panels
+    401080: flames
+    401082: chair
+    401084: end_table
+    401086: fireplace
+    401088: tabletop
+    401090: wooden
+    401092: terrain
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -1114,6 +1130,7 @@ ModelImporter:
     2100060: fabric_beige
     2100062: lightshade_red
     2100064: glass
+    2100066: ground
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -1277,6 +1294,12 @@ ModelImporter:
     2300320: v
     2300322: window_frame_narrow
     2300324: blue_room_walls 1
+    2300326: fireplace_panels
+    2300328: flames
+    2300330: chair
+    2300332: tabletop
+    2300334: wooden
+    2300336: terrain
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -1440,6 +1463,12 @@ ModelImporter:
     3300320: v
     3300322: window_frame_narrow
     3300324: blue_room_walls 1
+    3300326: fireplace_panels
+    3300328: flames
+    3300330: chair
+    3300332: tabletop
+    3300334: wooden
+    3300336: terrain
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -1601,6 +1630,12 @@ ModelImporter:
     4300316: h3
     4300318: v
     4300320: panels_booled
+    4300322: flames
+    4300324: fireplace_panels
+    4300326: chair
+    4300328: wooden
+    4300330: tabletop
+    4300332: terrain
     7400000: Take 001
     9500000: //RootNode
     10800000: illum
