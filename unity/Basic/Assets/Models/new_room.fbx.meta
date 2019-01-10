@@ -530,6 +530,18 @@ ModelImporter:
     101048: trim
     101050: spotLight1
     101052: floor_lamp_point
+    101054: h1
+    101056: h2
+    101058: h3
+    101060: pane
+    101062: panels
+    101064: panels_booled
+    101066: transform188
+    101068: transform189
+    101070: v
+    101072: window_frame_narrow
+    101074: window_narrow1
+    101076: blue_room_walls 1
     400000: billiards_door
     400002: billiards_door 1
     400004: dining_door
@@ -1057,6 +1069,18 @@ ModelImporter:
     401048: trim
     401050: spotLight1
     401052: floor_lamp_point
+    401054: h1
+    401056: h2
+    401058: h3
+    401060: pane
+    401062: panels
+    401064: panels_booled
+    401066: transform188
+    401068: transform189
+    401070: v
+    401072: window_frame_narrow
+    401074: window_narrow1
+    401076: blue_room_walls 1
     2100000: mat_stairs
     2100002: blinn1
     2100004: mat_floor
@@ -1089,6 +1113,7 @@ ModelImporter:
     2100058: wallpaper_yellow
     2100060: fabric_beige
     2100062: lightshade_red
+    2100064: glass
     2300000: door
     2300002: door 1
     2300004: door 2
@@ -1244,6 +1269,14 @@ ModelImporter:
     2300304: stand
     2300306: top_trim
     2300308: trim
+    2300310: h1
+    2300312: h2
+    2300314: h3
+    2300316: pane
+    2300318: panels_booled
+    2300320: v
+    2300322: window_frame_narrow
+    2300324: blue_room_walls 1
     3300000: door
     3300002: door 1
     3300004: door 2
@@ -1399,6 +1432,14 @@ ModelImporter:
     3300304: stand
     3300306: top_trim
     3300308: trim
+    3300310: h1
+    3300312: h2
+    3300314: h3
+    3300316: pane
+    3300318: panels_booled
+    3300320: v
+    3300322: window_frame_narrow
+    3300324: blue_room_walls 1
     4300000: stairs_mesh
     4300002: downstairs_walls_working1
     4300004: floor_lower
@@ -1553,6 +1594,13 @@ ModelImporter:
     4300302: top_trim
     4300304: stand
     4300306: trim
+    4300308: window_frame_narrow
+    4300310: pane
+    4300312: h1
+    4300314: h2
+    4300316: h3
+    4300318: v
+    4300320: panels_booled
     7400000: Take 001
     9500000: //RootNode
     10800000: illum
