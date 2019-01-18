@@ -1,5 +1,5 @@
 ﻿using edu.stanford.nlp.process;
-//using edu.stanford.nlp.ling;
+using edu.stanford.nlp.ling;
 using edu.stanford.nlp.trees;
 using edu.stanford.nlp.parser.lexparser;
 
@@ -106,5 +106,11 @@ namespace GameAI
       => this.First(
            (td) => td.reln().getShortName() == "root"
          );
+
+    public IEnumerable<TypedDependency> WithRelation(IndexedWord from, string relation)
+      => this.Where(
+        (td) => td.gov() == from
+             && td.reln().getShortName() == relation
+      );
   }
 }
