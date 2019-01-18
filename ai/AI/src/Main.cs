@@ -17,7 +17,7 @@ public class MainClass
       if (line == "") { break; }
 
       var tree = parser.Parse(line);
-      Console.WriteLine("{0}\n", tree);
+      Console.WriteLine("{0}\n", tree.pennString());
 
       foreach (var td in parser.DependenciesFrom(tree))
       {
@@ -26,3 +26,4 @@ public class MainClass
     }
   }
 }
+

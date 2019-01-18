@@ -170,4 +170,41 @@ namespace GameAI
       _from = -1;
     }
   }
+
+  /// <summary>
+  /// Quick class for building <see cref="GameAI.KnowledgeGraph"/>.
+  /// </summary>
+  public class KnowledgeGraphBuilder
+  {
+    private KnowledgeGraph _kg;
+
+    /// <summary>
+    /// Begins initialisation of a new <see cref="GameAI.KnowledgeGraph"/>.
+    /// </summary>
+    /// <param name="size">The sixe of the <see cref="GameAI.KnowledgeGraph"/>.</param>
+    public KnowledgeGraphBuilder(int size)
+    {
+      _kg = new KnowledgeGraph(size);
+    }
+
+    /// <summary>
+    /// Adds a <see cref="GameAI.Relationships"/>, <paramref name="rel"/>, from <paramref name="a"/> to <paramref name="b"/>.
+    /// </summary>
+    /// <returns><c>this</c>.</returns>
+    /// <param name="a">The first node.</param>
+    /// <param name="b">The second node.</param>
+    /// <param name="rel">The relationships</param>
+    public KnowledgeGraphBuilder AddEdge(int a, int b, Relationships rel)
+    {
+      _kg.RelationshipsFromTo(a, b) = rel;
+      return this;
+    }
+
+    /// <summary>
+    /// Builds the instance of <see cref="GameAI.KnowledgeGraph"/>.
+    /// </summary>
+    /// <returns>A new <see cref="GameAI.KnowledgeGraph"/>.</returns>
+    public KnowledgeGraph Build()
+      => _kg;
+  }
 }
