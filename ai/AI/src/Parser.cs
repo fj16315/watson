@@ -107,10 +107,13 @@ namespace GameAI
            (td) => td.reln().getShortName() == "root"
          );
 
-    public IEnumerable<TypedDependency> WithRelation(IndexedWord from, string relation)
+    public IEnumerable<TypedDependency> AllWithRelation(IndexedWord from, string relation)
       => this.Where(
         (td) => td.gov() == from
              && td.reln().getShortName() == relation
       );
+
+    public TypedDependency WithRelation(IndexedWord from, string relation)
+      => this.AllWithRelation(from, relation).First();
   }
 }
