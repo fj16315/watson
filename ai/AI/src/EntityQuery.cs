@@ -16,6 +16,28 @@ namespace GameAI
       return start;
     }
 
-   
+    public IEnumerator<Entity> fullQuery(TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subject)
+    {
+      var verb = tdlist.WithRelationTo("nsubj", subject);
+      if (verb == null)
+      {
+
+      }
+      else
+      {
+        var noun = tdlist.WithRelationTo("dobj", verb);
+        if (noun == null)
+        {
+
+        }
+        else
+        {
+
+        }
+      }
+    }
+
   }
+
+  
 }
