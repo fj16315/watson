@@ -102,18 +102,27 @@ namespace GameAI
     IEnumerator IEnumerable.GetEnumerator()
       => GetEnumerator();
 
-    public TypedDependency GetRoot()
+    public IndexedWord GetRoot()
       => this.First(
            (td) => td.reln().getShortName() == "root"
-         );
+         ).dep();
 
-    public IEnumerable<TypedDependency> AllWithRelation(IndexedWord from, string relation)
+    public IEnumerable<IndexedWord> AllWithRelationFrom(IndexedWord from, string relation)
       => this.Where(
         (td) => td.gov() == from
              && td.reln().getShortName() == relation
-      );
+      ).Select((td) => td.dep());
 
-    public TypedDependency WithRelation(IndexedWord from, string relation)
-      => this.AllWithRelation(from, relation).First();
+    public IndexedWord WithRelationFrom(IndexedWord from, string relation)
+      => this.AllWithRelationFrom(from, relation).First();
+
+    public IEnumerable<IndexedWord> AllWithRelationTo(string relation, IndexedWord to)
+      => this.Where(
+        (td) => td.dep() == to
+             && td.reln().getShortName() == relation
+      ).Select((td) => td.gov());
+
+    public IndexedWord WithRelationTo(string relation, IndexedWord to)
+      => this.AllWithRelationTo(relation, to).First();
   }
 }
