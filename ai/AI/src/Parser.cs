@@ -5,6 +5,7 @@ using edu.stanford.nlp.parser.lexparser;
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameAI
 {
@@ -67,24 +68,24 @@ namespace GameAI
     /// </summary>
     /// <returns>An opaque <see cref="IEnumerable{TypedDependency}"/>.</returns>
     /// <param name="tree">The grammatical tree containing dependencies.</param>
-    public IEnumerable<TypedDependency> DependenciesFrom(Tree tree)
+    public TypedDependenciesList DependenciesFrom(Tree tree)
     {
       var tdList = new PennTreebankLanguagePack()
                     .grammaticalStructureFactory()
                     .newGrammaticalStructure(tree)
                     .typedDependenciesCCprocessed();
-      return new TypedDependeciesList(tdList);
+      return new TypedDependenciesList(tdList);
     }
   }
 
   /// <summary>
   /// A wrapper around <see cref="java.util.List"/>.
   /// </summary>
-  public class TypedDependeciesList : IEnumerable<TypedDependency>
+  public class TypedDependenciesList : IEnumerable<TypedDependency>
   {
     private java.util.List _tdList;
 
-    public TypedDependeciesList(java.util.List tdList)
+    public TypedDependenciesList(java.util.List tdList)
     {
       _tdList = tdList;
     }
@@ -100,5 +101,10 @@ namespace GameAI
 
     IEnumerator IEnumerable.GetEnumerator()
       => GetEnumerator();
+
+    public TypedDependency GetRoot()
+      => this.First(
+           (td) => td.reln().getShortName() == "root"
+         );
   }
 }
