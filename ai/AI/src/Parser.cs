@@ -114,15 +114,15 @@ namespace GameAI
       ).Select((td) => td.dep());
 
     public IndexedWord WithRelationFrom(IndexedWord from, string relation)
-      => this.AllWithRelationFrom(from, relation).First();
+      => this.AllWithRelationFrom(from, relation).FirstOrDefault();
 
     public IEnumerable<IndexedWord> AllWithRelationTo(string relation, IndexedWord to)
       => this.Where(
-        (td) => td.dep() == to
-             && td.reln().getShortName() == relation
+        (td) => td.dep().equals(to)
+             && td.reln().getShortName().Equals(relation)
       ).Select((td) => td.gov());
 
     public IndexedWord WithRelationTo(string relation, IndexedWord to)
-      => this.AllWithRelationTo(relation, to).First();
+      => this.AllWithRelationTo(relation, to).FirstOrDefault();
   }
 }
