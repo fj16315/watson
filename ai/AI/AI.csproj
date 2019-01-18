@@ -141,6 +141,7 @@
     <None Include="res\englishPCFG.ser.gz" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\EntityQuery.cs" />
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Relationships.cs" />
     <Compile Include="src\WordIterator.cs" />

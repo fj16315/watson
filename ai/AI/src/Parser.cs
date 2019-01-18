@@ -109,8 +109,8 @@ namespace GameAI
 
     public IEnumerable<IndexedWord> AllWithRelationFrom(IndexedWord from, string relation)
       => this.Where(
-        (td) => td.gov() == from
-             && td.reln().getShortName() == relation
+        (td) => td.gov().equals(from)
+             && td.reln().getShortName().Equals(relation)
       ).Select((td) => td.dep());
 
     public IndexedWord WithRelationFrom(IndexedWord from, string relation)
