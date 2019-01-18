@@ -146,6 +146,7 @@
     <Compile Include="src\WordIterator.cs" />
     <Compile Include="src\KnowledgeGraph.cs" />
     <Compile Include="src\Parser.cs" />
+    <Compile Include="src\Entity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />

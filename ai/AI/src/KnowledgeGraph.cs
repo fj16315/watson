@@ -37,15 +37,15 @@ namespace GameAI
     /// <returns>The <see cref="GameAI.Relationships"/> from one node to another.</returns>
     /// <param name="from">The node from which the relationships come.</param>
     /// <param name="to">The node to which the relationships go.</param>
-    public ref Relationships RelationshipsFromTo(int from, int to)
-      => ref adj_matrix[from, to];
+    public ref Relationships RelationshipsFromTo(Entity from, Entity to)
+      => ref adj_matrix[(int)from, (int)to];
 
     /// <summary>
     /// Returns the relationships from a given node.
     /// </summary>
     /// <returns>An <see cref="GameAI.OutEdgeIter"/> containing the <see cref="GameAI.Relationships"/> from the given node, <paramref name="from"/>.</returns>
     /// <param name="from">The node from which the relationships come.</param>
-    public OutEdgeIter RelationshipsFrom(int from)
+    public OutEdgeIter RelationshipsFrom(Entity from)
       => new OutEdgeIter(from, this);
 
     /// <summary>
@@ -53,7 +53,7 @@ namespace GameAI
     /// </summary>
     /// <returns>An <see cref="GameAI.InEdgeIter"/> containing the <see cref="GameAI.Relationships"/> to the given node, <paramref name="to"/>.</returns>
     /// <param name="to">The node to which the relationships go.</param>
-    public InEdgeIter RelationshipsTo(int to)
+    public InEdgeIter RelationshipsTo(Entity to)
       => new InEdgeIter(to, this);
   }
 
@@ -65,7 +65,7 @@ namespace GameAI
     /// <summary>
     /// The node from which the <see cref="GameAI.Relationships"/> are coming.
     /// </summary>
-    private readonly int _from;
+    private readonly Entity _from;
     /// <summary>
     /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
     /// </summary>
@@ -80,7 +80,7 @@ namespace GameAI
     /// </summary>
     /// <param name="from">The node from which the <see cref="GameAI.Relationships"/> come.</param>
     /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
-    public OutEdgeIter(int from, KnowledgeGraph graph)
+    public OutEdgeIter(Entity from, KnowledgeGraph graph)
     {
       _from = from;
       _graph = graph;
@@ -92,7 +92,7 @@ namespace GameAI
     /// </summary>
     /// <value>The <see cref="GameAI.Relationships"/> from the initial node to the current node.</value>
     object IEnumerator.Current
-      => _graph.RelationshipsFromTo(_from, _to);
+      => _graph.RelationshipsFromTo(_from, new Entity(_to));
 
     /// <summary>
     /// Advances to the next <see cref="GameAI.Relationships"/>.
@@ -122,7 +122,7 @@ namespace GameAI
     /// <summary>
     /// The node to which the <see cref="GameAI.Relationships"/> are going.
     /// </summary>
-    private readonly int _to;
+    private readonly Entity _to;
     /// <summary>
     /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
     /// </summary>
@@ -137,7 +137,7 @@ namespace GameAI
     /// </summary>
     /// <param name="to">The node to which the <see cref="GameAI.Relationships"/> go.</param>
     /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
-    public InEdgeIter(int to, KnowledgeGraph graph)
+    public InEdgeIter(Entity to, KnowledgeGraph graph)
     {
       _to = to;
       _graph = graph;
@@ -149,7 +149,7 @@ namespace GameAI
     /// </summary>
     /// <value>The <see cref="GameAI.Relationships"/> from the current node to the initial node.</value>
     object IEnumerator.Current
-      => _graph.RelationshipsFromTo(_from, _to);
+      => _graph.RelationshipsFromTo(new Entity(_from), _to);
 
     /// <summary>
     /// Advances to the next <see cref="GameAI.Relationships"/>.
@@ -194,7 +194,7 @@ namespace GameAI
     /// <param name="a">The first node.</param>
     /// <param name="b">The second node.</param>
     /// <param name="rel">The relationships</param>
-    public KnowledgeGraphBuilder AddEdge(int a, int b, Relationships rel)
+    public KnowledgeGraphBuilder AddEdge(Entity a, Entity b, Relationships rel)
     {
       _kg.RelationshipsFromTo(a, b) = rel;
       return this;
