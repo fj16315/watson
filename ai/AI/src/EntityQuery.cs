@@ -21,6 +21,7 @@ namespace GameAI
       var verb = tdlist.WithRelationTo("nsubj", subject);
       if (verb == null)
       {
+        return null;
 
       }
       else
@@ -28,10 +29,12 @@ namespace GameAI
         var noun = tdlist.WithRelationTo("dobj", verb);
         if (noun == null)
         {
+          return null;
 
         }
         else
         {
+          return null;
 
         }
       }
