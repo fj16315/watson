@@ -5,6 +5,7 @@ namespace GameAI
   /// <summary>
   /// Stores the relationships between two nodes in <see cref="GameAI.KnowledgeGraph"/>.
   /// </summary>
+  [Serializable()]
   public struct Relationships
   {
     /// <summary>

@@ -1,7 +1,10 @@
 ﻿using GameAI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,24 +35,19 @@ namespace GraphEditor
       InitializeComponent();
       ComboBoxItem relationship0 = new ComboBoxItem
       {
-        Content = "None"
+        Content = "Contains"
       };
       ComboBoxItem relationship1 = new ComboBoxItem
       {
-        Content = "Contains"
-      };
-      ComboBoxItem relationship2 = new ComboBoxItem
-      {
         Content = "Owns"
       };
-      ComboBoxItem relationship3 = new ComboBoxItem
+      ComboBoxItem relationship2 = new ComboBoxItem
       {
         Content = "Wants"
       };
       comboBoxRelationships.Items.Add(relationship0);
       comboBoxRelationships.Items.Add(relationship1);
       comboBoxRelationships.Items.Add(relationship2);
-      comboBoxRelationships.Items.Add(relationship3);
     }
 
     public void ButtonClick_AddNewNode(object sender, RoutedEventArgs e)
@@ -57,20 +55,30 @@ namespace GraphEditor
       GraphNode node = new GraphNode(this.GetNextFreeId(), nodeName.Text);
       this.nodes.Add(node);
 
-      ListBoxItem nodeListItem = new ListBoxItem
-      {
-        Content = node.Id.ToString() + " : " + node.Name
-      };
+      this.AddComboNode(node);
+      this.AddSourceListNode(node);
 
+      nodeName.Text = "";
+    }
+
+    private void AddComboNode(GraphNode node)
+    {
       ComboBoxItem nodeComboItem = new ComboBoxItem
       {
         Content = node.Id.ToString() + " : " + node.Name
       };
 
-      nodeList.Items.Add(nodeListItem);
       comboBoxNodes.Items.Add(nodeComboItem);
+    }
 
-      nodeName.Text = "";
+    private void AddSourceListNode(GraphNode node)
+    {
+      ListBoxItem nodeListItem = new ListBoxItem
+      {
+        Content = node.Id.ToString() + " : " + node.Name
+      };
+
+      nodeList.Items.Add(nodeListItem);
     }
 
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
@@ -110,10 +118,9 @@ namespace GraphEditor
 
     private string RelationshipIdToName(int id)
     {
-      if (id == 1) return "None";
-      if (id == 2) return "Contains";
-      if (id == 4) return "Owns";
-      if (id == 8) return "Wants";
+      if (id == 1) return "Contains";
+      if (id == 2) return "Owns";
+      if (id == 4) return "Wants";
       return "";
     }
 
@@ -164,8 +171,82 @@ namespace GraphEditor
       if (result == true)
       {
         string filename = dlg.FileName;
-        string[] lines = { "First line", "Second line", "Third line" };
-        System.IO.File.WriteAllLines(filename, lines);
+
+        KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
+        foreach (GraphNode n in this.nodes)
+        {
+          foreach (Relationship r in this.relationships[n.Id])
+          {
+            Entity source = new Entity(n.Id);
+            Entity destination = new Entity(r.Destination);
+
+            //TODO: Combine edges with same source and destination
+
+            Relationships relationships = new Relationships((Relationships.Flags)r.RelationshipId);
+            builder.AddEdge(source, destination, relationships);
+          }
+        }
+
+        Dictionary<Entity, string> entitiyNames = new Dictionary<Entity, string>();
+        foreach (GraphNode n in this.nodes)
+        {
+          entitiyNames.Add(new Entity(n.Id), n.Name);
+        }
+        builder.AddEntityNames(entitiyNames);
+
+        KnowledgeGraph knowledgeGraph = builder.Build();
+        IFormatter formatter = new BinaryFormatter();
+        Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
+        formatter.Serialize(stream, knowledgeGraph);
+        stream.Close();
+      }
+    }
+
+
+    public void OpenGraph(object sender, RoutedEventArgs e)
+    {
+      Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+      {
+        DefaultExt = ".AIgraph",
+        Filter = "AI Knowledge Graphs (.AIgraph)|*.AIgraph"
+      };
+
+      Nullable<bool> result = dlg.ShowDialog();
+
+      if (result == true)
+      {
+        string filename = dlg.FileName;
+
+        IFormatter formatter = new BinaryFormatter();  
+        Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);  
+        KnowledgeGraph knowledgeGraph = (KnowledgeGraph) formatter.Deserialize(stream);  
+        stream.Close();
+
+        this.nodes.Clear();
+        foreach (Entity entity in knowledgeGraph.entity_names.Keys)
+        {
+          this.nodes.Add(new GraphNode(entity._n, knowledgeGraph.entity_names[entity]));
+          foreach (Relationships rs in knowledgeGraph.RelationshipsFrom(entity))
+          {
+
+          }
+        }
+
+        this.RefreshLists();
+      }
+    }
+
+    private void RefreshLists()
+    {
+      nodeList.Items.Clear();
+      comboBoxNodes.Items.Clear();
+      comboBoxRelationships.Items.Clear();
+      relationshipList.Items.Clear();
+
+      foreach (GraphNode node in this.nodes)
+      {
+        this.AddComboNode(node);
+        this.AddSourceListNode(node);
       }
     }
   }

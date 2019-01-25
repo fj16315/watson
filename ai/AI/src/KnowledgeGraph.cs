@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace GameAI
 {
@@ -13,6 +14,11 @@ namespace GameAI
     /// An adjacency matrix used for representing the <see cref="GameAI.KnowledgeGraph"/>.
     /// </summary>
     private Relationships[,] adj_matrix;
+
+    /// <summary>
+    /// A dictionary lookup for entities.
+    /// </summary>
+    public Dictionary<Entity,String> entity_names;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.KnowledgeGraph"/> class.
@@ -60,7 +66,7 @@ namespace GameAI
   /// <summary>
   /// An iterator over the <see cref="GameAI.Relationships"/> coming out of a node.
   /// </summary>
-  public class OutEdgeIter : IEnumerator
+  public class OutEdgeIter : IEnumerator, IEnumerable
   {
     /// <summary>
     /// The node from which the <see cref="GameAI.Relationships"/> are coming.
@@ -74,6 +80,14 @@ namespace GameAI
     /// The node to which the current <see cref="GameAI.Relationships"/> goes.
     /// </summary>
     int _to;
+
+    /// <summary>
+    /// Implementing IEnumerable.
+    /// </summary>
+    public IEnumerator GetEnumerator()
+    {
+      return this;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.OutEdgeIter"/> class.
@@ -117,7 +131,7 @@ namespace GameAI
   /// <summary>
   /// An iterator over the <see cref="GameAI.Relationships"/> going into a node.
   /// </summary>
-  public class InEdgeIter : IEnumerator
+  public class InEdgeIter : IEnumerator, IEnumerable
   {
     /// <summary>
     /// The node to which the <see cref="GameAI.Relationships"/> are going.
@@ -131,6 +145,14 @@ namespace GameAI
     /// The node from which the current <see cref="GameAI.Relationships"/> comes.
     /// </summary>
     int _from;
+
+    /// <summary>
+    /// Implementing IEnumerable.
+    /// </summary>
+    public IEnumerator GetEnumerator()
+    {
+      return this;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.InEdgeIter"/> class.
@@ -185,6 +207,17 @@ namespace GameAI
     public KnowledgeGraphBuilder(int size)
     {
       _kg = new KnowledgeGraph(size);
+    }
+
+    /// <summary>
+    /// Provide a mapping for entities to their names.
+    /// </summary>
+    /// <returns><c>this</c>.</returns>
+    /// <param name="a">A dictionary mapping entities to names.</param>
+    public KnowledgeGraphBuilder AddEntityNames(Dictionary<Entity,String> entity_names)
+    {
+      _kg.entity_names = entity_names;
+      return this;
     }
 
     /// <summary>
