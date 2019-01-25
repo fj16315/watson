@@ -131,7 +131,7 @@ namespace GameAI
   /// <summary>
   /// An iterator over the <see cref="GameAI.Relationships"/> going into a node.
   /// </summary>
-  public class InEdgeIter : IEnumerator, IEnumerable
+  public class InEdgeIter : IEnumerator, IEnumerable<Relationships>
   {
     /// <summary>
     /// The node to which the <see cref="GameAI.Relationships"/> are going.
@@ -149,7 +149,15 @@ namespace GameAI
     /// <summary>
     /// Implementing IEnumerable.
     /// </summary>
-    public IEnumerator GetEnumerator()
+    public IEnumerator<Relationships> GetEnumerator()
+    {
+      return this as IEnumerable<Relationships>;
+    }
+
+    /// <summary>
+    /// Implementing IEnumerable.
+    /// </summary>
+    IEnumerator IEnumerable.GetEnumerator()
     {
       return this;
     }

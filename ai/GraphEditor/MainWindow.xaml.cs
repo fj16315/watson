@@ -226,10 +226,8 @@ namespace GraphEditor
         foreach (Entity entity in knowledgeGraph.entity_names.Keys)
         {
           this.nodes.Add(new GraphNode(entity._n, knowledgeGraph.entity_names[entity]));
-          foreach (Relationships rs in knowledgeGraph.RelationshipsFrom(entity))
-          {
-
-          }
+          //This mysteriously does not work
+          //knowledgeGraph.RelationshipsFrom(entity).Select((ent) => !ent.IsNone());
         }
 
         this.RefreshLists();
