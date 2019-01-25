@@ -61,7 +61,6 @@ namespace GraphEditor
       {
         Content = node.Id.ToString() + " : " + node.Name
       };
-      nodeListItem.Selected += SelectedNode;
 
       ComboBoxItem nodeComboItem = new ComboBoxItem
       {
@@ -78,16 +77,13 @@ namespace GraphEditor
     {
       int source = this.nodes.ElementAt(nodeList.SelectedIndex).Id;
       int destination = this.nodes.ElementAt(comboBoxNodes.SelectedIndex).Id;
-      System.Diagnostics.Debug.Print((1 << comboBoxRelationships.SelectedIndex).ToString());
       Relationship relationship = new Relationship(destination, 1 << comboBoxRelationships.SelectedIndex);
-      System.Diagnostics.Debug.Print(relationship.RelationshipId.ToString());
 
       if (!this.relationships.ContainsKey(source))
       {
         this.relationships.Add(source, new List<Relationship>());
       }
       this.relationships[source].Add(relationship);
-      System.Diagnostics.Debug.Print(relationship.RelationshipId.ToString());
 
       ListBoxItem relationshipListItem = new ListBoxItem
       {
@@ -114,10 +110,10 @@ namespace GraphEditor
 
     private string RelationshipIdToName(int id)
     {
-      if (id == 0) return "None";
-      if (id == 1) return "Contains";
-      if (id == 2) return "Owns";
-      if (id == 4) return "Wants";
+      if (id == 1) return "None";
+      if (id == 2) return "Contains";
+      if (id == 4) return "Owns";
+      if (id == 8) return "Wants";
       return "";
     }
 
@@ -139,10 +135,11 @@ namespace GraphEditor
 
     public void SelectedNode(object sender, RoutedEventArgs e)
     {
+      int source = this.nodes.ElementAt(nodeList.SelectedIndex).Id;
       relationshipList.Items.Clear();
-      if (this.relationships.ContainsKey(nodeList.SelectedIndex))
+      if (this.relationships.ContainsKey(source))
       {
-        foreach (Relationship relationship in this.relationships[nodeList.SelectedIndex])
+        foreach (Relationship relationship in this.relationships[source])
         {
           ListBoxItem relationshipListItem = new ListBoxItem
           {
@@ -150,6 +147,25 @@ namespace GraphEditor
           };
           relationshipList.Items.Add(relationshipListItem);
         }
+      }
+    }
+
+    public void SaveGraph(object sender, RoutedEventArgs e)
+    {
+      Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+      {
+        FileName = "UntitledGraph",
+        DefaultExt = ".AIgraph",
+        Filter = "AI Knowledge Graphs (.AIgraph)|*.AIgraph"
+      };
+
+      Nullable<bool> result = dlg.ShowDialog();
+
+      if (result == true)
+      {
+        string filename = dlg.FileName;
+        string[] lines = { "First line", "Second line", "Third line" };
+        System.IO.File.WriteAllLines(filename, lines);
       }
     }
   }
@@ -176,7 +192,7 @@ namespace GraphEditor
     public Relationship(int destination, int relationshipId)
     {
       this.Destination = destination;
-      this.RelationshipId = RelationshipId;
+      this.RelationshipId = relationshipId;
     }
   }
 }
