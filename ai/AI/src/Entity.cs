@@ -7,7 +7,7 @@ namespace GameAI
   /// </summary>
   public struct Entity
   {
-    public int _n { get; };
+    public int _n { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.Entity"/> struct.
