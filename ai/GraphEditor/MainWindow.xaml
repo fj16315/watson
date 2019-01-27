@@ -73,6 +73,7 @@
         </StackPanel>
       </Grid>
 
+      <Button Grid.Column="1" Grid.Row="2" Width="150px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_RelationshipWindow">Edit Possible Relationships</Button>
     </Grid>
 
   </DockPanel>

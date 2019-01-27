@@ -247,6 +247,12 @@ namespace GraphEditor
         this.AddSourceListNode(node);
       }
     }
+
+    private void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
+    {
+    RelationshipEditor relationshipEditor = new RelationshipEditor();
+    relationshipEditor.Show();
+    }
   }
 
   public class GraphNode
