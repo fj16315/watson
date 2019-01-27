@@ -27,7 +27,7 @@ namespace GraphEditor
     private List<Entity> nodes = new List<Entity>();
     private Dictionary<Entity, string> nodeNames = new Dictionary<Entity, string>();
 
-    private Dictionary<int,List<RelationshipDestinationRow>> relationships = new Dictionary<int, List<RelationshipDestinationRow>>();
+    private Dictionary<int,List<RelationshipDestinationRow>> Relation = new Dictionary<int, List<RelationshipDestinationRow>>();
     private Dictionary<SingleRelation, string> relationNames = new Dictionary<SingleRelation, string>();
 
     private int maxId = 0;
@@ -48,9 +48,9 @@ namespace GraphEditor
       {
         Content = "Wants"
       };
-      comboBoxRelationships.Items.Add(relationship0);
-      comboBoxRelationships.Items.Add(relationship1);
-      comboBoxRelationships.Items.Add(relationship2);
+      comboBoxRelation.Items.Add(relationship0);
+      comboBoxRelation.Items.Add(relationship1);
+      comboBoxRelation.Items.Add(relationship2);
     }
 
     public void ButtonClick_AddNewNode(object sender, RoutedEventArgs e)
@@ -102,13 +102,13 @@ namespace GraphEditor
     {
       int source = (int)this.nodes.ElementAt(nodeList.SelectedIndex);
       int destination = (int)this.nodes.ElementAt(comboBoxNodes.SelectedIndex);
-      RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelationships.SelectedIndex);
+      RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelation.SelectedIndex);
 
-      if (!this.relationships.ContainsKey(source))
+      if (!this.Relation.ContainsKey(source))
       {
-        this.relationships.Add(source, new List<RelationshipDestinationRow>());
+        this.Relation.Add(source, new List<RelationshipDestinationRow>());
       }
-      this.relationships[source].Add(relationship);
+      this.Relation[source].Add(relationship);
 
       ListBoxItem relationshipListItem = new ListBoxItem
       {
@@ -179,8 +179,8 @@ namespace GraphEditor
 
     private void DeleteRelationshipMapping()
     {
-      RelationshipDestinationRow deletedRelationship = this.relationships[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
-      this.relationships[nodeList.SelectedIndex].RemoveAt(relationshipList.SelectedIndex);
+      RelationshipDestinationRow deletedRelationship = this.Relation[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
+      this.Relation[nodeList.SelectedIndex].RemoveAt(relationshipList.SelectedIndex);
       relationshipList.Items.RemoveAt(relationshipList.SelectedIndex);
     }
 
@@ -188,9 +188,9 @@ namespace GraphEditor
     {
       int source = (int)this.nodes.ElementAtOrDefault(nodeList.SelectedIndex);
       relationshipList.Items.Clear();
-      if (this.relationships.ContainsKey(source))
+      if (this.Relation.ContainsKey(source))
       {
-        foreach (RelationshipDestinationRow relationship in this.relationships[source])
+        foreach (RelationshipDestinationRow relationship in this.Relation[source])
         {
           ListBoxItem relationshipListItem = new ListBoxItem
           {
@@ -219,14 +219,14 @@ namespace GraphEditor
         KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
         foreach (Entity source in this.nodes)
         {
-          foreach (RelationshipDestinationRow r in this.relationships[(int)source])
+          foreach (RelationshipDestinationRow r in this.Relation[(int)source])
           {
             Entity destination = new Entity(r.Destination);
 
             //TODO: Combine edges with same source and destination
 
-            Relationships relationships = new Relationships((Relationships.Flags)r.RelationshipId);
-            builder.AddEdge(source, relationships, destination);
+            Relation Relation = new Relation(r.RelationshipId);
+            builder.AddEdge(source, Relation, destination);
           }
         }
 
@@ -263,8 +263,7 @@ namespace GraphEditor
         foreach (Entity entity in knowledgeGraph.entity_names.Keys)
         {
           this.nodes.Add(entity);
-          //This mysteriously does not work
-          //knowledgeGraph.RelationshipsFrom(entity).Select((ent) => !ent.IsNone());
+          knowledgeGraph.RelationFrom(entity).Select((ent) => !ent.IsNone());
         }
         this.nodeNames = knowledgeGraph.entity_names;
 
@@ -277,7 +276,7 @@ namespace GraphEditor
     {
       nodeList.Items.Clear();
       comboBoxNodes.Items.Clear();
-      comboBoxRelationships.Items.Clear();
+      comboBoxRelation.Items.Clear();
       relationshipList.Items.Clear();
 
       foreach (Entity node in this.nodes)

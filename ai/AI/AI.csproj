@@ -146,7 +146,7 @@
   <ItemGroup>
     <Compile Include="src\EntityQuery.cs" />
     <Compile Include="src\Main.cs" />
-    <Compile Include="src\Relationships.cs" />
+    <Compile Include="src\Relation.cs" />
     <Compile Include="src\WordIterator.cs" />
     <Compile Include="src\KnowledgeGraph.cs" />
     <Compile Include="src\Parser.cs" />

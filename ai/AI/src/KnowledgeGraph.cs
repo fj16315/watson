@@ -15,7 +15,7 @@ namespace GameAI
     /// <summary>
     /// An adjacency matrix used for representing the <see cref="GameAI.KnowledgeGraph"/>.
     /// </summary>
-    private Relationships[,] adj_matrix;
+    private Relation[,] adj_matrix;
 
     // TODO: Remove this.
     /// <summary>
@@ -29,7 +29,7 @@ namespace GameAI
     /// <param name="node_count">The number of nodes in the graph.</param>
     public KnowledgeGraph(int node_count)
     {
-      adj_matrix = new Relationships[node_count,node_count];
+      adj_matrix = new Relation[node_count,node_count];
     }
 
     /// <summary>
@@ -41,37 +41,37 @@ namespace GameAI
       => adj_matrix.GetLength(0);
 
     /// <summary>
-    /// Returns the relationships from one node to another.
+    /// Returns the Relation from one node to another.
     /// </summary>
-    /// <returns>The <see cref="GameAI.Relationships"/> from one node to another.</returns>
-    /// <param name="from">The node from which the relationships come.</param>
-    /// <param name="to">The node to which the relationships go.</param>
-    public ref Relationships RelationshipsFromTo(Entity from, Entity to)
+    /// <returns>The <see cref="GameAI.Relation"/> from one node to another.</returns>
+    /// <param name="from">The node from which the Relation come.</param>
+    /// <param name="to">The node to which the Relation go.</param>
+    public ref Relation RelationFromTo(Entity from, Entity to)
       => ref adj_matrix[(int)from, (int)to];
 
     /// <summary>
-    /// Returns the relationships from a given node.
+    /// Returns the Relation from a given node.
     /// </summary>
-    /// <returns>An <see cref="GameAI.OutEdgeIter"/> containing the <see cref="GameAI.Relationships"/> from the given node, <paramref name="from"/>.</returns>
-    /// <param name="from">The node from which the relationships come.</param>
-    public OutEdgeIter RelationshipsFrom(Entity from)
+    /// <returns>An <see cref="GameAI.OutEdgeIter"/> containing the <see cref="GameAI.Relation"/> from the given node, <paramref name="from"/>.</returns>
+    /// <param name="from">The node from which the Relation come.</param>
+    public OutEdgeIter RelationFrom(Entity from)
       => new OutEdgeIter(from, this);
 
     /// <summary>
-    /// Returns the relationships to a given node.
+    /// Returns the Relation to a given node.
     /// </summary>
-    /// <returns>An <see cref="GameAI.InEdgeIter"/> containing the <see cref="GameAI.Relationships"/> to the given node, <paramref name="to"/>.</returns>
-    /// <param name="to">The node to which the relationships go.</param>
-    public InEdgeIter RelationshipsTo(Entity to)
+    /// <returns>An <see cref="GameAI.InEdgeIter"/> containing the <see cref="GameAI.Relation"/> to the given node, <paramref name="to"/>.</returns>
+    /// <param name="to">The node to which the Relation go.</param>
+    public InEdgeIter RelationTo(Entity to)
       => new InEdgeIter(to, this);
 
     /// <summary>
-    /// Returns all of the <see cref="GameAI.Relationships"/> stored in this
+    /// Returns all of the <see cref="GameAI.Relation"/> stored in this
     /// instance of the graph.
     /// </summary>
-    /// <returns>An <see cref="System.Collections.Generic.IEnumerator{(Entity,Relationships,Entity)}"/>.</returns>
+    /// <returns>An <see cref="System.Collections.Generic.IEnumerator{(Entity,Relation,Entity)}"/>.</returns>
     /// <remarks>The items are of the form <c>(from, relationship, to)</c></remarks>
-    public IEnumerator<(Entity,Relationships,Entity)> AllRelationships()
+    public IEnumerator<(Entity,Relation,Entity)> AllRelation()
     {
       for (int from_i = 0; from_i < GetNodeCount(); ++from_i)
       {
@@ -79,32 +79,32 @@ namespace GameAI
         for (int to_i = 0; to_i < GetNodeCount(); ++to_i)
         {
           var to = new Entity(to_i);
-          yield return (from, RelationshipsFromTo(from, to), to);
+          yield return (from, RelationFromTo(from, to), to);
         }
       }
     }
   }
 
   /// <summary>
-  /// A container for the <see cref="GameAI.Relationships"/> coming from an
+  /// A container for the <see cref="GameAI.Relation"/> coming from an
   /// <see cref="GameAI.Entity"/> and going to another.
   /// </summary>
-  public class OutEdgeIter : IEnumerable<Relationships>
+  public class OutEdgeIter : IEnumerable<Relation>
   {
     /// <summary>
-    /// The node from which the <see cref="GameAI.Relationships"/> are coming.
+    /// The node from which the <see cref="GameAI.Relation"/> are coming.
     /// </summary>
     private readonly Entity from;
     /// <summary>
-    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
+    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relation"/>.
     /// </summary>
     private readonly KnowledgeGraph graph;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.OutEdgeIter"/> class.
     /// </summary>
-    /// <param name="from">The node from which the <see cref="GameAI.Relationships"/> come.</param>
-    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
+    /// <param name="from">The node from which the <see cref="GameAI.Relation"/> come.</param>
+    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relation"/>.</param>
     public OutEdgeIter(Entity from, KnowledgeGraph graph)
     {
       this.from = from;
@@ -112,13 +112,13 @@ namespace GameAI
     }
 
     /// <summary>
-    /// Implementing IEnumerable<Relationships>.
+    /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<Relationships> GetEnumerator()
+    public IEnumerator<Relation> GetEnumerator()
     {
       for (int to = 0; to < this.graph.GetNodeCount(); ++to)
       {
-        yield return this.graph.RelationshipsFromTo(from, new Entity(to));
+        yield return this.graph.RelationFromTo(from, new Entity(to));
       }
     }
 
@@ -130,25 +130,25 @@ namespace GameAI
   }
 
   /// <summary>
-  /// A container for the <see cref="GameAI.Relationships"/> going to an
+  /// A container for the <see cref="GameAI.Relation"/> going to an
   /// <see cref="GameAI.Entity"/> and coming from another.
   /// </summary>
-  public class InEdgeIter : IEnumerable<Relationships>
+  public class InEdgeIter : IEnumerable<Relation>
   {
     /// <summary>
-    /// The node to which the <see cref="GameAI.Relationships"/> are going.
+    /// The node to which the <see cref="GameAI.Relation"/> are going.
     /// </summary>
     private readonly Entity to;
     /// <summary>
-    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.
+    /// The <see cref="GameAI.KnowledgeGraph"/> containing the <see cref="GameAI.Relation"/>.
     /// </summary>
     private readonly KnowledgeGraph graph;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.InEdgeIter"/> class.
     /// </summary>
-    /// <param name="to">The node to which the <see cref="GameAI.Relationships"/> go.</param>
-    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relationships"/>.</param>
+    /// <param name="to">The node to which the <see cref="GameAI.Relation"/> go.</param>
+    /// <param name="graph">The <see cref="KnowledgeGraph"/> containing the <see cref="GameAI.Relation"/>.</param>
     public InEdgeIter(Entity to, KnowledgeGraph graph)
     {
       this.to = to;
@@ -156,13 +156,13 @@ namespace GameAI
     }
 
     /// <summary>
-    /// Implementing IEnumerable<Relationships>.
+    /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<Relationships> GetEnumerator()
+    public IEnumerator<Relation> GetEnumerator()
     {
       for (int from = 0; from < this.graph.GetNodeCount(); ++from)
       {
-        yield return this.graph.RelationshipsFromTo(new Entity(from), to);
+        yield return this.graph.RelationFromTo(new Entity(from), to);
       }
     }
 
@@ -203,15 +203,15 @@ namespace GameAI
     }
 
     /// <summary>
-    /// Adds a <see cref="GameAI.Relationships"/>, <paramref name="rel"/>, from <paramref name="a"/> to <paramref name="b"/>.
+    /// Adds a <see cref="GameAI.Relation"/>, <paramref name="rel"/>, from <paramref name="a"/> to <paramref name="b"/>.
     /// </summary>
     /// <returns><c>this</c>.</returns>
     /// <param name="a">The first node.</param>
-    /// <param name="rel">The relationships</param>
+    /// <param name="rel">The Relation</param>
     /// <param name="b">The second node.</param>
-    public KnowledgeGraphBuilder AddEdge(Entity a, Relationships rel, Entity b)
+    public KnowledgeGraphBuilder AddEdge(Entity a, Relation rel, Entity b)
     {
-      this.kg.RelationshipsFromTo(a, b) = rel;
+      this.kg.RelationFromTo(a, b) = rel;
       return this;
     }
 
