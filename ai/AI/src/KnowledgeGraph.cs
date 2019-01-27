@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-
-
 namespace GameAI
 {
   /// <summary>
@@ -71,7 +69,7 @@ namespace GameAI
     /// </summary>
     /// <returns>An <see cref="System.Collections.Generic.IEnumerator{(Entity,Relation,Entity)}"/>.</returns>
     /// <remarks>The items are of the form <c>(from, relationship, to)</c></remarks>
-    public IEnumerator<(Entity,Relation,Entity)> AllRelation()
+    public IEnumerator<(Entity,Relation,Entity)> AllRelations()
     {
       for (int from_i = 0; from_i < GetNodeCount(); ++from_i)
       {
@@ -81,6 +79,18 @@ namespace GameAI
           var to = new Entity(to_i);
           yield return (from, RelationFromTo(from, to), to);
         }
+      }
+    }
+
+    /// <summary>
+    /// Returns all of the entities in this graph.
+    /// </summary>
+    /// <returns>The entities.</returns>
+    public IEnumerator<Entity> AllEntities()
+    {
+      for (int node = 0; node < GetNodeCount(); ++node)
+      {
+        yield return new Entity(node);
       }
     }
   }
