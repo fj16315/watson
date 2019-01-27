@@ -19,12 +19,14 @@ public class CameraRaycasting : MonoBehaviour
     int type;
     Collider entity;
     public GUISkin skin;
-    public string stringToEdit = "Strike up a conversation!";
+    public string stringToEdit = "Who are you?";
+    GameObject masterCanvas, speechCanvas;
 
     // Use this for initialization
     void Start()
     {
-
+        masterCanvas = GameObject.Find("MasterCanvas");
+        speechCanvas = GameObject.Find("SpeechCanvas");
     }
 
     // Update is called once per frame
@@ -46,6 +48,8 @@ public class CameraRaycasting : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     converse = true;
+                    Pause(true);
+                    SpeechDialogue();
                 }
             }
 
@@ -81,10 +85,12 @@ public class CameraRaycasting : MonoBehaviour
         // When conversing
         if (converse)
         {
-            Pause(true);
-            int width = 600;
-            int height = 200;
-            stringToEdit = GUI.TextArea(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height), stringToEdit);
+            // Exit speech
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                converse = false;
+                Pause(false);
+            }
         }
         if (display && !converse)
         {
@@ -112,7 +118,8 @@ public class CameraRaycasting : MonoBehaviour
                     if (door.open)
                     {
                         message = "Close door";
-                    } else
+                    }
+                    else
                     {
                         message = "Open door";
                     }
@@ -138,5 +145,17 @@ public class CameraRaycasting : MonoBehaviour
                 Time.timeScale = 1;
                 break;
         }
+    }
+
+    private void SpeechDialogue()
+    {
+        //masterCanvas.SetActive(false);
+        speechCanvas.SetActive(true);
+    }
+
+    private void CloseDialogue()
+    {
+        masterCanvas.SetActive(true);
+        speechCanvas.SetActive(false);
     }
 }
