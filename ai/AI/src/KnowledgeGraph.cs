@@ -67,32 +67,17 @@ namespace GameAI
     /// Returns all of the <see cref="GameAI.Relation"/> stored in this
     /// instance of the graph.
     /// </summary>
-    /// <returns>An <see cref="System.Collections.Generic.IEnumerator{(Entity,Relation,Entity)}"/>.</returns>
+    /// <returns>An <see cref="GameAI.AllRelationsIter"/>.</returns>
     /// <remarks>The items are of the form <c>(from, relationship, to)</c></remarks>
-    public IEnumerator<(Entity,Relation,Entity)> AllRelations()
-    {
-      for (int from_i = 0; from_i < GetNodeCount(); ++from_i)
-      {
-        var from = new Entity(from_i);
-        for (int to_i = 0; to_i < GetNodeCount(); ++to_i)
-        {
-          var to = new Entity(to_i);
-          yield return (from, RelationFromTo(from, to), to);
-        }
-      }
-    }
+    public AllRelationsIter AllRelations()
+      => new AllRelationsIter(this);
 
     /// <summary>
     /// Returns all of the entities in this graph.
     /// </summary>
     /// <returns>The entities.</returns>
-    public IEnumerator<Entity> AllEntities()
-    {
-      for (int node = 0; node < GetNodeCount(); ++node)
-      {
-        yield return new Entity(node);
-      }
-    }
+    public AllEntitiesIter AllEntities()
+      => new AllEntitiesIter(GetNodeCount());
   }
 
   /// <summary>
@@ -182,6 +167,53 @@ namespace GameAI
     IEnumerator IEnumerable.GetEnumerator()
       => this.GetEnumerator();
 
+  }
+
+  public class AllRelationsIter : IEnumerable<(Entity,Relation,Entity)>
+  {
+    private readonly KnowledgeGraph graph;
+
+    public AllRelationsIter(KnowledgeGraph graph)
+    {
+      this.graph = graph;
+    }
+
+    public IEnumerator<(Entity,Relation,Entity)> GetEnumerator()
+    {
+      for (int from_i = 0; from_i < graph.GetNodeCount(); ++from_i)
+      {
+        var from = new Entity(from_i);
+        for (int to_i = 0; to_i < graph.GetNodeCount(); ++to_i)
+        {
+          var to = new Entity(to_i);
+          yield return (from, graph.RelationFromTo(from, to), to);
+        }
+      }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+      => this.GetEnumerator();
+  }
+
+  public class AllEntitiesIter : IEnumerable<Entity>
+  {
+    private readonly int nodeCount;
+
+    public AllEntitiesIter(int nodeCount)
+    {
+      this.nodeCount = nodeCount;
+    }
+
+    public IEnumerator<Entity> GetEnumerator()
+    {
+      for (int node = 0; node < nodeCount; ++node)
+      {
+        yield return new Entity(node);
+      }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+      => this.GetEnumerator();
   }
 
   /// <summary>
