@@ -54,6 +54,19 @@ namespace GraphEditor
 
     public void ButtonClick_AddNewNode(object sender, RoutedEventArgs e)
     {
+      this.AddNewNode();
+    }
+
+    public void KeyUp_AddNewNode(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Return)
+      {
+        this.AddNewNode();
+      }
+    }
+
+    private void AddNewNode()
+    {
       Entity node = new Entity(this.GetNextFreeId());
       this.nodes.Add(node);
       this.nodeNames.Add(node, nodeName.Text);
@@ -129,7 +142,21 @@ namespace GraphEditor
 
     public void ButtonClick_DeleteNode(object sender, RoutedEventArgs e)
     {
+      this.DeleteNode();
+    }
+
+    public void KeyUp_DeleteNode(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Delete || e.Key == Key.Back)
+      {
+        this.DeleteNode();
+      }
+    }
+
+    private void DeleteNode()
+    {
       Entity deletedNode = this.nodes.ElementAt(nodeList.SelectedIndex);
+      this.nodeNames.Remove(deletedNode);
       freeIds.Push(deletedNode._n);
       this.nodes.RemoveAt(nodeList.SelectedIndex);
       comboBoxNodes.Items.RemoveAt(nodeList.SelectedIndex);
@@ -138,6 +165,19 @@ namespace GraphEditor
 
     public void ButtonClick_DeleteRelationshipMapping(object sender, RoutedEventArgs e)
     {
+      this.DeleteRelationshipMapping();
+    }
+
+    public void KeyUp_DeleteRelationshipMapping(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Delete || e.Key == Key.Back)
+      {
+        this.DeleteRelationshipMapping();
+      }
+    }
+
+    private void DeleteRelationshipMapping()
+    {
       RelationshipDestinationRow deletedRelationship = this.relationships[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
       this.relationships[nodeList.SelectedIndex].RemoveAt(relationshipList.SelectedIndex);
       relationshipList.Items.RemoveAt(relationshipList.SelectedIndex);
@@ -145,7 +185,7 @@ namespace GraphEditor
 
     public void SelectedNode(object sender, RoutedEventArgs e)
     {
-      int source = this.nodes.ElementAt(nodeList.SelectedIndex)._n;
+      int source = this.nodes.ElementAtOrDefault(nodeList.SelectedIndex)._n;
       relationshipList.Items.Clear();
       if (this.relationships.ContainsKey(source))
       {
@@ -199,7 +239,6 @@ namespace GraphEditor
       }
     }
 
-
     public void OpenGraph(object sender, RoutedEventArgs e)
     {
       Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
@@ -230,6 +269,7 @@ namespace GraphEditor
 
         this.RefreshLists();
       }
+
     }
 
     private void RefreshLists()
@@ -253,7 +293,7 @@ namespace GraphEditor
     }
   }
 
-  public class RelationshipDestinationRow
+  class RelationshipDestinationRow
   {
     public int Destination { get; }
 

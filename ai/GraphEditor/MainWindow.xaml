@@ -35,7 +35,7 @@
       </Grid.RowDefinitions>
 
       <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyle}">Nodes</TextBlock>
-      <ListBox x:Name="nodeList" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" SelectionChanged="SelectedNode"/>
+      <ListBox x:Name="nodeList" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" SelectionChanged="SelectedNode" KeyUp="KeyUp_DeleteNode"/>
       <Grid Grid.Column="0" Grid.Row="2">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
@@ -47,7 +47,7 @@
         </Grid.RowDefinitions>
 
         <Button Grid.Column="0" Grid.Row="0" Width="90px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_DeleteNode">Delete Node</Button>
-        <TextBox Grid.Column="0" Grid.Row="1" x:Name="nodeName"  Margin="5,5,5,5"/>
+        <TextBox Grid.Column="0" Grid.Row="1" x:Name="nodeName"  Margin="5,5,5,5" KeyUp="KeyUp_AddNewNode"/>
         <Button Grid.Column="1" Grid.Row="1" Width="40px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_AddNewNode">Add</Button>
       </Grid>
 
@@ -60,7 +60,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource TextStyle}">Relationship</TextBlock>
-        <ListBox x:Name="relationshipList" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5"/>
+        <ListBox x:Name="relationshipList" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" KeyUp="KeyUp_DeleteRelationshipMapping"/>
         <StackPanel Grid.Column="0" Grid.Row="2">
           <Button Grid.Column="0" Grid.Row="0" Width="120px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_DeleteRelationshipMapping">Delete Relationship</Button>
           <StackPanel Orientation="Horizontal">
