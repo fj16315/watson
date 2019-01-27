@@ -25,8 +25,9 @@ namespace GraphEditor
   public partial class MainWindow : Window
   {
     private List<Entity> nodes = new List<Entity>();
-    private Dictionary<int,List<Relationship>> relationships = new Dictionary<int, List<Relationship>>();
     private Dictionary<Entity, string> nodeNames = new Dictionary<Entity, string>();
+
+    private Dictionary<int,List<RelationshipDestinationRow>> relationships = new Dictionary<int, List<RelationshipDestinationRow>>();
 
     private int maxId = 0;
     private Stack<int> freeIds = new Stack<int>();
@@ -87,11 +88,11 @@ namespace GraphEditor
     {
       int source = this.nodes.ElementAt(nodeList.SelectedIndex)._n;
       int destination = this.nodes.ElementAt(comboBoxNodes.SelectedIndex)._n;
-      Relationship relationship = new Relationship(destination, 1 << comboBoxRelationships.SelectedIndex);
+      RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelationships.SelectedIndex);
 
       if (!this.relationships.ContainsKey(source))
       {
-        this.relationships.Add(source, new List<Relationship>());
+        this.relationships.Add(source, new List<RelationshipDestinationRow>());
       }
       this.relationships[source].Add(relationship);
 
@@ -137,7 +138,7 @@ namespace GraphEditor
 
     public void ButtonClick_DeleteRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      Relationship deletedRelationship = this.relationships[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
+      RelationshipDestinationRow deletedRelationship = this.relationships[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
       this.relationships[nodeList.SelectedIndex].RemoveAt(relationshipList.SelectedIndex);
       relationshipList.Items.RemoveAt(relationshipList.SelectedIndex);
     }
@@ -148,7 +149,7 @@ namespace GraphEditor
       relationshipList.Items.Clear();
       if (this.relationships.ContainsKey(source))
       {
-        foreach (Relationship relationship in this.relationships[source])
+        foreach (RelationshipDestinationRow relationship in this.relationships[source])
         {
           ListBoxItem relationshipListItem = new ListBoxItem
           {
@@ -177,7 +178,7 @@ namespace GraphEditor
         KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
         foreach (Entity source in this.nodes)
         {
-          foreach (Relationship r in this.relationships[source._n])
+          foreach (RelationshipDestinationRow r in this.relationships[source._n])
           {
             Entity destination = new Entity(r.Destination);
 
@@ -252,13 +253,13 @@ namespace GraphEditor
     }
   }
 
-  public class Relationship
+  public class RelationshipDestinationRow
   {
     public int Destination { get; }
 
     public int RelationshipId { get; }
 
-    public Relationship(int destination, int relationshipId)
+    public RelationshipDestinationRow(int destination, int relationshipId)
     {
       this.Destination = destination;
       this.RelationshipId = relationshipId;
