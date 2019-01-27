@@ -134,6 +134,9 @@
     <Reference Include="stanford-parser">
       <HintPath>..\packages\Stanford.NLP.Parser.3.9.1.0\lib\stanford-parser.dll</HintPath>
     </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\App.config" />

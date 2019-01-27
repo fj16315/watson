@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
+
 namespace GameAI
 {
   /// <summary>
@@ -62,6 +64,25 @@ namespace GameAI
     /// <param name="to">The node to which the relationships go.</param>
     public InEdgeIter RelationshipsTo(Entity to)
       => new InEdgeIter(to, this);
+
+    /// <summary>
+    /// Returns all of the <see cref="GameAI.Relationships"/> stored in this
+    /// instance of the graph.
+    /// </summary>
+    /// <returns>An <see cref="System.Collections.Generic.IEnumerator{(Entity,Relationships,Entity)}"/>.</returns>
+    /// <remarks>The items are of the form <c>(from, relationship, to)</c></remarks>
+    public IEnumerator<(Entity,Relationships,Entity)> AllRelationships()
+    {
+      for (int from_i = 0; from_i < GetNodeCount(); ++from_i)
+      {
+        var from = new Entity(from_i);
+        for (int to_i = 0; to_i < GetNodeCount(); ++to_i)
+        {
+          var to = new Entity(to_i);
+          yield return (from, RelationshipsFromTo(from, to), to);
+        }
+      }
+    }
   }
 
   /// <summary>
