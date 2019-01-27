@@ -66,7 +66,7 @@ namespace GameAI
   /// <summary>
   /// An iterator over the <see cref="GameAI.Relationships"/> coming out of a node.
   /// </summary>
-  public class OutEdgeIter : IEnumerator, IEnumerable
+  public class OutEdgeIter : IEnumerator<Relationships>, IEnumerable<Relationships>
   {
     /// <summary>
     /// The node from which the <see cref="GameAI.Relationships"/> are coming.
@@ -79,15 +79,26 @@ namespace GameAI
     /// <summary>
     /// The node to which the current <see cref="GameAI.Relationships"/> goes.
     /// </summary>
-    int _to;
+    private int _to;
+
+    /// <summary>
+    /// Returns a new object which is a clone of itself.
+    /// </summary>
+    /// <returns></returns>
+    public OutEdgeIter Clone()
+      => new OutEdgeIter(this._from, this._graph);
+
+    /// <summary>
+    /// Implementing IEnumerable<Relationships>.
+    /// </summary>
+    public IEnumerator<Relationships> GetEnumerator()
+      => Clone();
 
     /// <summary>
     /// Implementing IEnumerable.
     /// </summary>
-    public IEnumerator GetEnumerator()
-    {
-      return this;
-    }
+    IEnumerator IEnumerable.GetEnumerator()
+      => Clone();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.OutEdgeIter"/> class.
@@ -100,6 +111,13 @@ namespace GameAI
       _graph = graph;
       (this as IEnumerator).Reset();
     }
+
+    /// <summary>
+    /// The <see cref="GameAI.Relationships"/> from the initial node to the current node.
+    /// </summary>
+    /// <value>The <see cref="GameAI.Relationships"/> from the initial node to the current node.</value>
+    Relationships IEnumerator<Relationships>.Current
+      => _graph.RelationshipsFromTo(_from, new Entity(_to));
 
     /// <summary>
     /// The <see cref="GameAI.Relationships"/> from the initial node to the current node.
@@ -125,6 +143,11 @@ namespace GameAI
     void IEnumerator.Reset()
     {
       _to = -1;
+    }
+
+    void IDisposable.Dispose()
+    {
+
     }
   }
 
@@ -199,6 +222,7 @@ namespace GameAI
     {
       _from = -1;
     }
+
   }
 
   /// <summary>
