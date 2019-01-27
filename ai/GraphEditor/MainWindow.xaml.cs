@@ -28,6 +28,7 @@ namespace GraphEditor
     private Dictionary<Entity, string> nodeNames = new Dictionary<Entity, string>();
 
     private Dictionary<int,List<RelationshipDestinationRow>> relationships = new Dictionary<int, List<RelationshipDestinationRow>>();
+    private Dictionary<SingleRelation, string> relationNames = new Dictionary<SingleRelation, string>();
 
     private int maxId = 0;
     private Stack<int> freeIds = new Stack<int>();
@@ -288,7 +289,7 @@ namespace GraphEditor
 
     private void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
     {
-      RelationshipEditor relationshipEditor = new RelationshipEditor();
+      RelationshipEditor relationshipEditor = new RelationshipEditor(this.relationNames);
       relationshipEditor.Show();
     }
   }

@@ -122,4 +122,33 @@ namespace GameAI
     public override int GetHashCode()
       => (int) relationships;
   }
+
+  /// <summary>
+  /// Wrapper type around <see cref="int"/> for safety.
+  /// </summary>
+  public struct SingleRelation
+  {
+    private int _n;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameAI.Entity"/> struct.
+    /// </summary>
+    /// <param name="n">The <see cref="int"/> to wrap.</param>
+    public SingleRelation(int n) 
+    {
+      _n = n;
+    }
+
+    /// <summary>
+    /// Returns a copy of the wrapped <see cref="int"/>.
+    /// </summary>
+    /// <returns>The wrapped <see cref="int"/>.</returns>
+    /// <param name="r">The wrapping <see cref="GameAI.Entity"/>.</param>
+    public static explicit operator int(SingleRelation r)
+      => r._n;
+
+    public Relationships AsRelation()
+      => new Relationships((Relationships.Flags)(1 << _n));
+  }
 }
+

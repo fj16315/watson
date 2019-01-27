@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GameAI;
 
 namespace GraphEditor
 {
@@ -19,9 +20,13 @@ namespace GraphEditor
   /// </summary>
   public partial class RelationshipEditor : Window
   {
-    public RelationshipEditor()
+
+    private Dictionary<SingleRelation, string> relationNames;
+
+    public RelationshipEditor(Dictionary<SingleRelation,string> relationNames)
     {
       InitializeComponent();
+      this.relationNames = relationNames;
     }
   }
 }
