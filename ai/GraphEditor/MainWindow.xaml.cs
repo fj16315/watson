@@ -81,7 +81,7 @@ namespace GraphEditor
     {
       ComboBoxItem nodeComboItem = new ComboBoxItem
       {
-        Content = node._n.ToString() + " : " + this.nodeNames[node]
+        Content = $"{(int)node}:{this.nodeNames[node]}"
       };
 
       comboBoxNodes.Items.Add(nodeComboItem);
@@ -91,7 +91,7 @@ namespace GraphEditor
     {
       ListBoxItem nodeListItem = new ListBoxItem
       {
-        Content = node._n.ToString() + " : " + this.nodeNames[node]
+        Content = $"{(int)node}:{this.nodeNames[node]}"
       };
 
       nodeList.Items.Add(nodeListItem);
@@ -99,8 +99,8 @@ namespace GraphEditor
 
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      int source = this.nodes.ElementAt(nodeList.SelectedIndex)._n;
-      int destination = this.nodes.ElementAt(comboBoxNodes.SelectedIndex)._n;
+      int source = (int)this.nodes.ElementAt(nodeList.SelectedIndex);
+      int destination = (int)this.nodes.ElementAt(comboBoxNodes.SelectedIndex);
       RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelationships.SelectedIndex);
 
       if (!this.relationships.ContainsKey(source))
@@ -111,7 +111,7 @@ namespace GraphEditor
 
       ListBoxItem relationshipListItem = new ListBoxItem
       {
-        Content = this.RelationshipIdToName(relationship.RelationshipId) + " " + this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]
+        Content = $"{this.RelationshipIdToName(relationship.RelationshipId)} {this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]}"
       };
 
       relationshipList.Items.Add(relationshipListItem);
@@ -157,7 +157,7 @@ namespace GraphEditor
     {
       Entity deletedNode = this.nodes.ElementAt(nodeList.SelectedIndex);
       this.nodeNames.Remove(deletedNode);
-      freeIds.Push(deletedNode._n);
+      freeIds.Push((int)deletedNode);
       this.nodes.RemoveAt(nodeList.SelectedIndex);
       comboBoxNodes.Items.RemoveAt(nodeList.SelectedIndex);
       nodeList.Items.RemoveAt(nodeList.SelectedIndex);
@@ -185,7 +185,7 @@ namespace GraphEditor
 
     public void SelectedNode(object sender, RoutedEventArgs e)
     {
-      int source = this.nodes.ElementAtOrDefault(nodeList.SelectedIndex)._n;
+      int source = (int)this.nodes.ElementAtOrDefault(nodeList.SelectedIndex);
       relationshipList.Items.Clear();
       if (this.relationships.ContainsKey(source))
       {
@@ -218,7 +218,7 @@ namespace GraphEditor
         KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
         foreach (Entity source in this.nodes)
         {
-          foreach (RelationshipDestinationRow r in this.relationships[source._n])
+          foreach (RelationshipDestinationRow r in this.relationships[(int)source])
           {
             Entity destination = new Entity(r.Destination);
 
