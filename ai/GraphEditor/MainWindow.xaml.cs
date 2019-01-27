@@ -226,7 +226,7 @@ namespace GraphEditor
             //TODO: Combine edges with same source and destination
 
             Relationships relationships = new Relationships((Relationships.Flags)r.RelationshipId);
-            builder.AddEdge(source, destination, relationships);
+            builder.AddEdge(source, relationships, destination);
           }
         }
 

@@ -20,7 +20,6 @@ namespace GraphEditor
   /// </summary>
   public partial class RelationshipEditor : Window
   {
-
     private Dictionary<SingleRelation, string> relationNames;
 
     public RelationshipEditor(Dictionary<SingleRelation,string> relationNames)
