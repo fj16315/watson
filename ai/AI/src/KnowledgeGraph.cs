@@ -151,7 +151,7 @@ namespace GameAI
     /// </summary>
     public IEnumerator<Relationships> GetEnumerator()
     {
-      return this as IEnumerable<Relationships>;
+      return this as IEnumerator<Relationships>;
     }
 
     /// <summary>
