@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphEditor"
         mc:Ignorable="d"
-        Title="RelationshipEditor" Height="450" Width="800">
-    <Grid>
-        
+        Title="GraphEditor - Relationships" 
+        Height="450" Width="800">
+    <Grid Margin="10,10,10,10">
+      <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="3*"/>
+          <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <TextBlock Grid.Row="0" Style="{StaticResource HeaderStyle}">Possible Relationships</TextBlock>
+      <ListBox Grid.Row="1" x:Name="nodeList" Margin="5,5,5,5"/>
+      <Grid Grid.Row="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="0" Width="120px" Height="30px" Margin="5,5,5,5">Delete Relationship</Button>
+        <TextBox Grid.Column="0" Grid.Row="1" x:Name="nodeName"  Margin="5,5,5,5"/>
+        <Button Grid.Column="1" Grid.Row="1" Width="40px" Height="30px" Margin="5,5,5,5">Add</Button>
+      </Grid>
     </Grid>
 </Window>

@@ -250,8 +250,8 @@ namespace GraphEditor
 
     private void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
     {
-    RelationshipEditor relationshipEditor = new RelationshipEditor();
-    relationshipEditor.Show();
+      RelationshipEditor relationshipEditor = new RelationshipEditor();
+      relationshipEditor.Show();
     }
   }
 
