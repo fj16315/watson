@@ -1,46 +1,47 @@
-﻿using System;
-using edu.stanford.nlp.trees;
-using edu.stanford.nlp.ling;
+﻿using edu.stanford.nlp.ling;
 
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameAI
 {
-  public class EntityQuery
+  public class Query
   {
-    public IndexedWord query(TypedDependenciesList tdlist, KnowledgeGraph kg)
+    private readonly Parser parser;
+
+    public Query(Parser parser)
     {
-      var root = tdlist.GetRoot();
-      var start = tdlist.WithRelationFrom(root, "nsubj");
-      return start;
+      this.parser = parser;
     }
 
-    public IEnumerator<Entity> fullQuery(TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subject)
+    public IEnumerable<Entity> Run(Associations assocs, string sentence, KnowledgeGraph kg)
     {
-      var verb = tdlist.WithRelationTo("nsubj", subject);
-      if (verb == null)
+      var tree = parser.Parse(sentence);
+      var tdList = parser.DependenciesFrom(tree);
+      var root = tdList.GetRoot();
+      var start = tdList.WithRelationFrom(root, "nsubj");
+      return RunClause(assocs, tdList, kg, start);
+    }
+
+    private IEnumerable<Entity> RunClause(Associations assocs, TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subj)
+    {
+      var verb = tdlist.WithRelationTo("nsubj", subj);
+      if (verb != null)
       {
-        return null;
-
-      }
-      else
-      {
-        var noun = tdlist.WithRelationTo("dobj", verb);
-        if (noun == null)
+        var obj = tdlist.WithRelationFrom(verb, "dobj");
+        if (obj != null)
         {
-          return null;
-
-        }
-        else
-        {
-          return null;
-
+          return RunClause(assocs, tdlist, kg, obj)
+            .SelectMany(kg.RelationTo)
+            .Where(
+              arg => assocs.Describes(verb.word(), arg.rel)
+                  && assocs.Describes(subj.word(), arg.from))
+            .Select(arg => arg.from);
         }
       }
+      return kg.AllEntities();
     }
 
   }
 
-  
 }

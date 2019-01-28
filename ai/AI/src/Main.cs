@@ -9,7 +9,6 @@ public class MainClass
   public static void Main(string[] args)
   {
     var parser = Parser.FromRecommendedPath();
-    KnowledgeGraph _kg = null;
 
     while (true)
     {
@@ -24,9 +23,6 @@ public class MainClass
       {
         Console.WriteLine("{0}", td);
       }
-      Console.WriteLine("\n");
-      EntityQuery equery = new EntityQuery();
-      Console.WriteLine("{0}\n", equery.query(parser.DependenciesFrom(tree), _kg));
     }
   }
 }

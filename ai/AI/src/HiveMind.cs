@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GameAI 
 {
-  class HiveMind
+  public class HiveMind
   {
     private KnowledgeGraph mainGraph;
     private List<KnowledgeGraph> subGraphs;
@@ -17,7 +16,7 @@ namespace GameAI
     }
 
     /*public static Universe CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
-      => subGraphs.Select(g => IsSubGraph(g, mainGraph)).All(x => x) ? new Universe(mainGraph, subGraphs) : null;*/
+      => subGraphs.All(g => IsSubGraph(g, mainGraph)) ? new Universe(mainGraph, subGraphs) : null;*/
 
     public static HiveMind CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
@@ -37,16 +36,16 @@ namespace GameAI
       return Enumerable.Zip(
         mainGraph.AllRelations(),
         subGraph.AllRelations(),
-        (main, sub) => main.Item2.Contains(sub.Item2)).All(x => x);
+        (main, sub) => main.rel.Contains(sub.rel)).All(x => x);
     }
   }
 
   [Serializable]
-  class Associations
+  public class Associations
   {
-    private string[] entityNames;
+    private readonly string[] entityNames;
 
-    private string[] relationNames;
+    private readonly string[] relationNames;
 
     public Dictionary<string,List<Entity>> entityWords { get; }
 
@@ -54,16 +53,22 @@ namespace GameAI
 
     public Associations(int entityCount, int relationCount)
     {
-      this.entityNames = new string[entityCount];
-      this.entityNames = new string[relationCount];
-      this.entityWords = new Dictionary<string, List<Entity>>();
-      this.relationWords = new Dictionary<string, List<Relation>>();
+      entityNames = new string[entityCount];
+      relationNames = new string[relationCount];
+      entityWords = new Dictionary<string, List<Entity>>();
+      relationWords = new Dictionary<string, List<Relation>>();
     }
 
     public string NameOf(Entity entity)
-      => this.entityNames[(int) entity];
+      => entityNames[(int) entity];
 
     public string NameOf(Relation relation)
-      => this.relationNames[(int) relation];
+      => relationNames[(int) relation];
+
+    public bool Describes(string word, Entity entity)
+      => entityWords[word].Contains(entity);
+
+    public bool Describes(string word, Relation relation)
+      => relationWords[word].Contains(relation);
   }
 }

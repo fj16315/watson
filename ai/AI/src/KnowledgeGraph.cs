@@ -84,7 +84,7 @@ namespace GameAI
   /// A container for the <see cref="GameAI.Relation"/> coming from an
   /// <see cref="GameAI.Entity"/> and going to another.
   /// </summary>
-  public class OutEdgeIter : IEnumerable<Relation>
+  public class OutEdgeIter : IEnumerable<(Relation rel, Entity to)>
   {
     /// <summary>
     /// The node from which the <see cref="GameAI.Relation"/> are coming.
@@ -109,11 +109,12 @@ namespace GameAI
     /// <summary>
     /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<Relation> GetEnumerator()
+    public IEnumerator<(Relation rel, Entity to)> GetEnumerator()
     {
-      for (int to = 0; to < this.graph.GetNodeCount(); ++to)
+      for (int to_i = 0; to_i < graph.GetNodeCount(); ++to_i)
       {
-        yield return this.graph.RelationFromTo(from, new Entity(to));
+        var to = new Entity(to_i);
+        yield return (graph.RelationFromTo(from, to), to);
       }
     }
 
@@ -128,7 +129,7 @@ namespace GameAI
   /// A container for the <see cref="GameAI.Relation"/> going to an
   /// <see cref="GameAI.Entity"/> and coming from another.
   /// </summary>
-  public class InEdgeIter : IEnumerable<Relation>
+  public class InEdgeIter : IEnumerable<(Entity from, Relation rel)>
   {
     /// <summary>
     /// The node to which the <see cref="GameAI.Relation"/> are going.
@@ -153,11 +154,12 @@ namespace GameAI
     /// <summary>
     /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<Relation> GetEnumerator()
+    public IEnumerator<(Entity from, Relation rel)> GetEnumerator()
     {
-      for (int from = 0; from < this.graph.GetNodeCount(); ++from)
+      for (int from_i = 0; from_i < graph.GetNodeCount(); ++from_i)
       {
-        yield return this.graph.RelationFromTo(new Entity(from), to);
+        var from = new Entity(from_i);
+        yield return (from, graph.RelationFromTo(from, to));
       }
     }
 
@@ -165,11 +167,11 @@ namespace GameAI
     /// Implementing IEnumerable.
     /// </summary>
     IEnumerator IEnumerable.GetEnumerator()
-      => this.GetEnumerator();
+      => GetEnumerator();
 
   }
 
-  public class AllRelationsIter : IEnumerable<(Entity,Relation,Entity)>
+  public class AllRelationsIter : IEnumerable<(Entity from, Relation rel, Entity to)>
   {
     private readonly KnowledgeGraph graph;
 
@@ -178,7 +180,7 @@ namespace GameAI
       this.graph = graph;
     }
 
-    public IEnumerator<(Entity,Relation,Entity)> GetEnumerator()
+    public IEnumerator<(Entity from, Relation rel, Entity to)> GetEnumerator()
     {
       for (int from_i = 0; from_i < graph.GetNodeCount(); ++from_i)
       {
