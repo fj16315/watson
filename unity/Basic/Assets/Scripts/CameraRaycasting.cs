@@ -27,6 +27,7 @@ public class CameraRaycasting : MonoBehaviour
     {
         masterCanvas = GameObject.Find("MasterCanvas");
         speechCanvas = GameObject.Find("SpeechCanvas");
+        //speechCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,8 +48,6 @@ public class CameraRaycasting : MonoBehaviour
                 // Interact with character
                 if (Input.GetMouseButtonDown(0))
                 {
-                    converse = true;
-                    Pause(true);
                     SpeechDialogue();
                 }
             }
@@ -86,10 +85,9 @@ public class CameraRaycasting : MonoBehaviour
         if (converse)
         {
             // Exit speech
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                converse = false;
-                Pause(false);
+                CloseDialogue();
             }
         }
         if (display && !converse)
@@ -149,13 +147,20 @@ public class CameraRaycasting : MonoBehaviour
 
     private void SpeechDialogue()
     {
-        //masterCanvas.SetActive(false);
-        speechCanvas.SetActive(true);
+        masterCanvas.SetActive(false);
+        converse = true;
+        Pause(true);
+        speechCanvas.GetComponent<DialogueScreen>().ShowScreen();
+        //speechCanvas.SetActive(true);
     }
 
     private void CloseDialogue()
     {
         masterCanvas.SetActive(true);
-        speechCanvas.SetActive(false);
+        converse = false;
+        Pause(false);
+        speechCanvas.GetComponent<DialogueScreen>().HideScreen();
+        //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        //speechCanvas.SetActive(false);
     }
 }
