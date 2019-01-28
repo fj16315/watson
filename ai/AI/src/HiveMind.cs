@@ -41,6 +41,7 @@ namespace GameAI
     }
   }
 
+  [Serializable]
   class Associations
   {
     private string[] entityNames;
