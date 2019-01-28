@@ -23,21 +23,25 @@ namespace GameAI
       return RunClause(assocs, tdList, kg, start);
     }
 
+    // I am so sorry for how this looks, this needs urgent restructuring.
+    //   - Jago Taylor
     private IEnumerable<Entity> RunClause(Associations assocs, TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subj)
     {
-      var verb = tdlist.WithRelationTo("nsubj", subj);
-      if (verb != null)
+      IEnumerable<(IndexedWord verb, IndexedWord obj)> verb_objs =
+        from verb in tdlist.AllWithRelationTo("nsubj", subj)
+        from obj in tdlist.AllWithRelationFrom(verb, "dobj")
+        select (verb, obj);
+
+      if (verb_objs.Any())
       {
-        var obj = tdlist.WithRelationFrom(verb, "dobj");
-        if (obj != null)
-        {
-          return RunClause(assocs, tdlist, kg, obj)
-            .SelectMany(kg.RelationTo)
-            .Where(
-              arg => assocs.Describes(verb.word(), arg.rel)
-                  && assocs.Describes(subj.word(), arg.from))
-            .Select(arg => arg.from);
-        }
+        return verb_objs.SelectMany(
+          vo => RunClause(assocs, tdlist, kg, vo.obj)
+                  .SelectMany(kg.RelationTo)
+                  .Where(
+                    arg => assocs.Describes(vo.verb.word(), arg.rel)
+                        && assocs.Describes(subj.word(), arg.from))
+                  .Select(arg => arg.from));
+
       }
       return kg.AllEntities();
     }
