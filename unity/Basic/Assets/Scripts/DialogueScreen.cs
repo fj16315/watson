@@ -27,7 +27,7 @@ public class DialogueScreen : MonoBehaviour {
             int width = 600;
             int height = 200;
             GUI.SetNextControlName("TextBox");
-            //DisableKey(KeyCode.Return);
+
             stringToEdit = GUI.TextField(new Rect(Screen.width / 2 + 40, Screen.height / 2 + 40, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
 
@@ -49,24 +49,4 @@ public class DialogueScreen : MonoBehaviour {
         show = false;
     }
 
-    //static void DisableKey(KeyCode key)
-    //{
-    //    DisableKeys(new KeyCode[] { key });
-    //}
-
-    //static void DisableKeys(KeyCode[] keys)
-    //{
-    //    if (!Event.current.isKey)
-    //    {
-    //        return;
-    //    }
-
-    //    foreach (KeyCode key in keys)
-    //    {
-    //        if (Event.current.keyCode == key)
-    //        {
-    //            //Event.current.Use();
-    //        }
-    //    }
-    //}
 }
