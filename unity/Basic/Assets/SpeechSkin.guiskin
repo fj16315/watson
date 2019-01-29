@@ -297,7 +297,7 @@ MonoBehaviour:
     m_Focused:
       m_Background: {fileID: 11026, guid: 0000000000000000e000000000000000, type: 0}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 1, g: 0.8156204, b: 0, a: 1}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_OnNormal:
       m_Background: {fileID: 11025, guid: 0000000000000000e000000000000000, type: 0}
       m_ScaledBackgrounds: []
@@ -325,22 +325,22 @@ MonoBehaviour:
       m_Top: 4
       m_Bottom: 4
     m_Padding:
-      m_Left: 3
-      m_Right: 3
-      m_Top: 3
-      m_Bottom: 3
+      m_Left: 10
+      m_Right: 10
+      m_Top: 10
+      m_Bottom: 10
     m_Overflow:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_FontSize: 26
     m_FontStyle: 0
     m_Alignment: 0
-    m_WordWrap: 0
+    m_WordWrap: 1
     m_RichText: 0
-    m_TextClipping: 1
+    m_TextClipping: 0
     m_ImagePosition: 3
     m_ContentOffset: {x: 0, y: 0}
     m_FixedWidth: 0
@@ -1420,8 +1420,8 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   m_Settings:
-    m_DoubleClickSelectsWord: 1
-    m_TripleClickSelectsLine: 1
+    m_DoubleClickSelectsWord: 0
+    m_TripleClickSelectsLine: 0
     m_CursorColor: {r: 1, g: 1, b: 1, a: 1}
     m_CursorFlashSpeed: -1
-    m_SelectionColor: {r: 1, g: 0.38403907, b: 0, a: 0.7}
+    m_SelectionColor: {r: 0.7264151, g: 0.5054374, b: 0.3255162, a: 0.7}

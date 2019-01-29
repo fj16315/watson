@@ -85,7 +85,7 @@ public class CameraRaycasting : MonoBehaviour
         if (converse)
         {
             // Exit speech
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (Event.current.isKey && Event.current.keyCode == KeyCode.LeftControl && GUI.GetNameOfFocusedControl() == "TextBox")
             {
                 CloseDialogue();
             }

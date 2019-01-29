@@ -16,8 +16,8 @@ public class DialogueScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+
+    }
 
     void OnGUI()
     {
@@ -29,13 +29,13 @@ public class DialogueScreen : MonoBehaviour {
             GUI.SetNextControlName("TextBox");
             //DisableKey(KeyCode.Return);
             stringToEdit = GUI.TextField(new Rect(Screen.width / 2 + 40, Screen.height / 2 + 40, width, height), stringToEdit);
-          
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Debug.Log("Query");
-            }
-
             GUI.FocusControl("TextBox");
+
+            if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
+            {
+                Debug.Log("Query: " + stringToEdit);
+            }
+         
         }
     }
 

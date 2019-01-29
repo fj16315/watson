@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public Vector3 pos;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -16,7 +18,7 @@ public class MouseMovement : MonoBehaviour {
 
     private void OnGUI()
     {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = (pos);
     }
 }
