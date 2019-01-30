@@ -20,8 +20,6 @@ sysinfo.txt
 ###
 [Ee]xportedObj/
 *.booproj
-*.csproj
-*.sln
 *.suo
 *.svd
 *.unityproj
@@ -41,3 +39,8 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
+###
+# Brass Monkey Added:
+###
+.vs/
