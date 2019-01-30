@@ -21,12 +21,14 @@ public class CameraRaycasting : MonoBehaviour
     public GUISkin skin;
     public string stringToEdit = "Who are you?";
     GameObject masterCanvas, speechCanvas;
+    PlayerController player;
 
     // Use this for initialization
     void Start()
     {
         masterCanvas = GameObject.Find("MasterCanvas");
         speechCanvas = GameObject.Find("SpeechCanvas");
+        player = Object.FindObjectOfType<PlayerController>();
         //speechCanvas.SetActive(false);
     }
 
@@ -56,6 +58,10 @@ public class CameraRaycasting : MonoBehaviour
             if (obj != null)
             {
                 type = (int)ToM.THING;
+                if (Input.GetMouseButtonDown(0) && obj.CanPickUp())
+                {
+                    player.PickUp(entity.gameObject);
+                }
                 display = true;
             }
 
@@ -70,6 +76,7 @@ public class CameraRaycasting : MonoBehaviour
                 }
                 display = true;
             }
+
         }
         else
         {
@@ -122,7 +129,6 @@ public class CameraRaycasting : MonoBehaviour
                         message = "Open door";
                     }
                     break;
-                // DEFAULT
                 default:
                     display = false;
                     break;

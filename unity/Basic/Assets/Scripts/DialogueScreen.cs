@@ -6,7 +6,7 @@ public class DialogueScreen : MonoBehaviour {
 
     public GUISkin skin;
     bool show = false;
-    bool query = false;
+    //bool query = false;
     public string stringToEdit = "";
 
     // Use this for initialization
