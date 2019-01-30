@@ -36,46 +36,29 @@ namespace GraphEditor
     public MainWindow()
     {
       InitializeComponent();
-      ComboBoxItem relationship0 = new ComboBoxItem
-      {
-        Content = "Contains"
-      };
-      ComboBoxItem relationship1 = new ComboBoxItem
-      {
-        Content = "Owns"
-      };
-      ComboBoxItem relationship2 = new ComboBoxItem
-      {
-        Content = "Wants"
-      };
-      comboBoxRelation.Items.Add(relationship0);
-      comboBoxRelation.Items.Add(relationship1);
-      comboBoxRelation.Items.Add(relationship2);
     }
 
     public void ButtonClick_AddNewNode(object sender, RoutedEventArgs e)
     {
-      this.AddNewNode();
+      this.AddNewNode(new Entity(sourceNodes.SelectedIndex));
     }
 
     public void KeyUp_AddNewNode(object sender, KeyEventArgs e)
     {
       if (e.Key == Key.Return)
       {
-        this.AddNewNode();
+        this.AddNewNode(new Entity(sourceNodes.SelectedIndex));
       }
     }
 
-    private void AddNewNode()
+    /// <summary>
+    /// Adds a new entity to the knowledge graph.
+    /// </summary>
+    /// <param name="entity">The entity to be added.</param>
+    private void AddNewNode(Entity entity)
     {
-      Entity node = new Entity(this.GetNextFreeId());
-      this.nodes.Add(node);
-      this.nodeNames.Add(node, nodeName.Text);
-
-      this.AddComboNode(node);
-      this.AddSourceListNode(node);
-
-      nodeName.Text = "";
+      this.nodes.Add(entity);
+      this.RefreshLists();
     }
 
     private void AddComboNode(Entity node)
@@ -85,7 +68,8 @@ namespace GraphEditor
         Content = $"{(int)node}:{this.nodeNames[node]}"
       };
 
-      comboBoxNodes.Items.Add(nodeComboItem);
+      destinationNodes.Items.Add(nodeComboItem);
+      sourceNodes.Items.Add(nodeComboItem);
     }
 
     private void AddSourceListNode(Entity node)
@@ -101,7 +85,7 @@ namespace GraphEditor
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
       int source = (int)this.nodes.ElementAt(nodeList.SelectedIndex);
-      int destination = (int)this.nodes.ElementAt(comboBoxNodes.SelectedIndex);
+      int destination = (int)this.nodes.ElementAt(destinationNodes.SelectedIndex);
       RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelation.SelectedIndex);
 
       if (!this.Relation.ContainsKey(source))
@@ -112,7 +96,7 @@ namespace GraphEditor
 
       ListBoxItem relationshipListItem = new ListBoxItem
       {
-        Content = $"{this.RelationshipIdToName(relationship.RelationshipId)} {this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]}"
+        Content = $"{this.RelationshipIdToName(relationship.RelationshipId)} {this.nodeNames[this.nodes.ElementAt(destinationNodes.SelectedIndex)]}"
       };
 
       relationshipList.Items.Add(relationshipListItem);
@@ -160,7 +144,7 @@ namespace GraphEditor
       this.nodeNames.Remove(deletedNode);
       freeIds.Push((int)deletedNode);
       this.nodes.RemoveAt(nodeList.SelectedIndex);
-      comboBoxNodes.Items.RemoveAt(nodeList.SelectedIndex);
+      destinationNodes.Items.RemoveAt(nodeList.SelectedIndex);
       nodeList.Items.RemoveAt(nodeList.SelectedIndex);
     }
 
@@ -194,7 +178,7 @@ namespace GraphEditor
         {
           ListBoxItem relationshipListItem = new ListBoxItem
           {
-            Content = this.RelationshipIdToName(relationship.RelationshipId) + " " + this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]
+            Content = this.RelationshipIdToName(relationship.RelationshipId) + " " + this.nodeNames[this.nodes.ElementAt(destinationNodes.SelectedIndex)]
           };
           relationshipList.Items.Add(relationshipListItem);
         }
@@ -275,7 +259,7 @@ namespace GraphEditor
     private void RefreshLists()
     {
       nodeList.Items.Clear();
-      comboBoxNodes.Items.Clear();
+      destinationNodes.Items.Clear();
       comboBoxRelation.Items.Clear();
       relationshipList.Items.Clear();
 
