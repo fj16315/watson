@@ -9477,6 +9477,7 @@ GameObject:
   - component: {fileID: 1433948784}
   - component: {fileID: 1433948786}
   - component: {fileID: 1433948785}
+  - component: {fileID: 1433948787}
   m_Layer: 0
   m_Name: book1
   m_TagString: Untagged
@@ -9542,6 +9543,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1433948783}
+  m_Mesh: {fileID: 4300096, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+--- !u!64 &1433948787
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1433948783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300096, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
 --- !u!1 &1435967356
 GameObject:
@@ -11517,6 +11532,7 @@ GameObject:
   - component: {fileID: 1782695679}
   - component: {fileID: 1782695681}
   - component: {fileID: 1782695680}
+  - component: {fileID: 1782695682}
   m_Layer: 0
   m_Name: yellow_room_walls
   m_TagString: Untagged
@@ -11582,6 +11598,20 @@ MeshFilter:
     type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1782695678}
+  m_Mesh: {fileID: 4300102, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+--- !u!64 &1782695682
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1782695678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300102, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
 --- !u!1 &1783248742
 GameObject:
@@ -11781,6 +11811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1812503202}
+  - component: {fileID: 1812503203}
   m_Layer: 0
   m_Name: end_table
   m_TagString: Untagged
@@ -11804,6 +11835,19 @@ Transform:
   m_Father: {fileID: 1176584170}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1812503203
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812503201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.006953696
+  m_Height: 0.019183302
+  m_Direction: 1
+  m_Center: {x: -0.0003018248, y: 0.002640295, z: 0.00045561555}
 --- !u!1 &1813539600
 GameObject:
   m_ObjectHideFlags: 0
@@ -12014,6 +12058,7 @@ GameObject:
   - component: {fileID: 1850748789}
   - component: {fileID: 1850748791}
   - component: {fileID: 1850748790}
+  - component: {fileID: 1850748792}
   m_Layer: 0
   m_Name: chair
   m_TagString: Untagged
@@ -12080,6 +12125,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1850748788}
   m_Mesh: {fileID: 4300074, guid: 05da6f57793e20245a06b49d73882b27, type: 3}
+--- !u!65 &1850748792
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850748788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.010633108, y: 0.017702838, z: 0.010893822}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1866363041
 GameObject:
   m_ObjectHideFlags: 0
@@ -13841,6 +13898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092410262}
+  - component: {fileID: 2092410263}
   m_Layer: 0
   m_Name: fireplace
   m_TagString: Untagged
@@ -13871,6 +13929,18 @@ Transform:
   m_Father: {fileID: 1176584170}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2092410263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2092410261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04567339, y: 0.023354523, z: 0.020071998}
+  m_Center: {x: 0.020814903, y: 0.008214186, z: -0.01428727}
 --- !u!1 &2097535981
 GameObject:
   m_ObjectHideFlags: 0

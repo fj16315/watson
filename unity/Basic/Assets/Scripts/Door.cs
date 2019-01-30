@@ -17,7 +17,7 @@ namespace Doors
         // Use this for initialization
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
@@ -29,7 +29,8 @@ namespace Doors
                 float target = open ? angleClose : angleOpen;
                 int sweep = open ? 1 : -1;
                 Debug.Log(currentAngle);
-                if (Mathf.Abs(currentAngle - target) > 1) {
+                if (Mathf.Abs(currentAngle - target) > 1)
+                {
                     transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime, 0);
                 }
                 else
