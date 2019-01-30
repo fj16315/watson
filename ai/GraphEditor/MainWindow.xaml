@@ -7,17 +7,17 @@
       d:DesignHeight="800" d:DesignWidth="700"
       Title="GraphEditor - Home">
   <DockPanel>
-  <DockPanel.Resources>
-    <Style TargetType="TextBlock">
-      <Setter Property="Foreground" Value="Gray" />
-      <Setter Property="FontSize" Value="24" />
-    </Style>
-  </DockPanel.Resources>
+    <DockPanel.Resources>
+      <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="FontSize" Value="24" />
+      </Style>
+    </DockPanel.Resources>
 
     <Menu DockPanel.Dock="Top">
       <MenuItem Header="_File">
         <MenuItem Header="_New Graph"/>
-        <MenuItem Header="_Save Graph" Click="SaveGraph"/>
+        <MenuItem Header="_Save Graph" Click="MenuItemClick_SaveGraph"/>
         <MenuItem Header="_Load Graph"/>
         <MenuItem Header="_Exit"/>
       </MenuItem>
@@ -55,7 +55,7 @@
               <StackPanel>
                 <TextBlock FontWeight="Bold" FontSize="14">Export Config</TextBlock>
                 <TextBlock FontSize="12">
-                  Saves an associations config. 
+                  Saves an associations config.
                 </TextBlock>
               </StackPanel>
             </ToolTip>
@@ -89,7 +89,7 @@
           </Grid.RowDefinitions>
 
           <Button Grid.Column="0" Grid.Row="0" Width="90px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_DeleteNode">Delete Entity</Button>
-          <ComboBox Grid.Column="0" Grid.Row="1" x:Name="sourceNodes"  Margin="5,5,5,5" KeyUp="KeyUp_AddNewNode"/>
+          <ComboBox Grid.Column="0" Grid.Row="1" x:Name="comboBox_PossibleSourceNodes"  Margin="5,5,5,5" KeyUp="KeyUp_AddNewNode"/>
           <Button Grid.Column="1" Grid.Row="1" Width="40px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_AddNewNode">Add</Button>
         </Grid>
       </Grid>
@@ -97,12 +97,16 @@
       <TabControl Grid.Column="1" Grid.Row="0" Margin="5,5,5,5">
         <TabItem Header="Relations">
           <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="22*"/>
+              <ColumnDefinition Width="67*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
               <RowDefinition Height="*"/>
               <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="4*"/>
@@ -110,30 +114,37 @@
               </Grid.RowDefinitions>
 
               <TextBlock Grid.Row="0" Style="{StaticResource TextStyle}">Relation</TextBlock>
-              <ListBox x:Name="relationshipList" Grid.Row="1" Margin="5,5,5,5" KeyUp="KeyUp_DeleteRelationshipMapping"/>
+              <ListBox x:Name="relationList" Grid.Row="1" Margin="5,5,5,5" KeyUp="KeyUp_DeleteRelationshipMapping"/>
               <StackPanel Grid.Row="2">
                 <Button Width="120px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_DeleteRelationshipMapping">Delete Relation</Button>
                 <StackPanel Orientation="Horizontal">
                   <TextBlock Style="{StaticResource TextStyle}">Relation:</TextBlock>
-                  <ComboBox x:Name="comboBoxRelation" Width="120px" Margin="5,5,5,5"/>
+                  <ComboBox x:Name="comboBox_PossibleRelations" Width="120px" Margin="5,5,5,5"/>
                   <TextBlock Style="{StaticResource TextStyle}">Entity:</TextBlock>
-                  <ComboBox x:Name="destinationNodes" Width="120px" Margin="5,5,5,5"/>
+                  <ComboBox x:Name="comboBox_PossibleDestinationNodes" Width="120px" Margin="5,5,5,5"/>
                   <Button Width="40px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_AddNewRelationshipMapping">Add</Button>
                 </StackPanel>
               </StackPanel>
             </Grid>
-            <Button Grid.Row="1" Width="150px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_RelationshipWindow">Edit Possible Relations</Button>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+              <Button Width="150px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_RelationshipWindow">Edit Possible Relations</Button>
+              <Button Width="150px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_EntityWindow">Edit Possible Entities</Button>
+            </StackPanel>
           </Grid>
         </TabItem>
 
         <TabItem Header="Associated Words">
           <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="29*"/>
+              <ColumnDefinition Width="416*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
               <RowDefinition Height="*"/>
               <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="5*"/>

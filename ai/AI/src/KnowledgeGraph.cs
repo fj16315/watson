@@ -15,12 +15,6 @@ namespace GameAI
     /// </summary>
     private Relation[,] adj_matrix;
 
-    // TODO: Remove this.
-    /// <summary>
-    /// A dictionary lookup for entities.
-    /// </summary>
-    public Dictionary<Entity,String> entity_names;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="GameAI.KnowledgeGraph"/> class.
     /// </summary>
@@ -232,18 +226,6 @@ namespace GameAI
     public KnowledgeGraphBuilder(int size)
     {
       this.kg = new KnowledgeGraph(size);
-    }
-
-    // TODO: Remove this!
-    /// <summary>
-    /// Provide a mapping for entities to their names.
-    /// </summary>
-    /// <returns><c>this</c>.</returns>
-    /// <param name="a">A dictionary mapping entities to names.</param>
-    public KnowledgeGraphBuilder AddEntityNames(Dictionary<Entity,String> entity_names)
-    {
-      this.kg.entity_names = entity_names;
-      return this;
     }
 
     /// <summary>

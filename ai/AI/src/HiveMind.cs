@@ -71,4 +71,21 @@ namespace GameAI
     public bool Describes(string word, Relation relation)
       => relationWords[word].Contains(relation);
   }
+
+  /// <summary>
+  /// Utility class for saving a knowledge graph and associated configurations in one file.
+  /// </summary>
+  [Serializable]
+  public class GraphAndAssociations
+  {
+    public KnowledgeGraph knowledgeGraph { get; }
+
+    public Associations associations { get; }
+
+    public GraphAndAssociations(KnowledgeGraph knowledgeGraph, Associations associations)
+    {
+      this.knowledgeGraph = knowledgeGraph;
+      this.associations = associations;
+    }
+  }
 }
