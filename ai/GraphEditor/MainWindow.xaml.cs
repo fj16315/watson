@@ -263,7 +263,8 @@ namespace GraphEditor
         foreach (Entity entity in knowledgeGraph.entity_names.Keys)
         {
           this.nodes.Add(entity);
-          knowledgeGraph.RelationFrom(entity).Select((ent) => !ent.IsNone());
+          //TODO: THIS IS BROKEN
+          //knowledgeGraph.RelationFrom(entity).Select((ent) => !ent.IsNone());
         }
         this.nodeNames = knowledgeGraph.entity_names;
 

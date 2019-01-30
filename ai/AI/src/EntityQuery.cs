@@ -27,10 +27,10 @@ namespace GameAI
     //   - Jago Taylor
     private IEnumerable<Entity> RunClause(Associations assocs, TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subj)
     {
-      IEnumerable<(IndexedWord verb, IndexedWord obj)> verb_objs =
+      var verb_objs =
         from verb in tdlist.AllWithRelationTo("nsubj", subj)
         from obj in tdlist.AllWithRelationFrom(verb, "dobj")
-        select (verb, obj);
+        select new ObjectVerbPair(verb, obj);
 
       if (verb_objs.Any())
       {
@@ -38,14 +38,24 @@ namespace GameAI
           vo => RunClause(assocs, tdlist, kg, vo.obj)
                   .SelectMany(kg.RelationTo)
                   .Where(
-                    arg => assocs.Describes(vo.verb.word(), arg.rel)
+                    arg => assocs.Describes(vo.verb.word(), arg.relation)
                         && assocs.Describes(subj.word(), arg.from))
                   .Select(arg => arg.from));
-
       }
       return kg.AllEntities();
     }
-
   }
 
+  public struct ObjectVerbPair
+  {
+    public IndexedWord obj { get; }
+
+    public IndexedWord verb { get; }
+
+    public ObjectVerbPair(IndexedWord obj, IndexedWord verb)
+    {
+      this.obj = obj;
+      this.verb = verb;
+    }
+  }
 }

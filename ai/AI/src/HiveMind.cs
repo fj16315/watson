@@ -36,7 +36,7 @@ namespace GameAI
       return Enumerable.Zip(
         mainGraph.AllRelations(),
         subGraph.AllRelations(),
-        (main, sub) => main.rel.Contains(sub.rel)).All(x => x);
+        (main, sub) => main.relation.Contains(sub.relation)).All(x => x);
     }
   }
 

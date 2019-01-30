@@ -101,7 +101,8 @@ namespace GameAI
     /// <see cref="T:GameAI.Relation"/>; otherwise, <c>false</c>.</returns>
     public override bool Equals(object obj)
     {
-      if ( obj is Relation rel)
+      var rel = obj as Relation?;
+      if (rel != null)
       {
         return this == rel;
       }

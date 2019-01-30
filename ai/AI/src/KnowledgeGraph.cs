@@ -44,8 +44,13 @@ namespace GameAI
     /// <returns>The <see cref="GameAI.Relation"/> from one node to another.</returns>
     /// <param name="from">The node from which the Relation come.</param>
     /// <param name="to">The node to which the Relation go.</param>
-    public ref Relation RelationFromTo(Entity from, Entity to)
-      => ref adj_matrix[(int)from, (int)to];
+    public Relation RelationFromTo(Entity from, Entity to)
+      => adj_matrix[(int)from, (int)to];
+
+    public void SetRelationFromTo(Entity from, Relation rel, Entity to)
+    {
+      adj_matrix[(int)from, (int)to] = rel;
+    }
 
     /// <summary>
     /// Returns the Relation from a given node.
@@ -84,7 +89,7 @@ namespace GameAI
   /// A container for the <see cref="GameAI.Relation"/> coming from an
   /// <see cref="GameAI.Entity"/> and going to another.
   /// </summary>
-  public class OutEdgeIter : IEnumerable<(Relation rel, Entity to)>
+  public class OutEdgeIter : IEnumerable<Edge>
   {
     /// <summary>
     /// The node from which the <see cref="GameAI.Relation"/> are coming.
@@ -109,12 +114,18 @@ namespace GameAI
     /// <summary>
     /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<(Relation rel, Entity to)> GetEnumerator()
+    public IEnumerator<Edge> GetEnumerator()
     {
       for (int to_i = 0; to_i < graph.GetNodeCount(); ++to_i)
       {
         var to = new Entity(to_i);
-        yield return (graph.RelationFromTo(from, to), to);
+        var edge = new Edge
+        {
+          from = from,
+          to = to,
+          relation = graph.RelationFromTo(from, to)
+        };
+        yield return edge;
       }
     }
 
@@ -129,7 +140,7 @@ namespace GameAI
   /// A container for the <see cref="GameAI.Relation"/> going to an
   /// <see cref="GameAI.Entity"/> and coming from another.
   /// </summary>
-  public class InEdgeIter : IEnumerable<(Entity from, Relation rel)>
+  public class InEdgeIter : IEnumerable<Edge>
   {
     /// <summary>
     /// The node to which the <see cref="GameAI.Relation"/> are going.
@@ -154,12 +165,18 @@ namespace GameAI
     /// <summary>
     /// Implementing IEnumerable<Relation>.
     /// </summary>
-    public IEnumerator<(Entity from, Relation rel)> GetEnumerator()
+    public IEnumerator<Edge> GetEnumerator()
     {
       for (int from_i = 0; from_i < graph.GetNodeCount(); ++from_i)
       {
         var from = new Entity(from_i);
-        yield return (from, graph.RelationFromTo(from, to));
+        var edge = new Edge
+        {
+          from = from,
+          to = to,
+          relation = graph.RelationFromTo(from, to)
+        };
+        yield return edge;
       }
     }
 
@@ -171,7 +188,7 @@ namespace GameAI
 
   }
 
-  public class AllRelationsIter : IEnumerable<(Entity from, Relation rel, Entity to)>
+  public class AllRelationsIter : IEnumerable<Edge>
   {
     private readonly KnowledgeGraph graph;
 
@@ -180,7 +197,7 @@ namespace GameAI
       this.graph = graph;
     }
 
-    public IEnumerator<(Entity from, Relation rel, Entity to)> GetEnumerator()
+    public IEnumerator<Edge> GetEnumerator()
     {
       for (int from_i = 0; from_i < graph.GetNodeCount(); ++from_i)
       {
@@ -188,7 +205,13 @@ namespace GameAI
         for (int to_i = 0; to_i < graph.GetNodeCount(); ++to_i)
         {
           var to = new Entity(to_i);
-          yield return (from, graph.RelationFromTo(from, to), to);
+          var edge = new Edge
+          {
+            from = from,
+            to = to,
+            relation = graph.RelationFromTo(from, to)
+          };
+          yield return edge;
         }
       }
     }
@@ -255,7 +278,7 @@ namespace GameAI
     /// <param name="b">The second node.</param>
     public KnowledgeGraphBuilder AddEdge(Entity a, Relation rel, Entity b)
     {
-      this.kg.RelationFromTo(a, b) = rel;
+      this.kg.SetRelationFromTo(a, rel, b);
       return this;
     }
 
@@ -266,4 +289,14 @@ namespace GameAI
     public KnowledgeGraph Build()
       => this.kg;
   }
+
+  public struct Edge
+  {
+    public Entity from { get; set; }
+
+    public Entity to { get; set; }
+
+    public Relation relation { get; set; }
+  }
 }
+
