@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     string list = "";
     public GUISkin skin;
     public GUISkin winskin;
-    bool won = true;
+    bool won = false;
 
 	// Use this for initialization
 	void Start () {
