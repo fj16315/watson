@@ -11,6 +11,7 @@ namespace Containers
         public Key key;
         public bool locked;
         public bool open;
+        public GameObject contents;
 
         // Use this for initialization
         void Start()

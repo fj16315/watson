@@ -12,6 +12,10 @@ public class Box : Container {
 	void Start () {
         lid = transform.Find("lid");
         player = Object.FindObjectOfType<PlayerController>();
+        if (!open)
+        {
+            this.contents.SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
@@ -24,6 +28,7 @@ public class Box : Container {
         if (Unlockable())
         {
             lid.gameObject.SetActive(false);
+            this.contents.SetActive(true);
             open = true;
             locked = false;
         }

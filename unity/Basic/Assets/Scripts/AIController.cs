@@ -108,7 +108,7 @@ public class AIController : MonoBehaviour
 
     }
 
-    string Query(string question)
+    public string Query(string question)
       => String.Join( ", ",
             query.Run(assocs, question, graph_all)
             .Select(assocs.NameOf)

@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public List<GameObject> inventory;
     string list = "";
     public GUISkin skin;
+    public GUISkin winskin;
+    bool won = true;
 
 	// Use this for initialization
 	void Start () {
@@ -21,10 +23,16 @@ public class PlayerController : MonoBehaviour {
 
     void OnGUI()
     {
-        //GUIStyle style = new GUIStyle();
-        //style.richText = true;
-        GUI.skin = skin;
-        GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
+        if (won)
+        {
+            GUI.skin = winskin;
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "You found my son!");
+        }
+        else
+        {
+            GUI.skin = skin;
+            GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
+        }
     }
 
     public void PickUp(GameObject obj)
@@ -32,6 +40,10 @@ public class PlayerController : MonoBehaviour {
         inventory.Add(obj);
         obj.SetActive(false);
         GenerateList();
+        if (obj.GetComponent<Thing>().objName.Equals("Prize!"))
+        {
+            won = true;
+        }
     }
 
     private void GenerateList()

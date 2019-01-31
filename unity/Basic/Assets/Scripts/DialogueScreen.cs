@@ -8,10 +8,12 @@ public class DialogueScreen : MonoBehaviour {
     bool show = false;
     //bool query = false;
     public string stringToEdit = "";
+    string answer = "";
+    private AIController ai;
 
     // Use this for initialization
     void Start () {
-        
+        ai = Object.FindObjectOfType<AIController>();
     }
 
     // Update is called once per frame
@@ -28,12 +30,18 @@ public class DialogueScreen : MonoBehaviour {
             int height = 200;
             GUI.SetNextControlName("TextBox");
 
-            stringToEdit = GUI.TextField(new Rect(Screen.width / 2 + 40, Screen.height / 2 + 40, width, height), stringToEdit);
+            int x = Screen.width / 2 + 40;
+            int y = Screen.height / 2 + 40;
+
+            stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
+
+            GUI.Box(new Rect(x - width - 10, y - height, width, height), answer);
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
-                Debug.Log("Query: " + stringToEdit);
+                answer = ai.Query(stringToEdit);
+                Debug.Log(answer);
             }
          
         }
