@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using NPC;
 using Things;
 using Doors;
+using Containers;
 
 // (T)ype (o)f (M)essage
 enum ToM : int {CHARACTER, THING, DOOR};
@@ -58,9 +59,17 @@ public class CameraRaycasting : MonoBehaviour
             if (obj != null)
             {
                 type = (int)ToM.THING;
-                if (Input.GetMouseButtonDown(0) && obj.CanPickUp())
+                Container container = entity.GetComponent<Container>();
+                if (Input.GetMouseButtonDown(0))
                 {
-                    player.PickUp(entity.gameObject);
+                    if (obj.CanPickUp())
+                    {
+                        player.PickUp(entity.gameObject);
+                    }
+                    else if (container != null)
+                    {
+                        container.Activate();
+                    }
                 }
                 display = true;
             }
@@ -111,7 +120,27 @@ public class CameraRaycasting : MonoBehaviour
                 // THING
                 case (int)ToM.THING:
                     Thing thing = entity.GetComponent<Thing>();
-                    if (thing.CanPickUp())
+                    Container container = entity.GetComponent<Container>();
+                    if (container != null)
+                    {
+                        if (!container.locked && !container.open)
+                        {
+                            message = "Open ";
+                        }
+                        else if (!container.locked && container.open)
+                        {
+                            message = "Close ";
+                        }
+                        else if (container.locked && container.Unlockable())
+                        {
+                            message = "Unlock ";
+                        }
+                        else
+                        {
+                            message = "Locked ";
+                        }
+                    }
+                    else if (thing.CanPickUp())
                     {
                         message = "Pick up ";
                     }
@@ -120,13 +149,20 @@ public class CameraRaycasting : MonoBehaviour
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    if (door.open)
+                    if (door.locked)
                     {
-                        message = "Close door";
+                        message = "Locked door";
                     }
                     else
                     {
-                        message = "Open door";
+                        if (door.open)
+                        {
+                            message = "Close door";
+                        }
+                        else
+                        {
+                            message = "Open door";
+                        }
                     }
                     break;
                 default:

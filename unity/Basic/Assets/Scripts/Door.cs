@@ -43,7 +43,7 @@ namespace Doors
 
         public void Activate()
         {
-            if (single)
+            if (single && !locked)
             {
                 activate = true;
             }

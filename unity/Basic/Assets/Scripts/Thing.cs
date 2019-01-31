@@ -12,7 +12,7 @@ namespace Things
         public string objName;
         public int category;
 
-        public enum Category : int {BOOK, KEY};
+        public enum Category : int {BOOK, KEY, CONTAINER};
 
         // Use this for initialization
         void Start()
