@@ -117,6 +117,18 @@ namespace GameAI
     public static explicit operator int(Relation r)
       => r.relation;
 
+    public SingleRelation? AsSingleRelation()
+    {
+      for (int r = 0; (1 << r) < int.MaxValue; ++r)
+      {
+        if (relation == (1 << r))
+        {
+          return new SingleRelation(r);
+        }
+      }
+      return null;
+    }
+
     /// <summary>
     /// Serves as a hash function for a <see cref="T:GameAI.Relation"/> object.
     /// </summary>
