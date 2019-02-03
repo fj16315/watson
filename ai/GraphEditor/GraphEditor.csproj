@@ -90,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditorModel.cs" />
     <Compile Include="FreeValueManager.cs" />
     <Compile Include="GraphReader.cs" />
     <Compile Include="GraphWriter.cs" />
