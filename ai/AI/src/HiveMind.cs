@@ -36,7 +36,7 @@ namespace GameAI
       return Enumerable.Zip(
         mainGraph.AllRelations(),
         subGraph.AllRelations(),
-        (main, sub) => main.rel.Contains(sub.rel)).All(x => x);
+        (main, sub) => main.relation.Contains(sub.relation)).All(x => x);
     }
   }
 
@@ -62,14 +62,32 @@ namespace GameAI
     public string NameOf(Entity entity)
       => entityNames[(int) entity];
 
+    public void SetNameOf(Entity entity, string name)
+    {
+      entityNames[(int)entity] = name;
+    }
+
     public string NameOf(Relation relation)
       => relationNames[(int) relation];
 
+    public void SetNameOf(Relation relation, string name)
+    {
+      relationNames[(int)relation] = name;
+    }
+
     public bool Describes(string word, Entity entity)
-      => entityWords[word].Contains(entity);
+    {
+      List<Entity> list = null;
+      entityWords.TryGetValue(word, out list);
+      return list?.Contains(entity) ?? false;
+    }
 
     public bool Describes(string word, Relation relation)
-      => relationWords[word].Contains(relation);
+    {
+      List<Relation> list = null;
+      relationWords.TryGetValue(word, out list);
+      return list?.Contains(relation) ?? false;
+    }
   }
 
   /// <summary>

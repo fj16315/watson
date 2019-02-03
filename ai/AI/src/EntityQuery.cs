@@ -3,11 +3,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
+//using System;
+
 namespace GameAI
 {
   public class Query
   {
     private readonly Parser parser;
+    //public Func<string, object> logger;
 
     public Query(Parser parser)
     {
@@ -27,25 +30,52 @@ namespace GameAI
     //   - Jago Taylor
     private IEnumerable<Entity> RunClause(Associations assocs, TypedDependenciesList tdlist, KnowledgeGraph kg, IndexedWord subj)
     {
-      IEnumerable<(IndexedWord verb, IndexedWord obj)> verb_objs =
+      var obj_verbs =
         from verb in tdlist.AllWithRelationTo("nsubj", subj)
         from obj in tdlist.AllWithRelationFrom(verb, "dobj")
-        select (verb, obj);
+        select new ObjectVerbPair(obj, verb);
+        
+      //foreach (var foo in obj_verbs)
+      //{
+      //  logger($"verb: {foo.verb}, obj:{foo.obj}");
+      //}
 
-      if (verb_objs.Any())
+      if (obj_verbs.Any())
       {
-        return verb_objs.SelectMany(
+        //logger("  Not empty!");
+        return obj_verbs.SelectMany(
           vo => RunClause(assocs, tdlist, kg, vo.obj)
                   .SelectMany(kg.RelationTo)
                   .Where(
-                    arg => assocs.Describes(vo.verb.word(), arg.rel)
-                        && assocs.Describes(subj.word(), arg.from))
+                    arg => assocs.Describes(vo.verb.word(), arg.relation)
+                        && assocs.Describes(vo.obj.word(), arg.to) )
                   .Select(arg => arg.from));
 
+                    //arg => {
+                    //var verb_bool = assocs.Describes(vo.verb.word(), arg.relation);
+                    ////var subj_bool = assocs.Describes(subj.word(), arg.from);
+                    //var obj_bool = assocs.Describes(vo.obj.word(), arg.to);
+                    //logger($"  v {vo.verb.word()} == {(int)arg.relation}? {verb_bool}");
+                    ////logger($"  {subj.word()} == {(int)arg.from}? {subj_bool}");
+                    //logger($"  o {vo.obj.word()} == {(int)arg.to}? {obj_bool}");
+                    //return verb_bool && obj_bool;
+                    //})
       }
+      //logger("  Empty!");
       return kg.AllEntities();
     }
-
   }
 
+  public struct ObjectVerbPair
+  {
+    public IndexedWord obj { get; }
+
+    public IndexedWord verb { get; }
+
+    public ObjectVerbPair(IndexedWord obj, IndexedWord verb)
+    {
+      this.obj = obj;
+      this.verb = verb;
+    }
+  }
 }

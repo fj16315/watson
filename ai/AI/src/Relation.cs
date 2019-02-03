@@ -101,7 +101,8 @@ namespace GameAI
     /// <see cref="T:GameAI.Relation"/>; otherwise, <c>false</c>.</returns>
     public override bool Equals(object obj)
     {
-      if ( obj is Relation rel)
+      var rel = obj as Relation?;
+      if (rel != null)
       {
         return this == rel;
       }
@@ -115,6 +116,18 @@ namespace GameAI
     /// <param name="r">The wrapping <see cref="GameAI.Relation"/>.</param>
     public static explicit operator int(Relation r)
       => r.relation;
+
+    public SingleRelation? AsSingleRelation()
+    {
+      for (int r = 0; (1 << r) < int.MaxValue; ++r)
+      {
+        if (relation == (1 << r))
+        {
+          return new SingleRelation(r);
+        }
+      }
+      return null;
+    }
 
     /// <summary>
     /// Serves as a hash function for a <see cref="T:GameAI.Relation"/> object.
