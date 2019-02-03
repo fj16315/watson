@@ -30,6 +30,10 @@ namespace GraphEditor
       this.relationNames = relationNames;
     }
 
+    /// <summary>
+    /// Saves the current knowledge graph and associations in a file.
+    /// Opens a new fileexplorer box to fine the file path to save.
+    /// </summary>
     public void SaveGraph()
     {
       Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
@@ -54,6 +58,10 @@ namespace GraphEditor
       }
     }
     
+    /// <summary>
+    /// Builds the current knowledge graph from constituent parts stored in the model.
+    /// </summary>
+    /// <returns>The current knowledge graph.</returns>
     private KnowledgeGraph BuildGraph()
     {
       KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);

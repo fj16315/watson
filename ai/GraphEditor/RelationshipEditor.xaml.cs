@@ -21,18 +21,15 @@ namespace GraphEditor
   public partial class RelationEditor : Window
   {
     private MainWindow mainWindow;
-    private FreeValueManager freeValueManager;
-    private Dictionary<SingleRelation, string> relationNames;
+    private EditorModel model;
 
-    public RelationEditor(MainWindow mainWindow, FreeValueManager freeValueManager, 
-      Dictionary<SingleRelation,string> relationNames)
+    public RelationEditor(MainWindow mainWindow, EditorModel model)
     {
       InitializeComponent();
       this.mainWindow = mainWindow;
-      this.freeValueManager = freeValueManager;
-      this.relationNames = relationNames;
+      this.model = model;
 
-      foreach (SingleRelation relation in relationNames.Keys)
+      foreach (SingleRelation relation in model.relationNames.Keys)
       {
         this.AddPossibleRelation(relation);
       }
@@ -40,11 +37,11 @@ namespace GraphEditor
 
     public void ButtonClick_AddRelation(object sender, RoutedEventArgs e)
     {
-      int id = freeValueManager.NextFreeId();
+      int id = this.model.relationValueManager.NextFreeId();
       SingleRelation relation = new SingleRelation(id);
       string relationName = textBox_NewRelationName.Text;
 
-      this.relationNames.Add(relation, relationName);
+      model.relationNames.Add(relation, relationName);
 
       this.AddPossibleRelation(relation);
 
@@ -60,7 +57,7 @@ namespace GraphEditor
     {
       ListBoxItem listBoxItem = new ListBoxItem
       {
-        Content = $"{(int)relation} : {this.relationNames[relation]}"
+        Content = $"{(int)relation} : {model.relationNames[relation]}"
       };
 
       listBox_RelationList.Items.Add(listBoxItem);

@@ -21,18 +21,15 @@ namespace GraphEditor
   public partial class EntityEditor : Window
   {
     private MainWindow mainWindow;
-    private FreeValueManager freeValueManager;
-    private Dictionary<Entity, string> entityNames;
+    private EditorModel model;
 
-    public EntityEditor(MainWindow mainWindow, FreeValueManager freeValueManager,
-      Dictionary<Entity,string> entityNames)
+    public EntityEditor(MainWindow mainWindow, EditorModel model)
     {
       InitializeComponent();
       this.mainWindow = mainWindow;
-      this.freeValueManager = freeValueManager;
-      this.entityNames = entityNames;
+      this.model = model;
 
-      foreach (Entity entity in entityNames.Keys)
+      foreach (Entity entity in model.entityNames.Keys)
       {
         this.AddPossibleEntity(entity);
       }
@@ -40,11 +37,11 @@ namespace GraphEditor
 
     public void ButtonClick_AddEntity(object sender, RoutedEventArgs e)
     {
-      int id = freeValueManager.NextFreeId();
+      int id = model.entityValueManager.NextFreeId();
       Entity entity = new Entity(id);
       string entityName = textBox_NewEntityName.Text;
 
-      this.entityNames.Add(entity, entityName);
+      model.entityNames.Add(entity, entityName);
 
       this.AddPossibleEntity(entity);
 
@@ -59,7 +56,7 @@ namespace GraphEditor
     {
       ListBoxItem listBoxItem = new ListBoxItem
       {
-        Content = $"{(int)entity} : {this.entityNames[entity]}"
+        Content = $"{(int)entity} : {model.entityNames[entity]}"
       };
 
       listBox_EntityList.Items.Add(listBoxItem);
