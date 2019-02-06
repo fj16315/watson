@@ -6,7 +6,7 @@ using NPC;
 using Things;
 using Doors;
 using Containers;
-using UnityStandardAssets.Characters;
+using UnityStandardAssets.Characters.FirstPerson;
 
 // (T)ype (o)f (M)essage
 enum ToM : int {CHARACTER, THING, DOOR};
@@ -24,7 +24,7 @@ public class CameraRaycasting : MonoBehaviour
     public string stringToEdit = "Who are you?";
     GameObject masterCanvas, speechCanvas;
     PlayerController player;
-    //MouseLook mouseLook;
+    RigidbodyFirstPersonController fpc;
     
 
     // Use this for initialization
@@ -33,7 +33,7 @@ public class CameraRaycasting : MonoBehaviour
         masterCanvas = GameObject.Find("MasterCanvas");
         speechCanvas = GameObject.Find("SpeechCanvas");
         player = Object.FindObjectOfType<PlayerController>();
-        //speechCanvas.SetActive(false);
+        fpc = Object.FindObjectOfType<RigidbodyFirstPersonController>();
     }
 
     // Update is called once per frame
@@ -99,6 +99,10 @@ public class CameraRaycasting : MonoBehaviour
 
     void OnGUI()
     {
+        if (!fpc.mouseLook.lockCursor)
+        {
+            Debug.Log("mouse");
+        }
         GUI.skin = skin;
         // When conversing
         if (converse)
@@ -182,11 +186,14 @@ public class CameraRaycasting : MonoBehaviour
         switch (pause)
         {
             case true:
-                //Time.timeScale = 0;
-                
+                Time.timeScale = 0;
+                //fpc.mouseLook.lockCursor = false;
+                fpc.mouseLook.SetCursorLock(false);
                 break;
             default:
-                //Time.timeScale = 1;
+                Time.timeScale = 1;
+                //fpc.mouseLook.lockCursor = true;
+                fpc.mouseLook.SetCursorLock(true);
                 break;
         }
     }
@@ -195,18 +202,15 @@ public class CameraRaycasting : MonoBehaviour
     {
         masterCanvas.SetActive(false);
         converse = true;
-        //Pause(true);
+        Pause(true);
         speechCanvas.GetComponent<DialogueScreen>().ShowScreen();
-        //speechCanvas.SetActive(true);
     }
 
     private void CloseDialogue()
     {
         masterCanvas.SetActive(true);
         converse = false;
-        //Pause(false);
+        Pause(false);
         speechCanvas.GetComponent<DialogueScreen>().HideScreen();
-        //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        //speechCanvas.SetActive(false);
     }
 }

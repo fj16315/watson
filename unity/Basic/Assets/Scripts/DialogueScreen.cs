@@ -39,6 +39,13 @@ public class DialogueScreen : MonoBehaviour {
 
             GUI.Box(new Rect(x - width - 10, y - height, width, height), answer);
 
+            GUI.Button(new Rect(1000, 1000, 100, 100), "Save answer");
+
+            //if (GUI.Button(new Rect(x + width + 10, y + width + 10, 100, 100), "Save answer"))
+            //{
+            //    Debug.Log("Saved");
+            //}
+
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
                 answer = ai.Query(stringToEdit);
@@ -51,7 +58,10 @@ public class DialogueScreen : MonoBehaviour {
     public void ShowScreen()
     {
         show = true;
-        answer = "";
+        if (!show)
+        {
+            answer = "";
+        }
     }
 
     public void HideScreen()
