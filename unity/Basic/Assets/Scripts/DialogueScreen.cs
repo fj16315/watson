@@ -26,6 +26,7 @@ public class DialogueScreen : MonoBehaviour {
         GUI.skin = skin;
         if (show)
         {
+            //Cursor.visible = true;
             int width = 600;
             int height = 200;
             GUI.SetNextControlName("TextBox");
@@ -50,11 +51,13 @@ public class DialogueScreen : MonoBehaviour {
     public void ShowScreen()
     {
         show = true;
+        answer = "";
     }
 
     public void HideScreen()
     {
         show = false;
+        Cursor.visible = false;
     }
 
 }

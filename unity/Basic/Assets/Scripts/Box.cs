@@ -28,7 +28,10 @@ public class Box : Container {
         if (Unlockable())
         {
             lid.gameObject.SetActive(false);
-            this.contents.SetActive(true);
+            if (!player.Possesses(contents))
+            {
+                this.contents.SetActive(true);
+            }
             open = true;
             locked = false;
         }

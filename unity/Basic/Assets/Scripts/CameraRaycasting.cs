@@ -6,6 +6,7 @@ using NPC;
 using Things;
 using Doors;
 using Containers;
+using UnityStandardAssets.Characters;
 
 // (T)ype (o)f (M)essage
 enum ToM : int {CHARACTER, THING, DOOR};
@@ -23,6 +24,8 @@ public class CameraRaycasting : MonoBehaviour
     public string stringToEdit = "Who are you?";
     GameObject masterCanvas, speechCanvas;
     PlayerController player;
+    //MouseLook mouseLook;
+    
 
     // Use this for initialization
     void Start()
@@ -179,10 +182,11 @@ public class CameraRaycasting : MonoBehaviour
         switch (pause)
         {
             case true:
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
+                
                 break;
             default:
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
                 break;
         }
     }
@@ -191,7 +195,7 @@ public class CameraRaycasting : MonoBehaviour
     {
         masterCanvas.SetActive(false);
         converse = true;
-        Pause(true);
+        //Pause(true);
         speechCanvas.GetComponent<DialogueScreen>().ShowScreen();
         //speechCanvas.SetActive(true);
     }
@@ -200,7 +204,7 @@ public class CameraRaycasting : MonoBehaviour
     {
         masterCanvas.SetActive(true);
         converse = false;
-        Pause(false);
+        //Pause(false);
         speechCanvas.GetComponent<DialogueScreen>().HideScreen();
         //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         //speechCanvas.SetActive(false);
