@@ -1,5 +1,6 @@
 ﻿using GameAI;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GraphEditor
 {
@@ -8,7 +9,7 @@ namespace GraphEditor
   /// </summary>
   public class EditorModel
   {
-    public List<Entity> entities { get; }
+    public List<Entity> entities { get; set; }
     public Dictionary<Entity, string> entityNames { get; }
 
     public Dictionary<Entity, List<RelationDestinationRow>> relations { get; }
@@ -36,6 +37,7 @@ namespace GraphEditor
       if (!this.entities.Contains(entity))
       {
         this.entities.Add(entity);
+        this.relations.Add(entity, new List<RelationDestinationRow>());
       }
     }
 
@@ -62,13 +64,7 @@ namespace GraphEditor
     public void AddNewRelationshipMapping(Entity source, SingleRelation relation, Entity destination)
     {
       RelationDestinationRow relationMapping = new RelationDestinationRow(destination, relation);
-
-      if (!this.relations.ContainsKey(source))
-      {
-        this.relations.Add(source, new List<RelationDestinationRow>());
-      }
       this.relations[source].Add(relationMapping);
-
     }
 
     /// <summary>
@@ -94,8 +90,74 @@ namespace GraphEditor
     /// </summary>
     public void SaveGraph()
     {
+      this.CrunchGraph();
       var graphWriter = new GraphWriter(this.entities, this.entityNames, this.relations, this.relationNames);
       graphWriter.SaveGraph();
+    }
+
+    /// <summary>
+    /// Removes all the gaps in the numbering from the ids of possible entities and relations.
+    /// </summary>
+    private void CrunchGraph()
+    {
+      this.CrunchEntities();
+      this.CrunchRelations();
+    }
+
+    /// <summary>
+    /// Gets rid of gaps in the entity numberings.
+    /// </summary>
+    private void CrunchEntities()
+    {
+      this.entities = this.entities.OrderBy(e => (int)e).ToList();
+      for (int i = 0; i < this.entities.Count; i++)
+      {
+        var previous = this.entities[i];
+        if ((int)previous != i)
+        {
+          var newEntity = new Entity(i);
+          this.entityNames[newEntity] = this.entityNames[previous];
+          this.relations[newEntity] = this.relations[previous];
+          foreach (var e in this.entities)
+          {
+            for (int r = 0; r < this.relations[e].Count; r++)
+            {
+              var relationRow = this.relations[newEntity][r];
+              if (relationRow.destination.Equals(previous))
+              {
+                relationRow.destination = newEntity;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// Gets rid of gaps in the relation numberings.
+    /// </summary>
+    private void CrunchRelations()
+    {
+      var relations = this.relationNames.Keys.OrderBy(r => (int)r).ToList();
+      for (int i = 0; i < relations.Count; i++)
+      {
+        var previous = relations[i];
+        var newRelation = new SingleRelation(i);
+        if ((int)previous != i)
+        {
+          foreach (var e in this.entities)
+          {
+            for (int r = 0; r < this.relations[e].Count; r++)
+            {
+              var rel = this.relations[e][r];
+              if (rel.relation.Equals(previous))
+              {
+                rel.relation = newRelation;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

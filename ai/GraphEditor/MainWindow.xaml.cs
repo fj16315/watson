@@ -137,7 +137,7 @@ namespace GraphEditor
     {
       ComboBoxItem sourceComboItem = new ComboBoxItem
       {
-        Content = $"{(int)entity} : {model.entityNames[entity]}"
+        Content = $"{model.entityNames[entity]}"
       };
 
       comboBox_PossibleSourceEntities.Items.Add(sourceComboItem);
@@ -147,7 +147,7 @@ namespace GraphEditor
     {
       ComboBoxItem destinationComboItem = new ComboBoxItem
       {
-        Content = $"{(int)entity} : {model.entityNames[entity]}"
+        Content = $"{model.entityNames[entity]}"
       };
 
       comboBox_PossibleDestinationEntity.Items.Add(destinationComboItem);
@@ -157,7 +157,7 @@ namespace GraphEditor
     {
       ComboBoxItem relationComboItem = new ComboBoxItem
       {
-        Content = $"{(int)relation} : {model.relationNames[relation]}"
+        Content = $"{model.relationNames[relation]}"
       };
 
       comboBox_PossibleRelations.Items.Add(relationComboItem);
@@ -167,7 +167,7 @@ namespace GraphEditor
     {
       ListBoxItem entityListItem = new ListBoxItem
       {
-        Content = $"{(int)entity} : {model.entityNames[entity]}"
+        Content = $"{model.entityNames[entity]}"
       };
 
       entityList.Items.Add(entityListItem);
@@ -284,9 +284,9 @@ namespace GraphEditor
   /// </summary>
   public struct RelationDestinationRow
   {
-    public Entity destination { get; }
+    public Entity destination { get; set; }
 
-    public SingleRelation relation { get; }
+    public SingleRelation relation { get; set; }
 
     public RelationDestinationRow(Entity destination, SingleRelation relation)
     {

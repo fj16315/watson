@@ -57,7 +57,7 @@ namespace GraphEditor
     {
       ListBoxItem listBoxItem = new ListBoxItem
       {
-        Content = $"{(int)relation} : {model.relationNames[relation]}"
+        Content = $"{model.relationNames[relation]}"
       };
 
       listBox_RelationList.Items.Add(listBoxItem);

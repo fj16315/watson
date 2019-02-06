@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 namespace GraphEditor
 {
   /// <summary>
-  /// Writes knowledge graphs and associations(not implemented) to a file.
+  /// Writes knowledge graphs and associations to a file.
   /// </summary>
   public class GraphWriter
   {
-    private List<Entity> nodes;
-    private Dictionary<Entity, string> nodeNames;
+    private List<Entity> entities;
+    private Dictionary<Entity, string> entityNames;
 
     private Dictionary<Entity, List<RelationDestinationRow>> relations;
     private Dictionary<SingleRelation, string> relationNames;
 
-    public GraphWriter(List<Entity> nodes, Dictionary<Entity, string> nodeNames, 
+    public GraphWriter(List<Entity> entity, Dictionary<Entity, string> entityNames, 
       Dictionary<Entity, List<RelationDestinationRow>> relations, Dictionary<SingleRelation, string> relationNames)
     {
-      this.nodes = nodes;
-      this.nodeNames = nodeNames;
+      this.entities = entity;
+      this.entityNames = entityNames;
       this.relations = relations;
       this.relationNames = relationNames;
     }
@@ -33,6 +33,7 @@ namespace GraphEditor
     /// <summary>
     /// Saves the current knowledge graph and associations in a file.
     /// Opens a new fileexplorer box to fine the file path to save.
+    /// Expects graph to contain no gaps in numbering of entities or relations.
     /// </summary>
     public void SaveGraph()
     {
@@ -49,11 +50,13 @@ namespace GraphEditor
       {
         string filename = dlg.FileName;
 
-        KnowledgeGraph knowledgeGraph = this.BuildGraph();
+        var knowledgeGraph = this.BuildGraph();
+        var associations = this.BuildAssociations();
+        var universe = new Universe(knowledgeGraph, associations);
 
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
-        formatter.Serialize(stream, knowledgeGraph);
+        formatter.Serialize(stream, universe);
         stream.Close();
       }
     }
@@ -64,10 +67,10 @@ namespace GraphEditor
     /// <returns>The current knowledge graph.</returns>
     private KnowledgeGraph BuildGraph()
     {
-      KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
-      foreach (Entity source in this.nodes)
+      var builder = new KnowledgeGraphBuilder(this.entities.Count);
+      foreach (Entity source in this.entities)
       {
-        foreach (Entity possibleDestination in this.nodes)
+        foreach (Entity possibleDestination in this.entities)
         {
           var relation = new Relation();
           foreach (RelationDestinationRow r in this.relations[source])
@@ -85,6 +88,20 @@ namespace GraphEditor
       }
 
       return builder.Build();
+    }
+
+    private Associations BuildAssociations()
+    {
+      var associations = new Associations(this.entityNames.Keys.Count, this.relationNames.Keys.Count);
+      foreach (var relation in this.relationNames.Keys)
+      {
+        associations.SetNameOf(relation, this.relationNames[relation]);
+      }
+      foreach (var entity in this.entityNames.Keys)
+      {
+        associations.SetNameOf(entity, this.entityNames[entity]);
+      }
+      return associations;
     }
   }
 }

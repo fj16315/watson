@@ -49,14 +49,14 @@ namespace GameAI
 
     public Dictionary<string,List<Entity>> entityWords { get; }
 
-    public Dictionary<string,List<Relation>> relationWords { get; }
+    public Dictionary<string,List<SingleRelation>> relationWords { get; }
 
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
       relationNames = new string[relationCount];
       entityWords = new Dictionary<string, List<Entity>>();
-      relationWords = new Dictionary<string, List<Relation>>();
+      relationWords = new Dictionary<string, List<SingleRelation>>();
     }
 
     public string NameOf(Entity entity)
@@ -70,7 +70,7 @@ namespace GameAI
     public string NameOf(Relation relation)
       => relationNames[(int) relation];
 
-    public void SetNameOf(Relation relation, string name)
+    public void SetNameOf(SingleRelation relation, string name)
     {
       relationNames[(int)relation] = name;
     }
@@ -84,9 +84,15 @@ namespace GameAI
 
     public bool Describes(string word, Relation relation)
     {
-      List<Relation> list = null;
-      relationWords.TryGetValue(word, out list);
-      return list?.Contains(relation) ?? false;
+      var relations = this.relationWords[word];
+      foreach (var singleRelation in relations)
+      {
+        if (relation.Contains(singleRelation.AsRelation()))
+        {
+          return true;
+        }
+      }
+      return false;
     }
   }
 
@@ -94,13 +100,13 @@ namespace GameAI
   /// Utility class for saving a knowledge graph and associated configurations in one file.
   /// </summary>
   [Serializable]
-  public class GraphAndAssociations
+  public class Universe
   {
     public KnowledgeGraph knowledgeGraph { get; }
 
     public Associations associations { get; }
 
-    public GraphAndAssociations(KnowledgeGraph knowledgeGraph, Associations associations)
+    public Universe(KnowledgeGraph knowledgeGraph, Associations associations)
     {
       this.knowledgeGraph = knowledgeGraph;
       this.associations = associations;

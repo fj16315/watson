@@ -56,7 +56,7 @@ namespace GraphEditor
     {
       ListBoxItem listBoxItem = new ListBoxItem
       {
-        Content = $"{(int)entity} : {model.entityNames[entity]}"
+        Content = $"{model.entityNames[entity]}"
       };
 
       listBox_EntityList.Items.Add(listBoxItem);
