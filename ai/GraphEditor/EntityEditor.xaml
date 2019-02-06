@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GraphEditor"
         mc:Ignorable="d"
         Title="GraphEditor - Entities" 
-        Height="450" Width="800">
+        Height="450" Width="300">
     <Grid Margin="10,10,10,10">
       <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>

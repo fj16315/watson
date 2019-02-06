@@ -29,9 +29,6 @@ namespace GraphEditor
     private List<Entity> entities;
     private Dictionary<Entity, List<RelationDestinationRow>> relations;
 
-    private RelationEditor relationshipEditor;
-    private EntityEditor entityEditor;
-
     public MainWindow()
     {
       InitializeComponent();
@@ -39,8 +36,6 @@ namespace GraphEditor
       this.model = new EditorModel();
       this.entities = new List<Entity>();
       this.relations = new Dictionary<Entity, List<RelationDestinationRow>>();
-      this.relationshipEditor = new RelationEditor(this, this.model);
-      this.entityEditor = new EntityEditor(this, this.model);
     }
 
     //---------------------------------------------------------------------------------
@@ -63,13 +58,11 @@ namespace GraphEditor
 
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      Entity source = this.entities[entityList.SelectedIndex];
-      Entity destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
-      SingleRelation relation =  new SingleRelation(comboBox_PossibleRelations.SelectedIndex);
+      var source = this.entities[entityList.SelectedIndex];
+      var destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
+      var relation =  new SingleRelation(comboBox_PossibleRelations.SelectedIndex);
 
-      model.AddNewRelationshipMapping(source, relation, destination);
-
-      this.AddRelationListRelation(relation);
+      this.AddRelationshipMapping(source, relation, destination);
     }
 
     public void ButtonClick_DeleteEntity(object sender, RoutedEventArgs e)
@@ -106,24 +99,33 @@ namespace GraphEditor
 
     public void SelectedEntity(object sender, RoutedEventArgs e)
     {
-      Entity source = entities[entityList.SelectedIndex];
-      relationList.Items.Clear();
-      if (this.relations.ContainsKey(source))
+      if (entityList.SelectedIndex == -1)
       {
-        foreach (RelationDestinationRow relationship in this.relations[source])
+        relationList.Items.Clear();
+      }
+      else
+      {
+        Entity source = entities[entityList.SelectedIndex];
+        relationList.Items.Clear();
+        if (this.relations.ContainsKey(source))
         {
-          this.AddRelationListRelation(relationship.relation);
+          foreach (RelationDestinationRow relationship in this.relations[source])
+          {
+            this.AddRelationListRelation(relationship.relation);
+          }
         }
       }
     }
 
     public void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
     {
+      var relationshipEditor = new RelationEditor(this, this.model);
       relationshipEditor.Show();
     }
 
     public void ButtonClick_EntityWindow(object sender, RoutedEventArgs e)
     {
+      var entityEditor = new EntityEditor(this, this.model);
       entityEditor.Show();
     }
 
@@ -198,6 +200,7 @@ namespace GraphEditor
         model.AddNewEntity(entity);
         this.entities.Add(entity);
         this.AddSourceListEntity(entity);
+        this.relations[entity] = new List<RelationDestinationRow>();
         this.RefreshLists();
       }
     }
@@ -216,6 +219,20 @@ namespace GraphEditor
       {
         relations.RemoveAll(r => r.destination.Equals(deletedEntity));
       }
+    }
+
+    /// <summary>
+    /// Deletes a relationship mapping.
+    /// </summary>
+    /// <param name="deletedRelation">The destination entity and relation to be deleted.</param>
+    private void AddRelationshipMapping(Entity source, SingleRelation relation, Entity destination)
+    {
+      var selectedEntity = this.entities[entityList.SelectedIndex];
+      var row = new RelationDestinationRow(destination, relation);
+      this.relations[selectedEntity].Add(row);
+
+      model.AddNewRelationshipMapping(source, relation, destination);
+      this.AddRelationListRelation(relation);
     }
 
     /// <summary>
