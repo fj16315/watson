@@ -1,0 +1,655 @@
+fileFormatVersion: 2
+guid: 30ec6182a4cc36644b564675efd570ed
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: base
+    100002: base 1
+    100004: billiards_door
+    100006: billiards_walls
+    100008: bulb_light
+    100010: bulb_light 1
+    100012: bulb_light1
+    100014: bulb_light1 1
+    100016: bulb_light2
+    100018: bulb_light2 1
+    100020: bulb_light3
+    100022: bulb_light3 1
+    100024: bulbs
+    100026: bulbs 1
+    100028: ceiling
+    100030: chandelier_billiards
+    100032: chandelier_dining
+    100034: chandelier_salon
+    100036: chimney
+    100038: chimney 1
+    100040: door
+    100042: door_frame
+    100044: door_hole
+    100046: doors
+    100048: downstairs
+    100050: firelight
+    100052: firelight 1
+    100054: fireplace_dining
+    100056: fireplace_hole
+    100058: fireplace_hole 1
+    100060: fireplace_salon
+    100062: fireplaces
+    100064: flames
+    100066: flames 1
+    100068: floor
+    100070: floor 1
+    100072: frame
+    100074: frame 1
+    100076: frame 2
+    100078: frame 3
+    100080: front_panels
+    100082: front_panels 1
+    100084: grate
+    100086: grate 1
+    100088: //RootNode
+    100090: knobs
+    100092: lighting
+    100094: lights
+    100096: lights 1
+    100098: logs
+    100100: logs 1
+    100102: main
+    100104: main 1
+    100106: mantle
+    100108: mantle 1
+    100110: metal_parts
+    100112: metal_parts 1
+    100114: narrow_cl
+    100116: narrow_cr
+    100118: narrow_l
+    100120: narrow_r
+    100122: new_house:bulb_light
+    100124: new_house:bulb_light1
+    100126: new_house:bulb_light2
+    100128: new_house:bulb_light3
+    100130: new_house:bulbs
+    100132: new_house:dining_door
+    100134: new_house:door
+    100136: new_house:door 1
+    100138: new_house:door 2
+    100140: new_house:door_frame
+    100142: new_house:door_frame 1
+    100144: new_house:door_frame 2
+    100146: new_house:door_frame 3
+    100148: new_house:door_frame 4
+    100150: new_house:door_hole
+    100152: new_house:door_l
+    100154: new_house:door_l 1
+    100156: new_house:door_r
+    100158: new_house:door_r 1
+    100160: new_house:end_table2
+    100162: new_house:entry_door
+    100164: new_house:front_door
+    100166: new_house:kitchen_door
+    100168: new_house:knobs
+    100170: new_house:lights
+    100172: new_house:main
+    100174: new_house:metal_parts
+    100176: new_house:polySurface64
+    100178: new_house:polySurface67
+    100180: new_house:polySurface68
+    100182: new_house:polySurface70
+    100184: new_house:polySurface72
+    100186: new_house:polySurface73
+    100188: new_house:polySurface76
+    100190: new_house:polySurface80
+    100192: new_house:polySurface81
+    100194: new_house:polySurface82
+    100196: new_house:polySurface83
+    100198: new_house:polySurface84
+    100200: new_house:polySurface85
+    100202: new_house:polySurface86
+    100204: new_house:polySurface87
+    100206: new_house:polySurface88
+    100208: new_house:polySurface89
+    100210: new_house:polySurface90
+    100212: new_house:polySurface91
+    100214: new_house:polySurface95
+    100216: new_house:polySurface96
+    100218: new_house:shades
+    100220: new_house:top_cap
+    100222: new_house:transform187
+    100224: pane
+    100226: pane 1
+    100228: pane 2
+    100230: pane 3
+    100232: salon_door
+    100234: salon_walls
+    100236: shades
+    100238: shades 1
+    100240: stairs
+    100242: terrain
+    100244: tips
+    100246: tips 1
+    100248: top_cap
+    100250: top_cap 1
+    100252: tray
+    100254: tray 1
+    100256: upper_ceiling
+    100258: upstairs
+    100260: walls
+    100262: wide
+    100264: windows
+    100266: windows_salon
+    400000: base
+    400002: base 1
+    400004: billiards_door
+    400006: billiards_walls
+    400008: bulb_light
+    400010: bulb_light 1
+    400012: bulb_light1
+    400014: bulb_light1 1
+    400016: bulb_light2
+    400018: bulb_light2 1
+    400020: bulb_light3
+    400022: bulb_light3 1
+    400024: bulbs
+    400026: bulbs 1
+    400028: ceiling
+    400030: chandelier_billiards
+    400032: chandelier_dining
+    400034: chandelier_salon
+    400036: chimney
+    400038: chimney 1
+    400040: door
+    400042: door_frame
+    400044: door_hole
+    400046: doors
+    400048: downstairs
+    400050: firelight
+    400052: firelight 1
+    400054: fireplace_dining
+    400056: fireplace_hole
+    400058: fireplace_hole 1
+    400060: fireplace_salon
+    400062: fireplaces
+    400064: flames
+    400066: flames 1
+    400068: floor
+    400070: floor 1
+    400072: frame
+    400074: frame 1
+    400076: frame 2
+    400078: frame 3
+    400080: front_panels
+    400082: front_panels 1
+    400084: grate
+    400086: grate 1
+    400088: //RootNode
+    400090: knobs
+    400092: lighting
+    400094: lights
+    400096: lights 1
+    400098: logs
+    400100: logs 1
+    400102: main
+    400104: main 1
+    400106: mantle
+    400108: mantle 1
+    400110: metal_parts
+    400112: metal_parts 1
+    400114: narrow_cl
+    400116: narrow_cr
+    400118: narrow_l
+    400120: narrow_r
+    400122: new_house:bulb_light
+    400124: new_house:bulb_light1
+    400126: new_house:bulb_light2
+    400128: new_house:bulb_light3
+    400130: new_house:bulbs
+    400132: new_house:dining_door
+    400134: new_house:door
+    400136: new_house:door 1
+    400138: new_house:door 2
+    400140: new_house:door_frame
+    400142: new_house:door_frame 1
+    400144: new_house:door_frame 2
+    400146: new_house:door_frame 3
+    400148: new_house:door_frame 4
+    400150: new_house:door_hole
+    400152: new_house:door_l
+    400154: new_house:door_l 1
+    400156: new_house:door_r
+    400158: new_house:door_r 1
+    400160: new_house:end_table2
+    400162: new_house:entry_door
+    400164: new_house:front_door
+    400166: new_house:kitchen_door
+    400168: new_house:knobs
+    400170: new_house:lights
+    400172: new_house:main
+    400174: new_house:metal_parts
+    400176: new_house:polySurface64
+    400178: new_house:polySurface67
+    400180: new_house:polySurface68
+    400182: new_house:polySurface70
+    400184: new_house:polySurface72
+    400186: new_house:polySurface73
+    400188: new_house:polySurface76
+    400190: new_house:polySurface80
+    400192: new_house:polySurface81
+    400194: new_house:polySurface82
+    400196: new_house:polySurface83
+    400198: new_house:polySurface84
+    400200: new_house:polySurface85
+    400202: new_house:polySurface86
+    400204: new_house:polySurface87
+    400206: new_house:polySurface88
+    400208: new_house:polySurface89
+    400210: new_house:polySurface90
+    400212: new_house:polySurface91
+    400214: new_house:polySurface95
+    400216: new_house:polySurface96
+    400218: new_house:shades
+    400220: new_house:top_cap
+    400222: new_house:transform187
+    400224: pane
+    400226: pane 1
+    400228: pane 2
+    400230: pane 3
+    400232: salon_door
+    400234: salon_walls
+    400236: shades
+    400238: shades 1
+    400240: stairs
+    400242: terrain
+    400244: tips
+    400246: tips 1
+    400248: top_cap
+    400250: top_cap 1
+    400252: tray
+    400254: tray 1
+    400256: upper_ceiling
+    400258: upstairs
+    400260: walls
+    400262: wide
+    400264: windows
+    400266: windows_salon
+    2100000: new_house_ground
+    2100002: lambert1
+    2100004: new_house_floor
+    2100006: new_house_wallpaper_blue
+    2100008: new_house_furniture_wood
+    2100010: new_house_table_top_shiny
+    2100012: new_house_wallpaper_yellow
+    2100014: new_house_blinn1
+    2100016: new_house_mat_door
+    2100018: new_house_glass
+    2100020: new_house_mat_stairs
+    2100022: new_house_mat_floor
+    2300000: base
+    2300002: base 1
+    2300004: billiards_walls
+    2300006: bulbs
+    2300008: bulbs 1
+    2300010: ceiling
+    2300012: chimney
+    2300014: chimney 1
+    2300016: door
+    2300018: door_frame
+    2300020: door_hole
+    2300022: fireplace_hole
+    2300024: fireplace_hole 1
+    2300026: flames
+    2300028: flames 1
+    2300030: floor
+    2300032: floor 1
+    2300034: frame
+    2300036: frame 1
+    2300038: frame 2
+    2300040: frame 3
+    2300042: front_panels
+    2300044: front_panels 1
+    2300046: grate
+    2300048: grate 1
+    2300050: knobs
+    2300052: logs
+    2300054: logs 1
+    2300056: main
+    2300058: main 1
+    2300060: mantle
+    2300062: mantle 1
+    2300064: metal_parts
+    2300066: metal_parts 1
+    2300068: new_house:bulbs
+    2300070: new_house:door
+    2300072: new_house:door 1
+    2300074: new_house:door 2
+    2300076: new_house:door_frame
+    2300078: new_house:door_frame 1
+    2300080: new_house:door_frame 2
+    2300082: new_house:door_frame 3
+    2300084: new_house:door_frame 4
+    2300086: new_house:door_hole
+    2300088: new_house:door_l
+    2300090: new_house:door_l 1
+    2300092: new_house:door_r
+    2300094: new_house:door_r 1
+    2300096: new_house:end_table2
+    2300098: new_house:knobs
+    2300100: new_house:main
+    2300102: new_house:metal_parts
+    2300104: new_house:polySurface64
+    2300106: new_house:polySurface67
+    2300108: new_house:polySurface68
+    2300110: new_house:polySurface70
+    2300112: new_house:polySurface72
+    2300114: new_house:polySurface73
+    2300116: new_house:polySurface76
+    2300118: new_house:polySurface80
+    2300120: new_house:polySurface81
+    2300122: new_house:polySurface82
+    2300124: new_house:polySurface83
+    2300126: new_house:polySurface84
+    2300128: new_house:polySurface85
+    2300130: new_house:polySurface86
+    2300132: new_house:polySurface87
+    2300134: new_house:polySurface88
+    2300136: new_house:polySurface89
+    2300138: new_house:polySurface90
+    2300140: new_house:polySurface91
+    2300142: new_house:polySurface95
+    2300144: new_house:polySurface96
+    2300146: new_house:shades
+    2300148: new_house:top_cap
+    2300150: pane
+    2300152: pane 1
+    2300154: pane 2
+    2300156: pane 3
+    2300158: salon_walls
+    2300160: shades
+    2300162: shades 1
+    2300164: stairs
+    2300166: terrain
+    2300168: tips
+    2300170: tips 1
+    2300172: top_cap
+    2300174: top_cap 1
+    2300176: tray
+    2300178: tray 1
+    2300180: upper_ceiling
+    3300000: base
+    3300002: base 1
+    3300004: billiards_walls
+    3300006: bulbs
+    3300008: bulbs 1
+    3300010: ceiling
+    3300012: chimney
+    3300014: chimney 1
+    3300016: door
+    3300018: door_frame
+    3300020: door_hole
+    3300022: fireplace_hole
+    3300024: fireplace_hole 1
+    3300026: flames
+    3300028: flames 1
+    3300030: floor
+    3300032: floor 1
+    3300034: frame
+    3300036: frame 1
+    3300038: frame 2
+    3300040: frame 3
+    3300042: front_panels
+    3300044: front_panels 1
+    3300046: grate
+    3300048: grate 1
+    3300050: knobs
+    3300052: logs
+    3300054: logs 1
+    3300056: main
+    3300058: main 1
+    3300060: mantle
+    3300062: mantle 1
+    3300064: metal_parts
+    3300066: metal_parts 1
+    3300068: new_house:bulbs
+    3300070: new_house:door
+    3300072: new_house:door 1
+    3300074: new_house:door 2
+    3300076: new_house:door_frame
+    3300078: new_house:door_frame 1
+    3300080: new_house:door_frame 2
+    3300082: new_house:door_frame 3
+    3300084: new_house:door_frame 4
+    3300086: new_house:door_hole
+    3300088: new_house:door_l
+    3300090: new_house:door_l 1
+    3300092: new_house:door_r
+    3300094: new_house:door_r 1
+    3300096: new_house:end_table2
+    3300098: new_house:knobs
+    3300100: new_house:main
+    3300102: new_house:metal_parts
+    3300104: new_house:polySurface64
+    3300106: new_house:polySurface67
+    3300108: new_house:polySurface68
+    3300110: new_house:polySurface70
+    3300112: new_house:polySurface72
+    3300114: new_house:polySurface73
+    3300116: new_house:polySurface76
+    3300118: new_house:polySurface80
+    3300120: new_house:polySurface81
+    3300122: new_house:polySurface82
+    3300124: new_house:polySurface83
+    3300126: new_house:polySurface84
+    3300128: new_house:polySurface85
+    3300130: new_house:polySurface86
+    3300132: new_house:polySurface87
+    3300134: new_house:polySurface88
+    3300136: new_house:polySurface89
+    3300138: new_house:polySurface90
+    3300140: new_house:polySurface91
+    3300142: new_house:polySurface95
+    3300144: new_house:polySurface96
+    3300146: new_house:shades
+    3300148: new_house:top_cap
+    3300150: pane
+    3300152: pane 1
+    3300154: pane 2
+    3300156: pane 3
+    3300158: salon_walls
+    3300160: shades
+    3300162: shades 1
+    3300164: stairs
+    3300166: terrain
+    3300168: tips
+    3300170: tips 1
+    3300172: top_cap
+    3300174: top_cap 1
+    3300176: tray
+    3300178: tray 1
+    3300180: upper_ceiling
+    4300000: terrain
+    4300002: floor
+    4300004: salon_walls
+    4300006: new_house:polySurface64
+    4300008: new_house:polySurface67
+    4300010: new_house:polySurface68
+    4300012: new_house:polySurface70
+    4300014: new_house:polySurface72
+    4300016: new_house:polySurface73
+    4300018: new_house:polySurface76
+    4300020: new_house:polySurface80
+    4300022: new_house:polySurface81
+    4300024: new_house:polySurface82
+    4300026: new_house:polySurface83
+    4300028: new_house:polySurface84
+    4300030: new_house:polySurface85
+    4300032: new_house:polySurface86
+    4300034: new_house:polySurface87
+    4300036: new_house:polySurface88
+    4300038: new_house:polySurface89
+    4300040: new_house:polySurface90
+    4300042: new_house:polySurface91
+    4300044: new_house:polySurface95
+    4300046: new_house:polySurface96
+    4300048: new_house:end_table2
+    4300050: billiards_walls
+    4300052: new_house:door_frame
+    4300054: new_house:door
+    4300056: new_house:door_frame
+    4300058: new_house:door
+    4300060: new_house:door_frame
+    4300062: new_house:door_l
+    4300064: new_house:door_r
+    4300066: new_house:door_frame
+    4300068: new_house:door_l
+    4300070: new_house:door_r
+    4300072: new_house:door
+    4300074: new_house:knobs
+    4300076: new_house:door_hole
+    4300078: new_house:door_frame
+    4300080: door
+    4300082: knobs
+    4300084: door_hole
+    4300086: door_frame
+    4300088: pane
+    4300090: frame
+    4300092: pane
+    4300094: frame
+    4300096: pane
+    4300098: frame
+    4300100: pane
+    4300102: frame
+    4300104: fireplace_hole
+    4300106: chimney
+    4300108: base
+    4300110: front_panels
+    4300112: mantle
+    4300114: grate
+    4300116: tray
+    4300118: logs
+    4300120: flames
+    4300122: tips
+    4300124: fireplace_hole
+    4300126: chimney
+    4300128: base
+    4300130: front_panels
+    4300132: mantle
+    4300134: grate
+    4300136: tray
+    4300138: logs
+    4300140: flames
+    4300142: tips
+    4300144: top_cap
+    4300146: main
+    4300148: shades
+    4300150: metal_parts
+    4300152: bulbs
+    4300154: top_cap
+    4300156: main
+    4300158: shades
+    4300160: metal_parts
+    4300162: bulbs
+    4300164: new_house:top_cap
+    4300166: new_house:main
+    4300168: new_house:shades
+    4300170: new_house:metal_parts
+    4300172: new_house:bulbs
+    4300174: stairs
+    4300176: ceiling
+    4300178: floor
+    4300180: upper_ceiling
+    10800000: bulb_light
+    10800002: bulb_light 1
+    10800004: bulb_light1
+    10800006: bulb_light1 1
+    10800008: bulb_light2
+    10800010: bulb_light2 1
+    10800012: bulb_light3
+    10800014: bulb_light3 1
+    10800016: firelight
+    10800018: firelight 1
+    10800020: new_house:bulb_light
+    10800022: new_house:bulb_light1
+    10800024: new_house:bulb_light2
+    10800026: new_house:bulb_light3
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
