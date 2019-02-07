@@ -137,6 +137,8 @@ ModelImporter:
     100262: wide
     100264: windows
     100266: windows_salon
+    100268: caps
+    100270: main 2
     400000: base
     400002: base 1
     400004: billiards_door
@@ -271,6 +273,8 @@ ModelImporter:
     400262: wide
     400264: windows
     400266: windows_salon
+    400268: caps
+    400270: main 2
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -374,6 +378,8 @@ ModelImporter:
     2300176: tray
     2300178: tray 1
     2300180: upper_ceiling
+    2300182: caps
+    2300184: main 2
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -465,6 +471,8 @@ ModelImporter:
     3300176: tray
     3300178: tray 1
     3300180: upper_ceiling
+    3300182: caps
+    3300184: main 2
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -556,6 +564,8 @@ ModelImporter:
     4300176: ceiling
     4300178: floor
     4300180: upper_ceiling
+    4300182: caps
+    4300184: main
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
