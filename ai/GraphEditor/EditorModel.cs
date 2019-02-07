@@ -125,7 +125,7 @@ namespace GraphEditor
               var relationRow = this.relations[newEntity][r];
               if (relationRow.destination.Equals(previous))
               {
-                relationRow.destination = newEntity;
+                this.relations[newEntity][r] = new RelationDestinationRow(newEntity, relationRow.relation);
               }
             }
           }
@@ -152,7 +152,7 @@ namespace GraphEditor
               var rel = this.relations[e][r];
               if (rel.relation.Equals(previous))
               {
-                rel.relation = newRelation;
+                this.relations[e][r] = new RelationDestinationRow(rel.destination, newRelation);
               }
             }
           }
