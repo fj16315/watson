@@ -139,6 +139,7 @@ ModelImporter:
     100266: windows_salon
     100268: caps
     100270: main 2
+    100272: hearth
     400000: base
     400002: base 1
     400004: billiards_door
@@ -275,6 +276,7 @@ ModelImporter:
     400266: windows_salon
     400268: caps
     400270: main 2
+    400272: hearth
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -287,6 +289,8 @@ ModelImporter:
     2100018: new_house_glass
     2100020: new_house_mat_stairs
     2100022: new_house_mat_floor
+    2100024: Default_Material
+    2100026: heartBrick
     2300000: base
     2300002: base 1
     2300004: billiards_walls
@@ -380,6 +384,7 @@ ModelImporter:
     2300180: upper_ceiling
     2300182: caps
     2300184: main 2
+    2300186: hearth
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -473,6 +478,7 @@ ModelImporter:
     3300180: upper_ceiling
     3300182: caps
     3300184: main 2
+    3300186: hearth
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -566,6 +572,7 @@ ModelImporter:
     4300180: upper_ceiling
     4300182: caps
     4300184: main
+    4300186: hearth
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
