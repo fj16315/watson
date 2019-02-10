@@ -47,16 +47,10 @@ namespace GameAI
 
     private readonly string[] relationNames;
 
-    public Dictionary<string,List<Entity>> entityWords { get; }
-
-    public Dictionary<string,List<SingleRelation>> relationWords { get; }
-
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
       relationNames = new string[relationCount];
-      entityWords = new Dictionary<string, List<Entity>>();
-      relationWords = new Dictionary<string, List<SingleRelation>>();
     }
 
     public string NameOf(Entity entity)
@@ -77,17 +71,14 @@ namespace GameAI
 
     public bool Describes(string word, Entity entity)
     {
-      List<Entity> list = null;
-      entityWords.TryGetValue(word, out list);
-      return list?.Contains(entity) ?? false;
+      return entityNames[(int)entity].ToLower().Equals(word.ToLower());
     }
 
     public bool Describes(string word, Relation relation)
     {
-      var relations = this.relationWords[word];
-      foreach (var singleRelation in relations)
+      foreach (var singleRelation in relation.SingleRelations())
       {
-        if (relation.Contains(singleRelation.AsRelation()))
+        if (relationNames[(int)singleRelation].ToLower().Equals(word.ToLower()))
         {
           return true;
         }

@@ -98,9 +98,7 @@
         </Grid>
       </Grid>
 
-      <TabControl Grid.Column="1" Grid.Row="0" Margin="5,5,5,5">
-        <TabItem Header="Relations">
-          <Grid>
+          <Grid Grid.Column="1" Grid.Row="0">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="22*"/>
               <ColumnDefinition Width="67*"/>
@@ -117,7 +115,7 @@
                 <RowDefinition Height="*"/>
               </Grid.RowDefinitions>
 
-              <TextBlock Grid.Row="0" Style="{StaticResource TextStyle}">Relation</TextBlock>
+              <TextBlock Grid.Row="0" Style="{StaticResource HeaderStyle}">Relation</TextBlock>
               <ListBox x:Name="relationList" Grid.Row="1" Margin="5,5,5,5" KeyUp="KeyUp_DeleteRelationshipMapping"/>
               <StackPanel Grid.Row="2">
                 <Button Width="120px" Height="30px" Margin="5,5,5,5" x:Name="button_DeleteRelation" 
@@ -141,47 +139,6 @@
               <Button Width="150px" Height="30px" Margin="5,5,5,5" Click="ButtonClick_EntityWindow">Edit Possible Entities</Button>
             </StackPanel>
           </Grid>
-        </TabItem>
-
-        <TabItem Header="Associated Words">
-          <Grid>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="29*"/>
-              <ColumnDefinition Width="416*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="*"/>
-              <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Grid.ColumnSpan="2">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="*"/>
-              </Grid.RowDefinitions>
-
-              <TextBlock Grid.Row="0" Style="{StaticResource TextStyle}">Words</TextBlock>
-              <ListBox Grid.Row="1" x:Name="wordList" Margin="5,5,5,5" />
-
-              <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                  <ColumnDefinition Width="*"/>
-                  <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="Auto"/>
-                  <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Button Grid.Column="0" Grid.Row="0" Width="90px" Height="30px" Margin="5,5,5,5">Delete Word</Button>
-                <TextBox Grid.Column="0" Grid.Row="1" x:Name="word"  Margin="5,5,5,5"/>
-                <Button Grid.Column="1" Grid.Row="1" Width="40px" Height="30px" Margin="5,5,5,5">Add</Button>
-              </Grid>
-            </Grid>
-          </Grid>
-        </TabItem>
-      </TabControl>
     </Grid>
 
   </DockPanel>

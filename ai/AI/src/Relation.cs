@@ -129,6 +129,20 @@ namespace GameAI
       return null;
     }
 
+    public List<SingleRelation> SingleRelations()
+    {
+      var singleRelations = new List<SingleRelation>();
+      for (int r = 0; (1 << r) < int.MaxValue; ++r)
+      {
+        if (relation == (1 << r))
+        {
+          singleRelations.Add(new SingleRelation(r));
+        }
+
+      }
+      return singleRelations;
+    }
+
     /// <summary>
     /// Serves as a hash function for a <see cref="T:GameAI.Relation"/> object.
     /// </summary>
