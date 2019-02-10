@@ -43,12 +43,18 @@ namespace GraphEditor
     //---------------------------------------------------------------------------------
 
     public void ButtonClick_AddNewEntity(object sender, RoutedEventArgs e)
-      => this.AddNewEntity(comboBox_PossibleSourceEntities.SelectedIndex);
+    {
+      if (comboBox_PossibleSourceEntities.SelectedIndex != -1)
+      {
+        this.AddNewEntity(comboBox_PossibleSourceEntities.SelectedIndex);
+      }
+    }
 
     public void KeyUp_AddNewEntity(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Return)
-      {
+      if (e.Key == Key.Return && 
+        comboBox_PossibleSourceEntities.SelectedIndex != -1)
+      { 
         this.AddNewEntity(comboBox_PossibleSourceEntities.SelectedIndex);
       }
     }
@@ -58,38 +64,51 @@ namespace GraphEditor
 
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      var source = this.entities[entityList.SelectedIndex];
-      var destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
-      var relation =  new SingleRelation(comboBox_PossibleRelations.SelectedIndex);
+      if (comboBox_PossibleDestinationEntity.SelectedIndex != -1
+        && comboBox_PossibleRelations.SelectedIndex != -1
+        && entityList.SelectedIndex != -1)
+      {
+        var source = this.entities[entityList.SelectedIndex];
+        var destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
+        var relation =  new SingleRelation(comboBox_PossibleRelations.SelectedIndex);
 
-      this.AddRelationshipMapping(source, relation, destination);
+        this.AddRelationshipMapping(source, relation, destination);
+      }
     }
 
     public void ButtonClick_DeleteEntity(object sender, RoutedEventArgs e)
     {
-      var deletedEntity = this.entities[entityList.SelectedIndex];
-      model.DeleteEntity(deletedEntity);
+      if (entityList.SelectedIndex != -1)
+      {
+        var deletedEntity = this.entities[entityList.SelectedIndex];
+        this.DeleteEntity(deletedEntity);
+      }
     }
 
     public void KeyUp_DeleteEntity(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Delete || e.Key == Key.Back)
+      if (e.Key == Key.Delete || e.Key == Key.Back 
+        && entityList.SelectedIndex != -1)
       {
         var deletedEntity = this.entities[entityList.SelectedIndex];
-        model.DeleteEntity(deletedEntity);
+        this.DeleteEntity(deletedEntity);
       }
     }
 
     public void ButtonClick_DeleteRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      var selectedEntity = this.entities[entityList.SelectedIndex];
-      var deletedRelation = this.relations[selectedEntity][relationList.SelectedIndex];
-      this.DeleteRelationshipMapping(deletedRelation);
+      if (entityList.SelectedIndex != -1 && relationList.SelectedIndex != -1)
+      {
+        var selectedEntity = this.entities[entityList.SelectedIndex];
+        var deletedRelation = this.relations[selectedEntity][relationList.SelectedIndex];
+        this.DeleteRelationshipMapping(deletedRelation);
+      }
     }
 
     public void KeyUp_DeleteRelationshipMapping(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Delete || e.Key == Key.Back)
+      if (e.Key == Key.Delete || e.Key == Key.Back 
+        && entityList.SelectedIndex != -1 && relationList.SelectedIndex != -1)
       {
         var selectedEntity = this.entities[entityList.SelectedIndex];
         var deletedRelation = this.relations[selectedEntity][relationList.SelectedIndex];
@@ -275,7 +294,6 @@ namespace GraphEditor
         this.AddComboRelation(relation);
       }
     }
-
   }
   
   /// <summary>
