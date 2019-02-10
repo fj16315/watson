@@ -43,9 +43,9 @@ namespace GameAI
   [Serializable]
   public class Associations
   {
-    private readonly string[] entityNames;
+    public string[] entityNames { get; }
 
-    private readonly string[] relationNames;
+    public string[] relationNames { get; }
 
     public Associations(int entityCount, int relationCount)
     {

@@ -10,10 +10,10 @@ namespace GraphEditor
   public class EditorModel
   {
     public List<Entity> entities { get; set; }
-    public Dictionary<Entity, string> entityNames { get; }
+    public Dictionary<Entity, string> entityNames { get; set; }
 
-    public Dictionary<Entity, List<RelationDestinationRow>> relations { get; }
-    public Dictionary<SingleRelation, string> relationNames { get; }
+    public Dictionary<Entity, List<RelationDestinationRow>> relations { get; set; }
+    public Dictionary<SingleRelation, string> relationNames { get; set; }
 
     public FreeValueManager relationValueManager { get; }
     public FreeValueManager entityValueManager { get; }
@@ -48,7 +48,7 @@ namespace GraphEditor
     public void DeleteEntity(Entity deletedEntity)
     {
       this.entities.RemoveAt((int)deletedEntity);
-      foreach (List<RelationDestinationRow> relations in this.relations.Values)
+      foreach (var relations in this.relations.Values)
       {
         relations.RemoveAll(r => r.destination.Equals(deletedEntity));
       }
@@ -63,7 +63,7 @@ namespace GraphEditor
     /// <param name="destination">The destination entity.</param>
     public void AddNewRelationshipMapping(Entity source, SingleRelation relation, Entity destination)
     {
-      RelationDestinationRow relationMapping = new RelationDestinationRow(destination, relation);
+      var relationMapping = new RelationDestinationRow(destination, relation);
       this.relations[source].Add(relationMapping);
     }
 
@@ -93,6 +93,16 @@ namespace GraphEditor
       this.CrunchGraph();
       var graphWriter = new GraphWriter(this.entities, this.entityNames, this.relations, this.relationNames);
       graphWriter.SaveGraph();
+    }
+    
+    /// <summary>
+    /// Saves the current graph and associations into a file.
+    /// Opens file explorer box to specify file name.
+    /// </summary>
+    public void LoadGraph()
+    {
+      var graphReader = new GraphReader(this);
+      graphReader.LoadGraph();
     }
 
     /// <summary>

@@ -62,6 +62,14 @@ namespace GraphEditor
     public void MenuItemClick_SaveGraph(object sender, RoutedEventArgs e)
       => model.SaveGraph();
 
+    public void MenuItemClick_LoadGraph(object sender, RoutedEventArgs e)
+    {
+      model.LoadGraph();
+      this.entities = model.entities;
+      this.relations = model.relations;
+      this.RefreshLists();
+    }
+
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
       if (comboBox_PossibleDestinationEntity.SelectedIndex != -1
@@ -130,7 +138,7 @@ namespace GraphEditor
         {
           foreach (RelationDestinationRow relationship in this.relations[source])
           {
-            this.AddRelationListRelation(relationship.relation);
+            this.AddRelationListRelation(relationship.relation, relationship.destination);
           }
         }
       }
@@ -192,9 +200,8 @@ namespace GraphEditor
       entityList.Items.Add(entityListItem);
     }
 
-    private void AddRelationListRelation(SingleRelation relation)
+    private void AddRelationListRelation(SingleRelation relation, Entity destination)
     {
-      Entity destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
       ListBoxItem relationshipListItem = new ListBoxItem
       {
         Content = $"{model.relationNames[relation]} {model.entityNames[destination]}"
@@ -251,7 +258,7 @@ namespace GraphEditor
       this.relations[selectedEntity].Add(row);
 
       model.AddNewRelationshipMapping(source, relation, destination);
-      this.AddRelationListRelation(relation);
+      this.AddRelationListRelation(relation, destination);
     }
 
     /// <summary>

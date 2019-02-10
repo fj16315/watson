@@ -18,7 +18,7 @@
       <MenuItem Header="_File">
         <MenuItem Header="_New Graph"/>
         <MenuItem Header="_Save Graph" Click="MenuItemClick_SaveGraph"/>
-        <MenuItem Header="_Load Graph"/>
+        <MenuItem Header="_Load Graph" Click="MenuItemClick_LoadGraph"/>
         <MenuItem Header="_Exit"/>
       </MenuItem>
       <MenuItem Header="_Associations Config">
