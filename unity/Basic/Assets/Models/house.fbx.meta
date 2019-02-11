@@ -140,6 +140,25 @@ ModelImporter:
     100268: caps
     100270: main 2
     100272: hearth
+    100274: curtain_closed
+    100276: curtain_open
+    100278: curtain_top
+    100280: curtain_top 1
+    100282: curtain_top 2
+    100284: curtains
+    100286: curtains 1
+    100288: curtains_salon_narrow_l
+    100290: curtains_salon_narrow_r
+    100292: curtains_salon_wide
+    100294: holders
+    100296: metal
+    100298: metal 1
+    100300: tassels
+    100302: tassels 1
+    100304: tassels 2
+    100306: tie
+    100308: tie 1
+    100310: ties
     400000: base
     400002: base 1
     400004: billiards_door
@@ -277,6 +296,25 @@ ModelImporter:
     400268: caps
     400270: main 2
     400272: hearth
+    400274: curtain_closed
+    400276: curtain_open
+    400278: curtain_top
+    400280: curtain_top 1
+    400282: curtain_top 2
+    400284: curtains
+    400286: curtains 1
+    400288: curtains_salon_narrow_l
+    400290: curtains_salon_narrow_r
+    400292: curtains_salon_wide
+    400294: holders
+    400296: metal
+    400298: metal 1
+    400300: tassels
+    400302: tassels 1
+    400304: tassels 2
+    400306: tie
+    400308: tie 1
+    400310: ties
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -385,6 +423,21 @@ ModelImporter:
     2300182: caps
     2300184: main 2
     2300186: hearth
+    2300188: curtain_closed
+    2300190: curtain_open
+    2300192: curtain_top
+    2300194: curtain_top 1
+    2300196: curtain_top 2
+    2300198: curtains 1
+    2300200: holders
+    2300202: metal
+    2300204: metal 1
+    2300206: tassels
+    2300208: tassels 1
+    2300210: tassels 2
+    2300212: tie
+    2300214: tie 1
+    2300216: ties
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -479,6 +532,21 @@ ModelImporter:
     3300182: caps
     3300184: main 2
     3300186: hearth
+    3300188: curtain_closed
+    3300190: curtain_open
+    3300192: curtain_top
+    3300194: curtain_top 1
+    3300196: curtain_top 2
+    3300198: curtains 1
+    3300200: holders
+    3300202: metal
+    3300204: metal 1
+    3300206: tassels
+    3300208: tassels 1
+    3300210: tassels 2
+    3300212: tie
+    3300214: tie 1
+    3300216: ties
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -573,6 +641,21 @@ ModelImporter:
     4300182: caps
     4300184: main
     4300186: hearth
+    4300188: holders
+    4300190: ties
+    4300192: curtains
+    4300194: curtain_top
+    4300196: tassels
+    4300198: tie
+    4300200: curtain_open
+    4300202: metal
+    4300204: curtain_top
+    4300206: tassels
+    4300208: curtain_closed
+    4300210: metal
+    4300212: tie
+    4300214: curtain_top
+    4300216: tassels
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
