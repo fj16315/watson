@@ -129,6 +129,10 @@ namespace GameAI
       return null;
     }
 
+    /// <summary>
+    /// Returns a list of the constituent single relations of this list.
+    /// </summary>
+    /// <returns>A list of the constituent single relations.</returns>
     public List<SingleRelation> SingleRelations()
     {
       var singleRelations = new List<SingleRelation>();
