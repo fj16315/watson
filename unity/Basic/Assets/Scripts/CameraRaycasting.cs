@@ -99,10 +99,10 @@ public class CameraRaycasting : MonoBehaviour
 
     void OnGUI()
     {
-        if (!fpc.mouseLook.lockCursor)
-        {
-            Debug.Log("mouse");
-        }
+        //if (!fpc.mouseLook.lockCursor)
+        //{
+        //    Debug.Log("mouse");
+        //}
         GUI.skin = skin;
         // When conversing
         if (converse)
