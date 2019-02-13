@@ -40,6 +40,8 @@ public class NotebookController : MonoBehaviour {
                 tabsEmpty.SetActive(false);
                 tabsRightChars.SetActive(true);
                 break;
+            case (int)Tab.ITEM:
+                break;
         }
     }
 }

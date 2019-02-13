@@ -23,6 +23,10 @@ public class MasterControl : MonoBehaviour {
             paused = !paused;
             notebook.SetActive(paused);
             Pause(paused);
+            if (!paused)
+            {
+                Cursor.visible = false;
+            }
         }
     }
 
@@ -32,13 +36,17 @@ public class MasterControl : MonoBehaviour {
         {
             case true:
                 Time.timeScale = 0;
+                //fpc.mouseLook.SetCursorLock(false);
                 //fpc.mouseLook.lockCursor = false;
                 fpc.mouseLook.SetCursorLock(false);
+                Cursor.visible = true;
                 break;
             default:
                 Time.timeScale = 1;
+                //fpc.mouseLook.SetCursorLock(true);
                 //fpc.mouseLook.lockCursor = true;
                 fpc.mouseLook.SetCursorLock(true);
+                Cursor.visible = false;
                 break;
         }
     }
