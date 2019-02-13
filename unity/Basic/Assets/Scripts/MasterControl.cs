@@ -6,14 +6,16 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class MasterControl : MonoBehaviour {
 
     GameObject notebook;
-    bool paused = false;
+    bool paused = true;
     RigidbodyFirstPersonController fpc;
 
     // Use this for initialization
     void Start () {
+
         notebook = GameObject.Find("NotebookCanvas");
-        notebook.SetActive(false);
+        //notebook.SetActive(false);
         fpc = Object.FindObjectOfType<RigidbodyFirstPersonController>();
+        Pause(true);
     }
 	
 	// Update is called once per frame

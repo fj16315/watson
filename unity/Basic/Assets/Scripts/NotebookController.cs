@@ -1,21 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-enum Tab : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
+enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
 
 public class NotebookController : MonoBehaviour {
 
-    GameObject tabsLeft;
+    //GameObject tabsLeft;
     GameObject tabsRightChars;
     GameObject tabsEmpty;
-    Tab currentTab = Tab.MENU;
+    Page currentTab = Page.MENU;
+    // Notebook pages
+    GameObject charPage;
+    GameObject itemPage;
+    GameObject invtPage;
+    GameObject notePage;
+    GameObject menuPage;
 
     // Use this for initialization
     void Start () {
-        tabsLeft = transform.Find("Container/LeftTabsPanel").gameObject;
-        tabsRightChars = transform.Find("Container/CharacterTabsPanel").gameObject;
-        tabsEmpty = transform.Find("Container/EmptyPanel").gameObject;
+        //tabsLeft = GameObject.Find("LeftTabsPanel");
+        tabsRightChars = GameObject.Find("CharacterTabsPanel");
+        tabsRightChars.SetActive(false);
+        tabsEmpty = GameObject.Find("EmptyPanel");
+        // Notebook pages
+        charPage = GameObject.Find("CharactersPage");
+        charPage.SetActive(false);
+        itemPage = GameObject.Find("ItemsPage");
+        itemPage.SetActive(false);
+        invtPage = GameObject.Find("InventoryPage");
+        itemPage.SetActive(false);
+        notePage = GameObject.Find("NotesPage");
+        itemPage.SetActive(false);
+        menuPage = GameObject.Find("MenuPage");
+
+        //ChangePage((int)Page.MENU);
     }
 	
 	// Update is called once per frame
@@ -23,25 +43,22 @@ public class NotebookController : MonoBehaviour {
 		
 	}
 
-    public void ShowScreen()
+    public void Activate(bool active)
     {
+
     }
 
-    public void HideScreen()
-    {
-    }
 
-    public void ChangeLeftTab(int target)
+
+    public void ChangePage(int target)
     {
-        currentTab = (Tab)target;
-        switch (target)
+        if (target != (int)currentTab)
         {
-            case (int)Tab.CHARACTER:
-                tabsEmpty.SetActive(false);
-                tabsRightChars.SetActive(true);
-                break;
-            case (int)Tab.ITEM:
-                break;
+            //pages[(int)currentTab].SetActive(false);
+            //tabsR[(int)currentTab].SetActive(false);
+            //currentTab = (Page)target;
+            //pages[target].SetActive(true);
+            //tabsR[target].SetActive(true);
         }
     }
 }
