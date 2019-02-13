@@ -16,7 +16,7 @@ namespace WatsonTest
     [Property]
     public Property FsSanityCheck(int x)
     {
-      return (2 * x == x + x).Trivial(x == 0);
+      return (2 * x == x + x).ToProperty();
     }
   }
 }
