@@ -168,7 +168,6 @@
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Relation.cs" />
     <Compile Include="src\HiveMind.cs" />
-    <Compile Include="src\WordIterator.cs" />
     <Compile Include="src\KnowledgeGraph.cs" />
     <Compile Include="src\Parser.cs" />
     <Compile Include="src\Entity.cs" />
