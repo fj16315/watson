@@ -17,4 +17,7 @@
     <ProjectReference Include="..\WatsonAI\WatsonAI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
 </Project>
