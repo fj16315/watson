@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{5A91D279-E07E-4B06-AA7E-20526FC5DB77}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>GameAI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -168,6 +168,11 @@
     <Compile Include="src\Main.cs" />
     <Compile Include="src\Relation.cs" />
     <Compile Include="src\HiveMind.cs" />
+<<<<<<< ai/AI/AI.csproj
+    <Compile Include="src\SpeechSynthesis.cs" />
+    <Compile Include="src\WordIterator.cs" />
+=======
+>>>>>>> ai/AI/AI.csproj
     <Compile Include="src\KnowledgeGraph.cs" />
     <Compile Include="src\Parser.cs" />
     <Compile Include="src\Entity.cs" />
