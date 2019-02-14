@@ -43,20 +43,14 @@ namespace GameAI
   [Serializable]
   public class Associations
   {
-    private readonly string[] entityNames;
+    public string[] entityNames { get; }
 
-    private readonly string[] relationNames;
-
-    public Dictionary<string,List<Entity>> entityWords { get; }
-
-    public Dictionary<string,List<Relation>> relationWords { get; }
+    public string[] relationNames { get; }
 
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
       relationNames = new string[relationCount];
-      entityWords = new Dictionary<string, List<Entity>>();
-      relationWords = new Dictionary<string, List<Relation>>();
     }
 
     public string NameOf(Entity entity)
@@ -70,23 +64,43 @@ namespace GameAI
     public string NameOf(Relation relation)
       => relationNames[(int) relation];
 
-    public void SetNameOf(Relation relation, string name)
+    public void SetNameOf(SingleRelation relation, string name)
     {
       relationNames[(int)relation] = name;
     }
 
     public bool Describes(string word, Entity entity)
     {
-      List<Entity> list = null;
-      entityWords.TryGetValue(word, out list);
-      return list?.Contains(entity) ?? false;
+      return entityNames[(int)entity].ToLower().Equals(word.ToLower());
     }
 
     public bool Describes(string word, Relation relation)
     {
-      List<Relation> list = null;
-      relationWords.TryGetValue(word, out list);
-      return list?.Contains(relation) ?? false;
+      foreach (var singleRelation in relation.SingleRelations())
+      {
+        if (relationNames[(int)singleRelation].ToLower().Equals(word.ToLower()))
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
+  /// <summary>
+  /// Utility class for saving a knowledge graph and associated configurations in one file.
+  /// </summary>
+  [Serializable]
+  public class Universe
+  {
+    public KnowledgeGraph knowledgeGraph { get; }
+
+    public Associations associations { get; }
+
+    public Universe(KnowledgeGraph knowledgeGraph, Associations associations)
+    {
+      this.knowledgeGraph = knowledgeGraph;
+      this.associations = associations;
     }
   }
 }

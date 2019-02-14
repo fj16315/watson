@@ -119,7 +119,7 @@ namespace GameAI
 
     public SingleRelation? AsSingleRelation()
     {
-      for (int r = 0; (1 << r) < int.MaxValue; ++r)
+      for (int r = 0; r < sizeof(int) * 8; ++r)
       {
         if (relation == (1 << r))
         {
@@ -127,6 +127,24 @@ namespace GameAI
         }
       }
       return null;
+    }
+
+    /// <summary>
+    /// Returns a list of the constituent single relations of this list.
+    /// </summary>
+    /// <returns>A list of the constituent single relations.</returns>
+    public List<SingleRelation> SingleRelations()
+    {
+      var singleRelations = new List<SingleRelation>();
+      for (int r = 0; r < sizeof(int) * 8; ++r)
+      {
+        if (relation == (1 << r))
+        {
+          singleRelations.Add(new SingleRelation(r));
+        }
+
+      }
+      return singleRelations;
     }
 
     /// <summary>

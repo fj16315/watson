@@ -24,286 +24,328 @@ namespace GraphEditor
   /// </summary>
   public partial class MainWindow : Window
   {
-    private List<Entity> nodes = new List<Entity>();
-    private Dictionary<Entity, string> nodeNames = new Dictionary<Entity, string>();
+    private EditorModel model; 
 
-    private Dictionary<int,List<RelationshipDestinationRow>> Relation = new Dictionary<int, List<RelationshipDestinationRow>>();
-    private Dictionary<SingleRelation, string> relationNames = new Dictionary<SingleRelation, string>();
-
-    private int maxId = 0;
-    private Stack<int> freeIds = new Stack<int>();
+    private List<Entity> entities;
+    private Dictionary<Entity, List<RelationDestinationRow>> relations;
 
     public MainWindow()
     {
       InitializeComponent();
-      ComboBoxItem relationship0 = new ComboBoxItem
-      {
-        Content = "Contains"
-      };
-      ComboBoxItem relationship1 = new ComboBoxItem
-      {
-        Content = "Owns"
-      };
-      ComboBoxItem relationship2 = new ComboBoxItem
-      {
-        Content = "Wants"
-      };
-      comboBoxRelation.Items.Add(relationship0);
-      comboBoxRelation.Items.Add(relationship1);
-      comboBoxRelation.Items.Add(relationship2);
+
+      this.model = new EditorModel();
+      this.entities = new List<Entity>();
+      this.relations = new Dictionary<Entity, List<RelationDestinationRow>>();
     }
 
-    public void ButtonClick_AddNewNode(object sender, RoutedEventArgs e)
-    {
-      this.AddNewNode();
-    }
+    //---------------------------------------------------------------------------------
+    // UI Handlers
+    //---------------------------------------------------------------------------------
 
-    public void KeyUp_AddNewNode(object sender, KeyEventArgs e)
+    public void ButtonClick_AddNewEntity(object sender, RoutedEventArgs e)
     {
-      if (e.Key == Key.Return)
+      if (comboBox_PossibleSourceEntities.SelectedIndex != -1)
       {
-        this.AddNewNode();
+        this.AddNewEntity(comboBox_PossibleSourceEntities.SelectedIndex);
       }
     }
 
-    private void AddNewNode()
+    public void KeyUp_AddNewEntity(object sender, KeyEventArgs e)
     {
-      Entity node = new Entity(this.GetNextFreeId());
-      this.nodes.Add(node);
-      this.nodeNames.Add(node, nodeName.Text);
-
-      this.AddComboNode(node);
-      this.AddSourceListNode(node);
-
-      nodeName.Text = "";
+      if (e.Key == Key.Return && 
+        comboBox_PossibleSourceEntities.SelectedIndex != -1)
+      { 
+        this.AddNewEntity(comboBox_PossibleSourceEntities.SelectedIndex);
+      }
     }
 
-    private void AddComboNode(Entity node)
+    public void MenuItemClick_SaveGraph(object sender, RoutedEventArgs e)
+      => model.SaveGraph();
+
+    public void MenuItemClick_LoadGraph(object sender, RoutedEventArgs e)
     {
-      ComboBoxItem nodeComboItem = new ComboBoxItem
-      {
-        Content = $"{(int)node}:{this.nodeNames[node]}"
-      };
-
-      comboBoxNodes.Items.Add(nodeComboItem);
-    }
-
-    private void AddSourceListNode(Entity node)
-    {
-      ListBoxItem nodeListItem = new ListBoxItem
-      {
-        Content = $"{(int)node}:{this.nodeNames[node]}"
-      };
-
-      nodeList.Items.Add(nodeListItem);
+      model.LoadGraph();
+      this.entities = model.entities;
+      this.relations = model.relations;
+      this.RefreshLists();
     }
 
     public void ButtonClick_AddNewRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      int source = (int)this.nodes.ElementAt(nodeList.SelectedIndex);
-      int destination = (int)this.nodes.ElementAt(comboBoxNodes.SelectedIndex);
-      RelationshipDestinationRow relationship = new RelationshipDestinationRow(destination, 1 << comboBoxRelation.SelectedIndex);
-
-      if (!this.Relation.ContainsKey(source))
+      if (comboBox_PossibleDestinationEntity.SelectedIndex != -1
+        && comboBox_PossibleRelations.SelectedIndex != -1
+        && entityList.SelectedIndex != -1)
       {
-        this.Relation.Add(source, new List<RelationshipDestinationRow>());
-      }
-      this.Relation[source].Add(relationship);
+        var source = this.entities[entityList.SelectedIndex];
+        var destination = this.entities[comboBox_PossibleDestinationEntity.SelectedIndex];
+        var relation =  new SingleRelation(comboBox_PossibleRelations.SelectedIndex);
 
-      ListBoxItem relationshipListItem = new ListBoxItem
-      {
-        Content = $"{this.RelationshipIdToName(relationship.RelationshipId)} {this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]}"
-      };
-
-      relationshipList.Items.Add(relationshipListItem);
-    }
-
-    private int GetNextFreeId()
-    {
-      if (this.freeIds.Any())
-      {
-        return this.freeIds.Pop();
-
-      }
-      else
-      {
-        int id = this.maxId;
-        this.maxId++;
-        return id;
+        this.AddRelationshipMapping(source, relation, destination);
       }
     }
 
-    private string RelationshipIdToName(int id)
+    public void ButtonClick_DeleteEntity(object sender, RoutedEventArgs e)
     {
-      if (id == 1) return "Contains";
-      if (id == 2) return "Owns";
-      if (id == 4) return "Wants";
-      return "";
-    }
-
-    public void ButtonClick_DeleteNode(object sender, RoutedEventArgs e)
-    {
-      this.DeleteNode();
-    }
-
-    public void KeyUp_DeleteNode(object sender, KeyEventArgs e)
-    {
-      if (e.Key == Key.Delete || e.Key == Key.Back)
+      if (entityList.SelectedIndex != -1)
       {
-        this.DeleteNode();
+        var deletedEntity = this.entities[entityList.SelectedIndex];
+        this.DeleteEntity(deletedEntity);
       }
     }
 
-    private void DeleteNode()
+    public void KeyUp_DeleteEntity(object sender, KeyEventArgs e)
     {
-      Entity deletedNode = this.nodes.ElementAt(nodeList.SelectedIndex);
-      this.nodeNames.Remove(deletedNode);
-      freeIds.Push((int)deletedNode);
-      this.nodes.RemoveAt(nodeList.SelectedIndex);
-      comboBoxNodes.Items.RemoveAt(nodeList.SelectedIndex);
-      nodeList.Items.RemoveAt(nodeList.SelectedIndex);
+      if (e.Key == Key.Delete || e.Key == Key.Back 
+        && entityList.SelectedIndex != -1)
+      {
+        var deletedEntity = this.entities[entityList.SelectedIndex];
+        this.DeleteEntity(deletedEntity);
+      }
     }
 
     public void ButtonClick_DeleteRelationshipMapping(object sender, RoutedEventArgs e)
     {
-      this.DeleteRelationshipMapping();
+      if (entityList.SelectedIndex != -1 && relationList.SelectedIndex != -1)
+      {
+        var selectedEntity = this.entities[entityList.SelectedIndex];
+        var deletedRelation = this.relations[selectedEntity][relationList.SelectedIndex];
+        this.DeleteRelationshipMapping(deletedRelation);
+      }
     }
 
     public void KeyUp_DeleteRelationshipMapping(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Delete || e.Key == Key.Back)
+      if (e.Key == Key.Delete || e.Key == Key.Back 
+        && entityList.SelectedIndex != -1 && relationList.SelectedIndex != -1)
       {
-        this.DeleteRelationshipMapping();
+        var selectedEntity = this.entities[entityList.SelectedIndex];
+        var deletedRelation = this.relations[selectedEntity][relationList.SelectedIndex];
+        this.DeleteRelationshipMapping(deletedRelation);
       }
     }
 
-    private void DeleteRelationshipMapping()
+    public void SelectedEntity(object sender, RoutedEventArgs e)
     {
-      RelationshipDestinationRow deletedRelationship = this.Relation[nodeList.SelectedIndex].ElementAt(relationshipList.SelectedIndex);
-      this.Relation[nodeList.SelectedIndex].RemoveAt(relationshipList.SelectedIndex);
-      relationshipList.Items.RemoveAt(relationshipList.SelectedIndex);
-    }
-
-    public void SelectedNode(object sender, RoutedEventArgs e)
-    {
-      int source = (int)this.nodes.ElementAtOrDefault(nodeList.SelectedIndex);
-      relationshipList.Items.Clear();
-      if (this.Relation.ContainsKey(source))
+      if (entityList.SelectedIndex == -1)
       {
-        foreach (RelationshipDestinationRow relationship in this.Relation[source])
-        {
-          ListBoxItem relationshipListItem = new ListBoxItem
-          {
-            Content = this.RelationshipIdToName(relationship.RelationshipId) + " " + this.nodeNames[this.nodes.ElementAt(comboBoxNodes.SelectedIndex)]
-          };
-          relationshipList.Items.Add(relationshipListItem);
-        }
+        relationList.Items.Clear();
       }
-    }
-
-    public void SaveGraph(object sender, RoutedEventArgs e)
-    {
-      Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+      else
       {
-        FileName = "UntitledGraph",
-        DefaultExt = ".AIgraph",
-        Filter = "AI Knowledge Graphs (.AIgraph)|*.AIgraph"
-      };
-
-      Nullable<bool> result = dlg.ShowDialog();
-
-      if (result == true)
-      {
-        string filename = dlg.FileName;
-
-        KnowledgeGraphBuilder builder = new KnowledgeGraphBuilder(this.nodes.Count);
-        foreach (Entity source in this.nodes)
+        Entity source = entities[entityList.SelectedIndex];
+        relationList.Items.Clear();
+        if (this.relations.ContainsKey(source))
         {
-          foreach (RelationshipDestinationRow r in this.Relation[(int)source])
+          foreach (RelationDestinationRow relationship in this.relations[source])
           {
-            Entity destination = new Entity(r.Destination);
-
-            //TODO: Combine edges with same source and destination
-
-            Relation Relation = new Relation(r.RelationshipId);
-            builder.AddEdge(source, Relation, destination);
+            this.AddRelationListRelation(relationship.relation, relationship.destination);
           }
         }
-
-        builder.AddEntityNames(this.nodeNames);
-
-        KnowledgeGraph knowledgeGraph = builder.Build();
-        IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
-        formatter.Serialize(stream, knowledgeGraph);
-        stream.Close();
       }
     }
 
-    public void OpenGraph(object sender, RoutedEventArgs e)
+    public void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
     {
-      Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
-      {
-        DefaultExt = ".AIgraph",
-        Filter = "AI Knowledge Graphs (.AIgraph)|*.AIgraph"
-      };
-
-      Nullable<bool> result = dlg.ShowDialog();
-
-      if (result == true)
-      {
-        string filename = dlg.FileName;
-
-        IFormatter formatter = new BinaryFormatter();  
-        Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);  
-        KnowledgeGraph knowledgeGraph = (KnowledgeGraph) formatter.Deserialize(stream);  
-        stream.Close();
-
-        this.nodes.Clear();
-        foreach (Entity entity in knowledgeGraph.entity_names.Keys)
-        {
-          this.nodes.Add(entity);
-          //TODO: THIS IS BROKEN
-          //knowledgeGraph.RelationFrom(entity).Select((ent) => !ent.IsNone());
-        }
-        this.nodeNames = knowledgeGraph.entity_names;
-
-        this.RefreshLists();
-      }
-
-    }
-
-    private void RefreshLists()
-    {
-      nodeList.Items.Clear();
-      comboBoxNodes.Items.Clear();
-      comboBoxRelation.Items.Clear();
-      relationshipList.Items.Clear();
-
-      foreach (Entity node in this.nodes)
-      {
-        this.AddComboNode(node);
-        this.AddSourceListNode(node);
-      }
-    }
-
-    private void ButtonClick_RelationshipWindow(object sender, RoutedEventArgs e)
-    {
-      RelationshipEditor relationshipEditor = new RelationshipEditor(this.relationNames);
+      var relationshipEditor = new RelationEditor(this, this.model);
       relationshipEditor.Show();
     }
-  }
 
-  class RelationshipDestinationRow
-  {
-    public int Destination { get; }
-
-    public int RelationshipId { get; }
-
-    public RelationshipDestinationRow(int destination, int relationshipId)
+    public void ButtonClick_EntityWindow(object sender, RoutedEventArgs e)
     {
-      this.Destination = destination;
-      this.RelationshipId = relationshipId;
+      var entityEditor = new EntityEditor(this, this.model);
+      entityEditor.Show();
+    }
+
+    //---------------------------------------------------------------------------------
+    // UI Element Constructors
+    //---------------------------------------------------------------------------------
+
+    private void AddComboSourceEntity(Entity entity)
+    {
+      ComboBoxItem sourceComboItem = new ComboBoxItem
+      {
+        Content = $"{model.entityNames[entity]}"
+      };
+
+      comboBox_PossibleSourceEntities.Items.Add(sourceComboItem);
+    }
+
+    private void AddComboDestinationEntity(Entity entity)
+    {
+      ComboBoxItem destinationComboItem = new ComboBoxItem
+      {
+        Content = $"{model.entityNames[entity]}"
+      };
+
+      comboBox_PossibleDestinationEntity.Items.Add(destinationComboItem);
+    }
+
+    private void AddComboRelation(SingleRelation relation)
+    {
+      ComboBoxItem relationComboItem = new ComboBoxItem
+      {
+        Content = $"{model.relationNames[relation]}"
+      };
+
+      comboBox_PossibleRelations.Items.Add(relationComboItem);
+    }
+
+    private void AddSourceListEntity(Entity entity)
+    {
+      ListBoxItem entityListItem = new ListBoxItem
+      {
+        Content = $"{model.entityNames[entity]}"
+      };
+
+      entityList.Items.Add(entityListItem);
+    }
+
+    private void AddRelationListRelation(SingleRelation relation, Entity destination)
+    {
+      ListBoxItem relationshipListItem = new ListBoxItem
+      {
+        Content = $"{model.relationNames[relation]} {model.entityNames[destination]}"
+      };
+
+      relationList.Items.Add(relationshipListItem);
+    }
+    
+    //---------------------------------------------------------------------------------
+    // Controller Functionality 
+    //---------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Adds a new entity to the knowledge graph.
+    /// </summary>
+    /// <param name="entity">The entity to be added.</param>
+    private void AddNewEntity(int id)
+    {
+      Entity entity = new Entity(id);
+      if (!model.ContainsEntity(entity))
+      {
+        model.AddNewEntity(entity);
+        this.entities.Add(entity);
+        this.AddSourceListEntity(entity);
+        this.relations[entity] = new List<RelationDestinationRow>();
+        this.RefreshLists();
+      }
+    }
+
+    /// <summary>
+    /// Deletes an entity.
+    /// </summary>
+    /// <param name="deletedEntity">The entity to be deleted.</param>
+    private void DeleteEntity(Entity deletedEntity)
+    {
+      model.DeleteEntity(deletedEntity);
+      this.entities.RemoveAt(entityList.SelectedIndex);
+      comboBox_PossibleDestinationEntity.Items.RemoveAt(entityList.SelectedIndex);
+      entityList.Items.RemoveAt(entityList.SelectedIndex);
+      foreach (List<RelationDestinationRow> relations in this.relations.Values)
+      {
+        relations.RemoveAll(r => r.destination.Equals(deletedEntity));
+      }
+    }
+
+    /// <summary>
+    /// Deletes a relationship mapping.
+    /// </summary>
+    /// <param name="deletedRelation">The destination entity and relation to be deleted.</param>
+    private void AddRelationshipMapping(Entity source, SingleRelation relation, Entity destination)
+    {
+      var selectedEntity = this.entities[entityList.SelectedIndex];
+      var row = new RelationDestinationRow(destination, relation);
+      this.relations[selectedEntity].Add(row);
+
+      model.AddNewRelationshipMapping(source, relation, destination);
+      this.AddRelationListRelation(relation, destination);
+    }
+
+    /// <summary>
+    /// Deletes a relationship mapping.
+    /// </summary>
+    /// <param name="deletedRelation">The destination entity and relation to be deleted.</param>
+    private void DeleteRelationshipMapping(RelationDestinationRow deletedRelation)
+    {
+      var selectedEntity = this.entities[entityList.SelectedIndex];
+      model.DeleteRelationshipMapping(selectedEntity, deletedRelation);
+      this.relations[selectedEntity].RemoveAt(relationList.SelectedIndex);
+      relationList.Items.RemoveAt(relationList.SelectedIndex);
+    }
+
+    /// <summary>
+    /// Refreshes all the UI lists.
+    /// </summary>
+    public void RefreshLists()
+    {
+      entityList.Items.Clear();
+      comboBox_PossibleSourceEntities.Items.Clear();
+      comboBox_PossibleDestinationEntity.Items.Clear();
+      comboBox_PossibleRelations.Items.Clear();
+      relationList.Items.Clear();
+
+      foreach (Entity entity in this.entities)
+      {
+        this.AddSourceListEntity(entity);
+      }
+      foreach (Entity entity in this.entities)
+      {
+        this.AddComboDestinationEntity(entity);
+      }
+      foreach (Entity entity in model.entityNames.Keys)
+      {
+        this.AddComboSourceEntity(entity);
+      }
+      foreach (SingleRelation relation in model.relationNames.Keys)
+      {
+        this.AddComboRelation(relation);
+      }
+    }
+  }
+  
+  /// <summary>
+  /// Utility class that stores single relations and a destination. 
+  /// Represents one arrow in the knowledge graph and one line in the editor relation listbox.
+  /// </summary>
+  public struct RelationDestinationRow
+  {
+    public Entity destination { get; set; }
+
+    public SingleRelation relation { get; set; }
+
+    public RelationDestinationRow(Entity destination, SingleRelation relation)
+    {
+      this.destination = destination;
+      this.relation = relation;
+    }
+
+    /// <summary>
+    /// Equals method generated by visual studio.
+    /// </summary>
+    /// <param name="obj">Object to be compared.</param>
+    /// <returns>True if obj is equal to the relation destination row.</returns>
+    public override bool Equals(object obj)
+    {
+      if (!(obj is RelationDestinationRow))
+      {
+        return false;
+      }
+
+      var row = (RelationDestinationRow)obj;
+      return EqualityComparer<Entity>.Default.Equals(destination, row.destination) &&
+             EqualityComparer<SingleRelation>.Default.Equals(relation, row.relation);
+    }
+
+    /// <summary>
+    /// HashCode method generated by visual studio.
+    /// </summary>
+    /// <returns></returns>
+    public override int GetHashCode()
+    {
+      var hashCode = 521575480;
+      hashCode = hashCode * -1521134295 + EqualityComparer<Entity>.Default.GetHashCode(destination);
+      hashCode = hashCode * -1521134295 + EqualityComparer<SingleRelation>.Default.GetHashCode(relation);
+      return hashCode;
     }
   }
 }

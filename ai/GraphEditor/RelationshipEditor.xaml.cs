@@ -18,14 +18,49 @@ namespace GraphEditor
   /// <summary>
   /// Interaction logic for RelationshipEditor.xaml
   /// </summary>
-  public partial class RelationshipEditor : Window
+  public partial class RelationEditor : Window
   {
-    private Dictionary<SingleRelation, string> relationNames;
+    private MainWindow mainWindow;
+    private EditorModel model;
 
-    public RelationshipEditor(Dictionary<SingleRelation,string> relationNames)
+    public RelationEditor(MainWindow mainWindow, EditorModel model)
     {
       InitializeComponent();
-      this.relationNames = relationNames;
+      this.mainWindow = mainWindow;
+      this.model = model;
+
+      foreach (SingleRelation relation in model.relationNames.Keys)
+      {
+        this.AddPossibleRelation(relation);
+      }
+    }
+
+    public void ButtonClick_AddRelation(object sender, RoutedEventArgs e)
+    {
+      int id = this.model.relationValueManager.NextFreeId();
+      SingleRelation relation = new SingleRelation(id);
+      string relationName = textBox_NewRelationName.Text;
+
+      model.relationNames.Add(relation, relationName);
+
+      this.AddPossibleRelation(relation);
+
+
+      textBox_NewRelationName.Text = "";
+
+      this.mainWindow.RefreshLists();
+    }
+
+    //TODO: Add enter key handler.
+
+    private void AddPossibleRelation(SingleRelation relation)
+    {
+      ListBoxItem listBoxItem = new ListBoxItem
+      {
+        Content = $"{model.relationNames[relation]}"
+      };
+
+      listBox_RelationList.Items.Add(listBoxItem);
     }
   }
 }
