@@ -17,6 +17,8 @@ public class NotebookController : MonoBehaviour {
     GameObject invtPage;
     GameObject notePage;
     GameObject menuPage;
+    GameObject currentPage;
+    GameObject currentTabs;
 
     // Use this for initialization
     void Start () {
@@ -30,12 +32,13 @@ public class NotebookController : MonoBehaviour {
         itemPage = GameObject.Find("ItemsPage");
         itemPage.SetActive(false);
         invtPage = GameObject.Find("InventoryPage");
-        itemPage.SetActive(false);
+        invtPage.SetActive(false);
         notePage = GameObject.Find("NotesPage");
-        itemPage.SetActive(false);
+        notePage.SetActive(false);
         menuPage = GameObject.Find("MenuPage");
 
-        //ChangePage((int)Page.MENU);
+        currentPage = menuPage;
+        currentTabs = tabsEmpty;
     }
 	
 	// Update is called once per frame
@@ -48,17 +51,48 @@ public class NotebookController : MonoBehaviour {
 
     }
 
-
-
     public void ChangePage(int target)
     {
         if (target != (int)currentTab)
         {
-            //pages[(int)currentTab].SetActive(false);
-            //tabsR[(int)currentTab].SetActive(false);
-            //currentTab = (Page)target;
-            //pages[target].SetActive(true);
-            //tabsR[target].SetActive(true);
+            if (currentTab == Page.CHARACTER)
+            {
+                tabsRightChars.SetActive(false);
+                tabsEmpty.SetActive(true);
+            }
+            currentPage.SetActive(false);
+            switch (target)
+            {
+                case (int)Page.CHARACTER:
+                    tabsEmpty.SetActive(false);
+                    charPage.SetActive(true);
+                    tabsRightChars.SetActive(true);
+                    currentPage = charPage;
+                    currentTabs = tabsRightChars;
+                    break;
+                case (int)Page.INVENTORY:
+                    invtPage.SetActive(true);
+                    currentPage = invtPage;
+                    currentTabs = tabsEmpty;
+                    break;
+                case (int)Page.ITEM:
+                    itemPage.SetActive(true);
+                    currentPage = itemPage;
+                    currentTabs = tabsEmpty;
+                    break;
+                case (int)Page.NOTES:
+                    notePage.SetActive(true);
+                    currentPage = notePage;
+                    currentTabs = tabsEmpty;
+                    break;
+                case (int)Page.MENU:
+                    menuPage.SetActive(true);
+                    currentPage = menuPage;
+                    currentTabs = tabsEmpty;
+                    break;
+            }
+            currentTab = (Page)target;
         }
     }
+
 }
