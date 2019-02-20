@@ -54,7 +54,7 @@ public class CameraRaycasting : MonoBehaviour
                 // Interact with character
                 if (Input.GetMouseButtonDown(0))
                 {
-                    SpeechDialogue();
+                    SpeechDialogue(npc);
                 }
             }
 
@@ -198,12 +198,12 @@ public class CameraRaycasting : MonoBehaviour
         }
     }
 
-    private void SpeechDialogue()
+    private void SpeechDialogue(NPCController character)
     {
         masterCanvas.SetActive(false);
         converse = true;
         Pause(true);
-        speechCanvas.GetComponent<DialogueScreen>().ShowScreen();
+        speechCanvas.GetComponent<DialogueScreen>().ShowScreen(character);
     }
 
     private void CloseDialogue()

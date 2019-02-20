@@ -20,6 +20,9 @@ public class NotebookController : MonoBehaviour {
     GameObject currentPage;
     GameObject currentTabs;
 
+    // Character clues
+    
+
     // Use this for initialization
     void Start () {
         //tabsLeft = GameObject.Find("LeftTabsPanel");
