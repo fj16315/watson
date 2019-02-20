@@ -16,9 +16,6 @@ namespace WatsonAI
       this.subGraphs = subGraphs;
     }
 
-    /*public static Universe CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
-      => subGraphs.All(g => IsSubGraph(g, mainGraph)) ? new Universe(mainGraph, subGraphs) : null;*/
-
     public static HiveMind CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
       foreach (var subGraph in subGraphs)
@@ -72,20 +69,16 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
+      var spellChecker = new SpellChecker();
+      Console.WriteLine(spellChecker.Suggestions(word));
       var thesaurus = new Thesaurus();
       return thesaurus.IsSynonymOf(word, NameOf(entity));
     }
 
     public bool Describes(string word, Relation relation)
     {
-      foreach (var singleRelation in relation.SingleRelations())
-      {
-        if (relationNames[(int)singleRelation].ToLower().Equals(word.ToLower()))
-        {
-          return true;
-        }
-      }
-      return false;
+      var thesaurus = new Thesaurus();
+      return thesaurus.IsSynonymOf(word, NameOf(relation));
     }
   }
 

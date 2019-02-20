@@ -11,7 +11,12 @@ namespace WatsonAI
 
     public Thesaurus()
     {
-      app = new wordLib.Application();
+      this.app = new wordLib.Application();
+    }
+
+    public Thesaurus(wordLib.Application app)
+    {
+      this.app = app;
     }
 
     public bool IsSynonymOf(string a, string b)
