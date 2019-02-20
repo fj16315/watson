@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Syn.WordNet;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace WatsonAI 
@@ -9,7 +11,7 @@ namespace WatsonAI
     private KnowledgeGraph mainGraph;
     private List<KnowledgeGraph> subGraphs;
 
-    private HiveMind(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
+    public HiveMind(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
       this.mainGraph = mainGraph;
       this.subGraphs = subGraphs;
@@ -47,10 +49,18 @@ namespace WatsonAI
 
     public string[] relationNames { get; }
 
+    public WordNetEngine wordNet { get; }
+
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
       relationNames = new string[relationCount];
+      wordNet = new WordNetEngine();
+
+      string directory = $"{Directory.GetCurrentDirectory()}/wordnet/dict/";
+      Console.WriteLine("Loading database...");
+      wordNet.LoadFromDirectory(directory);
+      Console.WriteLine("Load completed.");
     }
 
     public string NameOf(Entity entity)
@@ -71,7 +81,30 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      return entityNames[(int)entity].ToLower().Equals(word.ToLower());
+      if (entityNames[(int)entity].ToLower().Equals(word.ToLower()))
+      {
+        return true;
+      }
+      var synSetList = wordNet.GetSynSets(word);
+      if (synSetList.Count == 0)
+      {
+        return false;
+      }
+
+      foreach (var synSet in synSetList)
+      {
+        if (synSet.Words.Contains(word))
+        {
+          return true;
+        }
+        var words = string.Join(", ", synSet.Words);
+
+        Console.WriteLine($"\nWords: {words}");
+        //Console.WriteLine($"POS: {synSet.PartOfSpeech}");
+        //Console.WriteLine($"Gloss: {synSet.Gloss}");
+      }
+      return false;
+
     }
 
     public bool Describes(string word, Relation relation)
