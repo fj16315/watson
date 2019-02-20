@@ -14,6 +14,7 @@ public class DialogueScreen : MonoBehaviour {
     private AIController ai;
     public GameObject replyBubble;
     public Text answerBox;
+    public GameObject saveButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
 
@@ -34,6 +35,7 @@ public class DialogueScreen : MonoBehaviour {
         ai = Object.FindObjectOfType<AIController>();
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
+        saveButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -125,6 +127,11 @@ public class DialogueScreen : MonoBehaviour {
 
         }
         return new NPCProfile("", fontDetective, 0, 0);
+    }
+
+    public void LogResponse(NPCController character, string message)
+    {
+
     }
 
 }
