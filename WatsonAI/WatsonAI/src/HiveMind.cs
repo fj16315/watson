@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using wordLib = Microsoft.Office.Interop.Word;
 
 namespace WatsonAI 
 {
@@ -73,22 +72,8 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      var app = new wordLib.Application();
-      var infosyn = app.SynonymInfo[word, wordLib.WdLanguageID.wdEnglishUK];
-      foreach (var item in infosyn.PartOfSpeechList as Array)
-      {
-        Console.WriteLine("             " + item);
-
-      }
-      foreach (var item in infosyn.MeaningList as Array)
-      {
-        Console.WriteLine("             " + item);
-        foreach (var b in infosyn.SynonymList[item] as Array)
-        {
-          Console.WriteLine(b);
-        }
-      }
-      return false;
+      var thesaurus = new Thesaurus();
+      return thesaurus.IsSynonymOf(word, NameOf(entity));
     }
 
     public bool Describes(string word, Relation relation)
