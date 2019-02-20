@@ -1,8 +1,8 @@
-﻿using Syn.WordNet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using wordLib = Microsoft.Office.Interop.Word;
 
 namespace WatsonAI 
 {
@@ -49,20 +49,10 @@ namespace WatsonAI
 
     public string[] relationNames { get; }
 
-    public WordNetEngine wordNet { get; }
-
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
       relationNames = new string[relationCount];
-      wordNet = new WordNetEngine();
-
-      string directory = $"{Directory.GetCurrentDirectory()}/wordnet/dict/";
-      Console.WriteLine("Loading database...");
-      Console.WriteLine(directory);
-            Console.WriteLine("cat");
-      wordNet.LoadFromDirectory(directory);
-      Console.WriteLine("Load completed.");
     }
 
     public string NameOf(Entity entity)
@@ -83,34 +73,22 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      //if (entityNames[(int)entity].ToLower().Equals(word.ToLower()))
-      //{
-      //  return true;
-      //}
-
-      
-      var synSetList = wordNet.GetSynSets(entityNames[(int)entity].ToLower());
-      if (synSetList.Count == 0)
+      var app = new wordLib.Application();
+      var infosyn = app.SynonymInfo[word, wordLib.WdLanguageID.wdEnglishUK];
+      foreach (var item in infosyn.PartOfSpeechList as Array)
       {
-        return false;
+        Console.WriteLine("             " + item);
+
       }
-
-      foreach (var synSet in synSetList)
+      foreach (var item in infosyn.MeaningList as Array)
       {
-        var words = string.Join(", ", synSet.Words);
-        Console.WriteLine($"\nWords: {words}");
-        if (synSet.Words.Contains(word.ToLower()))
+        Console.WriteLine("             " + item);
+        foreach (var b in infosyn.SynonymList[item] as Array)
         {
-          return true;
+          Console.WriteLine(b);
         }
-
-
-        
-        //Console.WriteLine($"POS: {synSet.PartOfSpeech}");
-        //Console.WriteLine($"Gloss: {synSet.Gloss}");
       }
       return false;
-
     }
 
     public bool Describes(string word, Relation relation)
