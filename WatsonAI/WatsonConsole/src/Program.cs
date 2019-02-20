@@ -11,7 +11,7 @@ public class MainClass
   {
     var parser = new Parser();
     var associations = new Associations(1,0);
-    associations.SetNameOf(new Entity(0), "cat");
+    associations.SetNameOf(new Entity(0), "walk");
 
     while (true)
     {

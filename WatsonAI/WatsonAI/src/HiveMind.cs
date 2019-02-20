@@ -59,6 +59,8 @@ namespace WatsonAI
 
       string directory = $"{Directory.GetCurrentDirectory()}/wordnet/dict/";
       Console.WriteLine("Loading database...");
+      Console.WriteLine(directory);
+            Console.WriteLine("cat");
       wordNet.LoadFromDirectory(directory);
       Console.WriteLine("Load completed.");
     }
@@ -81,11 +83,13 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      if (entityNames[(int)entity].ToLower().Equals(word.ToLower()))
-      {
-        return true;
-      }
-      var synSetList = wordNet.GetSynSets(word);
+      //if (entityNames[(int)entity].ToLower().Equals(word.ToLower()))
+      //{
+      //  return true;
+      //}
+
+      
+      var synSetList = wordNet.GetSynSets(entityNames[(int)entity].ToLower());
       if (synSetList.Count == 0)
       {
         return false;
@@ -93,13 +97,15 @@ namespace WatsonAI
 
       foreach (var synSet in synSetList)
       {
-        if (synSet.Words.Contains(word))
+        var words = string.Join(", ", synSet.Words);
+        Console.WriteLine($"\nWords: {words}");
+        if (synSet.Words.Contains(word.ToLower()))
         {
           return true;
         }
-        var words = string.Join(", ", synSet.Words);
 
-        Console.WriteLine($"\nWords: {words}");
+
+        
         //Console.WriteLine($"POS: {synSet.PartOfSpeech}");
         //Console.WriteLine($"Gloss: {synSet.Gloss}");
       }
