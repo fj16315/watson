@@ -60,7 +60,7 @@ namespace WatsonAI
       {
         foreach (var word in infosyn.SynonymList[item] as Array)
         {
-          if (word.ToString().Equals(b,StringComparison.OrdinalIgnoreCase)) return true;
+          if ((word as string).Equals(b,StringComparison.OrdinalIgnoreCase)) return true;
         }
       }
 
@@ -69,21 +69,23 @@ namespace WatsonAI
 
     private bool CheckSynonymRelation(DictionaryWord a, string b)
     {
-      var infosyn = app.SynonymInfo[a.word, wordLib.WdLanguageID.wdEnglishUK];
-
-      var meaningList = infosyn.MeaningList as Array;
-      for (int i = 0; i < meaningList.Length; i++)
+      var asyn = app.SynonymInfo[a.word, wordLib.WdLanguageID.wdEnglishUK];
+      var meaningList = asyn.MeaningList as Array;
+      for (int meaning = 0; meaning < meaningList.Length; meaning++)
       {
-        var partsOfSpeech = infosyn.PartOfSpeechList as Array;
-        if ((int)partsOfSpeech.GetValue(i) == (int)a.category)
+        foreach (var word in asyn.SynonymList[meaningList.GetValue(meaning)] as Array)
         {
-          foreach (var word in infosyn.SynonymList[meaningList.GetValue(i)] as Array)
-          {
-            if (word.ToString().Equals(b,StringComparison.OrdinalIgnoreCase)) return true;
+          var partOfSpeechList = asyn.PartOfSpeechList as Array;
+            if ((int)partOfSpeechList.GetValue(meaning) == (int)a.category
+              && word.ToString().Equals(b, StringComparison.OrdinalIgnoreCase))
+            {
+              //System.Diagnostics.Debug.WriteLine((LexicalCategory)partOfSpeechList);
+              //System.Diagnostics.Debug.WriteLine(a.category);
+              //System.Diagnostics.Debug.WriteLine(word);
+              return true;
+            }
           }
         }
-      }
-
       return false;
     }
   }

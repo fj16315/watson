@@ -49,5 +49,100 @@ namespace WatsonTest
       Assert.True(thesaurus.IsSynonymOf("kItty", "cat"));
       Assert.True(thesaurus.IsSynonymOf("cat", "kItty"));
     }
+
+    [Fact]
+    public void IsSynonymOf_OneStringOneDictWord_Standard()
+    {
+      var word = new DictionaryWord("cat", LexicalCategory.Noun);
+      Assert.True(thesaurus.IsSynonymOf(word, "kitty"));
+      word = new DictionaryWord("walk", LexicalCategory.Noun);
+      Assert.True(thesaurus.IsSynonymOf(word, "stroll"));
+
+      // Synonyms of two strings gives strange results sometimes:
+      word = new DictionaryWord("cat", LexicalCategory.Noun);
+      Assert.True(thesaurus.IsSynonymOf(word, "man"));
+
+      word = new DictionaryWord("cat", LexicalCategory.Noun);
+      Assert.False(thesaurus.IsSynonymOf(word, "dog"));
+      word = new DictionaryWord("cat", LexicalCategory.Noun);
+      Assert.False(thesaurus.IsSynonymOf(word, "lion"));
+      word = new DictionaryWord("crockery", LexicalCategory.Noun);
+      Assert.False(thesaurus.IsSynonymOf(word, "plate"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_OneStringOneDictWord_Filtering()
+    {
+      var word = new DictionaryWord("key", LexicalCategory.Noun);
+      Assert.False(thesaurus.IsSynonymOf(word, "crucial"));
+      word = new DictionaryWord("key", LexicalCategory.Adjective);
+      Assert.True(thesaurus.IsSynonymOf(word, "crucial"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_OneStringOneDictWord_EdgeCase()
+    {
+      Assert.True(thesaurus.IsSynonymOf("cat", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("", ""));
+      Assert.True(thesaurus.IsSynonymOf("good-looking", "pretty"));
+      Assert.True(thesaurus.IsSynonymOf("pretty", "good-looking"));
+
+      Assert.False(thesaurus.IsSynonymOf("", "dog"));
+      Assert.False(thesaurus.IsSynonymOf("cat", ""));
+
+      Assert.False(thesaurus.IsSynonymOf("cat ", "cat"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_OneStringOneDictWord_Capitalisation()
+    {
+      Assert.True(thesaurus.IsSynonymOf("CAT", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("CaT", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("CaT", "cAt"));
+      Assert.True(thesaurus.IsSynonymOf("CAt", "kitty"));
+      Assert.True(thesaurus.IsSynonymOf("kitty", "CAt"));
+      Assert.True(thesaurus.IsSynonymOf("kItty", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("cat", "kItty"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_TwoDictWords_Standard()
+    {
+      Assert.True(thesaurus.IsSynonymOf("cat", "kitty"));
+      Assert.True(thesaurus.IsSynonymOf("walk", "stroll"));
+
+      // Synonyms of two strings gives strange results sometimes:
+      Assert.True(thesaurus.IsSynonymOf("cat", "man"));
+
+      Assert.False(thesaurus.IsSynonymOf("cat", "dog"));
+      Assert.False(thesaurus.IsSynonymOf("cat", "lion"));
+      Assert.False(thesaurus.IsSynonymOf("crockery", "plate"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_TwoDictWords_EdgeCase()
+    {
+      Assert.True(thesaurus.IsSynonymOf("cat", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("", ""));
+      Assert.True(thesaurus.IsSynonymOf("good-looking", "pretty"));
+      Assert.True(thesaurus.IsSynonymOf("pretty", "good-looking"));
+
+      Assert.False(thesaurus.IsSynonymOf("", "dog"));
+      Assert.False(thesaurus.IsSynonymOf("cat", ""));
+
+      Assert.False(thesaurus.IsSynonymOf("cat ", "cat"));
+    }
+
+    [Fact]
+    public void IsSynonymOf_TwoDictWords_Capitalisation()
+    {
+      Assert.True(thesaurus.IsSynonymOf("CAT", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("CaT", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("CaT", "cAt"));
+      Assert.True(thesaurus.IsSynonymOf("CAt", "kitty"));
+      Assert.True(thesaurus.IsSynonymOf("kitty", "CAt"));
+      Assert.True(thesaurus.IsSynonymOf("kItty", "cat"));
+      Assert.True(thesaurus.IsSynonymOf("cat", "kItty"));
+    }
   }
 }

@@ -69,8 +69,6 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      var spellChecker = new SpellChecker();
-      Console.WriteLine(spellChecker.Suggestions(word));
       var thesaurus = new Thesaurus();
       return thesaurus.IsSynonymOf(word, NameOf(entity));
     }
