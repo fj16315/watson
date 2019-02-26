@@ -38,12 +38,13 @@ namespace WatsonAI
 
       // We do this both ways because the Word synonyms aren't a two way relation.
       // Apparantly.
-      return CheckSynonymRelation(b, a.word);
+      return CheckSynonymRelation(new DictionaryWord(b, a.category), a.word);
     }
 
     public bool IsSynonymOf(DictionaryWord a, DictionaryWord b)
     {
       if (a.word.Equals(b.word, StringComparison.OrdinalIgnoreCase)) return true;
+      if (a.category != b.category) return false;
 
       if (CheckSynonymRelation(a, b.word)) return true;
 
@@ -71,21 +72,19 @@ namespace WatsonAI
     {
       var asyn = app.SynonymInfo[a.word, wordLib.WdLanguageID.wdEnglishUK];
       var meaningList = asyn.MeaningList as Array;
-      for (int meaning = 0; meaning < meaningList.Length; meaning++)
+      // These lists are 1 indexed for some reason, caution!
+      for (int meaning = 1; meaning <= meaningList.Length; meaning++)
       {
         foreach (var word in asyn.SynonymList[meaningList.GetValue(meaning)] as Array)
         {
           var partOfSpeechList = asyn.PartOfSpeechList as Array;
-            if ((int)partOfSpeechList.GetValue(meaning) == (int)a.category
-              && word.ToString().Equals(b, StringComparison.OrdinalIgnoreCase))
-            {
-              //System.Diagnostics.Debug.WriteLine((LexicalCategory)partOfSpeechList);
-              //System.Diagnostics.Debug.WriteLine(a.category);
-              //System.Diagnostics.Debug.WriteLine(word);
+          if ((int)partOfSpeechList.GetValue(meaning) == (int)a.category
+            && word.ToString().Equals(b, StringComparison.OrdinalIgnoreCase))
+          {
               return true;
-            }
           }
         }
+      }
       return false;
     }
   }
