@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace WatsonAI 
@@ -8,15 +9,13 @@ namespace WatsonAI
   {
     private KnowledgeGraph mainGraph;
     private List<KnowledgeGraph> subGraphs;
+    
 
-    private HiveMind(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
+    public HiveMind(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
       this.mainGraph = mainGraph;
       this.subGraphs = subGraphs;
     }
-
-    /*public static Universe CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
-      => subGraphs.All(g => IsSubGraph(g, mainGraph)) ? new Universe(mainGraph, subGraphs) : null;*/
 
     public static HiveMind CheckedNew(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
@@ -47,6 +46,8 @@ namespace WatsonAI
 
     public string[] relationNames { get; }
 
+    private Thesaurus thesaurus = new Thesaurus();
+    
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
@@ -71,19 +72,12 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      return entityNames[(int)entity].ToLower().Equals(word.ToLower());
+      return this.thesaurus.IsSynonymOf(word, NameOf(entity));
     }
 
     public bool Describes(string word, Relation relation)
-    {
-      foreach (var singleRelation in relation.SingleRelations())
-      {
-        if (relationNames[(int)singleRelation].ToLower().Equals(word.ToLower()))
-        {
-          return true;
-        }
-      }
-      return false;
+    { 
+      return this.thesaurus.IsSynonymOf(word, NameOf(relation));
     }
   }
 
