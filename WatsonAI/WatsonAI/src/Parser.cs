@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using OpenNLP.Tools.PosTagger;
+using OpenNLP.Tools.SentenceDetect;
 using OpenNLP.Tools.Tokenize;
 
 namespace WatsonAI
@@ -17,18 +18,26 @@ namespace WatsonAI
     /// </summary>
     public Parser()
     {
-      var modelPath = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishPOS.nbin";
+      var modelPathSen = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishSD.nbin";
+      var modelPathTok = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishTok.nbin";
+      var modelPathPos = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishPOS.nbin";
+
       var tagDictDir = Directory.GetCurrentDirectory() + "\\res\\Models\\Parser\\tagdict";
 
-      var sentence = "The quick brown fox jumped over the lazy dog.";
+      var sentence = "The quick brown fox jumped over the lazy dog. He died.";
 
-      var tokenizer = new EnglishRuleBasedTokenizer(false);
+      var sentenceDetector = new EnglishMaximumEntropySentenceDetector(modelPathSen);
+      var sentences = sentenceDetector.SentenceDetect(sentence);
+      var tokenizer = new EnglishRuleBasedTokenizer(true);
       var tokens = tokenizer.Tokenize(sentence);
 
-      var posTagger = new EnglishMaximumEntropyPosTagger(modelPath, tagDictDir);
+      var posTagger = new EnglishMaximumEntropyPosTagger(modelPathPos, tagDictDir);
       var pos = posTagger.Tag(tokens);
       
-      System.Diagnostics.Debug.WriteLine(pos);
+      foreach (var s in pos)
+      {
+        System.Diagnostics.Debug.WriteLine(s);
+      }
     }
   }
 }
