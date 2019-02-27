@@ -13,6 +13,8 @@ namespace Notebook
     public class NotebookController : MonoBehaviour
     {
 
+        public GameObject container;
+
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
@@ -25,6 +27,14 @@ namespace Notebook
         public GameObject menuPage;
         GameObject currentPage;
         GameObject currentTabs;
+        // Character pages
+        public GameObject charActress;
+        public GameObject charButler;
+        public GameObject charColonel;
+        public GameObject charCountess;
+        public GameObject charEarl;
+        public GameObject charGangster;
+        public GameObject charPolice;
 
         // Character clues
         List<string> cluesActress = new List<string>();
@@ -40,11 +50,13 @@ namespace Notebook
         void Start()
         {
             tabsRightChars.SetActive(false);
+            tabsEmpty.SetActive(true);
             // Notebook pages
             charPage.SetActive(false);
             itemPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
+            menuPage.SetActive(true);
 
             currentPage = menuPage;
             currentTabs = tabsEmpty;
@@ -67,7 +79,7 @@ namespace Notebook
 
         public void Activate(bool active)
         {
-
+            container.SetActive(active);
         }
 
         public void ChangePage(int target)
@@ -80,37 +92,47 @@ namespace Notebook
                     tabsEmpty.SetActive(true);
                 }
                 currentPage.SetActive(false);
-                switch (target)
+                switch ((Page)target)
                 {
-                    case (int)Page.CHARACTER:
+                    case Page.CHARACTER:
                         tabsEmpty.SetActive(false);
                         charPage.SetActive(true);
                         tabsRightChars.SetActive(true);
                         currentPage = charPage;
                         currentTabs = tabsRightChars;
                         break;
-                    case (int)Page.INVENTORY:
+                    case Page.INVENTORY:
                         invtPage.SetActive(true);
                         currentPage = invtPage;
                         currentTabs = tabsEmpty;
                         break;
-                    case (int)Page.ITEM:
+                    case Page.ITEM:
                         itemPage.SetActive(true);
                         currentPage = itemPage;
                         currentTabs = tabsEmpty;
                         break;
-                    case (int)Page.NOTES:
+                    case Page.NOTES:
                         notePage.SetActive(true);
                         currentPage = notePage;
                         currentTabs = tabsEmpty;
                         break;
-                    case (int)Page.MENU:
+                    case Page.MENU:
                         menuPage.SetActive(true);
                         currentPage = menuPage;
                         currentTabs = tabsEmpty;
                         break;
                 }
                 currentTab = (Page)target;
+            }
+        }
+
+        public void ChangeCharacter(int target)
+        {
+            switch ((Character)target)
+            {
+                case Character.ACTRESS:
+
+                    break;
             }
         }
 

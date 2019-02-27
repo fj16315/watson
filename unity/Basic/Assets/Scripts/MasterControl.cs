@@ -2,29 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using Notebook;
 
 public class MasterControl : MonoBehaviour {
 
-    GameObject notebook, masterCanvas;
-    bool paused = false;
-    RigidbodyFirstPersonController fpc;
+    public GameObject masterCanvas;
+    public NotebookController notebook;
+    public bool paused = false;
+    public RigidbodyFirstPersonController fpc;
 
     // Use this for initialization
     void Start () {
-        notebook = GameObject.Find("NotebookCanvas");
-        fpc = Object.FindObjectOfType<RigidbodyFirstPersonController>();
-        //Pause(true);
-        notebook.SetActive(false);
-        masterCanvas = GameObject.Find("MasterCanvas");
+        notebook.Activate(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = !paused;
-            notebook.SetActive(paused);
-            Pause(paused);
+            notebook.Activate(!paused);
+            Pause(!paused);
             if (!paused)
             {
                 Cursor.visible = false;
@@ -32,11 +29,12 @@ public class MasterControl : MonoBehaviour {
         }
     }
 
-    private void Pause(bool pause)
+    public void Pause(bool pause)
     {
         switch (pause)
         {
             case true:
+                paused = true;
                 masterCanvas.SetActive(false);
                 Time.timeScale = 0;
                 //fpc.mouseLook.SetCursorLock(false);
@@ -45,6 +43,7 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = true;
                 break;
             default:
+                paused = false;
                 masterCanvas.SetActive(true);
                 Time.timeScale = 1;
                 //fpc.mouseLook.SetCursorLock(true);
