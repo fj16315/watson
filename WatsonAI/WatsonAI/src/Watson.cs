@@ -15,8 +15,18 @@ namespace WatsonAI
     /// <returns>Response to the player.</returns>
     public string Run(string input)
     {
-      var parse = parser.Parse(input);
-      return parse.Show();
+      var io = new InputOutput(input);
+
+      var greetings = new GreetingsEngine();
+      var debugParse = new DebugParseEngine();
+      var fallback = new FallbackEngine();
+
+      var output = io
+        .Process(greetings)
+        .Process(debugParse)
+
+        .Process(fallback);
+      return output.output;
     }
 
     /// <summary>
