@@ -9,16 +9,13 @@ public class MainClass
   /// </summary>
   public static void Main(string[] args)
   {
-    var parser = new Parser();
-    var associations = new Associations(1,0);
-    associations.SetNameOf(new Entity(0), "walk");
+    IWatson watson = new Watson();
 
     while (true)
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      var b = associations.Describes(line, new Entity(0));
-      Console.WriteLine(b);
+      Console.WriteLine(watson.Run(line));
       if (line == "") { break; }
     }
   }
