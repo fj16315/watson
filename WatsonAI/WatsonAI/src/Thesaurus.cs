@@ -99,6 +99,7 @@ namespace WatsonAI
     {
       var infosyn = app.SynonymInfo[a, wordLib.WdLanguageID.wdEnglishUK];
 
+      // This needs to be Array because of the library object casting
       foreach (var item in infosyn.MeaningList as Array)
       {
         foreach (var word in infosyn.SynonymList[item] as Array)
