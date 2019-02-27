@@ -18,7 +18,7 @@ namespace WatsonAI
       var io = new InputOutput(input);
 
       var greetings = new GreetingsEngine();
-      var debugParse = new DebugParseEngine();
+      var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
 
       var output = io

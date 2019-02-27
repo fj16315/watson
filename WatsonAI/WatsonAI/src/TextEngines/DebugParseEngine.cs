@@ -9,6 +9,25 @@ namespace WatsonAI
   /// </summary>
   public class DebugParseEngine : IRule
   {
+    private Parser parser;
+
+    /// <summary>
+    /// Text engine for debuging the parser.
+    /// </summary>
+    public DebugParseEngine()
+    {
+      this.parser = new Parser();
+    }
+
+    /// <summary>
+    /// Text engine for debuging the specified Parser.
+    /// </summary>
+    /// <param name="parse">The parser to use.</param>
+    public DebugParseEngine(Parser parse)
+    {
+      this.parser = parse;
+    }
+
     /// <summary>
     /// Typing 'debugparse x' will print the parse tree for x.
     /// </summary>
@@ -19,7 +38,7 @@ namespace WatsonAI
       if (io.remainingInput.Trim().StartsWith("debugparse", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("debugparse".Length);
-        var parse = new Parser().Parse(io.remainingInput).Show();
+        var parse = this.parser.Parse(io.remainingInput).Show();
         io.remainingInput = "";
         io.output = io.output + parse;
       }
