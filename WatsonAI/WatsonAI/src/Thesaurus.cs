@@ -40,16 +40,17 @@ namespace WatsonAI
     /// <param name="a">The first word.</param>
     /// <param name="b">The second word.</param>
     /// <returns>A boolean value, whether they are synonyms.</returns>
-    public bool IsSynonymOf(string a, string b)
-    {
-      if (a.Equals(b, StringComparison.OrdinalIgnoreCase)) return true;
+    public bool IsSynonymOf(string a, string b) 
+      => a.Equals(b, StringComparison.OrdinalIgnoreCase) 
+      || CheckSynonymRelation(a, b) 
+      || CheckSynonymRelation(b, a);
 
-      if (CheckSynonymRelation(a, b)) return true;
+      
 
       // We do this both ways because the Word synonyms aren't a two way relation.
       // Apparantly.
-      return CheckSynonymRelation(b, a);
-    }
+      
+    
 
     /// <summary>
     /// Checks if string a is a synonym of string b.
@@ -60,15 +61,12 @@ namespace WatsonAI
     /// <param name="b">The second word.</param>
     /// <returns>A boolean value, whether they are synonyms.</returns>
     public bool IsSynonymOf(DictionaryWord a, string b)
-    {
-      if (a.word.Equals(b, StringComparison.OrdinalIgnoreCase)) return true;
-
-      if (CheckSynonymRelation(a, b)) return true;
-
+      => (a.word.Equals(b, StringComparison.OrdinalIgnoreCase)) 
+      || (CheckSynonymRelation(a, b)) 
       // We do this both ways because the Word synonyms aren't a two way relation.
       // Apparantly.
-      return CheckSynonymRelation(new DictionaryWord(b, a.category), a.word);
-    }
+      ||CheckSynonymRelation(new DictionaryWord(b, a.category), a.word);
+    
 
     /// <summary>
     /// Checks if string a is a synonym of string b.

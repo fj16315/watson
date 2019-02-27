@@ -9,6 +9,7 @@ namespace WatsonAI
   {
     private KnowledgeGraph mainGraph;
     private List<KnowledgeGraph> subGraphs;
+    
 
     public HiveMind(KnowledgeGraph mainGraph, List<KnowledgeGraph> subGraphs)
     {
@@ -45,6 +46,8 @@ namespace WatsonAI
 
     public string[] relationNames { get; }
 
+    private Thesaurus thesaurus = new Thesaurus();
+    
     public Associations(int entityCount, int relationCount)
     {
       entityNames = new string[entityCount];
@@ -69,14 +72,12 @@ namespace WatsonAI
 
     public bool Describes(string word, Entity entity)
     {
-      var thesaurus = new Thesaurus();
-      return thesaurus.IsSynonymOf(word, NameOf(entity));
+      return this.thesaurus.IsSynonymOf(word, NameOf(entity));
     }
 
     public bool Describes(string word, Relation relation)
-    {
-      var thesaurus = new Thesaurus();
-      return thesaurus.IsSynonymOf(word, NameOf(relation));
+    { 
+      return this.thesaurus.IsSynonymOf(word, NameOf(relation));
     }
   }
 
