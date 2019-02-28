@@ -15,11 +15,13 @@ namespace Notebook
     {
 
         public GameObject container;
+        public PlayerController player;
 
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
         Page currentPageEnum = Page.MENU;
+
         // Notebook pages
         public GameObject charPage;
         public GameObject itemPage;
@@ -27,7 +29,7 @@ namespace Notebook
         public GameObject notePage;
         public GameObject menuPage;
         GameObject currentPage;
-        GameObject currentTabs;
+
         // Character pages
         public GameObject charActress;
         public GameObject charButler;
@@ -80,7 +82,6 @@ namespace Notebook
             menuPage.SetActive(true);
 
             currentPage = menuPage;
-            currentTabs = tabsEmpty;
 
             // Add clue lists
             cluesDirectory.Add(cluesActress);
@@ -125,28 +126,23 @@ namespace Notebook
                         charPage.SetActive(true);
                         tabsRightChars.SetActive(true);
                         currentPage = charPage;
-                        currentTabs = tabsRightChars;
                         ChangeCharacter((int)currentCharEnum);
                         break;
                     case Page.INVENTORY:
                         invtPage.SetActive(true);
                         currentPage = invtPage;
-                        currentTabs = tabsEmpty;
                         break;
                     case Page.ITEM:
                         itemPage.SetActive(true);
                         currentPage = itemPage;
-                        currentTabs = tabsEmpty;
                         break;
                     case Page.NOTES:
                         notePage.SetActive(true);
                         currentPage = notePage;
-                        currentTabs = tabsEmpty;
                         break;
                     case Page.MENU:
                         menuPage.SetActive(true);
                         currentPage = menuPage;
-                        currentTabs = tabsEmpty;
                         break;
                 }
                 currentPageEnum = (Page)target;

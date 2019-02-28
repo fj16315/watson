@@ -24,14 +24,12 @@ public class CameraRaycasting : MonoBehaviour
     public string stringToEdit = "Who are you?";
     public GameObject masterCanvas, speechCanvas;
     PlayerController player;
-    RigidbodyFirstPersonController fpc;
     public MasterControl controller;
 
     // Use this for initialization
     void Start()
     {
         player = Object.FindObjectOfType<PlayerController>();
-        fpc = Object.FindObjectOfType<RigidbodyFirstPersonController>();
     }
 
     // Update is called once per frame
