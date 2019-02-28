@@ -144,4 +144,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="src\HiveMind.cs" />
+    <Compile Remove="src\EntityQuery.cs" />
+  </ItemGroup>
 </Project>

@@ -5,15 +5,9 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatsonAI", "WatsonAI\WatsonAI.csproj", "{7D57AFA3-7E15-4E26-964D-23F21C654754}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatsonConsole", "WatsonConsole\WatsonConsole.csproj", "{7069BB55-2D9F-4C59-B913-5ECFEA762C03}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7D57AFA3-7E15-4E26-964D-23F21C654754} = {7D57AFA3-7E15-4E26-964D-23F21C654754}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatsonConsole", "WatsonConsole\WatsonConsole.csproj", "{7069BB55-2D9F-4C59-B913-5ECFEA762C03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatsonTest", "WatsonTest\WatsonTest.csproj", "{1EEED99B-0297-4E79-A297-E4D51A6CF80A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7D57AFA3-7E15-4E26-964D-23F21C654754} = {7D57AFA3-7E15-4E26-964D-23F21C654754}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,5 +33,17 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC05C35D-A569-4DA6-80CF-63712636AB56}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.TabWidth = 2
+		$1.TabsToSpaces = True
+		$1.IndentWidth = 2
+		$1.EolMarker = Unix
+		$1.scope = text/x-csharp
+		$1.FileWidth = 80
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
 	EndGlobalSection
 EndGlobal
