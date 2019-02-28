@@ -22,7 +22,7 @@ public class CameraRaycasting : MonoBehaviour
     Collider entity;
     public GUISkin skin;
     public string stringToEdit = "Who are you?";
-    GameObject masterCanvas, speechCanvas;
+    public GameObject masterCanvas, speechCanvas;
     PlayerController player;
     RigidbodyFirstPersonController fpc;
     public MasterControl controller;
@@ -30,8 +30,6 @@ public class CameraRaycasting : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        masterCanvas = GameObject.Find("MasterCanvas");
-        speechCanvas = GameObject.Find("SpeechCanvas");
         player = Object.FindObjectOfType<PlayerController>();
         fpc = Object.FindObjectOfType<RigidbodyFirstPersonController>();
     }

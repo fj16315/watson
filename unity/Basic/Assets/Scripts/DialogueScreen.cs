@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC;
+using Notebook;
 
 public class DialogueScreen : MonoBehaviour {
 
@@ -11,12 +12,14 @@ public class DialogueScreen : MonoBehaviour {
     //bool query = false;
     public string stringToEdit = "";
     string answer = "";
+    string queryResponse = "";
     private AIController ai;
     public GameObject replyBubble;
     public Text answerBox;
     public GameObject saveButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
+    public NotebookController notebook;
 
     // Character Fonts
     public Font fontDetective;
@@ -71,8 +74,8 @@ public class DialogueScreen : MonoBehaviour {
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
-                string result = ai.Query(stringToEdit);
-                UpdateReply(result);
+                queryResponse = ai.Query(stringToEdit);
+                UpdateReply(queryResponse);
                 Debug.Log(answer);
             }
          
@@ -84,6 +87,7 @@ public class DialogueScreen : MonoBehaviour {
         show = true;
         replyBubble.SetActive(true);
         textBubble.SetActive(true);
+        saveButton.SetActive(true);
         currentCharacter = character;
         UpdateReply("");
     }
@@ -93,6 +97,7 @@ public class DialogueScreen : MonoBehaviour {
         show = false;
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
+        saveButton.SetActive(false);
         answerBox.text = "";
         Cursor.visible = false;
     }
@@ -129,9 +134,9 @@ public class DialogueScreen : MonoBehaviour {
         return new NPCProfile("", fontDetective, 0, 0);
     }
 
-    public void LogResponse(NPCController character, string message)
+    public void SaveButton()
     {
-
+        notebook.LogResponse(currentCharacter, queryResponse);
     }
 
 }
