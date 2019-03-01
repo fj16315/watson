@@ -24,7 +24,7 @@ namespace WatsonAI
     /// </summary>
     public Parser()
     {
-      var modelPathParse = Path.Combine(Directory.GetCurrentDirectory(), "res", "Models");
+      var modelPathParse = Path.Combine(Directory.GetCurrentDirectory(), "res", "Models") + Path.DirectorySeparatorChar;
 
       this.tokenizer = new EnglishRuleBasedTokenizer(false);
       this.parser = new EnglishTreebankParser(modelPathParse);
