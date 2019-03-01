@@ -24,12 +24,7 @@ namespace WatsonAI
     /// </summary>
     public Parser()
     {
-      //var modelPathSen = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishSD.nbin";
-      //var modelPathTok = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishTok.nbin";
-      //var modelPathPos = Directory.GetCurrentDirectory() + "\\res\\Models\\EnglishPOS.nbin";
-      var modelPathParse = Directory.GetCurrentDirectory() + "\\res\\Models\\";
-
-      //var tagDictDir = Directory.GetCurrentDirectory() + "\\res\\Models\\Parser\\tagdict";
+      var modelPathParse = Path.Combine(Directory.GetCurrentDirectory(), "res", "Models");
 
       this.tokenizer = new EnglishRuleBasedTokenizer(false);
       this.parser = new EnglishTreebankParser(modelPathParse);
