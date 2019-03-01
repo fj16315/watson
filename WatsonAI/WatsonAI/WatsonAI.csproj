@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1003" />
-    <PackageReference Include="OpenNLP" Version="1.3.4" />
     <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
   </ItemGroup>
 
@@ -20,6 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="libs\OpenNLP.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libs\SharpEntropy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libs\SharpWordNet.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="res\Models\Coref\acronyms">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -148,5 +156,17 @@
   <ItemGroup>
     <Compile Remove="src\HiveMind.cs" />
     <Compile Remove="src\EntityQuery.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenNLP">
+      <HintPath>libs\OpenNLP.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpEntropy">
+      <HintPath>libs\SharpEntropy.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpWordNet">
+      <HintPath>libs\SharpWordNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
