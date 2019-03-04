@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="src\Thesaurus.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="res\Models\Coref\acronyms">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -147,5 +150,6 @@
   <ItemGroup>
     <Compile Remove="src\HiveMind.cs" />
     <Compile Remove="src\EntityQuery.cs" />
+    <Compile Remove="src\Thesaurus.cs" />
   </ItemGroup>
 </Project>
