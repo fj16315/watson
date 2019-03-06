@@ -48,9 +48,15 @@ namespace WatsonTest
            }))()
          );
 
-    public static Arbitrary<VerbPhrase> VerbPhrase()
+    public static Arbitrary<Verb> Verb()
       => Arb.From(
            from n in Arb.Generate<uint>()
+           select new Verb(n)
+         );
+
+    public static Arbitrary<VerbPhrase> VerbPhrase()
+      => Arb.From(
+           from n in Arb.Generate<Verb>()
            from vs in Arb.Generate<Valent[]>()
            select ((Func<VerbPhrase>)(() =>
            {

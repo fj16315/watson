@@ -5,11 +5,11 @@ namespace WatsonAI
   public class VerbPhrase
   {
     // TODO: Make a wrapper class
-    public uint verb { get; }
+    public Verb verb { get; }
     private readonly HashSet<ITag> tags;
     private readonly List<Valent> valents;
 
-    public VerbPhrase(uint verb)
+    public VerbPhrase(Verb verb)
     {
       this.verb = verb;
       this.tags = new HashSet<ITag>();
@@ -89,6 +89,62 @@ namespace WatsonAI
   {
     // TODO: Decide on the contents of the interface.
     //       The common functionality of these tags is not yet clear.
+  }
+
+  public struct Verb
+  {
+    private readonly uint n;
+
+    public Verb(uint v)
+    {
+      this.n = v;
+    }
+
+    public static explicit operator uint(Verb v)
+      => v.n;
+
+    public static bool operator ==(Verb l, Verb r)
+      => l.n == r.n;
+
+    public static bool operator !=(Verb l, Verb r)
+      => !(l == r);
+
+    public static bool operator ==(Verb v, uint i)
+      => v.n == i;
+
+    public static bool operator !=(Verb v, uint i)
+      => !(v == i);
+
+    public static bool operator ==(uint i, Verb v)
+      => v == i;
+
+    public static bool operator !=(uint i, Verb v)
+      => v != i;
+
+    public override bool Equals(object obj)
+    {
+      if (obj == null)
+      {
+        throw new System.ArgumentNullException();
+      }
+
+      if (obj is Verb)
+      {
+        return this == (Verb)obj;
+      }
+
+      if (obj is int)
+      {
+        return this == (uint)obj;
+      }
+      return false;
+    }
+
+    public override int GetHashCode()
+      => n.GetHashCode();
+
+    public override string ToString()
+      => $"Verb{{{n}}}";
   }
 }
 

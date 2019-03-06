@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <None Include="src\Thesaurus.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <None Include="src\Parser.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <None Include="src\TextEngines\DebugParseEngine.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <None Include="src\Watson.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
   <ItemGroup>
     <None Update="res\Models\Coref\acronyms">
@@ -151,5 +154,8 @@
     <Compile Remove="src\HiveMind.cs" />
     <Compile Remove="src\EntityQuery.cs" />
     <Compile Remove="src\Thesaurus.cs" />
+    <Compile Remove="src\Parser.cs" />
+    <Compile Remove="src\TextEngines\DebugParseEngine.cs" />
+    <Compile Remove="src\Watson.cs" />
   </ItemGroup>
 </Project>

@@ -33,8 +33,8 @@ namespace WatsonTest
       }
       return Enumerable.Zip(
         knowledge.GetVerbPhrases()
-          .OrderBy(vp => vp.verb),
-        verbPhrases.OrderBy(vp => vp.verb),
+          .OrderBy(vp => (uint)vp.verb),
+        verbPhrases.OrderBy(vp => (uint)vp.verb),
         (a, b) => a == b
       ).All(b => b);
     }
