@@ -4,7 +4,6 @@ namespace WatsonAI
 {
   public class VerbPhrase
   {
-    // TODO: Make a wrapper class
     public Verb verb { get; }
     private readonly HashSet<ITag> tags;
     private readonly List<Valent> valents;
@@ -95,9 +94,9 @@ namespace WatsonAI
   {
     private readonly uint n;
 
-    public Verb(uint v)
+    public Verb(uint n)
     {
-      this.n = v;
+      this.n = n;
     }
 
     public static explicit operator uint(Verb v)
