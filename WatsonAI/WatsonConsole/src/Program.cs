@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using WatsonAI;
 
 public class MainClass
@@ -9,6 +10,13 @@ public class MainClass
   /// </summary>
   public static void Main(string[] args)
   {
+    var path = Directory.GetCurrentDirectory();
+    if (Directory.Exists(Path.Combine(path, "bin")))
+    {
+      path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
+      Directory.SetCurrentDirectory(path);
+    }
+
     IWatson watson = new Watson();
 
     while (true)
