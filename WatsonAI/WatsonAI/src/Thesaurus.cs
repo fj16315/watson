@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Linq;
 
 namespace WatsonAI
 {
@@ -63,6 +64,32 @@ namespace WatsonAI
             }
           //}
           Console.Write("\n");
+        }
+      }
+    }
+
+    public void Similarity(string first, string second)
+    {
+      var relations = new SynSetRelation[]
+      {
+        SynSetRelation.SimilarTo,
+        SynSetRelation.Hypernym
+        //SynSetRelation.Hyponym
+      };
+
+      //var foo = from synSetA in wordNet.GetSynSets(first)
+                //from synSetB in wordNet.GetSynSets(second)
+                //from aaa in synSetA.GetShortestPathTo(synSetB, relations)
+                //select aaa;
+
+      foreach (var synSetA in wordNet.GetSynSets(first))
+      {
+        foreach (var synSetB in wordNet.GetSynSets(second))
+        {
+          foreach (var aaa in synSetA.GetShortestPathTo(synSetB, relations) ?? Enumerable.Empty<SynSet>())
+          {
+            Console.WriteLine($"{aaa}");
+          }
         }
       }
     }

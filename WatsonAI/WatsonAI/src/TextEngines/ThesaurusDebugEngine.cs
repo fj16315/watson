@@ -37,6 +37,16 @@ namespace WatsonAI
         io.remainingInput = io.remainingInput.Substring("!t ".Length);
         this.thesaurus.GetSynonyms(io.remainingInput);
       }
+
+      if (io.remainingInput.Trim().StartsWith("!s", StringComparison.OrdinalIgnoreCase))
+      {
+        io.remainingInput = io.remainingInput.Substring("!s ".Length);
+        var foo = io.remainingInput.Split(' ');
+        if (foo.Length >= 2)
+        {
+          this.thesaurus.Similarity(foo[0], foo[1]);
+        }
+      }
       return io;
     }
   }
