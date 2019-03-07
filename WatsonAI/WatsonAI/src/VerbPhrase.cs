@@ -2,6 +2,12 @@ using System.Collections.Generic;
 
 namespace WatsonAI
 {
+  /// <summary>
+  /// Represents a verb and its subjects and objects.
+  /// </summary>
+  /// <remarks>
+  /// A piece of knowledge is represented by stating a fact using this type.
+  /// </remarks>
   public class VerbPhrase
   {
     public Verb verb { get; }
@@ -36,6 +42,16 @@ namespace WatsonAI
     }
   }
 
+  /// <summary>
+  /// Represents a subject or object in a clause.
+  /// </summary>
+  /// <remarks>
+  /// All valents contain an <see cref="WatsonAI.Entity"/> and indirect objects
+  /// also contain a preposition (<see cref="WatsonAI.Prep"/>).
+  /// 
+  /// The name <see cref="WatsonAI.Valent"/> comes from the valency of a verb
+  /// but is not an actual word.
+  /// </remarks>
   public struct Valent
   {
     public enum Tag { Subj, Dobj, Iobj };
