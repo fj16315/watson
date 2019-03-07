@@ -45,13 +45,6 @@ namespace WatsonAI
       || CheckSynonymRelation(a, b) 
       || CheckSynonymRelation(b, a);
 
-      
-
-      // We do this both ways because the Word synonyms aren't a two way relation.
-      // Apparantly.
-      
-    
-
     /// <summary>
     /// Checks if string a is a synonym of string b.
     /// Providing the Lexical Category of the first word helps filter invalid synonyms.
@@ -67,7 +60,6 @@ namespace WatsonAI
       // Apparantly.
       ||CheckSynonymRelation(new DictionaryWord(b, a.category), a.word);
     
-
     /// <summary>
     /// Checks if string a is a synonym of string b.
     /// Providing the Lexical Category of both words helps filter invalid synonyms.
