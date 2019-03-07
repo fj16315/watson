@@ -22,7 +22,7 @@ namespace WatsonAI
     /// </summary>
     public Thesaurus()
     {
-      var directory = Path.Combine(Directory.GetCurrentDirectory(), "wordnet") + Path.DirectorySeparatorChar;
+      var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet") + Path.DirectorySeparatorChar;
 
 
       wordNet = new WordNetEngine();
@@ -30,16 +30,6 @@ namespace WatsonAI
       Console.WriteLine("Loading database...");
       wordNet.LoadFromDirectory(directory);
       Console.WriteLine("Load completed.");
-    }
-
-    /// <summary>
-    /// Constructor for a thesaurus.
-    /// Passing in an existing word application is faster for mutliple thesaurus construction.
-    /// </summary>
-    /// <param name="app"></param>
-    public Thesaurus(WordNetEngine wordNetEngine)
-    {
-      this.wordNet = wordNetEngine;
     }
 
     public void GetSynonyms(string word)
@@ -59,8 +49,8 @@ namespace WatsonAI
         foreach (var relation in synSet.SemanticRelations)
         {
           Console.WriteLine("Related SynSet Words:");
-          if (synSet.GetRelatedSynSetCount(relation) > 0)
-          {
+          //if (wordNet.GetSynSets( > 0)
+          //{
             Console.WriteLine("Sense Greater Than Zero: Related SynSet Words:");
             foreach (var relatedSynSet in synSet.GetRelatedSynSets(relation, true))
             {
@@ -71,7 +61,7 @@ namespace WatsonAI
               }
               Console.Write("\n");
             }
-          }
+          //}
           Console.Write("\n");
         }
       }
