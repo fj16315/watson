@@ -216,6 +216,7 @@
   <ItemGroup>
     <Compile Remove="src\HiveMind.cs" />
     <Compile Remove="src\EntityQuery.cs" />
+    <Compile Remove="src\Thesaurus.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using WatsonAI;
 
+// There are commented out lines to allow the rest of the project to build.
+
 public class MainClass
 {
   /// <summary>

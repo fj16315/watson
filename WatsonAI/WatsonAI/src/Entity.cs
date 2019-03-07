@@ -1,23 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   /// <summary>
   /// Wrapper type around <see cref="int"/> for safety.
   /// </summary>
   public struct Entity
   {
-    // This is an int because it is often used as an index and C# uses
-    // ints, rather than uints, for indexing.
-    private readonly int n;
+    private readonly uint n;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WatsonAI.Entity"/> struct.
     /// </summary>
-    /// <param name="n">The <see cref="int"/> to wrap.</param>
-    public Entity(int n) 
+    /// <param name="n">The <see cref="uint"/> to wrap.</param>
+    public Entity(uint n) 
     {
       this.n = n;
     }
@@ -27,7 +21,7 @@ namespace WatsonAI
     /// </summary>
     /// <returns>The wrapped <see cref="int"/>.</returns>
     /// <param name="e">The wrapping <see cref="GameAI.Entity"/>.</param>
-    public static explicit operator int(Entity e)
+    public static explicit operator uint(Entity e)
       => e.n;
 
     public static bool operator ==(Entity l, Entity r)
@@ -36,34 +30,41 @@ namespace WatsonAI
     public static bool operator !=(Entity l, Entity r)
       => !(l == r);
 
-    public static bool operator ==(Entity e, int i)
+    public static bool operator ==(Entity e, uint i)
       => e.n == i;
 
-    public static bool operator !=(Entity e, int i)
+    public static bool operator !=(Entity e, uint i)
       => !(e == i);
 
-    public static bool operator ==(int i, Entity e)
+    public static bool operator ==(uint i, Entity e)
       => e == i;
 
-    public static bool operator !=(int i, Entity e)
+    public static bool operator !=(uint i, Entity e)
       => e != i;
 
     public override bool Equals(object obj)
     {
-      Contract.Requires(obj != null);
+      if (obj == null)
+      {
+        throw new System.ArgumentNullException();
+      }
 
       if (obj is Entity)
       {
         return this == (Entity)obj;
       }
+
       if (obj is int)
       {
-        return this == (int)obj;
+        return this == (uint)obj;
       }
       return false;
     }
 
     public override int GetHashCode()
       => n.GetHashCode();
+
+    public override string ToString()
+      => $"Entity{{{n}}}";
   }
 }

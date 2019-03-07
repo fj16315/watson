@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,43 +6,44 @@ namespace WatsonAI
   public class Knowledge
   {
     private readonly List<VerbPhrase> verbPhrases;
-    private int entityCount;
+    private readonly HashSet<Entity> entities;
 
     public Knowledge()
     {
       verbPhrases = new List<VerbPhrase>();
-      entityCount = 0;
+      entities = new HashSet<Entity>();
     }
 
-    void AddVerbPhrase(VerbPhrase verbPhrase)
+    public void AddVerbPhrase(VerbPhrase verbPhrase)
     {
       verbPhrases.Add(verbPhrase);
-      var highestEntity = verbPhrase.GetValents()
-                                    .Select(v => (int)v.entity)
-                                    .Max();
-      if (highestEntity > entityCount)
-      {
-        entityCount = highestEntity;
-      }
+      entities.UnionWith(
+        verbPhrase.GetValents().Select(v => v.entity)
+      );
     }
 
-    bool RemoveVerbPhrase(VerbPhrase verbPhrase)
+    public bool RemoveVerbPhrase(VerbPhrase verbPhrase)
     {
-      // TODO: Check if this changes entityCount
-      return verbPhrases.Remove(verbPhrase);
+      var removed = verbPhrases.Remove(verbPhrase);
+      RecheckEntities();
+      return removed;
     }
 
-    IEnumerable<VerbPhrase> GetVerbPhrases()
+    private void RecheckEntities()
+    {
+      entities.Clear();
+      entities.UnionWith(
+        verbPhrases.SelectMany(
+          vp => vp.GetValents()
+                  .Select( v => v.entity )
+        )
+      );
+    }
+
+    public IEnumerable<VerbPhrase> GetVerbPhrases()
       => verbPhrases;
 
-    // TODO: Make wrapper class for uint (Relation.cs: 8)
-    IEnumerable<VerbPhrase> FilterBy(uint verb)
-      => GetVerbPhrases().Where(
-        verbPhrase => verbPhrase.verb == verb
-      );
-
-    IEnumerable<Entity> GetEntities()
-      => Enumerable.Range(0, entityCount)
-         .Select(n => new Entity(n));
+    public IEnumerable<Entity> GetEntities()
+      => entities;
   }
 }
