@@ -22,7 +22,7 @@ namespace WatsonAI
     /// </summary>
     public Thesaurus()
     {
-      var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet") + Path.DirectorySeparatorChar;
+      var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
 
 
       wordNet = new WordNetEngine();

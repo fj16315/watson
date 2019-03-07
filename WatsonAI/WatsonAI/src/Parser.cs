@@ -25,11 +25,6 @@ namespace WatsonAI
     public Parser()
     {
       var modelPathParse = Directory.GetCurrentDirectory();
-      if (Directory.Exists(Path.Combine(modelPathParse, "bin")))
-      {
-        modelPathParse = Path.Combine(modelPathParse, "bin", "debug", "netcoreapp2.1");
-      }
-
       modelPathParse = Path.Combine(modelPathParse, "res", "Models") + Path.DirectorySeparatorChar;
 
       this.tokenizer = new EnglishRuleBasedTokenizer(false);

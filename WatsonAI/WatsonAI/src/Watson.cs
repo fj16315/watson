@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace WatsonAI
@@ -15,8 +16,12 @@ namespace WatsonAI
     /// <returns>Response to the player.</returns>
     public string Run(string input)
     {
-
-
+      var path = Directory.GetCurrentDirectory();
+      if (Directory.Exists(Path.Combine(path, "bin")))
+      {
+        path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
+        Directory.SetCurrentDirectory(path);
+      }
 
       var io = new InputOutput(input);
 
