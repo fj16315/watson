@@ -38,6 +38,15 @@ namespace WatsonAI
         this.thesaurus.GetSynonyms(io.remainingInput);
       }
 
+      if (io.remainingInput.Trim().StartsWith("!sd", StringComparison.OrdinalIgnoreCase))
+      {
+        io.remainingInput = io.remainingInput.Substring("!sd ".Length);
+        var foo = io.remainingInput.Split(' ');
+        {
+          Console.WriteLine($"{this.thesaurus.SimpleDescribes(foo[0], foo[1])} ");
+        }
+      }
+
       if (io.remainingInput.Trim().StartsWith("!s", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!s ".Length);

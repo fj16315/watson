@@ -68,6 +68,9 @@ namespace WatsonAI
       }
     }
 
+    public bool SimpleDescribes(string first, string second) 
+      => wordNet.GetWordSimilarity(first, second) > 0.25;
+
     public void Similarity(string first, string second)
     {
       var relations = new SynSetRelation[]
