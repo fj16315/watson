@@ -11,13 +11,13 @@ public class MainClass
   /// </summary>
   public static void Main(string[] args)
   {
-    //IWatson watson = new Watson();
+    IWatson watson = new Watson();
 
     while (true)
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      //Console.WriteLine(watson.Run(line));
+      Console.WriteLine(watson.Run(line));
       if (line == "") { break; }
     }
   }

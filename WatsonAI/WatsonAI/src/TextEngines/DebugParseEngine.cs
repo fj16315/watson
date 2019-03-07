@@ -35,9 +35,9 @@ namespace WatsonAI
     /// <returns>Output with parsetree appended when appropriate.</returns>
     public InputOutput Process(InputOutput io)
     {
-      if (io.remainingInput.Trim().StartsWith("debugparse", StringComparison.OrdinalIgnoreCase))
+      if (io.remainingInput.Trim().StartsWith("!p ", StringComparison.OrdinalIgnoreCase))
       {
-        io.remainingInput = io.remainingInput.Substring("debugparse".Length);
+        io.remainingInput = io.remainingInput.Substring("!p ".Length);
         var parse = this.parser.Parse(io.remainingInput).Show();
         io.remainingInput = "";
         io.output = io.output + parse;
