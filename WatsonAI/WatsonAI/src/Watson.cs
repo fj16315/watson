@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NHunspell;
 
 namespace WatsonAI
 {
@@ -15,15 +16,20 @@ namespace WatsonAI
     /// <returns>Response to the player.</returns>
     public string Run(string input)
     {
+
+
+
       var io = new InputOutput(input);
 
       var greetings = new GreetingsEngine();
       var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
+      var thesaurusDebug = new ThesaurusDebugEngine();
 
       var output = io
         .Process(greetings)
         .Process(debugParse)
+        .Process(thesaurusDebug)
 
         .Process(fallback);
       return output.output;
