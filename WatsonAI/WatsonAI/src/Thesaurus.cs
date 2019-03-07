@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Syn.WordNet;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using wordLib = Microsoft.Office.Interop.Word;
 
 namespace WatsonAI
 {
@@ -12,7 +13,8 @@ namespace WatsonAI
   /// </summary>
   public class Thesaurus
   {
-    private wordLib.Application app;
+
+    private WordNetEngine wordNet;
 
     /// <summary>
     /// Constructor for a thesaurus.
@@ -20,7 +22,14 @@ namespace WatsonAI
     /// </summary>
     public Thesaurus()
     {
-      this.app = new wordLib.Application();
+      var directory = Path.Combine(Directory.GetCurrentDirectory(), "wordnet") + Path.DirectorySeparatorChar;
+
+
+      wordNet = new WordNetEngine();
+
+      Console.WriteLine("Loading database...");
+      wordNet.LoadFromDirectory(directory);
+      Console.WriteLine("Load completed.");
     }
 
     /// <summary>
@@ -28,108 +37,44 @@ namespace WatsonAI
     /// Passing in an existing word application is faster for mutliple thesaurus construction.
     /// </summary>
     /// <param name="app"></param>
-    public Thesaurus(wordLib.Application app)
+    public Thesaurus(WordNetEngine wordNetEngine)
     {
-      this.app = app;
+      this.wordNet = wordNetEngine;
     }
 
-    /// <summary>
-    /// Checks if string a is a synonym of string b.
-    /// Sometimes gives weird results e.g. man is a synonym for cat.
-    /// </summary>
-    /// <param name="a">The first word.</param>
-    /// <param name="b">The second word.</param>
-    /// <returns>A boolean value, whether they are synonyms.</returns>
-    public bool IsSynonymOf(string a, string b) 
-      => a.Equals(b, StringComparison.OrdinalIgnoreCase) 
-      || CheckSynonymRelation(a, b) 
-      || CheckSynonymRelation(b, a);
-
-    /// <summary>
-    /// Checks if string a is a synonym of string b.
-    /// Providing the Lexical Category of the first word helps filter invalid synonyms.
-    /// Sometimes gives weird results e.g. man is a synonym for cat.
-    /// </summary>
-    /// <param name="a">The first word.</param>
-    /// <param name="b">The second word.</param>
-    /// <returns>A boolean value, whether they are synonyms.</returns>
-    public bool IsSynonymOf(DictionaryWord a, string b)
-      => (a.word.Equals(b, StringComparison.OrdinalIgnoreCase)) 
-      || (CheckSynonymRelation(a, b)) 
-      // We do this both ways because the Word synonyms aren't a two way relation.
-      // Apparantly.
-      ||CheckSynonymRelation(new DictionaryWord(b, a.category), a.word);
-    
-    /// <summary>
-    /// Checks if string a is a synonym of string b.
-    /// Providing the Lexical Category of both words helps filter invalid synonyms.
-    /// Sometimes gives weird results e.g. man is a synonym for cat.
-    /// </summary>
-    /// <param name="a">The first word.</param>
-    /// <param name="b">The second word.</param>
-    /// <returns>A boolean value, whether they are synonyms.</returns>
-    public bool IsSynonymOf(DictionaryWord a, DictionaryWord b)
+    public void GetSynonyms(string word)
     {
-      if (a.word.Equals(b.word, StringComparison.OrdinalIgnoreCase)) return true;
-      if (a.category != b.category) return false;
+      var synSetList = wordNet.GetSynSets(word);
 
-      if (CheckSynonymRelation(a, b.word)) return true;
-
-      // We do this both ways because the Word synonyms aren't a two way relation.
-      // Apparantly.
-      return CheckSynonymRelation(b, a.word);
-    }
-
-    /// <summary>
-    /// Checks the one way synonym relation for a to b.
-    /// To get all synonyms, this should be called with parameters swapped.
-    /// </summary>
-    /// <param name="a">The first word.</param>
-    /// <param name="b">The second word.</param>
-    /// <returns>Whether b is a synonym for a.</returns>
-    private bool CheckSynonymRelation(string a, string b)
-    {
-      var infosyn = app.SynonymInfo[a, wordLib.WdLanguageID.wdEnglishUK];
-
-      // This needs to be Array because of the library object casting
-      foreach (var item in infosyn.MeaningList as Array)
+      foreach (var synSet in synSetList)
       {
-        foreach (var word in infosyn.SynonymList[item] as Array)
+        Console.WriteLine("SynSet Words:");
+        foreach (var relatedWord in synSet.Words)
         {
-          if ((word as string).Equals(b,StringComparison.OrdinalIgnoreCase)) return true;
+          Console.Write(relatedWord + " ");
         }
-      }
+        Console.Write("\n");
+        Console.Write("\n");
 
-      return false;
-    }
-
-    /// <summary>
-    /// Checks the one way synonym relation for a to b.
-    /// To get all synonyms, this should be called with parameters swapped.
-    /// Uses the lexical category of a to filter synonyms.
-    /// </summary>
-    /// <remarks> The lists are one indexed! </remarks>
-    /// <param name="a">The first word.</param>
-    /// <param name="b">The second word.</param>
-    /// <returns>Whether b is a synonym for a.</returns>
-    private bool CheckSynonymRelation(DictionaryWord a, string b)
-    {
-      var asyn = app.SynonymInfo[a.word, wordLib.WdLanguageID.wdEnglishUK];
-      var meaningList = asyn.MeaningList as Array;
-      // These lists are 1 indexed for some reason, caution!
-      for (int meaning = 1; meaning <= meaningList.Length; meaning++)
-      {
-        foreach (var word in asyn.SynonymList[meaningList.GetValue(meaning)] as Array)
+        foreach (var relation in synSet.SemanticRelations)
         {
-          var partOfSpeechList = asyn.PartOfSpeechList as Array;
-          if ((int)partOfSpeechList.GetValue(meaning) == (int)a.category
-            && word.ToString().Equals(b, StringComparison.OrdinalIgnoreCase))
+          Console.WriteLine("Related SynSet Words:");
+          if (synSet.GetRelatedSynSetCount(relation) > 0)
           {
-              return true;
+            Console.WriteLine("Sense Greater Than Zero: Related SynSet Words:");
+            foreach (var relatedSynSet in synSet.GetRelatedSynSets(relation, true))
+            {
+              Console.Write("     ");
+              foreach (var relatedWord in relatedSynSet.Words)
+              {
+                Console.Write(relatedWord + " ");
+              }
+              Console.Write("\n");
+            }
           }
+          Console.Write("\n");
         }
       }
-      return false;
     }
   }
 

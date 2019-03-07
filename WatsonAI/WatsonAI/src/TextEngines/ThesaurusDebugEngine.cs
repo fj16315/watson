@@ -32,10 +32,10 @@ namespace WatsonAI
     /// <returns>Output with parsetree appended when appropriate.</returns>
     public InputOutput Process(InputOutput io)
     {
-      if (io.remainingInput.Trim().StartsWith("debugthesaurus", StringComparison.OrdinalIgnoreCase))
+      if (io.remainingInput.Trim().StartsWith("!t ", StringComparison.OrdinalIgnoreCase))
       {
-        io.remainingInput = io.remainingInput.Substring("debugthesaurus".Length);
-       
+        io.remainingInput = io.remainingInput.Substring("!t ".Length);
+        this.thesaurus.GetSynonyms(io.remainingInput);
       }
       return io;
     }

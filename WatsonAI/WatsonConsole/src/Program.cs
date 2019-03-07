@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using WatsonAI;
-using NHunspell;
+
 public class MainClass
 {
   /// <summary>
@@ -13,15 +13,6 @@ public class MainClass
 
     while (true)
     {
-
-      Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic");
-      List<string> suggestions = hunspell.Suggest("helo");
-      foreach (string suggestion in suggestions)
-      {
-        Console.WriteLine("Suggestion is : " + suggestion);
-      }
-
-
       Console.Write("> ");
       var line = Console.ReadLine();
       Console.WriteLine(watson.Run(line));
