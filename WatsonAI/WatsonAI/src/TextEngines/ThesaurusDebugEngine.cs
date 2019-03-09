@@ -12,7 +12,7 @@ namespace WatsonAI
     private Thesaurus thesaurus;
 
     /// <summary>
-    /// Text engine for debuging the parser.
+    /// Text engine for debugging the parser.
     /// </summary>
     public ThesaurusDebugEngine()
     {
@@ -20,10 +20,13 @@ namespace WatsonAI
     }
 
     /// <summary>
-    /// Text engine for debuging the specified Parser.
+    /// Text engine for debugging the parser.
     /// </summary>
-    /// <param name="parse">The parser to use.</param>
-
+    /// <param name="thesaurus">A thesaurus to use.</param>
+    public ThesaurusDebugEngine(Thesaurus thesaurus)
+    {
+      this.thesaurus = thesaurus;
+    }
 
     /// <summary>
     /// Typing 'debugparse x' will print the parse tree for x.
@@ -38,12 +41,13 @@ namespace WatsonAI
         this.thesaurus.GetSynonyms(io.remainingInput);
       }
 
-      if (io.remainingInput.Trim().StartsWith("!sd", StringComparison.OrdinalIgnoreCase))
+      if (io.remainingInput.Trim().StartsWith("!d", StringComparison.OrdinalIgnoreCase))
       {
-        io.remainingInput = io.remainingInput.Substring("!sd ".Length);
+        io.remainingInput = io.remainingInput.Substring("!d ".Length);
         var foo = io.remainingInput.Split(' ');
+        if (foo.Length >= 2)
         {
-          Console.WriteLine($"{this.thesaurus.SimpleDescribes(foo[0], foo[1])} ");
+          Console.WriteLine($"{this.thesaurus.Describes(foo[0], foo[1])} ");
         }
       }
 

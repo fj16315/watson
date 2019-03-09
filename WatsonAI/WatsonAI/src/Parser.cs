@@ -29,8 +29,9 @@ namespace WatsonAI
 
       this.tokenizer = new EnglishRuleBasedTokenizer(false);
 
-     
+      System.Diagnostics.Debug.WriteLine("Loading parser database...");
       this.parser = new EnglishTreebankParser(modelPathParse);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
     }
 
     /// <summary>

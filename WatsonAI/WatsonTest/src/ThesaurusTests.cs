@@ -2,6 +2,7 @@ using Xunit;
 using WatsonAI;
 using FsCheck.Xunit;
 using FsCheck;
+using Syn.WordNet;
 
 namespace WatsonTest
 {
@@ -11,143 +12,88 @@ namespace WatsonTest
     private Thesaurus thesaurus = new Thesaurus();
 
     [Fact]
-    public void IsSynonymOf_TwoString_Standard()
+    public void Describes_Standard()
     {
-      Assert.True(thesaurus.SimpleDescribes("cat", "kitty"));
-      Assert.True(thesaurus.SimpleDescribes("walk", "stroll"));
-      Assert.True(thesaurus.SimpleDescribes("cat", "lion"));
+      Assert.True(thesaurus.Describes("cat", "kitty"));
+      Assert.True(thesaurus.Describes("walk", "stroll"));
+      Assert.True(thesaurus.Describes("cat", "lion"));
+      Assert.True(thesaurus.Describes("lion", "cat"));
 
       // Synonyms of two strings gives strange results sometimes:
-      Assert.True(thesaurus.SimpleDescribes("cat", "man"));
+      Assert.True(thesaurus.Describes("cat", "man"));
 
-      Assert.False(thesaurus.SimpleDescribes("cat", "dog"));
-      Assert.False(thesaurus.SimpleDescribes("crockery", "plate"));
+      Assert.False(thesaurus.Describes("cat", "dog"));
+      Assert.False(thesaurus.Describes("catesifjeosifj", "dog"));
+      Assert.False(thesaurus.Describes("crockery", "plate"));
     }
 
     [Fact]
-    public void SimpleDescribes_TwoString_EdgeCase()
+    public void Describes_EdgeCase()
     {
-      Assert.True(thesaurus.SimpleDescribes("cat", "cat"));
-      Assert.True(thesaurus.SimpleDescribes("", ""));
+      Assert.True(thesaurus.Describes("cat", "cat"));
+      Assert.True(thesaurus.Describes("", ""));
 
-      Assert.False(thesaurus.SimpleDescribes("", "dog"));
-      Assert.False(thesaurus.SimpleDescribes("cat", ""));
+      Assert.False(thesaurus.Describes("", "dog"));
+      Assert.False(thesaurus.Describes("cat", ""));
 
-      Assert.False(thesaurus.SimpleDescribes("cat ", "cat"));
+      Assert.False(thesaurus.Describes("cat ", "cat"));
     }
 
     [Fact]
-    public void SimpleDescribes_TwoString_Capitalisation()
+    public void Describes_Capitalisation()
     {
-      Assert.True(thesaurus.SimpleDescribes("CAT", "cat"));
-      Assert.True(thesaurus.SimpleDescribes("CaT", "cat"));
-      Assert.True(thesaurus.SimpleDescribes("CaT", "cAt"));
-      Assert.True(thesaurus.SimpleDescribes("CAt", "kitty"));
-      Assert.True(thesaurus.SimpleDescribes("kitty", "CAt"));
-      Assert.True(thesaurus.SimpleDescribes("kItty", "cat"));
-      Assert.True(thesaurus.SimpleDescribes("cat", "kItty"));
+      Assert.True(thesaurus.Describes("CAT", "cat"));
+      Assert.True(thesaurus.Describes("CaT", "cat"));
+      Assert.True(thesaurus.Describes("CaT", "cAt"));
+      Assert.True(thesaurus.Describes("CAt", "kitty"));
+      Assert.True(thesaurus.Describes("kitty", "CAt"));
+      Assert.True(thesaurus.Describes("kItty", "cat"));
+      Assert.True(thesaurus.Describes("cat", "kItty"));
     }
 
-    //[Fact]
-    //public void IsSynonymOf_OneStringOneDictWord_Standard()
-    //{
-    //  var word = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "kitty"));
-    //  word = new DictionaryWord("walk", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "stroll"));
+    [Fact]
+    public void Describes_PartOfSpeechFilter_Standard()
+    {
+      Assert.True(thesaurus.Describes("cat", "kitty", PartOfSpeech.Noun));
+      Assert.True(thesaurus.Describes("walk", "stroll", PartOfSpeech.Verb));
+      Assert.True(thesaurus.Describes("cat", "lion", PartOfSpeech.Noun));
+      Assert.True(thesaurus.Describes("lion", "cat", PartOfSpeech.Noun));
 
-    //  // Synonyms of two strings gives strange results sometimes:
-    //  word = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "man"));
+      // Synonyms of two strings gives strange results sometimes:
+      Assert.True(thesaurus.Describes("cat", "man", PartOfSpeech.Noun));
 
-    //  word = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "dog"));
-    //  word = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "lion"));
-    //  word = new DictionaryWord("crockery", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "plate"));
-    //}
+      Assert.False(thesaurus.Describes("cat", "dog", PartOfSpeech.Noun));
+      Assert.False(thesaurus.Describes("crockery", "plate", PartOfSpeech.Noun));
+    }
 
-    //[Fact]
-    //public void IsSynonymOf_OneStringOneDictWord_Filtering()
-    //{
-    //  var word = new DictionaryWord("key", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "crucial"));
-    //  word = new DictionaryWord("key", LexicalCategory.Adjective);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "crucial"));
-    //}
+    [Fact]
+    public void Describes_PartOfSpeechFilter_Filtering()
+    {
+      Assert.False(thesaurus.Describes("key", "crucial", PartOfSpeech.Noun));
+      Assert.True(thesaurus.Describes("key", "crucial", PartOfSpeech.Adjective));
+    }
 
-    //[Fact]
-    //public void IsSynonymOf_OneStringOneDictWord_EdgeCase()
-    //{
-    //  var word = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "cat"));
-    //  word = new DictionaryWord("", LexicalCategory.Other);
-    //  Assert.True(thesaurus.IsSynonymOf(word, ""));
-    //  word = new DictionaryWord("good-looking", LexicalCategory.Adjective);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "pretty"));
-    //  word = new DictionaryWord("pretty", LexicalCategory.Adjective);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "good-looking"));
+    [Fact]
+    public void Describes_PartOfSpeechFilter_EdgeCase()
+    {
+      Assert.True(thesaurus.Describes("cat", "cat", PartOfSpeech.Noun));
+      Assert.True(thesaurus.Describes("good-looking", "pretty", PartOfSpeech.Adjective));
 
-    //  word = new DictionaryWord("", LexicalCategory.Other);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "dog"));
-    //  word = new DictionaryWord("dog", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, ""));
+      Assert.False(thesaurus.Describes("cat", "cat", PartOfSpeech.Adjective));
+      Assert.False(thesaurus.Describes("", "", PartOfSpeech.Noun));
+    }
 
-    //  word = new DictionaryWord("cat ", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word, "cat"));
-    //}
+    [Fact]
+    public void Describes_PartOfSpeechFilter_NoneExceptionThrowing()
+    {
+      Assert.Throws<System.Exception>(() => thesaurus.Describes("dog", "", PartOfSpeech.None));
+      Assert.Throws<System.Exception>(() => thesaurus.Describes("dog", "catesfliejsf", PartOfSpeech.None));
+    }
 
-    //[Fact]
-    //public void IsSynonymOf_OneStringOneDictWord_Capitalisation()
-    //{
-    //  var word = new DictionaryWord("Cat", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word, "cat"));
-    //}
-
-    //[Fact]
-    //public void IsSynonymOf_TwoDictWords_Standard()
-    //{
-    //  var word1 = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  var word2 = new DictionaryWord("kitty", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word1, word2));
-    //  word1 = new DictionaryWord("walk", LexicalCategory.Noun);
-    //  word2 = new DictionaryWord("stroll", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word1, word2));
-
-    //  // Synonyms of two strings gives strange results sometimes:
-    //  word1 = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  word2 = new DictionaryWord("man", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word1, word2));
-
-    //  word1 = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  word2 = new DictionaryWord("dog", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word1, word2));
-    //  word1 = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  word2 = new DictionaryWord("lion", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word1, word2));
-    //  word1 = new DictionaryWord("crockery", LexicalCategory.Noun);
-    //  word2 = new DictionaryWord("plate", LexicalCategory.Noun);
-    //  Assert.False(thesaurus.IsSynonymOf(word1, word2));
-    //}
-
-    //[Fact]
-    //public void IsSynonymOf_TwoDictWord_Filtering()
-    //{
-    //  var word1 = new DictionaryWord("key", LexicalCategory.Noun);
-    //  var word2 = new DictionaryWord("crucial", LexicalCategory.Adjective);
-    //  Assert.False(thesaurus.IsSynonymOf(word1, word2));
-    //  word1 = new DictionaryWord("key", LexicalCategory.Adjective);
-    //  word2 = new DictionaryWord("crucial", LexicalCategory.Adjective);
-    //  Assert.True(thesaurus.IsSynonymOf(word1, word2));
-    //}
-
-    //[Fact]
-    //public void IsSynonymOf_TwoDictWords_Capitalisation()
-    //{
-    //  var word1 = new DictionaryWord("cAt", LexicalCategory.Noun);
-    //  var word2 = new DictionaryWord("cat", LexicalCategory.Noun);
-    //  Assert.True(thesaurus.IsSynonymOf(word1, word2));
-    //}
+    [Fact]
+    public void Describes_PartOfSpeechFilter_Capitalisation()
+    {
+      Assert.True(thesaurus.Describes("Cat", "cat", PartOfSpeech.Noun));
+    }
   }
 }
