@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace WatsonAI
@@ -7,6 +8,7 @@ namespace WatsonAI
   public class Watson : IWatson
   {
     private Parser parser = new Parser();
+    private Thesaurus thesaurus = new Thesaurus();
 
     /// <summary>
     /// Run the AI on some input speech.
@@ -20,10 +22,12 @@ namespace WatsonAI
       var greetings = new GreetingsEngine();
       var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
+      var thesaurusDebug = new ThesaurusDebugEngine(thesaurus);
 
       var output = io
         .Process(greetings)
         .Process(debugParse)
+        .Process(thesaurusDebug)
 
         .Process(fallback);
       return output.output;

@@ -16,10 +16,4 @@
   <ItemGroup>
     <ProjectReference Include="..\WatsonAI\WatsonAI.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="src\ThesaurusTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\ThesaurusTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
-  </ItemGroup>
 </Project>
