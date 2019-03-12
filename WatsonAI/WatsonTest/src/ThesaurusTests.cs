@@ -8,8 +8,12 @@ namespace WatsonTest
 {
   public class ThesaurusTests
   {
-    // We initialise this only once for speed improvements.
-    private Thesaurus thesaurus = new Thesaurus();
+    /// <summary>
+    /// Having this as static means it is shared amongst all tests.
+    /// This is done because the construction is expensive as it must read in data files.
+    /// An alternative to static is XUnit fixtures, this may be needed in future.
+    /// </summary>
+    private static Thesaurus thesaurus = new Thesaurus();
 
     [Fact]
     public void Describes_Standard()
