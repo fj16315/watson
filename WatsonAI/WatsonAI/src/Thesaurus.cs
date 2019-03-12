@@ -89,11 +89,11 @@ namespace WatsonAI
     /// <param name="word">The word.</param>
     /// <returns>The synonyms of the word.</returns>
     public IEnumerable<string> GetSynonyms(string word)
-      => from synSet in wordNet.GetSynSets(word)
+      => (from synSet in wordNet.GetSynSets(word)
          from relation in synSet.SemanticRelations
          from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
          from synonym in relatedSynSet.Words.Union(synSet.Words)
-         select synonym;
+         select synonym).Distinct();
 
     /// <summary>
     /// Returns the synonyms of the first word.
@@ -104,12 +104,12 @@ namespace WatsonAI
     /// <param name="lexicalCategory">The lexical category of the word.</param>
     /// <returns>The synonyms of the word.</returns>
     public IEnumerable<string> GetSynonyms(string word, PartOfSpeech lexicalCategory)
-      => from synSet in wordNet.GetSynSets(word, lexicalCategory)
+      => (from synSet in wordNet.GetSynSets(word, lexicalCategory)
          from relation in synSet.SemanticRelations
          from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
          where relatedSynSet.PartOfSpeech == lexicalCategory
          from synonym in relatedSynSet.Words.Union(synSet.Words)
-         select synonym;
+         select synonym).Distinct();
 
     /// <summary>
     /// Returns the synonyms of the first word.
@@ -121,12 +121,12 @@ namespace WatsonAI
     /// <param name="relations">The possible synSetReltions between synsets accepted.</param>
     /// <returns>The synonyms of the word.</returns>
     public IEnumerable<string> GetSynonyms(string word, PartOfSpeech lexicalCategory, SynSetRelation[] relations)
-      => from synSet in wordNet.GetSynSets(word, lexicalCategory)
+      => (from synSet in wordNet.GetSynSets(word, lexicalCategory)
          from relation in relations
          from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
          where relatedSynSet.PartOfSpeech == lexicalCategory
          from synonym in relatedSynSet.Words.Union(synSet.Words)
-         select synonym;
+         select synonym).Distinct();
 
     /// <summary>
     /// Returns the similarity value of two words according to WordNet similarity.
