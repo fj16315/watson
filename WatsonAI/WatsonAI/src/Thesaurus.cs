@@ -35,6 +35,17 @@ namespace WatsonAI
       System.Diagnostics.Debug.WriteLine("Load completed.");
     }
 
+    public Thesaurus(string stringToPath)
+    {
+      var directory = Path.Combine(stringToPath, "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
+
+      wordNet = new WordNetEngine();
+
+      System.Diagnostics.Debug.WriteLine("Loading thesaurus database...");
+      wordNet.LoadFromDirectory(directory);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+    }
+
     /// <summary>
     /// Checks if the first word describes the second through the built-in WordNet similarity function.
     /// </summary>

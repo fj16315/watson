@@ -7,6 +7,14 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>AfterBuild</type>
+          <command></command>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
 
   <ItemGroup>

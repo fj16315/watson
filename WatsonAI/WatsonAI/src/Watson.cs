@@ -7,8 +7,20 @@ namespace WatsonAI
 {
   public class Watson : IWatson
   {
-    private Parser parser = new Parser();
-    private Thesaurus thesaurus = new Thesaurus();
+    private Parser parser;
+    private Thesaurus thesaurus; 
+
+
+
+    public Watson() {
+      this.parser = new Parser();
+      this.thesaurus = new Thesaurus();
+    }
+
+    public Watson(string stringToPath) {
+      this.parser = new Parser(stringToPath);
+      this.thesaurus = new Thesaurus(stringToPath);
+    }
 
     /// <summary>
     /// Run the AI on some input speech.

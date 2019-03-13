@@ -74,7 +74,7 @@ public class DialogueScreen : MonoBehaviour {
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
-                queryResponse = ai.Query(stringToEdit);
+                queryResponse = ai.Run(stringToEdit);
                 UpdateReply(queryResponse);
                 Debug.Log(answer);
             }
