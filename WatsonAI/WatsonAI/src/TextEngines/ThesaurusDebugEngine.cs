@@ -38,7 +38,12 @@ namespace WatsonAI
       if (io.remainingInput.Trim().StartsWith("!t ", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!t ".Length);
-        this.thesaurus.GetSynonyms(io.remainingInput);
+        foreach (var word in this.thesaurus.GetSynonyms(io.remainingInput))
+        {
+          Console.Write($"{word}, ");
+
+        }
+        Console.WriteLine("");
       }
 
       if (io.remainingInput.Trim().StartsWith("!d", StringComparison.OrdinalIgnoreCase))
@@ -57,7 +62,7 @@ namespace WatsonAI
         var foo = io.remainingInput.Split(' ');
         if (foo.Length >= 2)
         {
-          this.thesaurus.Similarity(foo[0], foo[1]);
+          Console.WriteLine($"{this.thesaurus.Similarity(foo[0], foo[1])}");
         }
       }
       return io;
