@@ -12,13 +12,9 @@ public class AIController : MonoBehaviour
 
     private Watson watson;
 
-    public AIController() {
-
-        //var altDirectory = Directory.GetCurrentDirectory();
+    public AIController()
+    {
         this.watson = new Watson("Assets/DLLs/");
-
-
-
     }
     // Start is called before the first frame update
     void Start()

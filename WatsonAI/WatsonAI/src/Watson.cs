@@ -11,12 +11,6 @@ namespace WatsonAI
     private Thesaurus thesaurus; 
 
 
-
-    public Watson() {
-      this.parser = new Parser();
-      this.thesaurus = new Thesaurus();
-    }
-
     public Watson(string stringToPath) {
       this.parser = new Parser(stringToPath);
       this.thesaurus = new Thesaurus(stringToPath);

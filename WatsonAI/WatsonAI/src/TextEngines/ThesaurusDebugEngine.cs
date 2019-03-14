@@ -40,30 +40,31 @@ namespace WatsonAI
         io.remainingInput = io.remainingInput.Substring("!t ".Length);
         foreach (var word in this.thesaurus.GetSynonyms(io.remainingInput))
         {
-          Console.Write($"{word}, ");
-
+          io.output += $"{word}, ";
         }
-        Console.WriteLine("");
+        io.output += $" ";
       }
 
       if (io.remainingInput.Trim().StartsWith("!d", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!d ".Length);
-        var foo = io.remainingInput.Split(' ');
+        var foo = io.remainingInput.Split(new char[]{' '});
         if (foo.Length >= 2)
         {
-          Console.WriteLine($"{this.thesaurus.Describes(foo[0], foo[1])} ");
+          io.output += $"{this.thesaurus.Describes(foo[0], foo[1])} ";
         }
+        io.output += $" ";
       }
 
       if (io.remainingInput.Trim().StartsWith("!s", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!s ".Length);
-        var foo = io.remainingInput.Split(' ');
+        var foo = io.remainingInput.Split(new char[]{' '});
         if (foo.Length >= 2)
         {
-          Console.WriteLine($"{this.thesaurus.Similarity(foo[0], foo[1])}");
+          io.output += $"{this.thesaurus.Similarity(foo[0], foo[1])} ";
         }
+        io.output += $" ";
       }
       return io;
     }
