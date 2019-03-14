@@ -47,7 +47,7 @@ namespace WatsonAI
       if (io.remainingInput.Trim().StartsWith("!d", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!d ".Length);
-        var foo = io.remainingInput.Split(new char[]{' '});
+        var foo = io.remainingInput.Split(new char[]{ ' ' });
         if (foo.Length >= 2)
         {
           io.output += $"{this.thesaurus.Describes(foo[0], foo[1])} ";
@@ -58,7 +58,7 @@ namespace WatsonAI
       if (io.remainingInput.Trim().StartsWith("!s", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!s ".Length);
-        var foo = io.remainingInput.Split(new char[]{' '});
+        var foo = io.remainingInput.Split(new char[]{ ' ' });
         if (foo.Length >= 2)
         {
           io.output += $"{this.thesaurus.Similarity(foo[0], foo[1])} ";
@@ -69,7 +69,7 @@ namespace WatsonAI
       if (io.remainingInput.Trim().StartsWith("!pos ", StringComparison.OrdinalIgnoreCase))
       {
         io.remainingInput = io.remainingInput.Substring("!pos ".Length);
-        var words = io.remainingInput.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var words = io.remainingInput.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (var word in words) {
           Console.WriteLine($" {word}: {String.Join(", ", thesaurus.GetPartsOfSpeech(word).Distinct())}");
         }
