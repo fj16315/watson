@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace WatsonAI
 {
@@ -63,6 +62,15 @@ namespace WatsonAI
         if (foo.Length >= 2)
         {
           Console.WriteLine($"{this.thesaurus.Similarity(foo[0], foo[1])}");
+        }
+      }
+
+      if (io.remainingInput.Trim().StartsWith("!pos ", StringComparison.OrdinalIgnoreCase))
+      {
+        io.remainingInput = io.remainingInput.Substring("!pos ".Length);
+        var words = io.remainingInput.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        foreach (var word in words) {
+          Console.WriteLine($" {word}: {String.Join(", ", thesaurus.GetPartsOfSpeech(word).Distinct())}");
         }
       }
       return io;

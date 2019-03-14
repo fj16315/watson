@@ -148,5 +148,8 @@ namespace WatsonAI
     /// <returns>The similarity value of two words.</returns>
     public float Similarity(string first, string second)
       => wordNet.GetWordSimilarity(first, second);
+
+    public IEnumerable<PartOfSpeech> GetPartsOfSpeech(string word)
+      => wordNet.GetSynSets(word).Select(ss => ss.PartOfSpeech);
   }
 }
