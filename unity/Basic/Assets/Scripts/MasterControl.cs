@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using Notebook;
+using NPC;
 
 public class MasterControl : MonoBehaviour {
 
@@ -10,6 +11,10 @@ public class MasterControl : MonoBehaviour {
     public NotebookController notebook;
     public bool paused = false;
     public RigidbodyFirstPersonController fpc;
+
+    // Scoring variables
+    public NPCController who;
+    public GameObject what;
 
     // Use this for initialization
     void Start () {
