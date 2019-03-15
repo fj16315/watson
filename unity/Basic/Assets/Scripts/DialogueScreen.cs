@@ -23,6 +23,7 @@ public class DialogueScreen : MonoBehaviour {
     public NotebookController notebook;
     public NPCController npcOracle;
     public OracleController oracle;
+    public MasterControl controller;
 
     // Character Fonts
     public Font fontDetective;
@@ -80,7 +81,7 @@ public class DialogueScreen : MonoBehaviour {
                 if (currentCharacter == npcOracle && stringToEdit == "end")
                 {
                     Stats.Score = 420;
-                    SceneManager.LoadScene("End_Scene", LoadSceneMode.Single);
+                    controller.EndGame();
                 }
                 queryResponse = ai.Query(stringToEdit);
                 UpdateReply(queryResponse);

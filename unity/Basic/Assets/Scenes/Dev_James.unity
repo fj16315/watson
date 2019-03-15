@@ -4704,8 +4704,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterCanvas: {fileID: 1909912404}
   notebook: {fileID: 325249721}
-  paused: 0
   fpc: {fileID: 1826286832}
+  paused: 0
   who: {fileID: 1637575776}
   what: {fileID: 1031304696}
 --- !u!65 &526429956
@@ -5066,6 +5066,7 @@ MonoBehaviour:
   notebook: {fileID: 325249721}
   npcOracle: {fileID: 585298504}
   oracle: {fileID: 585298505}
+  controller: {fileID: 526429955}
   fontDetective: {fileID: 12800000, guid: d878f75c795ad6a4e9effb3d682bf642, type: 3}
   fontActress: {fileID: 12800000, guid: f4c48a169a18d814d8c8dbcee337b627, type: 3}
   fontCountess: {fileID: 12800000, guid: 4a69600451964534b80f2c907bad1eb7, type: 3}

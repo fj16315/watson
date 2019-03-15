@@ -102,7 +102,6 @@ namespace Notebook
 
         public void Activate(bool active)
         {
-            //Debug.Log(Time.realtimeSinceStartup);
             container.SetActive(active);
             if (currentPageEnum == Page.CHARACTER)
             {
