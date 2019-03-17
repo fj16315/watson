@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Annytab.Stemmer" Version="1.2.3" />
     <PackageReference Include="Syn.WordNet" Version="1.0.5" />
     <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
   </ItemGroup>
