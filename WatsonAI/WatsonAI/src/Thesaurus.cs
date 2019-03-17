@@ -35,6 +35,12 @@ namespace WatsonAI
       System.Diagnostics.Debug.WriteLine("Load completed.");
     }
 
+    /// <summary>
+    /// Constructor for a thesaurus given a path to the location of the data files.
+    /// </summary>
+    /// This loads in the dictionary files, so is slow to construct.
+    /// For best results, share the one instance of the thesaurus object.
+    /// <param name="stringToPath">Path to the root of the data files. (Parent of res)</param>
     public Thesaurus(string stringToPath)
     {
       var directory = Path.Combine(stringToPath, "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
@@ -149,6 +155,11 @@ namespace WatsonAI
     public float Similarity(string first, string second)
       => wordNet.GetWordSimilarity(first, second);
 
+    /// <summary>
+    /// Returns the possible parts of speech of a word according to WordNet.
+    /// </summary>
+    /// <param name="word">A string word to get the parts of speech of.</param>
+    /// <returns>A WordNet PartOfSpeech IEnumerable - the parts of speech.</returns>
     public IEnumerable<PartOfSpeech> GetPartsOfSpeech(string word)
       => wordNet.GetSynSets(word).Select(ss => ss.PartOfSpeech);
   }

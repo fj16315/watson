@@ -10,6 +10,10 @@ namespace WatsonAI
     private Parser parser;
     private Thesaurus thesaurus; 
 
+    /// <summary>
+    /// Constructs a new Watson with path to the location of the data files.
+    /// </summary>
+    /// <param name="stringToPath"></param>
     public Watson(string stringToPath) {
       this.parser = new Parser(stringToPath);
       this.thesaurus = new Thesaurus(stringToPath);
