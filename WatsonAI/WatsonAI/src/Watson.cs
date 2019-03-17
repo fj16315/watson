@@ -23,13 +23,15 @@ namespace WatsonAI
       var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
       var thesaurusDebug = new ThesaurusDebugEngine(thesaurus);
+      var question = new QuestionEngine(parser);
 
       var output = io
-        .Process(greetings)
-        .Process(debugParse)
-        .Process(thesaurusDebug)
+        //.Process(greetings)
+        //.Process(debugParse);
+        //.Process(thesaurusDebug)
 
-        .Process(fallback);
+        //.Process(fallback);
+        .Process(question);
       return output.output;
     }
 
