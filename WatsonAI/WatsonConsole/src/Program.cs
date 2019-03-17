@@ -18,14 +18,14 @@ public class MainClass
       path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
       Directory.SetCurrentDirectory(path);
     }
-
-    IWatson watson = new Watson();
+    Character character = new Character("Actress", false);
+    IWatson watson = new Watson(character);
 
     while (true)
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      Console.WriteLine(watson.Run(line));
+      Console.WriteLine(watson.Run(line, character));
       if (line == "") { break; }
     }
   }

@@ -11,9 +11,10 @@ namespace WatsonAI
     private Thesaurus thesaurus = new Thesaurus();
     private Dictionary<Character, Knowledge> characters = new Dictionary<Character, Knowledge>();
 
-    public Watson()
+    public Watson(Character character)
     {
       // Constructor to initialise the dictionary.
+      characters.Add(character, new Knowledge());
     }
 
     /// <summary>
