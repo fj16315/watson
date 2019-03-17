@@ -138,25 +138,25 @@
     <None Update="res\Models\organization.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\build.nbin">
+    <None Update="res\Models\parser\build.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\check.nbin">
+    <None Update="res\Models\parser\check.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\chunk.nbin">
+    <None Update="res\Models\parser\chunk.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\date.nbin">
+    <None Update="res\Models\parser\date.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\head_rules">
+    <None Update="res\Models\parser\head_rules">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\tag.nbin">
+    <None Update="res\Models\parser\tag.nbin">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="res\Models\Parser\tagdict">
+    <None Update="res\Models\parser\tagdict">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="res\WordNet\dict\adj.exc">
