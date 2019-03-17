@@ -7,22 +7,28 @@ namespace WatsonAI
   public class QuestionEngine : IRule
   {
     private Parser parser;
+    private Character character;
+    private Knowledge kg;
 
     /// <summary>
     /// Text engine for debuging the parser.
     /// </summary>
-    public QuestionEngine()
+    public QuestionEngine(Character character, Knowledge kg)
     {
       this.parser = new Parser();
+      this.character = character;
+      this.kg = kg;
     }
 
     /// <summary>
     /// Text engine for debuging the specified Parser.
     /// </summary>
     /// <param name="parse">The parser to use.</param>
-    public QuestionEngine(Parser parse)
+    public QuestionEngine(Parser parse, Character character, Knowledge kg)
     {
       this.parser = parse;
+      this.character = character;
+      this.kg = kg;
     }
 
     public InputOutput Process(InputOutput io)
@@ -75,6 +81,11 @@ namespace WatsonAI
 
     public string Query(string wh, string noun, string verb)
     {
+      foreach (VerbPhrase vp in kg.GetVerbPhrases())
+      {
+
+      }
+
       return " ........ mep";
     }
 
