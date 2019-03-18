@@ -34,16 +34,42 @@ namespace WatsonAI
       this.verbs = verbs;
     }
 
+    /// <summary>
+    /// Tries to get the <see cref="WatsonAI.Entity"/> associated with
+    /// <paramref name="word"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if an <see cref="WatsonAI.Entity"/> was present,
+    /// <c>false</c> otherwise.</returns>
+    /// <param name="word">The word to look up.</param>
+    /// <param name="entity">The <see cref="WatsonAI.Entity"/> in which the
+    /// result will be stored.</param>
     public bool TryGetEntity(string word, out Entity entity)
     {
       return entities.TryGetValue(word, out entity);
     }
 
+    /// <summary>
+    /// Tries to get the <see cref="WatsonAI.Verb"/> associated with
+    /// <paramref name="word"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if a <see cref="WatsonAI.Verb"/> was present,
+    /// <c>false</c> otherwise.</returns>
+    /// <param name="word">The word to look up.</param>
+    /// <param name="verb">The <see cref="WatsonAI.Verb"/> in which the
+    /// result will be stored.</param>
     public bool TryGetVerb(string word, out Verb verb)
     {
       return verbs.TryGetValue(word, out verb);
     }
 
+    /// <summary>
+    /// Tries to name the <see cref="WatsonAI.Entity"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if a name was found for <paramref name="entity"/>,
+    /// <c>false</c> otherwise.</returns>
+    /// <param name="entity">The <see cref="WatsonAI.Entity"/> to name.</param>
+    /// <param name="name">The <see cref="string"/> in which the name is
+    /// stored.</param>
     public bool TryNameEntity(Entity entity, out string name)
     {
       foreach (var pair in entities)
@@ -58,6 +84,14 @@ namespace WatsonAI
       return false;
     }
 
+    /// <summary>
+    /// Tries to name the <see cref="WatsonAI.Verb"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if a name was found for <paramref name="verb"/>,
+    /// <c>false</c> otherwise.</returns>
+    /// <param name="verb">The <see cref="WatsonAI.Verb"/> to name.</param>
+    /// <param name="name">The <see cref="string"/> in which the name is
+    /// stored.</param>
     public bool TryNameVerb(Verb verb, out string name)
     {
       foreach (var pair in verbs)
