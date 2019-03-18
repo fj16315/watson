@@ -119,6 +119,9 @@ namespace WatsonTest
 
       Assert.True(thesaurus.Describes("kitty", "cats", true));
       Assert.True(thesaurus.Describes("kitty", "cats", PartOfSpeech.Noun, true));
+
+      Assert.True(thesaurus.Describes("is", "be", true));
+      Assert.True(thesaurus.Describes("is", "be", PartOfSpeech.Verb, true));
     }
 
     [Fact]

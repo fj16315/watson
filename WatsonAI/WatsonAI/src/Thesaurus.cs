@@ -15,10 +15,9 @@ namespace WatsonAI
   /// </summary>
   public class Thesaurus
   {
-
     private WordNetEngine wordNet;
 
-    private IStemmer stemmer; 
+    private Stemmer stemmer; 
 
     /// <summary>
     /// Constructor for a thesaurus.
@@ -37,7 +36,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new EnglishStemmer();
+      this.stemmer = new Stemmer();
     }
 
     /// <summary>
