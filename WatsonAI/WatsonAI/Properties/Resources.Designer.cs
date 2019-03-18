@@ -61,13 +61,22 @@ namespace WatsonAI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to arisen arise 
+        ///   Looks up a localized string similar to alumni alumnus 
+        ///analyses analysis 
+        ///antennae antenna 
+        ///antennas antenna 
+        ///appendices appendix 
+        ///arisen arise 
         ///arose arise 
         ///ate eat 
         ///awoke awake 
         ///awoken awake 
+        ///axes axis 
+        ///bacteria bacterium 
+        ///bases basis 
         ///beat beat 
         ///beaten beat 
+        ///beaux beau 
         ///became become 
         ///become become 
         ///been be 
@@ -87,18 +96,7 @@ namespace WatsonAI.Properties {
         ///broadcast broadcast 
         ///broke break 
         ///broken break 
-        ///brought bring 
-        ///built build 
-        ///burned burn 
-        ///burnt burn 
-        ///burst burst 
-        ///came come 
-        ///caught catch 
-        ///chose choose 
-        ///chosen choose 
-        ///clung cling 
-        ///come come 
-        ///cost c [rest of string was truncated]&quot;;.
+        ///brou [rest of string was truncated]&quot;;.
         /// </summary>
         public static string IrregularStems {
             get {

@@ -17,9 +17,17 @@ namespace WatsonTest
     private static Stemmer stemmer = new Stemmer();
 
     [Fact]
-    public void SpecialCaseStemming()
+    public void StemmingVerbs()
     {
-      Assert.True(stemmer.GetSteamWord("is") == "be");
+      Assert.Equal("be", stemmer.GetSteamWord("is"));
+      Assert.Equal("have", stemmer.GetSteamWord("has"));
+    }
+
+    [Fact]
+    public void StemmingNouns()
+    {
+      Assert.Equal("goose", stemmer.GetSteamWord("geese"));
+      Assert.Equal("mouse", stemmer.GetSteamWord("mice"));
     }
   }
 }
