@@ -31,7 +31,7 @@ namespace WatsonAI
       var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
       var thesaurusDebug = new ThesaurusDebugEngine(thesaurus);
-      var question = new QuestionEngine(parser, character, kg);
+      var question = new QuestionEngine(parser, character, kg, thesaurus, associations);
 
       var output = io
         //.Process(greetings)

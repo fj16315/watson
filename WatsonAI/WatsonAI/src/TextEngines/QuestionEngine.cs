@@ -9,6 +9,8 @@ namespace WatsonAI
     private Parser parser;
     private Character character;
     private Knowledge kg;
+    private Thesaurus thesaurus;
+    private Associations associations;
 
     /// <summary>
     /// Text engine for debuging the parser.
@@ -24,11 +26,13 @@ namespace WatsonAI
     /// Text engine for debuging the specified Parser.
     /// </summary>
     /// <param name="parse">The parser to use.</param>
-    public QuestionEngine(Parser parse, Character character, Knowledge kg)
+    public QuestionEngine(Parser parse, Character character, Knowledge kg, Thesaurus thesaurus, Associations associations)
     {
       this.parser = parse;
       this.character = character;
       this.kg = kg;
+      this.thesaurus = thesaurus;
+      this.associations = associations;
     }
 
     public InputOutput Process(InputOutput io)
@@ -78,15 +82,62 @@ namespace WatsonAI
 
       return io;
     }
-
     public string Query(string wh, string noun, string verb)
     {
-      foreach (VerbPhrase vp in kg.GetVerbPhrases())
+      var newVerb = new Verb();
+      foreach (string verbKey in associations.GetVerbs().Keys)
       {
-
+        if (thesaurus.Describes(verb, verbKey))
+        {
+          associations.TryGetVerb(verbKey, newVerb);
+        }
       }
 
-      return " ........ mep";
+      var entity = new Entity();
+      foreach (string nounKey in associations.GetEntities().Keys)
+      {
+        if (thesaurus.Describes(noun, nounKey))
+        {
+          associations.TryGetEntity(nounKey, entity);
+        }
+      }
+
+
+      var answers = new List<Entity>();
+      foreach (VerbPhrase vp in kg.GetVerbPhrases())
+      {
+        if (vp.verb.Equals(newVerb))
+        {
+          foreach (Valent valent in vp.GetValents())
+          {
+            if (valent.entity.Equals(entity) && valent.tag == Valent.Tag.Subj)
+            {
+              foreach (Valent nextValent in vp.GetValents())
+              {
+                if (nextValent.tag == Valent.Tag.Dobj)
+                {
+                  answers.Add(nextValent.entity);
+                }
+              }
+            }
+          }
+        } 
+      }
+
+      var response = "The " + noun + " " + verb;
+      foreach (Entity entityAnswer in answers)
+      {
+        if (entityAnswer.Equals(answers[0]))
+        {
+          response = response + " the " + associations.TryNameEntity(entityAnswer);
+        }
+        else
+        {
+          response = response + " and the " + associations.TryNameEntity(entityAnswer);
+        }
+      }
+
+      return response;
     }
 
   }
