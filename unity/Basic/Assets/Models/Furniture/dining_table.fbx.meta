@@ -6,17 +6,184 @@ ModelImporter:
     100000: cloth
     100002: //RootNode
     100004: wooden
+    100006: cloth 1
+    100008: cloth_reverse
+    100010: cloth_stuff
+    100012: dining_table
+    100014: dining_table_joined
+    100016: end_table
+    100018: end_table_joined
+    100020: leg1
+    100022: leg1 1
+    100024: leg2
+    100026: leg2 1
+    100028: leg3
+    100030: leg3 1
+    100032: leg4
+    100034: leg4 1
+    100036: main_leg
+    100038: nCloth1
+    100040: nRigid1
+    100042: nucleus1
+    100044: pPlane1
+    100046: table_top
+    100048: tabletop
+    100050: topper
+    100052: topper 1
+    100054: wood
+    100056: wood 1
+    100058: fork
+    100060: pCylinder1
+    100062: pCylinder2
+    100064: pCylinder3
+    100066: pCylinder4
+    100068: pCylinder5
+    100070: pCylinder6
+    100072: plates
     400000: cloth
     400002: //RootNode
     400004: wooden
+    400006: cloth 1
+    400008: cloth_reverse
+    400010: cloth_stuff
+    400012: dining_table
+    400014: dining_table_joined
+    400016: end_table
+    400018: end_table_joined
+    400020: leg1
+    400022: leg1 1
+    400024: leg2
+    400026: leg2 1
+    400028: leg3
+    400030: leg3 1
+    400032: leg4
+    400034: leg4 1
+    400036: main_leg
+    400038: nCloth1
+    400040: nRigid1
+    400042: nucleus1
+    400044: pPlane1
+    400046: table_top
+    400048: tabletop
+    400050: topper
+    400052: topper 1
+    400054: wood
+    400056: wood 1
+    400058: fork
+    400060: pCylinder1
+    400062: pCylinder2
+    400064: pCylinder3
+    400066: pCylinder4
+    400068: pCylinder5
+    400070: pCylinder6
+    400072: plates
     2100000: lambert1
+    2100002: new_house_table_top_shiny
+    2100004: new_house_furniture_wood
+    2100006: Default_Material
+    2100008: lambert2
+    2100010: table
     2300000: cloth
     2300002: wooden
+    2300004: cloth 1
+    2300006: cloth_reverse
+    2300008: leg1
+    2300010: leg1 1
+    2300012: leg2
+    2300014: leg2 1
+    2300016: leg3
+    2300018: leg3 1
+    2300020: leg4
+    2300022: leg4 1
+    2300024: main_leg
+    2300026: tabletop
+    2300028: topper
+    2300030: topper 1
+    2300032: wood
+    2300034: wood 1
+    2300036: fork
+    2300038: pCylinder1
+    2300040: pCylinder2
+    2300042: pCylinder3
+    2300044: pCylinder4
+    2300046: pCylinder5
+    2300048: pCylinder6
     3300000: cloth
     3300002: wooden
+    3300004: cloth 1
+    3300006: cloth_reverse
+    3300008: leg1
+    3300010: leg1 1
+    3300012: leg2
+    3300014: leg2 1
+    3300016: leg3
+    3300018: leg3 1
+    3300020: leg4
+    3300022: leg4 1
+    3300024: main_leg
+    3300026: tabletop
+    3300028: topper
+    3300030: topper 1
+    3300032: wood
+    3300034: wood 1
+    3300036: fork
+    3300038: pCylinder1
+    3300040: pCylinder2
+    3300042: pCylinder3
+    3300044: pCylinder4
+    3300046: pCylinder5
+    3300048: pCylinder6
     4300000: wooden
     4300002: cloth
-  externalObjects: {}
+    4300004: topper
+    4300006: wood
+    4300008: main_leg
+    4300010: leg1
+    4300012: leg2
+    4300014: leg3
+    4300016: leg4
+    4300018: wood
+    4300020: topper
+    4300022: tabletop
+    4300024: leg1
+    4300026: leg2
+    4300028: leg3
+    4300030: leg4
+    4300032: cloth_reverse
+    4300034: cloth
+    4300036: pCylinder4
+    4300038: pCylinder3
+    4300040: pCylinder2
+    4300042: pCylinder1
+    4300044: pCylinder6
+    4300046: pCylinder5
+    4300048: fork
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default_Material
+    second: {fileID: 2100000, guid: 078c27565620ae74cafd89cabb665e8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 078c27565620ae74cafd89cabb665e8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_furniture_wood
+    second: {fileID: 2100000, guid: 078c27565620ae74cafd89cabb665e8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_table_top_shiny
+    second: {fileID: 2100000, guid: 078c27565620ae74cafd89cabb665e8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: table
+    second: {fileID: 2100000, guid: 078c27565620ae74cafd89cabb665e8c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
