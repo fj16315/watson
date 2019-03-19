@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WatsonAI
 {
@@ -9,17 +8,17 @@ namespace WatsonAI
   /// </summary>
   public class Associations
   {
-    private readonly Dictionary<string, Entity> entities;
-    private readonly Dictionary<string, Verb> verbs;
+    private readonly Dictionary<Entity, string> entities;
+    private readonly Dictionary<Verb, string> verbs;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="T:WatsonAI.Associations"/>
-    /// class from data in <paramref name="path"/>
+    /// class with no associations.
     /// </summary>
-    /// <param name="path">Path to the data.</param>
-    public Associations(string path)
+    public Associations()
     {
-      throw new NotImplementedException();
+      entities = new Dictionary<Entity, string>();
+      verbs = new Dictionary<Verb, string>();
     }
 
     /// <summary>
@@ -28,7 +27,7 @@ namespace WatsonAI
     /// </summary>
     /// <param name="entities">The associations of <see cref="WatsonAI.Entity"/>.</param>
     /// <param name="verbs">The associations of <see cref="WatsonAI.Verb"/>.</param>
-    public Associations(Dictionary<string, Entity> entities, Dictionary<string, Verb> verbs)
+    public Associations(Dictionary<Entity, string> entities, Dictionary<Verb, string> verbs)
     {
       this.entities = entities;
       this.verbs = verbs;
@@ -45,7 +44,16 @@ namespace WatsonAI
     /// result will be stored.</param>
     public bool TryGetEntity(string word, out Entity entity)
     {
-      return entities.TryGetValue(word, out entity);
+      foreach (var pair in entities)
+      {
+        if (pair.Value == word)
+        {
+          entity = pair.Key;
+          return true;
+        }
+      }
+      entity = new Entity();
+      return false;
     }
 
     /// <summary>
@@ -59,7 +67,16 @@ namespace WatsonAI
     /// result will be stored.</param>
     public bool TryGetVerb(string word, out Verb verb)
     {
-      return verbs.TryGetValue(word, out verb);
+      foreach (var pair in verbs)
+      {
+        if (pair.Value == word)
+        {
+          verb = pair.Key;
+          return true;
+        }
+      }
+      verb = new Verb();
+      return false;
     }
 
     /// <summary>
@@ -71,18 +88,7 @@ namespace WatsonAI
     /// <param name="name">The <see cref="string"/> in which the name is
     /// stored.</param>
     public bool TryNameEntity(Entity entity, out string name)
-    {
-      foreach (var pair in entities)
-      {
-        if (pair.Value == entity)
-        {
-          name = pair.Key;
-          return true;
-        }
-      }
-      name = null;
-      return false;
-    }
+      => entities.TryGetValue(entity, out name);
 
     /// <summary>
     /// Tries to name the <see cref="WatsonAI.Verb"/>.
@@ -93,17 +99,64 @@ namespace WatsonAI
     /// <param name="name">The <see cref="string"/> in which the name is
     /// stored.</param>
     public bool TryNameVerb(Verb verb, out string name)
+      => verbs.TryGetValue(verb, out name);
+
+    /// <summary>
+    /// Associates a name with an <see cref="WatsonAI.Entity"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if the entity name was added, <c>false</c>
+    /// otherwise.</returns>
+    /// <param name="entity">Entity.</param>
+    /// <param name="name">Name.</param>
+    public bool AddEntityName(Entity entity, string name)
     {
-      foreach (var pair in verbs)
+      if (entities.ContainsKey(entity) || entities.ContainsValue(name))
       {
-        if (pair.Value == verb)
-        {
-          name = pair.Key;
-          return true;
-        }
+        return false;
       }
-      name = null;
-      return false;
+
+      entities.Add(entity, name);
+      return true;
+    }
+
+    /// <summary>
+    /// Associates a name with an <see cref="WatsonAI.Verb"/>.
+    /// </summary>
+    /// <returns><c>true</c>, if the verb name was added, <c>false</c>
+    /// otherwise.</returns>
+    /// <param name="verb">Verb.</param>
+    /// <param name="name">Name.</param>
+    public bool AddVerbName(Verb verb, string name)
+    {
+      if (verbs.ContainsKey(verb) || verbs.ContainsValue(name))
+      {
+        return false;
+      }
+
+      verbs.Add(verb, name);
+      return true;
+    }
+
+    /// <summary>
+    /// Removes the name of the entity.
+    /// </summary>
+    /// <returns><c>true</c>, if the entity name was removed, <c>false</c>
+    /// otherwise.</returns>
+    /// <param name="entity">Entity.</param>
+    public bool RemoveEntityName(Entity entity)
+    {
+      return entities.Remove(entity);
+    }
+
+    /// <summary>
+    /// Removes the name of the verb.
+    /// </summary>
+    /// <returns><c>true</c>, if the verb name was removed, <c>false</c>
+    /// otherwise.</returns>
+    /// <param name="verb">Verb.</param>
+    public bool RemoveVerbName(Verb verb)
+    {
+      return verbs.Remove(verb);
     }
   }
 }

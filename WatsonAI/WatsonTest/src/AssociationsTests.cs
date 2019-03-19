@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FsCheck;
+﻿using FsCheck;
 using FsCheck.Xunit;
-using Xunit;
 
 using WatsonAI;
 
@@ -13,43 +9,63 @@ namespace WatsonTest
   public class AssociationsTests
   {
     [Property]
-    public bool TryGetEntity(NonNull<string> word, Entity entity)
+    public bool TryGetEntityPresent(Entity entity, NonNull<string> word)
     {
-      var entities = new Dictionary<string, Entity>();
-      entities.Add(word.Get, entity);
-      var verbs = new Dictionary<string, Verb>();
-      var assoc = new Associations(entities, verbs);
+      var assoc = new Associations();
+      assoc.AddEntityName(entity, word.Get);
       return assoc.TryGetEntity(word.Get, out var newEntity);
     }
 
     [Property]
-    public bool TryGetVerb(NonNull<string> word, Verb verb)
+    public bool TryGetVerbPresent(Verb verb, NonNull<string> word)
     {
-      var verbs = new Dictionary<string, Verb>();
-      verbs.Add(word.Get, verb);
-      var entities = new Dictionary<string, Entity>();
-      var assoc = new Associations(entities, verbs);
+      var assoc = new Associations();
+      assoc.AddVerbName(verb, word.Get);
       return assoc.TryGetVerb(word.Get, out var newVerb);
     }
 
     [Property]
-    public bool TryNameEntity(Entity entity, NonNull<string> word)
+    public bool TryNameEntityPresent(Entity entity, NonNull<string> word)
     {
-      var entities = new Dictionary<string, Entity>();
-      entities.Add(word.Get, entity);
-      var verbs = new Dictionary<string, Verb>();
-      var assoc = new Associations(entities, verbs);
+      var assoc = new Associations();
+      assoc.AddEntityName(entity, word.Get);
       return assoc.TryNameEntity(entity, out var newWord);
     }
 
     [Property]
-    public bool TryNameVerb(Verb verb, NonNull<string> word)
+    public bool TryNameVerbPresent(Verb verb, NonNull<string> word)
     {
-      var verbs = new Dictionary<string, Verb>();
-      verbs.Add(word.Get, verb);
-      var entities = new Dictionary<string, Entity>();
-      var assoc = new Associations(entities, verbs);
+      var assoc = new Associations();
+      assoc.AddVerbName(verb, word.Get);
       return assoc.TryGetVerb(word.Get, out var newWord);
+    }
+
+    [Property]
+    public bool TryGetEntityEmpty(NonNull<string> word)
+    {
+      var assoc = new Associations();
+      return assoc.TryGetEntity(word.Get, out var entity) == false;
+    }
+
+    [Property]
+    public bool TryGetVerbEmpty(NonNull<string> word)
+    {
+      var assoc = new Associations();
+      return assoc.TryGetVerb(word.Get, out var verb) == false;
+    }
+
+    [Property]
+    public bool TryNameEntityEmpty(Entity entity)
+    {
+      var assoc = new Associations();
+      return assoc.TryNameEntity(entity, out var name) == false;
+    }
+
+    [Property]
+    public bool TryNameVerbEmpty(Verb verb)
+    {
+      var assoc = new Associations();
+      return assoc.TryNameVerb(verb, out var name) == false;
     }
   }
 }
