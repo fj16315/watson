@@ -10,11 +10,14 @@ namespace WatsonAI
     private Parser parser = new Parser();
     private Thesaurus thesaurus = new Thesaurus();
     private Dictionary<Character, Knowledge> characters = new Dictionary<Character, Knowledge>();
+    private Associations associations = new Associations();
 
     public Watson(Character character)
     {
       // Constructor to initialise the dictionary.
       characters.Add(character, new Knowledge());
+      associations.AddEntityName(new Entity(0), "cat");
+      associations.AddEntityName(new Entity(1), "dog");
     }
 
     /// <summary>

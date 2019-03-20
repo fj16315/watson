@@ -11,6 +11,9 @@ namespace WatsonAI
     private readonly Dictionary<Entity, string> entities;
     private readonly Dictionary<Verb, string> verbs;
 
+    private readonly Dictionary<string, Entity> entityNames;
+    private readonly Dictionary<string, Verb> verbNames;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="T:WatsonAI.Associations"/>
     /// class with no associations.
@@ -19,6 +22,8 @@ namespace WatsonAI
     {
       entities = new Dictionary<Entity, string>();
       verbs = new Dictionary<Verb, string>();
+      entityNames = new Dictionary<string, Entity>();
+      verbNames = new Dictionary<string, Verb>();
     }
 
     /// <summary>
@@ -31,7 +36,31 @@ namespace WatsonAI
     {
       this.entities = entities;
       this.verbs = verbs;
+      this.entityNames = new Dictionary<string, Entity>();
+      foreach (var entity in entities.Keys)
+      {
+        this.entityNames.Add(entities[entity], entity);
+      }
+      this.verbNames = new Dictionary<string, Verb>();
+      foreach (var verb in verbs.Keys)
+      {
+        this.verbNames.Add(verbs[verb], verb);
+      }
     }
+
+    /// <summary>
+    /// Returns a list of words currently associated to entities.
+    /// </summary>
+    /// <returns>A list of words currently associated to entities.</returns>
+    public IEnumerable<string> EntityNames()
+      => entityNames.Keys;
+
+    /// <summary>
+    /// Returns a list of words currently associated to verbs.
+    /// </summary>
+    /// <returns>A list of words currently associated to verbs.</returns>
+    public IEnumerable<string> VerbNames()
+      => verbNames.Keys;
 
     /// <summary>
     /// Tries to get the <see cref="WatsonAI.Entity"/> associated with
@@ -43,18 +72,7 @@ namespace WatsonAI
     /// <param name="entity">The <see cref="WatsonAI.Entity"/> in which the
     /// result will be stored.</param>
     public bool TryGetEntity(string word, out Entity entity)
-    {
-      foreach (var pair in entities)
-      {
-        if (pair.Value == word)
-        {
-          entity = pair.Key;
-          return true;
-        }
-      }
-      entity = new Entity();
-      return false;
-    }
+      => entityNames.TryGetValue(word, out entity);
 
     /// <summary>
     /// Tries to get the <see cref="WatsonAI.Verb"/> associated with
@@ -66,18 +84,7 @@ namespace WatsonAI
     /// <param name="verb">The <see cref="WatsonAI.Verb"/> in which the
     /// result will be stored.</param>
     public bool TryGetVerb(string word, out Verb verb)
-    {
-      foreach (var pair in verbs)
-      {
-        if (pair.Value == word)
-        {
-          verb = pair.Key;
-          return true;
-        }
-      }
-      verb = new Verb();
-      return false;
-    }
+      => verbNames.TryGetValue(word, out verb);
 
     /// <summary>
     /// Tries to name the <see cref="WatsonAI.Entity"/>.
@@ -115,6 +122,7 @@ namespace WatsonAI
         return false;
       }
 
+      entityNames.Add(name, entity);
       entities.Add(entity, name);
       return true;
     }
@@ -133,6 +141,7 @@ namespace WatsonAI
         return false;
       }
 
+      verbNames.Add(name, verb);
       verbs.Add(verb, name);
       return true;
     }
@@ -145,7 +154,7 @@ namespace WatsonAI
     /// <param name="entity">Entity.</param>
     public bool RemoveEntityName(Entity entity)
     {
-      return entities.Remove(entity);
+      return entityNames.Remove(entities[entity]) && entities.Remove(entity);
     }
 
     /// <summary>
@@ -156,7 +165,7 @@ namespace WatsonAI
     /// <param name="verb">Verb.</param>
     public bool RemoveVerbName(Verb verb)
     {
-      return verbs.Remove(verb);
+      return verbNames.Remove(verbs[verb]) && verbs.Remove(verb);
     }
   }
 }

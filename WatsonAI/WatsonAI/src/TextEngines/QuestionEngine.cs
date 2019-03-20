@@ -82,35 +82,24 @@ namespace WatsonAI
 
       return io;
     }
+
     public string Query(string wh, string noun, string verb)
     {
-      var newVerb = new Verb();
-      foreach (string verbKey in associations.GetVerbs().Keys)
+      Verb graphVerb;
+      Entity graphEntity;
+      if (!GetVerb(verb, out graphVerb) || !GetEntity(noun, out graphEntity))
       {
-        if (thesaurus.Describes(verb, verbKey))
-        {
-          associations.TryGetVerb(verbKey, newVerb);
-        }
+        return "";
       }
-
-      var entity = new Entity();
-      foreach (string nounKey in associations.GetEntities().Keys)
-      {
-        if (thesaurus.Describes(noun, nounKey))
-        {
-          associations.TryGetEntity(nounKey, entity);
-        }
-      }
-
 
       var answers = new List<Entity>();
       foreach (VerbPhrase vp in kg.GetVerbPhrases())
       {
-        if (vp.verb.Equals(newVerb))
+        if (vp.verb.Equals(graphVerb))
         {
           foreach (Valent valent in vp.GetValents())
           {
-            if (valent.entity.Equals(entity) && valent.tag == Valent.Tag.Subj)
+            if (valent.entity.Equals(graphEntity) && valent.tag == Valent.Tag.Subj)
             {
               foreach (Valent nextValent in vp.GetValents())
               {
@@ -123,22 +112,58 @@ namespace WatsonAI
           }
         } 
       }
+      return GenerateResponse(noun, verb, answers);
+    }
 
+    private bool GetVerb(string verb, out Verb graphVerb)
+    {
+      bool found = false;
+      Verb verbAssociation = new Verb();
+      foreach (string verbKey in associations.VerbNames())
+      {
+        if (thesaurus.Describes(verb, verbKey))
+        {
+          found = found || associations.TryGetVerb(verbKey, out verbAssociation);
+        }
+      }
+      graphVerb = verbAssociation;
+      return found;
+    }
+
+    private bool GetEntity(string noun, out Entity graphEntity)
+    {
+      bool found = false;
+      Entity entityAssociation = new Entity();
+      foreach (string nounKey in associations.EntityNames())
+      {
+        if (thesaurus.Describes(noun, nounKey))
+        {
+          found = found || associations.TryGetEntity(nounKey, out entityAssociation);
+        }
+      }
+      graphEntity = entityAssociation;
+      return found;
+    }
+
+    private string GenerateResponse(string noun, string verb, List<Entity> answers)
+    {
       var response = "The " + noun + " " + verb;
       foreach (Entity entityAnswer in answers)
       {
         if (entityAnswer.Equals(answers[0]))
         {
-          response = response + " the " + associations.TryNameEntity(entityAnswer);
+          string entityName;
+          associations.TryNameEntity(entityAnswer, out entityName);
+          response += " the " + entityName;
         }
         else
         {
-          response = response + " and the " + associations.TryNameEntity(entityAnswer);
+          string entityName;
+          associations.TryNameEntity(entityAnswer, out entityName);
+          response += " and the " + entityName;
         }
       }
-
       return response;
     }
-
   }
 }
