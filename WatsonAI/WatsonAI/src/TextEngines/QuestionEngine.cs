@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace WatsonAI
@@ -37,6 +38,8 @@ namespace WatsonAI
 
     public InputOutput Process(InputOutput io)
     {
+      if (io.remainingInput.Length == 0) return io;
+
       var parse = this.parser.Parse(io.remainingInput).GetChildren()[0];
       var nounPhrase = parse;
       var verbPhrase = parse;
@@ -45,7 +48,7 @@ namespace WatsonAI
 
       if (parse.Type.Equals("SBARQ"))
       {
-        io.output = "This has a question: ";
+        Console.WriteLine("This has a question:");
         var sq = parse.GetChildren()[1];
         if (sq.ChildCount == 1)
         {
@@ -76,54 +79,70 @@ namespace WatsonAI
           }
         }
         var wh = parse.GetChildren()[0].GetChildren()[0];
-        io.output = io.output + "Verb = " + verb.Show() + ", Noun = " + noun.Show();
-        io.output = io.output + Query(wh.Show(), noun.Show(), verb.Show());
+        //io.output += "Verb = " + verb.Show() + ", Noun = " + noun.Show();
+        var answers = Query(wh.Value, noun.Value, verb.Value);
+        if (answers.Count != 0)
+        {
+          io.output += GenerateResponse(noun.Value, verb.Value, answers);
+        }
       }
 
       return io;
     }
 
-    public string Query(string wh, string noun, string verb)
+    public List<Entity> Query(string wh, string noun, string verb)
     {
-      Verb graphVerb;
-      Entity graphEntity;
+      Verb graphVerb = new Verb();
+      Entity graphEntity = new Entity();
       if (!GetVerb(verb, out graphVerb) || !GetEntity(noun, out graphEntity))
       {
-        return "";
+        string verbName;
+        string entityName;
+        associations.TryNameEntity(graphEntity, out entityName);
+        associations.TryNameVerb(graphVerb, out verbName);
+        Console.WriteLine("Failed, attempted verb is: " + verbName + " " + graphVerb);
+        Console.WriteLine("Failed, attempted entity is: " + entityName + " " + graphEntity);
+        return new List<Entity>();
       }
+      Console.WriteLine("The verb is: " + verb + " " + graphVerb);
+      Console.WriteLine("The entity is: " + noun + " " + graphEntity);
 
+      return GetAnswers(graphVerb, graphEntity);
+    }
+
+    private List<Entity> GetAnswers(Verb verb, Entity entity)
+    {
       var answers = new List<Entity>();
       foreach (VerbPhrase vp in kg.GetVerbPhrases())
       {
-        if (vp.verb.Equals(graphVerb))
+        if (vp.verb.Equals(verb))
         {
-          foreach (Valent valent in vp.GetValents())
+          var subject = Valent.Subj(entity);
+          var dobject = Valent.Dobj(entity);
+          if (vp.GetValents().Contains(subject))
           {
-            if (valent.entity.Equals(graphEntity) && valent.tag == Valent.Tag.Subj)
+            foreach (Valent nextValent in vp.GetValents())
             {
-              foreach (Valent nextValent in vp.GetValents())
+              if (nextValent.tag == Valent.Tag.Dobj)
               {
-                if (nextValent.tag == Valent.Tag.Dobj)
-                {
-                  answers.Add(nextValent.entity);
-                }
+                answers.Add(nextValent.entity);
               }
             }
           }
         } 
       }
-      return GenerateResponse(noun, verb, answers);
+      return answers;
     }
 
     private bool GetVerb(string verb, out Verb graphVerb)
     {
       bool found = false;
       Verb verbAssociation = new Verb();
-      foreach (string verbKey in associations.VerbNames())
+      foreach (string verbName in associations.VerbNames())
       {
-        if (thesaurus.Describes(verb, verbKey))
+        if (thesaurus.Describes(verb, verbName, true))
         {
-          found = found || associations.TryGetVerb(verbKey, out verbAssociation);
+          found = found || associations.TryGetVerb(verbName, out verbAssociation);
         }
       }
       graphVerb = verbAssociation;
@@ -134,11 +153,11 @@ namespace WatsonAI
     {
       bool found = false;
       Entity entityAssociation = new Entity();
-      foreach (string nounKey in associations.EntityNames())
+      foreach (string entityName in associations.EntityNames())
       {
-        if (thesaurus.Describes(noun, nounKey))
+        if (thesaurus.Describes(noun, entityName, true))
         {
-          found = found || associations.TryGetEntity(nounKey, out entityAssociation);
+          found = found || associations.TryGetEntity(entityName, out entityAssociation);
         }
       }
       graphEntity = entityAssociation;
@@ -150,7 +169,7 @@ namespace WatsonAI
       var response = "The " + noun + " " + verb;
       foreach (Entity entityAnswer in answers)
       {
-        if (entityAnswer.Equals(answers[0]))
+        if (answers.IndexOf(entityAnswer) == 0)
         {
           string entityName;
           associations.TryNameEntity(entityAnswer, out entityName);

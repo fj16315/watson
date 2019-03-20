@@ -83,7 +83,7 @@ namespace WatsonAI
     /// <param name="word">The word to look up.</param>
     /// <param name="verb">The <see cref="WatsonAI.Verb"/> in which the
     /// result will be stored.</param>
-    public bool TryGetVerb(string word, out Verb verb)
+    public bool TryGetVerb(string word, out Verb verb) 
       => verbNames.TryGetValue(word, out verb);
 
     /// <summary>

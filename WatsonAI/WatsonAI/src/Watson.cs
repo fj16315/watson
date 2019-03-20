@@ -16,8 +16,14 @@ namespace WatsonAI
     {
       // Constructor to initialise the dictionary.
       characters.Add(character, new Knowledge());
-      associations.AddEntityName(new Entity(0), "cat");
-      associations.AddEntityName(new Entity(1), "dog");
+      associations.AddEntityName(new Entity(0), "room");
+      associations.AddEntityName(new Entity(1), "key");
+      associations.AddEntityName(new Entity(2), "cat");
+      associations.AddEntityName(new Entity(3), "murderer");
+      associations.AddEntityName(new Entity(4), "doris");
+      associations.AddVerbName(new Verb(0), "be");
+      associations.AddVerbName(new Verb(1), "kill");
+      associations.AddVerbName(new Verb(2), "consume");
     }
 
     /// <summary>
@@ -28,6 +34,13 @@ namespace WatsonAI
     public string Run(string input, Character character)
     {
       var kg = characters[character];
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(0), new List<Valent> { Valent.Subj(new Entity(2)), Valent.Dobj(new Entity(3)) }));
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(1), new List<Valent> { Valent.Subj(new Entity(2)), Valent.Dobj(new Entity(4)) }));
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(1)) }));
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(1)) }));
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(2)) }));
+      kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(3)) }));
+
       var io = new InputOutput(input);
 
       var greetings = new GreetingsEngine();
@@ -37,12 +50,11 @@ namespace WatsonAI
       var question = new QuestionEngine(parser, character, kg, thesaurus, associations);
 
       var output = io
-        //.Process(greetings)
-        //.Process(debugParse);
-        //.Process(thesaurusDebug)
-
-        //.Process(fallback);
-        .Process(question);
+        .Process(greetings)
+        .Process(debugParse)
+        .Process(thesaurusDebug)
+        .Process(question)
+        .Process(fallback);
       return output.output;
     }
 
