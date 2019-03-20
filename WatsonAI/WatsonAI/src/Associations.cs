@@ -75,6 +75,14 @@ namespace WatsonAI
       => entityNames.TryGetValue(word, out entity);
 
     /// <summary>
+    /// Gets the entity of given name (unsafe)
+    /// </summary>
+    /// <returns>The entity of given name.</returns>
+    /// <param name="word">The word to look up.</param>
+    public Entity UncheckedGetEntity(string word)
+      => entityNames[word];
+
+    /// <summary>
     /// Tries to get the <see cref="WatsonAI.Verb"/> associated with
     /// <paramref name="word"/>.
     /// </summary>
@@ -85,6 +93,14 @@ namespace WatsonAI
     /// result will be stored.</param>
     public bool TryGetVerb(string word, out Verb verb) 
       => verbNames.TryGetValue(word, out verb);
+
+    /// <summary>
+    /// Gets the verb of given name (unsafe)
+    /// </summary>
+    /// <returns>The verb of given name.</returns>
+    /// <param name="word">The word to look up.</param>
+    public Verb UncheckedGetVerb(string word)
+      => verbNames[word];
 
     /// <summary>
     /// Tries to name the <see cref="WatsonAI.Entity"/>.

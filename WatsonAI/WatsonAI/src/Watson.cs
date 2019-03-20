@@ -40,21 +40,22 @@ namespace WatsonAI
       kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(2)) }));
       kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(3)) }));
 
-      var io = new InputOutput(input);
+      var stream = Stream.Tokenise(parser, input);
 
       var greetings = new GreetingsEngine();
       var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
       var thesaurusDebug = new ThesaurusDebugEngine(thesaurus);
-      var question = new QuestionEngine(parser, character, kg, thesaurus, associations);
+      var question = new QuestionProcess(parser, character, kg, thesaurus, associations);
 
-      var output = io
-        .Process(greetings)
-        .Process(debugParse)
-        .Process(thesaurusDebug)
-        .Process(question)
-        .Process(fallback);
-      return output.output;
+      //var output = io
+      //  .Process(greetings)
+      //  .Process(debugParse)
+      //  .Process(thesaurusDebug)
+      //  .Process(question)
+      //  .Process(fallback);
+      var output = question.Process(stream);
+      return output.Output();
     }
 
     /// <summary>
