@@ -37,7 +37,6 @@ namespace WatsonAI
       kg.AddVerbPhrase(new VerbPhrase(new Verb(0), new List<Valent> { Valent.Subj(new Entity(2)), Valent.Dobj(new Entity(3)) }));
       kg.AddVerbPhrase(new VerbPhrase(new Verb(1), new List<Valent> { Valent.Subj(new Entity(2)), Valent.Dobj(new Entity(4)) }));
       kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(1)) }));
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(1)) }));
       kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(2)) }));
       kg.AddVerbPhrase(new VerbPhrase(new Verb(2), new List<Valent> { Valent.Subj(new Entity(0)), Valent.Dobj(new Entity(3)) }));
 

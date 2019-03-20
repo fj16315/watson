@@ -117,13 +117,12 @@ namespace WatsonAI
       {
         if (vp.verb.Equals(verb))
         {
-          var subject = Valent.Subj(entity);
           var dobject = Valent.Dobj(entity);
-          if (vp.GetValents().Contains(subject))
+          if (vp.GetValents().Contains(dobject))
           {
             foreach (Valent nextValent in vp.GetValents())
             {
-              if (nextValent.tag == Valent.Tag.Dobj)
+              if (nextValent.tag == Valent.Tag.Subj)
               {
                 answers.Add(nextValent.entity);
               }
