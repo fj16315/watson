@@ -3,6 +3,7 @@ using WatsonAI;
 using FsCheck.Xunit;
 using FsCheck;
 using Syn.WordNet;
+using System.Collections.Generic;
 
 namespace WatsonTest
 {
@@ -98,6 +99,70 @@ namespace WatsonTest
     public void Describes_PartOfSpeechFilter_Capitalisation()
     {
       Assert.True(thesaurus.Describes("Cat", "cat", PartOfSpeech.Noun));
+    }
+
+    [Fact]
+    public void GetSynonyms_Stemming()
+    {
+      Assert.False(thesaurus.GetSynonyms("cats").GetEnumerator().MoveNext());
+      Assert.False(thesaurus.GetSynonyms("cats", PartOfSpeech.Noun).GetEnumerator().MoveNext());
+
+      Assert.True(thesaurus.GetSynonyms("cats", true).GetEnumerator().MoveNext());
+      Assert.True(thesaurus.GetSynonyms("cats", PartOfSpeech.Noun, true).GetEnumerator().MoveNext());
+    }
+
+    [Fact]
+    public void Describes_Stemming()
+    {
+      Assert.False(thesaurus.Describes("kitty", "cats"));
+      Assert.False(thesaurus.Describes("kitty", "cats", PartOfSpeech.Noun));
+
+      Assert.True(thesaurus.Describes("kitty", "cats", true));
+      Assert.True(thesaurus.Describes("kitty", "cats", PartOfSpeech.Noun, true));
+
+      Assert.True(thesaurus.Describes("is", "be", true));
+      Assert.True(thesaurus.Describes("is", "be", PartOfSpeech.Verb, true));
+    }
+
+    [Fact]
+    public void GetSynonyms_NoDuplicates()
+    {
+      //Plate definitely has duplicates before 
+      var words = thesaurus.GetSynonyms("plate");
+      var set = new HashSet<string>();
+      int count = 0;
+
+      foreach (var word in words)
+      {
+        set.Add(word);
+        count++;
+      }
+      Assert.True(set.Count == count);
+
+
+      words = thesaurus.GetSynonyms("plate", PartOfSpeech.Noun);
+      set = new HashSet<string>();
+      count = 0;
+
+      foreach (var word in words)
+      {
+        set.Add(word);
+        count++;
+      }
+      Assert.True(set.Count == count);
+
+
+      SynSetRelation[] relations = { SynSetRelation.SimilarTo };
+      words = thesaurus.GetSynonyms("plate", PartOfSpeech.Noun, relations);
+      set = new HashSet<string>();
+      count = 0;
+
+      foreach (var word in words)
+      {
+        set.Add(word);
+        count++;
+      }
+      Assert.True(set.Count == count);
     }
   }
 }
