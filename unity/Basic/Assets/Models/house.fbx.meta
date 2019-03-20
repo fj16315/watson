@@ -159,6 +159,23 @@ ModelImporter:
     100306: tie
     100308: tie 1
     100310: ties
+    100312: dining_room_walls
+    100314: frame 4
+    100316: frame 5
+    100318: frame 6
+    100320: frame 7
+    100322: narrow_cl 1
+    100324: narrow_cr 1
+    100326: narrow_l 1
+    100328: narrow_r 1
+    100330: pane 4
+    100332: pane 5
+    100334: pane 6
+    100336: pane 7
+    100338: parts
+    100340: salon
+    100342: wide 1
+    100344: windows_dining_room
     400000: base
     400002: base 1
     400004: billiards_door
@@ -315,6 +332,23 @@ ModelImporter:
     400306: tie
     400308: tie 1
     400310: ties
+    400312: dining_room_walls
+    400314: frame 4
+    400316: frame 5
+    400318: frame 6
+    400320: frame 7
+    400322: narrow_cl 1
+    400324: narrow_cr 1
+    400326: narrow_l 1
+    400328: narrow_r 1
+    400330: pane 4
+    400332: pane 5
+    400334: pane 6
+    400336: pane 7
+    400338: parts
+    400340: salon
+    400342: wide 1
+    400344: windows_dining_room
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -438,6 +472,15 @@ ModelImporter:
     2300212: tie
     2300214: tie 1
     2300216: ties
+    2300218: dining_room_walls
+    2300220: frame 4
+    2300222: frame 5
+    2300224: frame 6
+    2300226: frame 7
+    2300228: pane 4
+    2300230: pane 5
+    2300232: pane 6
+    2300234: pane 7
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -547,6 +590,15 @@ ModelImporter:
     3300212: tie
     3300214: tie 1
     3300216: ties
+    3300218: dining_room_walls
+    3300220: frame 4
+    3300222: frame 5
+    3300224: frame 6
+    3300226: frame 7
+    3300228: pane 4
+    3300230: pane 5
+    3300232: pane 6
+    3300234: pane 7
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -656,6 +708,15 @@ ModelImporter:
     4300212: tie
     4300214: curtain_top
     4300216: tassels
+    4300218: dining_room_walls
+    4300220: pane
+    4300222: frame
+    4300224: pane
+    4300226: frame
+    4300228: pane
+    4300230: frame
+    4300232: pane
+    4300234: frame
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
@@ -671,7 +732,12 @@ ModelImporter:
     10800024: new_house:bulb_light2
     10800026: new_house:bulb_light3
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default_Material
+    second: {fileID: 2100000, guid: de0e3bb8dcb37e842813641d93ccc350, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
