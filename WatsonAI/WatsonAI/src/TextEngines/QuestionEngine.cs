@@ -337,6 +337,18 @@ namespace WatsonAI
               }
             }
           }
+
+          var sobject = Valent.Subj(entity);
+          if (vp.GetValents().Contains(sobject))
+          {
+            foreach (Valent nextValent in vp.GetValents())
+            {
+              if (nextValent.tag == Valent.Tag.Dobj)
+              {
+                answers.Add(nextValent.entity);
+              }
+            }
+          }
         } 
       }
       return answers;
