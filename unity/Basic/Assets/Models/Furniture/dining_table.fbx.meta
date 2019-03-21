@@ -80,6 +80,9 @@ ModelImporter:
     100148: tomato8
     100150: tomato9
     100152: tomatoes
+    100154: cutlery
+    100156: decoration
+    100158: gravy_boat
     400000: cloth
     400002: //RootNode
     400004: wooden
@@ -157,6 +160,9 @@ ModelImporter:
     400148: tomato8
     400150: tomato9
     400152: tomatoes
+    400154: cutlery
+    400156: decoration
+    400158: gravy_boat
     2100000: lambert1
     2100002: new_house_table_top_shiny
     2100004: new_house_furniture_wood
@@ -224,6 +230,7 @@ ModelImporter:
     2300116: tomato7
     2300118: tomato8
     2300120: tomato9
+    2300122: gravy_boat
     3300000: cloth
     3300002: wooden
     3300004: cloth 1
@@ -285,6 +292,7 @@ ModelImporter:
     3300116: tomato7
     3300118: tomato8
     3300120: tomato9
+    3300122: gravy_boat
     4300000: wooden
     4300002: cloth
     4300004: topper
@@ -346,6 +354,7 @@ ModelImporter:
     4300116: potato8
     4300118: potato9
     4300120: potato10
+    4300122: gravy_boat
   externalObjects:
   - first:
       type: UnityEngine:Material

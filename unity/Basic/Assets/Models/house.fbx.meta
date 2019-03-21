@@ -736,8 +736,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Default_Material
-    second: {fileID: 2100000, guid: de0e3bb8dcb37e842813641d93ccc350, type: 2}
+      name: heartBrick
+    second: {fileID: 2100000, guid: 48257e760b832da4f9a95e8c5087f19e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_glass
+    second: {fileID: 2100000, guid: c9a419fc54084ad46b6b5823ffb75a49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_mat_stairs
+    second: {fileID: 2100000, guid: 8301817dad0ec1043b8d3e2f613c11d7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
