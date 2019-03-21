@@ -442,7 +442,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Hand_out
       takeName: Take 001
-      firstFrame: 400
+      firstFrame: 560
       lastFrame: 620
       wrapMode: 0
       orientationOffsetY: 0
@@ -526,7 +526,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.25
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -546,7 +546,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 0.012
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
