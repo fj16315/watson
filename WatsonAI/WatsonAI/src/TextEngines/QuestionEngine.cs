@@ -308,7 +308,7 @@ namespace WatsonAI
         {
           var e = p.Item1;
           var v = p.Item2;
-          var answers = GetAnswers(v, e);
+          var answers = GetSubjAnswers(v, e);
           string verbName;
           associations.TryNameVerb(v, out verbName);
           string entityName;
@@ -322,7 +322,7 @@ namespace WatsonAI
       return stream;
     }
 
-    private List<Entity> GetAnswers(Verb verb, Entity entity)
+    private List<Entity> GetSubjAnswers(Verb verb, Entity entity)
     {
       var answers = new List<Entity>();
       foreach (VerbPhrase vp in kg.GetVerbPhrases())
@@ -343,6 +343,51 @@ namespace WatsonAI
         } 
       }
       return answers;
+    }
+
+    private List<Entity> GetIobjAnswers(Verb verb, Entity entity)
+    {
+      var answers = new List<Entity>();
+      foreach (VerbPhrase vp in kg.GetVerbPhrases())
+      {
+        if (vp.verb.Equals(verb))
+        {
+          var dobject = Valent.Dobj(entity);
+          if (vp.GetValents().Contains(dobject))
+          {
+            foreach (Valent nextValent in vp.GetValents())
+            {
+              if (nextValent.tag == Valent.Tag.Iobj)
+              {
+                answers.Add(nextValent.entity);
+              }
+            }
+          }
+        }
+      }
+      return answers;
+    }
+
+    private bool GetBoolAnswer(Verb verb, Entity subjEntity, Entity dobjEntity)
+    {
+      foreach (VerbPhrase vp in kg.GetVerbPhrases())
+      {
+        if (vp.verb.Equals(verb))
+        {
+          var dobject = Valent.Dobj(dobjEntity);
+          if (vp.GetValents().Contains(dobject))
+          {
+            foreach (Valent nextValent in vp.GetValents())
+            {
+              if (nextValent.tag == Valent.Tag.Subj && nextValent.entity.Equals(subjEntity))
+              {
+                return true;
+              }
+            }
+          }
+        }
+      }
+      return false;
     }
 
     private string GenerateResponse(string noun, string verb, List<Entity> answers)
