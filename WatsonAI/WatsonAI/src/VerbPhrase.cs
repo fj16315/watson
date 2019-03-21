@@ -21,6 +21,13 @@ namespace WatsonAI
       this.valents = new List<Valent>();
     }
 
+    public VerbPhrase(Verb verb, List<Valent> valents)
+    {
+      this.verb = verb;
+      this.tags = new HashSet<ITag>();
+      this.valents = valents;
+    }
+
     public IEnumerable<Valent> GetValents()
       => valents;
 
@@ -39,6 +46,15 @@ namespace WatsonAI
       var tagString = string.Join(", ", tags);
       var valentString = string.Join(", ", valents);
       return $"VerbPhrase{{{verb}, [{tagString}], [{valentString}]}}";
+    }
+
+    public override bool Equals(object obj)
+    {
+      var phrase = obj as VerbPhrase;
+      return phrase != null &&
+             verb.Equals(phrase.verb) &&
+             tags.Equals(phrase.tags) &&
+             valents.Equals(phrase.valents);
     }
   }
 
@@ -89,6 +105,19 @@ namespace WatsonAI
           return $"Iobj({prep}, {entity})";
       }
     }
+
+    public override bool Equals(object obj)
+    {
+      if (!(obj is Valent))
+      {
+        return false;
+      }
+
+      var valent = (Valent)obj;
+      return tag == valent.tag &&
+             prep.Equals(valent.prep) &&
+             entity.Equals(valent.entity);
+    }
   }
 
   public struct Prep
@@ -98,6 +127,10 @@ namespace WatsonAI
     //        - A hard-coded enum
     //        - An int/uint
     //        - A string
+    public override bool Equals(object obj)
+    {
+      return true;
+    }
   }
 
   public interface ITag

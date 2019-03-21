@@ -40,7 +40,7 @@ namespace WatsonAI
         io.remainingInput = io.remainingInput.Substring("!p ".Length);
         var parse = this.parser.Parse(io.remainingInput).Show();
         io.remainingInput = "";
-        io.output = io.output + parse;
+        io.output = parse;
       }
       return io;
     }

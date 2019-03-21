@@ -18,4 +18,8 @@
   <ItemGroup>
     <Folder Include="src\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1003" />
+  </ItemGroup>
 </Project>
