@@ -7,17 +7,41 @@ namespace WatsonAI
 {
   public struct Result<T>
   {
-    public T value { get; }
-    public bool hasValue { get; }
+    public T Value { get; }
+    public bool HasValue { get; }
 
     public Result(T value)
     {
-      this.hasValue = true;
-      this.value = value;
+      HasValue = true;
+      Value = value;
     }
 
     public static Result<T> operator |(Result<T> lhs, Result<T> rhs)
-      => lhs.hasValue ? lhs : rhs;
+      => lhs.HasValue ? lhs : rhs;
+
+    public static bool operator ==(Result<T> lhs, Result<T> rhs)
+    {
+      if (lhs.HasValue && rhs.HasValue)
+      {
+        return lhs.Value.Equals(rhs.Value);
+      }
+      return !lhs.HasValue && !rhs.HasValue;
+    }
+
+    public static bool operator !=(Result<T> lhs, Result<T> rhs)
+      => !(lhs == rhs);
+
+    public override bool Equals(object obj)
+    {
+      if (obj is Result<T>)
+      {
+        return this == (Result<T>)obj;
+      }
+      return false;
+    }
+
+    public override int GetHashCode()
+      => HasValue ? Value.GetHashCode() : HasValue.GetHashCode();
   }
 
   public abstract class Pattern<a> 
@@ -58,9 +82,9 @@ namespace WatsonAI
     {
       var lhsResult = lhs.Match(tree);
       var rhsResult = rhs.Match(tree);
-      if (lhsResult.hasValue && rhsResult.hasValue)
+      if (lhsResult.HasValue && rhsResult.HasValue)
       {
-        return new Result<Tuple<a, b>>(Tuple.Create(lhsResult.value, rhsResult.value));
+        return new Result<Tuple<a, b>>(Tuple.Create(lhsResult.Value, rhsResult.Value));
       }
       return new Result<Tuple<a, b>>();
     }
@@ -113,13 +137,13 @@ namespace WatsonAI
     public override Result<IEnumerable<a>> Match(Parse tree)
     {
       var newTree = parent.Match(tree);
-      if (newTree.hasValue)
+      if (newTree.HasValue)
       {
-        return new Result<IEnumerable<a>>(newTree.value
+        return new Result<IEnumerable<a>>(newTree.Value
           .GetChildren()
           .Select(t => child.Match(t))
-          .Where(r => r.hasValue)
-          .Select(r => r.value));
+          .Where(r => r.HasValue)
+          .Select(r => r.Value));
       }
       return new Result<IEnumerable<a>>();
     }
@@ -139,16 +163,16 @@ namespace WatsonAI
     public override Result<IEnumerable<a>> Match(Parse tree)
     {
       var newTree = parent.Match(tree);
-      if (newTree.hasValue)
+      if (newTree.HasValue)
       {
         Func<Parse, IEnumerable<a>> f = null;
         f = (Parse t) => {
           var d = this.descendant.Match(t);
           var ds = t.GetChildren().SelectMany(f);
-          if (!d.hasValue) return ds;
-          return ds.Append(d.value);
+          if (!d.HasValue) return ds;
+          return ds.Append(d.Value);
         };
-        return new Result<IEnumerable<a>>(newTree.value.GetChildren().SelectMany(f));
+        return new Result<IEnumerable<a>>(newTree.Value.GetChildren().SelectMany(f));
       } 
       return new Result<IEnumerable<a>>();
     }
@@ -233,9 +257,9 @@ namespace WatsonAI
       var verbs = query.Match(tree);
 
       Console.WriteLine("Verbs: ");
-      if (verbs.hasValue)
+      if (verbs.HasValue)
       {
-        foreach (var v in verbs.value.SelectMany(x => x).Distinct())
+        foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
         {
           string verbName;
           associations.TryNameVerb(v, out verbName);
@@ -256,9 +280,9 @@ namespace WatsonAI
       var entities = query.Match(tree);
 
       Console.WriteLine("Entities: ");
-      if (entities.hasValue)
+      if (entities.HasValue)
       {
-        foreach (var e in entities.value.SelectMany(x => x).Distinct())
+        foreach (var e in entities.Value.SelectMany(x => x).Distinct())
         {
           string entityName;
           associations.TryNameEntity(e, out entityName);
@@ -295,10 +319,10 @@ namespace WatsonAI
 
       var pNs = queryN.Match(tree);
       var pVs = queryV.Match(tree);
-      if (pNs.hasValue && pVs.hasValue)
+      if (pNs.HasValue && pVs.HasValue)
       {
-        var ns = pNs.value.SelectMany(x => x).SelectMany(x => x);
-        var vs = pVs.value.SelectMany(x => x).SelectMany(x => x);
+        var ns = pNs.Value.SelectMany(x => x).SelectMany(x => x);
+        var vs = pVs.Value.SelectMany(x => x).SelectMany(x => x);
 
         var pairs = from n in ns
                     from v in vs
