@@ -52,6 +52,28 @@ namespace WatsonAI
       => new Or<a>(lhs, rhs);
   }
 
+  public class Flatten<a> : Pattern<IEnumerable<a>>
+  {
+    private readonly Pattern<IEnumerable<IEnumerable<a>>> pattern;
+
+    public Flatten(Pattern<IEnumerable<IEnumerable<a>>> pattern)
+    {
+      this.pattern = pattern;
+    }
+
+    public override Result<IEnumerable<a>> Match(Parse tree)
+    {
+      var result = pattern.Match(tree);
+      if (!result.HasValue)
+      {
+        return new Result<IEnumerable<a>>();
+      }
+      return new Result<IEnumerable<a>>(
+        result.Value.SelectMany(x => x)
+      );
+    }
+  }
+
   public class Or<a> : Pattern<a> 
   {
     private readonly Pattern<a> lhs;
@@ -275,14 +297,14 @@ namespace WatsonAI
       var entity = new EntityName(associations, thesaurus);
       var top = new Branch("TOP");
 
-      var query = new Descendant<IEnumerable<Entity>>(top, entity);
+      var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
 
       var entities = query.Match(tree);
 
       Console.WriteLine("Entities: ");
       if (entities.HasValue)
       {
-        foreach (var e in entities.Value.SelectMany(x => x).Distinct())
+        foreach (var e in entities.Value.Distinct())
         {
           string entityName;
           associations.TryNameEntity(e, out entityName);
@@ -298,31 +320,24 @@ namespace WatsonAI
       PrintVerbs(stream);
       PrintEntities(stream);
 
-      var tree = this.parser.Parse(stream.RemainingInput);
+      var tree = parser.Parse(stream.RemainingInput);
 
       var noun = new EntityName(associations, thesaurus);
       var verb = new VerbName(associations, thesaurus);
-      var nounPhrase = new Descendant<IEnumerable<Entity>>(new Branch("NP"), noun);
-      var verbPhrase = new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb);
-      //var nounVerbPhrase = new Descendant<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>(new Branch("SQ"), new And<IEnumerable<Entity>, IEnumerable<Verb>>(nounPhrase, verbPhrase));
-      //var nounVerbPhrase = new And<IEnumerable<Entity>, IEnumerable<Verb>>(nounPhrase, verbPhrase);
-      //var question = new Descendant<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>(new Branch("SBARQ"), nounVerbPhrase);
-      //var question = new Descendant<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>(new Branch("SBARQ"), nounVerbPhrase);
+      var nounPhrase = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(new Branch("NP"), noun));
+      var verbPhrase = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb));
 
       var top = new Branch("TOP");
-      //var query = new Descendant<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>(top, question);
-      var queryN = new Descendant<IEnumerable<IEnumerable<Entity>>>(top, nounPhrase);
-      var queryV = new Descendant<IEnumerable<IEnumerable<Verb>>>(top, verbPhrase);
-      //var query = new Descendant<IEnumerable<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>>(top, question);
-      //var query = new Descendant<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>(top, nounVerbPhrase);
+      var queryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, nounPhrase));
+      var queryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, verbPhrase));
 
 
       var pNs = queryN.Match(tree);
       var pVs = queryV.Match(tree);
       if (pNs.HasValue && pVs.HasValue)
       {
-        var ns = pNs.Value.SelectMany(x => x).SelectMany(x => x);
-        var vs = pVs.Value.SelectMany(x => x).SelectMany(x => x);
+        var ns = pNs.Value;
+        var vs = pVs.Value;
 
         var pairs = from n in ns
                     from v in vs
