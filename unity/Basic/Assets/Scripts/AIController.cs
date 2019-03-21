@@ -45,7 +45,9 @@ public class AIController : MonoBehaviour
 
     public void SaveFile(string data)
     {
-        string path= Application.persistentDataPath + "/inputs.txt";
+        string path = Path.Combine(Application.persistentDataPath, "inputs.txt");
+        Debug.Log(path);
+
        
         // This text is added only once to the file.
         if (!File.Exists(path))
