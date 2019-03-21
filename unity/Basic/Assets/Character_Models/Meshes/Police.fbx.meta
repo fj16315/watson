@@ -3,267 +3,273 @@ guid: 79c2a3bdd63c13e4480da148c20a9cb4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Collar2
-    100002: Cuff_L
-    100004: Cuff_R
-    100006: Hat
-    100008: Jacket
-    100010: Model
-    100012: pasted__Chest_CTRL
-    100014: pasted__Controllers
-    100016: pasted__Elbow_L
-    100018: pasted__Elbow_R
-    100020: pasted__Head_CTRL
-    100022: pasted__Head_J
-    100024: pasted__HeadTop_J
-    100026: pasted__Hip_CTRL
-    100028: pasted__Hip_J
-    100030: pasted__IK_L_Hand
-    100032: pasted__IK_L_Leg
-    100034: pasted__IK_R_Hand
-    100036: pasted__IK_R_Leg
-    100038: pasted__IK_Spine
-    100040: pasted__Index
-    100042: pasted__Knee_L
-    100044: pasted__Knee_R
-    100046: pasted__L_Clavical_J
-    100048: pasted__L_Elbow_J
-    100050: pasted__L_Foot_CTRL
-    100052: pasted__L_Index01_J
-    100054: pasted__L_Index02_J
-    100056: pasted__L_Index03_J
-    100058: pasted__L_Index04_J
-    100060: pasted__L_LegFoot_J
-    100062: pasted__L_LegKnee_J
-    100064: pasted__L_LegToe_J
-    100066: pasted__L_LegTop_J
-    100068: pasted__L_Little01_J
-    100070: pasted__L_Little02_J
-    100072: pasted__L_Little03_J
-    100074: pasted__L_Little04_J
-    100076: pasted__L_Middle01_J
-    100078: pasted__L_Middle02_J
-    100080: pasted__L_Middle03_J
-    100082: pasted__L_Middle04_J
-    100084: pasted__L_Ring01_J
-    100086: pasted__L_Ring02_J
-    100088: pasted__L_Ring03_J
-    100090: pasted__L_Ring04_J
-    100092: pasted__L_Shoulder_J
-    100094: pasted__L_Thumb01_J
-    100096: pasted__L_Thumb02_J
-    100098: pasted__L_Thumb03_J
-    100100: pasted__L_Toe_Tip
-    100102: pasted__L_Wrist_CTRL
-    100104: pasted__L_Wrist_J
-    100106: pasted__Little
-    100108: pasted__Master_CTRL
-    100110: pasted__Middle
-    100112: pasted__Neck_J
-    100114: pasted__nurbsCircle1
-    100116: pasted__nurbsCircle1 1
-    100118: pasted__nurbsCircle2
-    100120: pasted__nurbsCircle2 1
-    100122: pasted__nurbsCircle3
-    100124: pasted__nurbsCircle4
-    100126: pasted__nurbsCircle4 1
-    100128: pasted__nurbsCircle4 2
-    100130: pasted__nurbsCircle4 3
-    100132: pasted__nurbsCircle4 4
-    100134: pasted__nurbsCircle4 5
-    100136: pasted__nurbsCircle5
-    100138: pasted__nurbsCircle5 1
-    100140: pasted__nurbsCircle5 2
-    100142: pasted__nurbsCircle5 3
-    100144: pasted__nurbsCircle5 4
-    100146: pasted__nurbsCircle5 5
-    100148: pasted__nurbsCircle5 6
-    100150: pasted__nurbsCircle5 7
-    100152: pasted__nurbsCircle6
-    100154: pasted__nurbsCircle7
-    100156: pasted__nurbsCircle8
-    100158: pasted__nurbsCircle9
-    100160: pasted__R_Clavical_J
-    100162: pasted__R_Elbow_J
-    100164: pasted__R_Foot_CTRL
-    100166: pasted__R_Index01_J
-    100168: pasted__R_Index02_J
-    100170: pasted__R_Index03_J
-    100172: pasted__R_Index04_J
-    100174: pasted__R_LegFoot_J
-    100176: pasted__R_LegKnee_J
-    100178: pasted__R_LegToe_J
-    100180: pasted__R_LegTop_J
-    100182: pasted__R_Little01_J
-    100184: pasted__R_Little02_J
-    100186: pasted__R_Little03_J
-    100188: pasted__R_Little04_J
-    100190: pasted__R_Middle01_J
-    100192: pasted__R_Middle02_J
-    100194: pasted__R_Middle03_J
-    100196: pasted__R_Middle04_J
-    100198: pasted__R_Ring01_J
-    100200: pasted__R_Ring02_J
-    100202: pasted__R_Ring03_J
-    100204: pasted__R_Ring04_J
-    100206: pasted__R_Shoulder_J
-    100208: pasted__R_Thumb01_J
-    100210: pasted__R_Thumb02_J
-    100212: pasted__R_Thumb03_J
-    100214: pasted__R_Toe_Tip
-    100216: pasted__R_Wrist_CTRL
-    100218: pasted__R_Wrist_J
-    100220: pasted__Rig
-    100222: pasted__Ring
-    100224: pasted__Spine01_J
-    100226: pasted__Spine02_J
-    100228: pasted__Spine03_J
-    100230: pasted__Spine_Curve
-    100232: pasted__Thumb
-    100234: //RootNode
-    100236: ShoeL
-    100238: ShoeLR
-    100240: Trousers
-    100242: Body
-    400000: Collar2
-    400002: Cuff_L
-    400004: Cuff_R
-    400006: Hat
-    400008: Jacket
-    400010: Model
-    400012: pasted__Chest_CTRL
-    400014: pasted__Controllers
-    400016: pasted__Elbow_L
-    400018: pasted__Elbow_R
-    400020: pasted__Head_CTRL
-    400022: pasted__Head_J
-    400024: pasted__HeadTop_J
-    400026: pasted__Hip_CTRL
-    400028: pasted__Hip_J
-    400030: pasted__IK_L_Hand
-    400032: pasted__IK_L_Leg
-    400034: pasted__IK_R_Hand
-    400036: pasted__IK_R_Leg
-    400038: pasted__IK_Spine
-    400040: pasted__Index
-    400042: pasted__Knee_L
-    400044: pasted__Knee_R
-    400046: pasted__L_Clavical_J
-    400048: pasted__L_Elbow_J
-    400050: pasted__L_Foot_CTRL
-    400052: pasted__L_Index01_J
-    400054: pasted__L_Index02_J
-    400056: pasted__L_Index03_J
-    400058: pasted__L_Index04_J
-    400060: pasted__L_LegFoot_J
-    400062: pasted__L_LegKnee_J
-    400064: pasted__L_LegToe_J
-    400066: pasted__L_LegTop_J
-    400068: pasted__L_Little01_J
-    400070: pasted__L_Little02_J
-    400072: pasted__L_Little03_J
-    400074: pasted__L_Little04_J
-    400076: pasted__L_Middle01_J
-    400078: pasted__L_Middle02_J
-    400080: pasted__L_Middle03_J
-    400082: pasted__L_Middle04_J
-    400084: pasted__L_Ring01_J
-    400086: pasted__L_Ring02_J
-    400088: pasted__L_Ring03_J
-    400090: pasted__L_Ring04_J
-    400092: pasted__L_Shoulder_J
-    400094: pasted__L_Thumb01_J
-    400096: pasted__L_Thumb02_J
-    400098: pasted__L_Thumb03_J
-    400100: pasted__L_Toe_Tip
-    400102: pasted__L_Wrist_CTRL
-    400104: pasted__L_Wrist_J
-    400106: pasted__Little
-    400108: pasted__Master_CTRL
-    400110: pasted__Middle
-    400112: pasted__Neck_J
-    400114: pasted__nurbsCircle1
-    400116: pasted__nurbsCircle1 1
-    400118: pasted__nurbsCircle2
-    400120: pasted__nurbsCircle2 1
-    400122: pasted__nurbsCircle3
-    400124: pasted__nurbsCircle4
-    400126: pasted__nurbsCircle4 1
-    400128: pasted__nurbsCircle4 2
-    400130: pasted__nurbsCircle4 3
-    400132: pasted__nurbsCircle4 4
-    400134: pasted__nurbsCircle4 5
-    400136: pasted__nurbsCircle5
-    400138: pasted__nurbsCircle5 1
-    400140: pasted__nurbsCircle5 2
-    400142: pasted__nurbsCircle5 3
-    400144: pasted__nurbsCircle5 4
-    400146: pasted__nurbsCircle5 5
-    400148: pasted__nurbsCircle5 6
-    400150: pasted__nurbsCircle5 7
-    400152: pasted__nurbsCircle6
-    400154: pasted__nurbsCircle7
-    400156: pasted__nurbsCircle8
-    400158: pasted__nurbsCircle9
-    400160: pasted__R_Clavical_J
-    400162: pasted__R_Elbow_J
-    400164: pasted__R_Foot_CTRL
-    400166: pasted__R_Index01_J
-    400168: pasted__R_Index02_J
-    400170: pasted__R_Index03_J
-    400172: pasted__R_Index04_J
-    400174: pasted__R_LegFoot_J
-    400176: pasted__R_LegKnee_J
-    400178: pasted__R_LegToe_J
-    400180: pasted__R_LegTop_J
-    400182: pasted__R_Little01_J
-    400184: pasted__R_Little02_J
-    400186: pasted__R_Little03_J
-    400188: pasted__R_Little04_J
-    400190: pasted__R_Middle01_J
-    400192: pasted__R_Middle02_J
-    400194: pasted__R_Middle03_J
-    400196: pasted__R_Middle04_J
-    400198: pasted__R_Ring01_J
-    400200: pasted__R_Ring02_J
-    400202: pasted__R_Ring03_J
-    400204: pasted__R_Ring04_J
-    400206: pasted__R_Shoulder_J
-    400208: pasted__R_Thumb01_J
-    400210: pasted__R_Thumb02_J
-    400212: pasted__R_Thumb03_J
-    400214: pasted__R_Toe_Tip
-    400216: pasted__R_Wrist_CTRL
-    400218: pasted__R_Wrist_J
-    400220: pasted__Rig
-    400222: pasted__Ring
-    400224: pasted__Spine01_J
-    400226: pasted__Spine02_J
-    400228: pasted__Spine03_J
-    400230: pasted__Spine_Curve
-    400232: pasted__Thumb
-    400234: //RootNode
-    400236: ShoeL
-    400238: ShoeLR
-    400240: Trousers
-    400242: Body
+    100000: Body
+    100002: Collar2
+    100004: Cuff_L
+    100006: Cuff_R
+    100008: Hat
+    100010: Jacket
+    100012: Model
+    100014: pasted__Chest_CTRL
+    100016: pasted__Controllers
+    100018: pasted__Elbow_L
+    100020: pasted__Elbow_R
+    100022: pasted__Head_CTRL
+    100024: pasted__Head_J
+    100026: pasted__HeadTop_J
+    100028: pasted__Hip_CTRL
+    100030: pasted__Hip_J
+    100032: pasted__IK_L_Hand
+    100034: pasted__IK_L_Leg
+    100036: pasted__IK_R_Hand
+    100038: pasted__IK_R_Leg
+    100040: pasted__IK_Spine
+    100042: pasted__Index
+    100044: pasted__Knee_L
+    100046: pasted__Knee_R
+    100048: pasted__L_Clavical_J
+    100050: pasted__L_Elbow_J
+    100052: pasted__L_Foot_CTRL
+    100054: pasted__L_Index01_J
+    100056: pasted__L_Index02_J
+    100058: pasted__L_Index03_J
+    100060: pasted__L_Index04_J
+    100062: pasted__L_LegFoot_J
+    100064: pasted__L_LegKnee_J
+    100066: pasted__L_LegToe_J
+    100068: pasted__L_LegTop_J
+    100070: pasted__L_Little01_J
+    100072: pasted__L_Little02_J
+    100074: pasted__L_Little03_J
+    100076: pasted__L_Little04_J
+    100078: pasted__L_Middle01_J
+    100080: pasted__L_Middle02_J
+    100082: pasted__L_Middle03_J
+    100084: pasted__L_Middle04_J
+    100086: pasted__L_Ring01_J
+    100088: pasted__L_Ring02_J
+    100090: pasted__L_Ring03_J
+    100092: pasted__L_Ring04_J
+    100094: pasted__L_Shoulder_J
+    100096: pasted__L_Thumb01_J
+    100098: pasted__L_Thumb02_J
+    100100: pasted__L_Thumb03_J
+    100102: pasted__L_Toe_Tip
+    100104: pasted__L_Wrist_CTRL
+    100106: pasted__L_Wrist_J
+    100108: pasted__Little
+    100110: pasted__Master_CTRL
+    100112: pasted__Middle
+    100114: pasted__Neck_J
+    100116: pasted__nurbsCircle1
+    100118: pasted__nurbsCircle1 1
+    100120: pasted__nurbsCircle2
+    100122: pasted__nurbsCircle2 1
+    100124: pasted__nurbsCircle3
+    100126: pasted__nurbsCircle4
+    100128: pasted__nurbsCircle4 1
+    100130: pasted__nurbsCircle4 2
+    100132: pasted__nurbsCircle4 3
+    100134: pasted__nurbsCircle4 4
+    100136: pasted__nurbsCircle4 5
+    100138: pasted__nurbsCircle5
+    100140: pasted__nurbsCircle5 1
+    100142: pasted__nurbsCircle5 2
+    100144: pasted__nurbsCircle5 3
+    100146: pasted__nurbsCircle5 4
+    100148: pasted__nurbsCircle5 5
+    100150: pasted__nurbsCircle5 6
+    100152: pasted__nurbsCircle5 7
+    100154: pasted__nurbsCircle6
+    100156: pasted__nurbsCircle7
+    100158: pasted__nurbsCircle8
+    100160: pasted__nurbsCircle9
+    100162: pasted__R_Clavical_J
+    100164: pasted__R_Elbow_J
+    100166: pasted__R_Foot_CTRL
+    100168: pasted__R_Index01_J
+    100170: pasted__R_Index02_J
+    100172: pasted__R_Index03_J
+    100174: pasted__R_Index04_J
+    100176: pasted__R_LegFoot_J
+    100178: pasted__R_LegKnee_J
+    100180: pasted__R_LegToe_J
+    100182: pasted__R_LegTop_J
+    100184: pasted__R_Little01_J
+    100186: pasted__R_Little02_J
+    100188: pasted__R_Little03_J
+    100190: pasted__R_Little04_J
+    100192: pasted__R_Middle01_J
+    100194: pasted__R_Middle02_J
+    100196: pasted__R_Middle03_J
+    100198: pasted__R_Middle04_J
+    100200: pasted__R_Ring01_J
+    100202: pasted__R_Ring02_J
+    100204: pasted__R_Ring03_J
+    100206: pasted__R_Ring04_J
+    100208: pasted__R_Shoulder_J
+    100210: pasted__R_Thumb01_J
+    100212: pasted__R_Thumb02_J
+    100214: pasted__R_Thumb03_J
+    100216: pasted__R_Toe_Tip
+    100218: pasted__R_Wrist_CTRL
+    100220: pasted__R_Wrist_J
+    100222: pasted__Rig
+    100224: pasted__Ring
+    100226: pasted__Spine01_J
+    100228: pasted__Spine02_J
+    100230: pasted__Spine03_J
+    100232: pasted__Spine_Curve
+    100234: pasted__Thumb
+    100236: //RootNode
+    100238: ShoeL
+    100240: ShoeLR
+    100242: Trousers
+    400000: Body
+    400002: Collar2
+    400004: Cuff_L
+    400006: Cuff_R
+    400008: Hat
+    400010: Jacket
+    400012: Model
+    400014: pasted__Chest_CTRL
+    400016: pasted__Controllers
+    400018: pasted__Elbow_L
+    400020: pasted__Elbow_R
+    400022: pasted__Head_CTRL
+    400024: pasted__Head_J
+    400026: pasted__HeadTop_J
+    400028: pasted__Hip_CTRL
+    400030: pasted__Hip_J
+    400032: pasted__IK_L_Hand
+    400034: pasted__IK_L_Leg
+    400036: pasted__IK_R_Hand
+    400038: pasted__IK_R_Leg
+    400040: pasted__IK_Spine
+    400042: pasted__Index
+    400044: pasted__Knee_L
+    400046: pasted__Knee_R
+    400048: pasted__L_Clavical_J
+    400050: pasted__L_Elbow_J
+    400052: pasted__L_Foot_CTRL
+    400054: pasted__L_Index01_J
+    400056: pasted__L_Index02_J
+    400058: pasted__L_Index03_J
+    400060: pasted__L_Index04_J
+    400062: pasted__L_LegFoot_J
+    400064: pasted__L_LegKnee_J
+    400066: pasted__L_LegToe_J
+    400068: pasted__L_LegTop_J
+    400070: pasted__L_Little01_J
+    400072: pasted__L_Little02_J
+    400074: pasted__L_Little03_J
+    400076: pasted__L_Little04_J
+    400078: pasted__L_Middle01_J
+    400080: pasted__L_Middle02_J
+    400082: pasted__L_Middle03_J
+    400084: pasted__L_Middle04_J
+    400086: pasted__L_Ring01_J
+    400088: pasted__L_Ring02_J
+    400090: pasted__L_Ring03_J
+    400092: pasted__L_Ring04_J
+    400094: pasted__L_Shoulder_J
+    400096: pasted__L_Thumb01_J
+    400098: pasted__L_Thumb02_J
+    400100: pasted__L_Thumb03_J
+    400102: pasted__L_Toe_Tip
+    400104: pasted__L_Wrist_CTRL
+    400106: pasted__L_Wrist_J
+    400108: pasted__Little
+    400110: pasted__Master_CTRL
+    400112: pasted__Middle
+    400114: pasted__Neck_J
+    400116: pasted__nurbsCircle1
+    400118: pasted__nurbsCircle1 1
+    400120: pasted__nurbsCircle2
+    400122: pasted__nurbsCircle2 1
+    400124: pasted__nurbsCircle3
+    400126: pasted__nurbsCircle4
+    400128: pasted__nurbsCircle4 1
+    400130: pasted__nurbsCircle4 2
+    400132: pasted__nurbsCircle4 3
+    400134: pasted__nurbsCircle4 4
+    400136: pasted__nurbsCircle4 5
+    400138: pasted__nurbsCircle5
+    400140: pasted__nurbsCircle5 1
+    400142: pasted__nurbsCircle5 2
+    400144: pasted__nurbsCircle5 3
+    400146: pasted__nurbsCircle5 4
+    400148: pasted__nurbsCircle5 5
+    400150: pasted__nurbsCircle5 6
+    400152: pasted__nurbsCircle5 7
+    400154: pasted__nurbsCircle6
+    400156: pasted__nurbsCircle7
+    400158: pasted__nurbsCircle8
+    400160: pasted__nurbsCircle9
+    400162: pasted__R_Clavical_J
+    400164: pasted__R_Elbow_J
+    400166: pasted__R_Foot_CTRL
+    400168: pasted__R_Index01_J
+    400170: pasted__R_Index02_J
+    400172: pasted__R_Index03_J
+    400174: pasted__R_Index04_J
+    400176: pasted__R_LegFoot_J
+    400178: pasted__R_LegKnee_J
+    400180: pasted__R_LegToe_J
+    400182: pasted__R_LegTop_J
+    400184: pasted__R_Little01_J
+    400186: pasted__R_Little02_J
+    400188: pasted__R_Little03_J
+    400190: pasted__R_Little04_J
+    400192: pasted__R_Middle01_J
+    400194: pasted__R_Middle02_J
+    400196: pasted__R_Middle03_J
+    400198: pasted__R_Middle04_J
+    400200: pasted__R_Ring01_J
+    400202: pasted__R_Ring02_J
+    400204: pasted__R_Ring03_J
+    400206: pasted__R_Ring04_J
+    400208: pasted__R_Shoulder_J
+    400210: pasted__R_Thumb01_J
+    400212: pasted__R_Thumb02_J
+    400214: pasted__R_Thumb03_J
+    400216: pasted__R_Toe_Tip
+    400218: pasted__R_Wrist_CTRL
+    400220: pasted__R_Wrist_J
+    400222: pasted__Rig
+    400224: pasted__Ring
+    400226: pasted__Spine01_J
+    400228: pasted__Spine02_J
+    400230: pasted__Spine03_J
+    400232: pasted__Spine_Curve
+    400234: pasted__Thumb
+    400236: //RootNode
+    400238: ShoeL
+    400240: ShoeLR
+    400242: Trousers
     2100000: Police_Shader
-    4300000: Jacket
-    4300002: Cuff_L
-    4300004: Collar2
-    4300006: Hat
-    4300008: Cuff_R
-    4300010: Trousers
-    4300012: ShoeL
-    4300014: ShoeLR
-    4300016: Body
+    4300000: Trousers
+    4300002: Jacket
+    4300004: Cuff_L
+    4300006: Collar2
+    4300008: ShoeL
+    4300010: ShoeLR
+    4300012: Body
+    4300014: Hat
+    4300016: Cuff_R
+    7400000: Test
+    7400002: Idle
+    7400004: Idle2
+    7400006: Hand_out
+    7400008: hand_out_wait
+    7400010: Hand_in
     9500000: //RootNode
-    13700000: Collar2
-    13700002: Cuff_L
-    13700004: Cuff_R
-    13700006: Hat
-    13700008: Jacket
-    13700010: Body
+    13700000: Body
+    13700002: Collar2
+    13700004: Cuff_L
+    13700006: Cuff_R
+    13700008: Hat
+    13700010: Jacket
     13700012: ShoeL
     13700014: ShoeLR
     13700016: Trousers
@@ -299,7 +305,175 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Test
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 80
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle2
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 400
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hand_out
+      takeName: Take 001
+      firstFrame: 400
+      lastFrame: 460
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: hand_out_wait
+      takeName: Take 001
+      firstFrame: 460
+      lastFrame: 500
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hand_in
+      takeName: Take 001
+      firstFrame: 500
+      lastFrame: 560
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

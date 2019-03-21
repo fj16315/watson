@@ -78,6 +78,49 @@ ModelImporter:
     100144: Tie3
     100146: Trousers3
     100148: UnderShirt4
+    100150: pasted__Index
+    100152: pasted__L_Elbow_Ctrl
+    100154: pasted__Little
+    100156: pasted__Middle
+    100158: pasted__nurbsCircle1
+    100160: pasted__nurbsCircle1 1
+    100162: pasted__nurbsCircle2
+    100164: pasted__nurbsCircle2 1
+    100166: pasted__nurbsCircle3
+    100168: pasted__nurbsCircle4
+    100170: pasted__nurbsCircle4 1
+    100172: pasted__nurbsCircle4 2
+    100174: pasted__nurbsCircle4 3
+    100176: pasted__nurbsCircle4 4
+    100178: pasted__nurbsCircle4 5
+    100180: pasted__nurbsCircle5
+    100182: pasted__nurbsCircle5 1
+    100184: pasted__nurbsCircle5 2
+    100186: pasted__nurbsCircle5 3
+    100188: pasted__nurbsCircle5 4
+    100190: pasted__nurbsCircle5 5
+    100192: pasted__nurbsCircle5 6
+    100194: pasted__nurbsCircle5 7
+    100196: pasted__nurbsCircle6
+    100198: pasted__nurbsCircle7
+    100200: pasted__nurbsCircle8
+    100202: pasted__nurbsCircle9
+    100204: pasted__pasted__Chest_CTRL
+    100206: pasted__pasted__Head_CTRL
+    100208: pasted__pasted__IK_L_Hand
+    100210: pasted__pasted__IK_L_Leg
+    100212: pasted__pasted__IK_R_Hand
+    100214: pasted__pasted__IK_R_Leg
+    100216: pasted__pasted__IK_Spine
+    100218: pasted__pasted__L_Foot_CTRL
+    100220: pasted__pasted__L_Wrist_CTRL
+    100222: pasted__pasted__qHip_CTRL
+    100224: pasted__pasted__R_Foot_CTRL
+    100226: pasted__pasted__R_Wrist_CTRL1
+    100228: pasted__pasted__Spine_Curve
+    100230: pasted__R_Elbow_Ctrl
+    100232: pasted__Ring
+    100234: pasted__Thumb
     400000: Body
     400002: //RootNode
     400004: Hat3
@@ -153,6 +196,49 @@ ModelImporter:
     400144: Tie3
     400146: Trousers3
     400148: UnderShirt4
+    400150: pasted__Index
+    400152: pasted__L_Elbow_Ctrl
+    400154: pasted__Little
+    400156: pasted__Middle
+    400158: pasted__nurbsCircle1
+    400160: pasted__nurbsCircle1 1
+    400162: pasted__nurbsCircle2
+    400164: pasted__nurbsCircle2 1
+    400166: pasted__nurbsCircle3
+    400168: pasted__nurbsCircle4
+    400170: pasted__nurbsCircle4 1
+    400172: pasted__nurbsCircle4 2
+    400174: pasted__nurbsCircle4 3
+    400176: pasted__nurbsCircle4 4
+    400178: pasted__nurbsCircle4 5
+    400180: pasted__nurbsCircle5
+    400182: pasted__nurbsCircle5 1
+    400184: pasted__nurbsCircle5 2
+    400186: pasted__nurbsCircle5 3
+    400188: pasted__nurbsCircle5 4
+    400190: pasted__nurbsCircle5 5
+    400192: pasted__nurbsCircle5 6
+    400194: pasted__nurbsCircle5 7
+    400196: pasted__nurbsCircle6
+    400198: pasted__nurbsCircle7
+    400200: pasted__nurbsCircle8
+    400202: pasted__nurbsCircle9
+    400204: pasted__pasted__Chest_CTRL
+    400206: pasted__pasted__Head_CTRL
+    400208: pasted__pasted__IK_L_Hand
+    400210: pasted__pasted__IK_L_Leg
+    400212: pasted__pasted__IK_R_Hand
+    400214: pasted__pasted__IK_R_Leg
+    400216: pasted__pasted__IK_Spine
+    400218: pasted__pasted__L_Foot_CTRL
+    400220: pasted__pasted__L_Wrist_CTRL
+    400222: pasted__pasted__qHip_CTRL
+    400224: pasted__pasted__R_Foot_CTRL
+    400226: pasted__pasted__R_Wrist_CTRL1
+    400228: pasted__pasted__Spine_Curve
+    400230: pasted__R_Elbow_Ctrl
+    400232: pasted__Ring
+    400234: pasted__Thumb
     2100000: Gangster_Shader
     4300000: Body
     4300002: UnderShirt4
@@ -161,6 +247,13 @@ ModelImporter:
     4300008: Tie3
     4300010: Hat3
     4300012: Shoes1
+    7400000: Test
+    7400002: Idle1
+    7400004: Idle2
+    7400006: Idle3
+    7400008: Hand_out
+    7400010: Hand_out_wait
+    7400012: Hand_in
     9500000: //RootNode
     13700000: Body
     13700002: Hat3
@@ -202,7 +295,203 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Test
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle1
+      takeName: Take 001
+      firstFrame: 80
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle2
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 400
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle3
+      takeName: Take 001
+      firstFrame: 400
+      lastFrame: 560
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hand_out
+      takeName: Take 001
+      firstFrame: 560
+      lastFrame: 620
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hand_out_wait
+      takeName: Take 001
+      firstFrame: 620
+      lastFrame: 660
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hand_in
+      takeName: Take 001
+      firstFrame: 660
+      lastFrame: 720
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -233,7 +522,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 0
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
