@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace WatsonAI
 {
-
   public struct Result<T>
   {
     public T value { get; }
@@ -155,7 +154,7 @@ namespace WatsonAI
     }
   }
 
-  public class EntityName : Pattern<Entity>
+  public class EntityName : Pattern<IEnumerable<Entity>>
   {
     private Associations associations;
     private Thesaurus thesaurus;
@@ -166,16 +165,14 @@ namespace WatsonAI
       this.thesaurus = thesaurus;
     }
 
-    public override Result<Entity> Match(Parse tree)
-      => associations
+    public override Result<IEnumerable<Entity>> Match(Parse tree)
+      => new Result<IEnumerable<Entity>>(associations
       .EntityNames()
       .Where(name => thesaurus.Describes(tree.Value, name, true))
-      .Select(name => associations.UncheckedGetEntity(name))
-      .Select(e => new Result<Entity>(e))
-      .FirstOrDefault();
+      .Select(name => associations.UncheckedGetEntity(name)));
   }
 
-  public class VerbName : Pattern<Verb>
+  public class VerbName : Pattern<IEnumerable<Verb>>
   {
     private Associations associations;
     private Thesaurus thesaurus;
@@ -186,13 +183,11 @@ namespace WatsonAI
       this.thesaurus = thesaurus;
     }
 
-    public override Result<Verb> Match(Parse tree)
-      => associations
+    public override Result<IEnumerable<Verb>> Match(Parse tree)
+      => new Result<IEnumerable<Verb>>(associations
       .VerbNames()
       .Where(name => thesaurus.Describes(tree.Value, name, true))
-      .Select(name => associations.UncheckedGetVerb(name))
-      .Select(v => new Result<Verb>(v))
-      .FirstOrDefault();
+      .Select(name => associations.UncheckedGetVerb(name)));
   }
 
   public class QuestionProcess : IProcess
@@ -226,16 +221,65 @@ namespace WatsonAI
       this.associations = associations;
     }
 
+    private void PrintVerbs(Stream stream)
+    {
+      var tree = this.parser.Parse(stream.RemainingInput);
+
+      var verb = new VerbName(associations, thesaurus);
+      var top = new Branch("TOP");
+
+      var query = new Descendant<IEnumerable<Verb>>(top, verb);
+
+      var verbs = query.Match(tree);
+
+      Console.WriteLine("Verbs: ");
+      if (verbs.hasValue)
+      {
+        foreach (var v in verbs.value.SelectMany(x => x).Distinct())
+        {
+          string verbName;
+          associations.TryNameVerb(v, out verbName);
+          Console.WriteLine($"{v} {verbName}");
+        }
+      }
+    }
+    
+    private void PrintEntities(Stream stream)
+    {
+      var tree = this.parser.Parse(stream.RemainingInput);
+
+      var entity = new EntityName(associations, thesaurus);
+      var top = new Branch("TOP");
+
+      var query = new Descendant<IEnumerable<Entity>>(top, entity);
+
+      var entities = query.Match(tree);
+
+      Console.WriteLine("Entities: ");
+      if (entities.hasValue)
+      {
+        foreach (var e in entities.value.SelectMany(x => x).Distinct())
+        {
+          string entityName;
+          associations.TryNameEntity(e, out entityName);
+          Console.WriteLine($"{e} {entityName}");
+        }
+      }
+    }
+
     public Stream Process(Stream stream)
     {
       Word.SetThesaurus(thesaurus);
+
+      //PrintVerbs(stream);
+      //PrintEntities(stream);
 
       var tree = this.parser.Parse(stream.RemainingInput);
 
       var noun = new EntityName(associations, thesaurus);
       var verb = new VerbName(associations, thesaurus);
-      var nounPhrase = new Descendant<Entity>(new Branch("NP"), noun);
-      var verbPhrase = new Descendant<Verb>(new Branch("VP"), verb);
+      var nounPhrase = new Descendant<IEnumerable<Entity>>(new Branch("NP"), noun);
+      var verbPhrase = new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb);
       //var nounVerbPhrase = new Descendant<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>(new Branch("SQ"), new And<IEnumerable<Entity>, IEnumerable<Verb>>(nounPhrase, verbPhrase));
       //var nounVerbPhrase = new And<IEnumerable<Entity>, IEnumerable<Verb>>(nounPhrase, verbPhrase);
       //var question = new Descendant<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>(new Branch("SBARQ"), nounVerbPhrase);
@@ -243,8 +287,8 @@ namespace WatsonAI
 
       var top = new Branch("TOP");
       //var query = new Descendant<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>(top, question);
-      var queryN = new Descendant<IEnumerable<Entity>>(top, nounPhrase);
-      var queryV = new Descendant<IEnumerable<Verb>>(top, verbPhrase);
+      var queryN = new Descendant<IEnumerable<IEnumerable<Entity>>>(top, nounPhrase);
+      var queryV = new Descendant<IEnumerable<IEnumerable<Verb>>>(top, verbPhrase);
       //var query = new Descendant<IEnumerable<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>>(top, question);
       //var query = new Descendant<IEnumerable<Tuple<IEnumerable<Entity>,IEnumerable<Verb>>>>(top, nounVerbPhrase);
 
@@ -253,8 +297,8 @@ namespace WatsonAI
       var pVs = queryV.Match(tree);
       if (pNs.hasValue && pVs.hasValue)
       {
-        var ns = pNs.value.SelectMany(x => x);
-        var vs = pVs.value.SelectMany(x => x);
+        var ns = pNs.value.SelectMany(x => x).SelectMany(x => x);
+        var vs = pVs.value.SelectMany(x => x).SelectMany(x => x);
 
         var pairs = from n in ns
                     from v in vs
@@ -272,142 +316,7 @@ namespace WatsonAI
           stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
         }
       }
-      //if (pairses.hasValue)
-      //{
-      //  var pairs = pairses.value.SelectMany(x => x);
-      //  foreach (var p in pairs)
-      //  {
-      //    var e = p.Item1.First();
-      //    var v = p.Item2.First();
-      //    var answers = GetAnswers(v, e);
-      //    string verbName;
-      //    associations.TryNameVerb(v, out verbName);
-      //    string entityName;
-      //    associations.TryNameEntity(e, out entityName);
-      //    stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
-      //  }
-      //}
-      //foreach (var nonu in pairses.value.SelectMany(x => x))
-      //{
-      //  Console.WriteLine($"{nonu}");
-      //}
-      //foreach (var pair in pairses.value.SelectMany(x => x))
-      //{
-      //  Console.WriteLine($"{pair.Item1.First()} , {pair.Item2.First()}");
-      //}
-      //else
-      //{
-      //  stream.AppendOutput("Question?!");
-      //}
       return stream;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public InputOutput Process(InputOutput io)
-    {
-      if (io.remainingInput.Length == 0) return io;
-
-      var parse = this.parser.Parse(io.remainingInput).GetChildren()[0];
-      var nounPhrase = parse;
-      var verbPhrase = parse;
-      var noun = parse;
-      var verb = parse;
-
-      if (parse.Type.Equals("SBARQ"))
-      {
-        Console.WriteLine("This has a question:");
-        var sq = parse.GetChildren()[1];
-        if (sq.ChildCount == 1)
-        {
-          verbPhrase = sq.GetChildren()[0];
-          verb = verbPhrase.GetChildren()[0];
-          nounPhrase = verbPhrase.GetChildren()[1];
-          noun = nounPhrase.GetChildren()[nounPhrase.ChildCount - 1];
-        }
-        else
-        {
-          for (int i = 0; i < sq.ChildCount; i++)
-          {
-            var current = sq.GetChildren()[i];
-            if (current.Type.Equals("VP"))
-            {
-              verbPhrase = current;
-              verb = verbPhrase.GetChildren()[0];
-            }
-            else if (current.Type.Contains("VB"))
-            {
-              verb = current;
-            }
-            else
-            {
-              nounPhrase = current;
-              noun = nounPhrase.GetChildren()[nounPhrase.ChildCount - 1];
-            }
-          }
-        }
-        var wh = parse.GetChildren()[0].GetChildren()[0];
-        //io.output += "Verb = " + verb.Show() + ", Noun = " + noun.Show();
-        var answers = Query(noun.Value, verb.Value);
-        if (answers.Count != 0)
-        {
-          io.output += GenerateResponse(noun.Value, verb.Value, answers);
-        }
-      }
-
-      return io;
-    }
-
-    public List<Entity> Query(string noun, string verb)
-    {
-      Verb graphVerb = new Verb();
-      Entity graphEntity = new Entity();
-      if (!GetVerb(verb, out graphVerb) || !GetEntity(noun, out graphEntity))
-      {
-        string verbName;
-        string entityName;
-        associations.TryNameEntity(graphEntity, out entityName);
-        associations.TryNameVerb(graphVerb, out verbName);
-        Console.WriteLine("Failed, attempted verb is: " + verbName + " " + graphVerb);
-        Console.WriteLine("Failed, attempted entity is: " + entityName + " " + graphEntity);
-        return new List<Entity>();
-      }
-      Console.WriteLine("The verb is: " + verb + " " + graphVerb);
-      Console.WriteLine("The entity is: " + noun + " " + graphEntity);
-
-      return GetAnswers(graphVerb, graphEntity);
     }
 
     private List<Entity> GetAnswers(Verb verb, Entity entity)
@@ -428,39 +337,21 @@ namespace WatsonAI
               }
             }
           }
+
+          var sobject = Valent.Subj(entity);
+          if (vp.GetValents().Contains(sobject))
+          {
+            foreach (Valent nextValent in vp.GetValents())
+            {
+              if (nextValent.tag == Valent.Tag.Dobj)
+              {
+                answers.Add(nextValent.entity);
+              }
+            }
+          }
         } 
       }
       return answers;
-    }
-
-    private bool GetVerb(string verb, out Verb graphVerb)
-    {
-      bool found = false;
-      Verb verbAssociation = new Verb();
-      foreach (string verbName in associations.VerbNames())
-      {
-        if (thesaurus.Describes(verb, verbName, true))
-        {
-          found = found || associations.TryGetVerb(verbName, out verbAssociation);
-        }
-      }
-      graphVerb = verbAssociation;
-      return found;
-    }
-
-    private bool GetEntity(string noun, out Entity graphEntity)
-    {
-      bool found = false;
-      Entity entityAssociation = new Entity();
-      foreach (string entityName in associations.EntityNames())
-      {
-        if (thesaurus.Describes(noun, entityName, true))
-        {
-          found = found || associations.TryGetEntity(entityName, out entityAssociation);
-        }
-      }
-      graphEntity = entityAssociation;
-      return found;
     }
 
     private string GenerateResponse(string noun, string verb, List<Entity> answers)
