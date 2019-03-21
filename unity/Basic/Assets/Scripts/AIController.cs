@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using System.IO;
 using UnityEditor;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 public class AIController : MonoBehaviour
 {
@@ -34,7 +36,37 @@ public class AIController : MonoBehaviour
 
     }
 
-    public string Run(string input) => watson.Run(input);
+    public string Run(string input) 
+    {
+        SaveFile(input);
 
+        return watson.Run(input); 
+    }
+
+    public void SaveFile(string data)
+    {
+        string path= Application.persistentDataPath + "/inputs.txt";
+       
+        // This text is added only once to the file.
+        if (!File.Exists(path))
+        {
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine(data);
+            }
+        }
+
+        // This text is always added, making the file longer over time
+        // if it is not deleted.
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            sw.WriteLine(data);
+        }
+    }
+
+   
 
 }
+
+
