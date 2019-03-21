@@ -1,0 +1,3 @@
+[submodule "WatsonAI/OpenNlp"]
+	path = WatsonAI/OpenNlp
+	url = https://github.com/AdamBeddoe/OpenNlp.git
