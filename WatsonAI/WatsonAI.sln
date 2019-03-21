@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatsonAI", "WatsonAI\WatsonAI.csproj", "{7D57AFA3-7E15-4E26-964D-23F21C654754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatsonConsole", "WatsonConsole\WatsonConsole.csproj", "{7069BB55-2D9F-4C59-B913-5ECFEA762C03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatsonTest", "WatsonTest\WatsonTest.csproj", "{1EEED99B-0297-4E79-A297-E4D51A6CF80A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D57AFA3-7E15-4E26-964D-23F21C654754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D57AFA3-7E15-4E26-964D-23F21C654754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D57AFA3-7E15-4E26-964D-23F21C654754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D57AFA3-7E15-4E26-964D-23F21C654754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7069BB55-2D9F-4C59-B913-5ECFEA762C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7069BB55-2D9F-4C59-B913-5ECFEA762C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7069BB55-2D9F-4C59-B913-5ECFEA762C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7069BB55-2D9F-4C59-B913-5ECFEA762C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EEED99B-0297-4E79-A297-E4D51A6CF80A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEED99B-0297-4E79-A297-E4D51A6CF80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEED99B-0297-4E79-A297-E4D51A6CF80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEED99B-0297-4E79-A297-E4D51A6CF80A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC05C35D-A569-4DA6-80CF-63712636AB56}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.TabWidth = 2
+		$1.TabsToSpaces = True
+		$1.IndentWidth = 2
+		$1.EolMarker = Unix
+		$1.scope = text/x-csharp
+		$1.FileWidth = 80
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
