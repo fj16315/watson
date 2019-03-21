@@ -1,18 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 using Notebook;
+using NPC;
 
 public class MasterControl : MonoBehaviour {
 
     public GameObject masterCanvas;
     public NotebookController notebook;
-    public bool paused = false;
     public RigidbodyFirstPersonController fpc;
+
+    // State variables
+    public bool paused = false;
+    private float launch;
+    private float end;
+
+    // Scoring variables
+    public NPCController who;
+    public GameObject what;
 
     // Use this for initialization
     void Start () {
+        launch = Time.realtimeSinceStartup;
+        Debug.Log("Launch: " + launch.ToString());
         notebook.Activate(false);
     }
 	
@@ -52,6 +64,14 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = false;
                 break;
         }
+    }
+
+    public void EndGame()
+    {
+        end = Time.realtimeSinceStartup;
+        Debug.Log("End: " + end.ToString());
+        Stats.Time = end - launch;
+        SceneManager.LoadScene("End_Scene", LoadSceneMode.Single);
     }
 
     public void QuitGame()
