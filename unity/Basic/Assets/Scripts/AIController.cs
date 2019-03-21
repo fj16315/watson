@@ -13,17 +13,13 @@ public class AIController : MonoBehaviour
 {
     private bool newSession = false;
     private Watson watson;
+    private bool loaded = false;
 
     public AIController()
     {
-      #if UNITY_EDITOR
-        this.watson = new Watson("Assets/StreamingAssets/");
-      #endif
 
-      #if UNITY_STANDALONE
-        this.watson = new Watson("Watson_Data/StreamingAssets/");
-      #endif
-  }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +32,14 @@ public class AIController : MonoBehaviour
 
     }
 
+    void StartUp()
+    {
+        string path = "Assets/StreamingAssets";
+        if (!Application.isEditor) path = "Watson_Data/StreamingAssets/";
+        this.watson = new Watson(path);
+        loaded = true;
+    }
+
     public string Run(string input) 
     {
         string aiResponse = watson.Run(input);
@@ -46,6 +50,10 @@ public class AIController : MonoBehaviour
 
     public void StartSession() {
         this.newSession = true;
+        if (!loaded)
+        {
+            StartUp();
+        }
     }
 
 

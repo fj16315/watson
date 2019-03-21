@@ -174,6 +174,7 @@ ModelImporter:
     100336: pasted__Character1_Ctrl_Spine
     100338: pasted__Character1_Ctrl_Spine1
     100340: pasted__Character1_Ctrl_Spine2
+    100342: Dress1
     400000: //RootNode
     400002: Dress_Bottom
     400004: Dress_Top
@@ -345,9 +346,36 @@ ModelImporter:
     400336: pasted__Character1_Ctrl_Spine
     400338: pasted__Character1_Ctrl_Spine1
     400340: pasted__Character1_Ctrl_Spine2
+    400342: Dress1
     2100000: lambert5
     2300000: Dress_Bottom
+    2300002: Dress1
+    2300004: Glasses3
+    2300006: Hair1
+    2300008: nurbsToPoly1
+    2300010: nurbsToPoly2
+    2300012: nurbsToPoly3
+    2300014: nurbsToPoly4
+    2300016: nurbsToPoly5
+    2300018: nurbsToPoly6
+    2300020: nurbsToPoly7
+    2300022: nurbsToPoly8
+    2300024: pasted__Body
+    2300026: Scarf2
     3300000: Dress_Bottom
+    3300002: Dress1
+    3300004: Glasses3
+    3300006: Hair1
+    3300008: nurbsToPoly1
+    3300010: nurbsToPoly2
+    3300012: nurbsToPoly3
+    3300014: nurbsToPoly4
+    3300016: nurbsToPoly5
+    3300018: nurbsToPoly6
+    3300020: nurbsToPoly7
+    3300022: nurbsToPoly8
+    3300024: pasted__Body
+    3300026: Scarf2
     4300000: nurbsToPoly1
     4300002: nurbsToPoly2
     4300004: nurbsToPoly3
@@ -362,6 +390,7 @@ ModelImporter:
     4300022: Scarf2
     4300024: Hair1
     4300026: pasted__Body
+    4300028: Dress1
     9500000: //RootNode
     13700000: Dress_Top
     13700002: Glasses3
