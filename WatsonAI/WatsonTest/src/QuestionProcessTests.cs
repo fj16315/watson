@@ -29,7 +29,9 @@ namespace WatsonTest
     {
       // Ignore the warning, this should be compared to itself.
       // That's the point of this test.
+#pragma warning disable CS1718
       return (result == result)
+#pragma warning restore CS1718
              .Classify(result.HasValue, "result has a value")
              .Classify(!result.HasValue, "result is empty");
     }
