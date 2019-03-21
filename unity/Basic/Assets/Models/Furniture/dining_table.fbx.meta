@@ -83,6 +83,40 @@ ModelImporter:
     100154: cutlery
     100156: decoration
     100158: gravy_boat
+    100160: apple1
+    100162: apple2
+    100164: apples
+    100166: banana
+    100168: egg1
+    100170: egg2
+    100172: egg3
+    100174: egg4
+    100176: egg5
+    100178: eggs
+    100180: fruit_platter
+    100182: gross
+    100184: jelly
+    100186: lettuce 1
+    100188: orange_wedge1
+    100190: orange_wedge2
+    100192: orange_wedge3
+    100194: orange_wedge4
+    100196: orange_wedge5
+    100198: orange_wedge6
+    100200: orange_wedge7
+    100202: oranges
+    100204: pear1
+    100206: pear2
+    100208: pear3
+    100210: pears
+    100212: platter 1
+    100214: platter 2
+    100216: strawberries
+    100218: strawberry1
+    100220: strawberry2
+    100222: strawberry3
+    100224: strawberry4
+    100226: strawberry5
     400000: cloth
     400002: //RootNode
     400004: wooden
@@ -163,6 +197,40 @@ ModelImporter:
     400154: cutlery
     400156: decoration
     400158: gravy_boat
+    400160: apple1
+    400162: apple2
+    400164: apples
+    400166: banana
+    400168: egg1
+    400170: egg2
+    400172: egg3
+    400174: egg4
+    400176: egg5
+    400178: eggs
+    400180: fruit_platter
+    400182: gross
+    400184: jelly
+    400186: lettuce 1
+    400188: orange_wedge1
+    400190: orange_wedge2
+    400192: orange_wedge3
+    400194: orange_wedge4
+    400196: orange_wedge5
+    400198: orange_wedge6
+    400200: orange_wedge7
+    400202: oranges
+    400204: pear1
+    400206: pear2
+    400208: pear3
+    400210: pears
+    400212: platter 1
+    400214: platter 2
+    400216: strawberries
+    400218: strawberry1
+    400220: strawberry2
+    400222: strawberry3
+    400224: strawberry4
+    400226: strawberry5
     2100000: lambert1
     2100002: new_house_table_top_shiny
     2100004: new_house_furniture_wood
@@ -231,6 +299,33 @@ ModelImporter:
     2300118: tomato8
     2300120: tomato9
     2300122: gravy_boat
+    2300124: apple1
+    2300126: apple2
+    2300128: banana
+    2300130: egg1
+    2300132: egg2
+    2300134: egg3
+    2300136: egg4
+    2300138: egg5
+    2300140: gross
+    2300142: lettuce 1
+    2300144: orange_wedge1
+    2300146: orange_wedge2
+    2300148: orange_wedge3
+    2300150: orange_wedge4
+    2300152: orange_wedge5
+    2300154: orange_wedge6
+    2300156: orange_wedge7
+    2300158: pear1
+    2300160: pear2
+    2300162: pear3
+    2300164: platter 1
+    2300166: platter 2
+    2300168: strawberry1
+    2300170: strawberry2
+    2300172: strawberry3
+    2300174: strawberry4
+    2300176: strawberry5
     3300000: cloth
     3300002: wooden
     3300004: cloth 1
@@ -293,6 +388,33 @@ ModelImporter:
     3300118: tomato8
     3300120: tomato9
     3300122: gravy_boat
+    3300124: apple1
+    3300126: apple2
+    3300128: banana
+    3300130: egg1
+    3300132: egg2
+    3300134: egg3
+    3300136: egg4
+    3300138: egg5
+    3300140: gross
+    3300142: lettuce 1
+    3300144: orange_wedge1
+    3300146: orange_wedge2
+    3300148: orange_wedge3
+    3300150: orange_wedge4
+    3300152: orange_wedge5
+    3300154: orange_wedge6
+    3300156: orange_wedge7
+    3300158: pear1
+    3300160: pear2
+    3300162: pear3
+    3300164: platter 1
+    3300166: platter 2
+    3300168: strawberry1
+    3300170: strawberry2
+    3300172: strawberry3
+    3300174: strawberry4
+    3300176: strawberry5
     4300000: wooden
     4300002: cloth
     4300004: topper
@@ -355,6 +477,33 @@ ModelImporter:
     4300118: potato9
     4300120: potato10
     4300122: gravy_boat
+    4300124: platter
+    4300126: gross
+    4300128: egg1
+    4300130: egg2
+    4300132: egg3
+    4300134: egg4
+    4300136: egg5
+    4300138: lettuce
+    4300140: platter
+    4300142: pear1
+    4300144: pear2
+    4300146: pear3
+    4300148: strawberry1
+    4300150: strawberry2
+    4300152: strawberry3
+    4300154: strawberry4
+    4300156: strawberry5
+    4300158: apple1
+    4300160: apple2
+    4300162: banana
+    4300164: orange_wedge1
+    4300166: orange_wedge2
+    4300168: orange_wedge3
+    4300170: orange_wedge4
+    4300172: orange_wedge5
+    4300174: orange_wedge6
+    4300176: orange_wedge7
   externalObjects:
   - first:
       type: UnityEngine:Material
