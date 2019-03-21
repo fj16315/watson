@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using NPC;
 using Notebook;
@@ -21,9 +20,6 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
-    public NPCController npcOracle;
-    public OracleController oracle;
-    public MasterControl controller;
 
     // Character Fonts
     public Font fontDetective;
@@ -78,12 +74,7 @@ public class DialogueScreen : MonoBehaviour {
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
-                if (currentCharacter == npcOracle && stringToEdit == "end")
-                {
-                    Stats.Score = 420;
-                    controller.EndGame();
-                }
-                queryResponse = ai.Query(stringToEdit);
+                queryResponse = ai.Run(stringToEdit);
                 UpdateReply(queryResponse);
                 Debug.Log(answer);
             }
