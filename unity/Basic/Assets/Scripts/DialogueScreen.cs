@@ -90,6 +90,7 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         currentCharacter = character;
         UpdateReply("");
+        ai.StartSession();
     }
 
     public void HideScreen()
