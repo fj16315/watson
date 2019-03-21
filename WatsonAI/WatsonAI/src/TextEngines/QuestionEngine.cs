@@ -271,8 +271,8 @@ namespace WatsonAI
     {
       Word.SetThesaurus(thesaurus);
 
-      //PrintVerbs(stream);
-      //PrintEntities(stream);
+      PrintVerbs(stream);
+      PrintEntities(stream);
 
       var tree = this.parser.Parse(stream.RemainingInput);
 
@@ -313,7 +313,10 @@ namespace WatsonAI
           associations.TryNameVerb(v, out verbName);
           string entityName;
           associations.TryNameEntity(e, out entityName);
-          stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
+          if (answers.Count != 0)
+          {
+            stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
+          }
         }
       }
       return stream;
@@ -337,18 +340,6 @@ namespace WatsonAI
               }
             }
           }
-
-          var sobject = Valent.Subj(entity);
-          if (vp.GetValents().Contains(sobject))
-          {
-            foreach (Valent nextValent in vp.GetValents())
-            {
-              if (nextValent.tag == Valent.Tag.Dobj)
-              {
-                answers.Add(nextValent.entity);
-              }
-            }
-          }
         } 
       }
       return answers;
@@ -357,7 +348,7 @@ namespace WatsonAI
     private string GenerateResponse(string noun, string verb, List<Entity> answers)
     {
       var response = "The " + noun + " " + verb;
-      foreach (Entity entityAnswer in answers)
+      foreach (Entity entityAnswer in answers.Distinct())
       {
         if (answers.IndexOf(entityAnswer) == 0)
         {
