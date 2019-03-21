@@ -375,7 +375,7 @@ Transform:
   - {fileID: 2116746705}
   - {fileID: 980173592}
   - {fileID: 2118272972}
-  - {fileID: 585298501}
+  - {fileID: 1249815380}
   - {fileID: 1283776868}
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -5313,11 +5313,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100234, guid: 79c2a3bdd63c13e4480da148c20a9cb4,
     type: 3}
   m_PrefabInternal: {fileID: 1249815379}
---- !u!4 &585298501 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400234, guid: 79c2a3bdd63c13e4480da148c20a9cb4,
-    type: 3}
-  m_PrefabInternal: {fileID: 1249815379}
 --- !u!136 &585298503
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5343,6 +5338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Police
+  anim: {fileID: 0}
 --- !u!114 &585298505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7257,6 +7253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Countess
+  anim: {fileID: 0}
 --- !u!4 &980173592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5ce337ebea312ea4b86c156b6dc13c30,
@@ -10087,9 +10084,26 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.227771
       objectReference: {fileID: 0}
+    - target: {fileID: 400236, guid: 79c2a3bdd63c13e4480da148c20a9cb4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 400236, guid: 79c2a3bdd63c13e4480da148c20a9cb4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 400236, guid: 79c2a3bdd63c13e4480da148c20a9cb4, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c2a3bdd63c13e4480da148c20a9cb4, type: 3}
   m_IsPrefabAsset: 0
+--- !u!4 &1249815380 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400236, guid: 79c2a3bdd63c13e4480da148c20a9cb4,
+    type: 3}
+  m_PrefabInternal: {fileID: 1249815379}
 --- !u!1 &1253665031
 GameObject:
   m_ObjectHideFlags: 0
@@ -10555,6 +10569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Butler
+  anim: {fileID: 0}
 --- !u!1001 &1283967148
 Prefab:
   m_ObjectHideFlags: 0
@@ -13975,6 +13990,41 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1736823989}
   m_CullTransparentMesh: 0
+--- !u!1 &1762764891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100236, guid: 79c2a3bdd63c13e4480da148c20a9cb4,
+    type: 3}
+  m_PrefabInternal: {fileID: 1249815379}
+--- !u!95 &1762764892 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 79c2a3bdd63c13e4480da148c20a9cb4,
+    type: 3}
+  m_PrefabInternal: {fileID: 1249815379}
+--- !u!114 &1762764893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1762764891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab1b1d4fcf64554db84296c4e496075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charName: Police
+  anim: {fileID: 1762764892}
+--- !u!65 &1762764894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1762764891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.0151424, z: 1}
+  m_Center: {x: 0, y: 1.0075712, z: 0}
 --- !u!1 &1772244953
 GameObject:
   m_ObjectHideFlags: 0
@@ -14059,8 +14109,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.223632, y: 2.1465678, z: 2.333657}
-  m_Center: {x: 0.017102959, y: 1.0779278, z: 0.0462625}
+  m_Size: {x: 4.223632, y: 1.3966715, z: 2.333657}
+  m_Center: {x: 0.017102957, y: 0.702986, z: 0.046262506}
 --- !u!4 &1773247110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: aa70f7ecdf2cb8d4fb0b7fc509e8aedf,
@@ -16714,6 +16764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Colonel
+  anim: {fileID: 0}
 --- !u!4 &2116746705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400010, guid: 82445f8e1d54d1f41aa5194ec6c0462f,
@@ -16836,6 +16887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charName: Gangster
+  anim: {fileID: 0}
 --- !u!1 &2120697496
 GameObject:
   m_ObjectHideFlags: 0
