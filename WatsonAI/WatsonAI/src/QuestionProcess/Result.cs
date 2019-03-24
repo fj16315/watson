@@ -1,9 +1,4 @@
-﻿using OpenNLP.Tools.Parser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   /// <summary>
   /// This struct is essentially a Nullable or Maybe class.
@@ -13,7 +8,7 @@ namespace WatsonAI
   /// but one of the datatypes we use doesn't work as this. By making our own, we
   /// got around this. 
   /// </remarks>
-  /// <typeparam name="T"></typeparam>
+  /// <typeparam name="T">Any type that Result wraps around.</typeparam>
   public struct Result<T>
   {
     /// <summary>
