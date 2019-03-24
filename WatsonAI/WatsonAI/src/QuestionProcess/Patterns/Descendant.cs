@@ -5,20 +5,35 @@ using System.Linq;
 
 namespace WatsonAI
 {
+  /// <summary>
+  /// A pattern that matches against the decendents of a branch.
+  /// A decendant is a child, child of child, etc.
+  /// </summary>
+  /// <typeparam name="a">The result of matching the child pattern.</typeparam>
   public class Descendant<a> : Pattern<IEnumerable<a>> 
   {
-    private readonly Pattern<Parse> parent;
+    private readonly Branch branch;
     private readonly Pattern<a> descendant;
 
-    public Descendant(Pattern<Parse> parent, Pattern<a> descendant)
+    /// <summary>
+    /// Construct a new pattern that matches against all children of a branch.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="child"></param>
+    public Descendant(Branch branch, Pattern<a> descendant)
     {
-      this.parent = parent;
+      this.branch = branch;
       this.descendant = descendant;
     }
 
+    /// <summary>
+    /// Returns the result of matching the child pattern against all decendants of the branch.
+    /// </summary>
+    /// <param name="tree">The tree to match against.</param>
+    /// <returns>A Result of IEnumerable conataining all successful matches on decendant branches.</returns>
     public override Result<IEnumerable<a>> Match(Parse tree)
     {
-      var newTree = parent.Match(tree);
+      var newTree = branch.Match(tree);
       if (newTree.HasValue)
       {
         Func<Parse, IEnumerable<a>> f = null;
