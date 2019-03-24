@@ -9,15 +9,11 @@ namespace WatsonAI
   {
     private readonly string word;
 
-    private static Thesaurus thesaurus;
+    private readonly Thesaurus thesaurus;
 
-    public static void SetThesaurus(Thesaurus thesaurus)
+    public Word(Thesaurus thesaurus, string word)
     {
-      Word.thesaurus = thesaurus;
-    }
-
-    public Word(string word)
-    {
+      this.thesaurus = thesaurus;
       this.word = word;
     }
 

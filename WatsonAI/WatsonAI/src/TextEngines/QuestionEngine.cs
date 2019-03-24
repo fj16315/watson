@@ -38,8 +38,6 @@ namespace WatsonAI
 
     public Stream Process(Stream stream)
     {
-      Word.SetThesaurus(thesaurus);
-
       PrintVerbs(stream);
       PrintEntities(stream);
 

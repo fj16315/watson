@@ -7,8 +7,8 @@ namespace WatsonAI
 {
   public class VerbName : Pattern<IEnumerable<Verb>>
   {
-    private Associations associations;
-    private Thesaurus thesaurus;
+    private readonly Associations associations;
+    private readonly Thesaurus thesaurus;
 
     public VerbName(Associations associations, Thesaurus thesaurus)
     {

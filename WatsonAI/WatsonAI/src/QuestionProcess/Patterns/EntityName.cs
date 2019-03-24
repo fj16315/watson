@@ -7,8 +7,8 @@ namespace WatsonAI
 {
   public class EntityName : Pattern<IEnumerable<Entity>>
   {
-    private Associations associations;
-    private Thesaurus thesaurus;
+    private readonly Associations associations;
+    private readonly Thesaurus thesaurus;
 
     public EntityName(Associations associations, Thesaurus thesaurus)
     {
