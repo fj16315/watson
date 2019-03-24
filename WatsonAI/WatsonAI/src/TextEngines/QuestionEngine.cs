@@ -5,237 +5,6 @@ using System.Linq;
 
 namespace WatsonAI
 {
-  public struct Result<T>
-  {
-    public T Value { get; }
-    public bool HasValue { get; }
-
-    public Result(T value)
-    {
-      HasValue = true;
-      Value = value;
-    }
-
-    public static Result<T> operator |(Result<T> lhs, Result<T> rhs)
-      => lhs.HasValue ? lhs : rhs;
-
-    public static bool operator ==(Result<T> lhs, Result<T> rhs)
-    {
-      if (lhs.HasValue && rhs.HasValue)
-      {
-        return lhs.Value.Equals(rhs.Value);
-      }
-      return !lhs.HasValue && !rhs.HasValue;
-    }
-
-    public static bool operator !=(Result<T> lhs, Result<T> rhs)
-      => !(lhs == rhs);
-
-    public override bool Equals(object obj)
-    {
-      if (obj is Result<T>)
-      {
-        return this == (Result<T>)obj;
-      }
-      return false;
-    }
-
-    public override int GetHashCode()
-      => HasValue ? Value.GetHashCode() : HasValue.GetHashCode();
-  }
-
-  public abstract class Pattern<a> 
-  {
-    public abstract Result<a> Match(Parse tree);
-
-    public static Pattern<a> operator |(Pattern<a> lhs, Pattern<a> rhs)
-      => new Or<a>(lhs, rhs);
-  }
-
-  public class Flatten<a> : Pattern<IEnumerable<a>>
-  {
-    private readonly Pattern<IEnumerable<IEnumerable<a>>> pattern;
-
-    public Flatten(Pattern<IEnumerable<IEnumerable<a>>> pattern)
-    {
-      this.pattern = pattern;
-    }
-
-    public override Result<IEnumerable<a>> Match(Parse tree)
-    {
-      var result = pattern.Match(tree);
-      if (!result.HasValue)
-      {
-        return new Result<IEnumerable<a>>();
-      }
-      return new Result<IEnumerable<a>>(
-        result.Value.SelectMany(x => x)
-      );
-    }
-  }
-
-  public class Or<a> : Pattern<a> 
-  {
-    private readonly Pattern<a> lhs;
-    private readonly Pattern<a> rhs;
-
-    public Or(Pattern<a> lhs, Pattern<a> rhs)
-    {
-      this.lhs = lhs;
-      this.rhs = rhs;
-    }
-
-    public override Result<a> Match(Parse tree)
-      => lhs.Match(tree) | rhs.Match(tree);
-  }
-
-  public class And<a,b> : Pattern<Tuple<a,b>> 
-  {
-    private readonly Pattern<a> lhs;
-    private readonly Pattern<b> rhs;
-
-    public And(Pattern<a> lhs, Pattern<b> rhs)
-    {
-      this.lhs = lhs;
-      this.rhs = rhs;
-    }
-
-    public override Result<Tuple<a,b>> Match(Parse tree)
-    {
-      var lhsResult = lhs.Match(tree);
-      var rhsResult = rhs.Match(tree);
-      if (lhsResult.HasValue && rhsResult.HasValue)
-      {
-        return new Result<Tuple<a, b>>(Tuple.Create(lhsResult.Value, rhsResult.Value));
-      }
-      return new Result<Tuple<a, b>>();
-    }
-  }
-
-  public class Word : Pattern<string>
-  {
-    private readonly string word;
-
-    private static Thesaurus thesaurus;
-
-    public static void SetThesaurus(Thesaurus thesaurus)
-    {
-      Word.thesaurus = thesaurus;
-    }
-
-    public Word(string word)
-    {
-      this.word = word;
-    }
-
-    public override Result<string> Match(Parse tree) 
-      => thesaurus.Describes(tree.Value, word) ? new Result<string>(word) : new Result<string>();
-  }
-
-  public class Branch : Pattern<Parse>
-  {
-    private readonly string branch;
-
-    public Branch(string branch)
-    {
-      this.branch = branch;
-    }
-
-    public override Result<Parse> Match(Parse tree)
-      => tree.Type == branch ? new Result<Parse>(tree) : new Result<Parse>();
-  }
-
-  public class Children<a> : Pattern<IEnumerable<a>> 
-  {
-    private readonly Pattern<Parse> parent;
-    private readonly Pattern<a> child;
-
-    public Children(Pattern<Parse> parent, Pattern<a> child)
-    {
-      this.parent = parent;
-      this.child = child;
-    }
-
-    public override Result<IEnumerable<a>> Match(Parse tree)
-    {
-      var newTree = parent.Match(tree);
-      if (newTree.HasValue)
-      {
-        return new Result<IEnumerable<a>>(newTree.Value
-          .GetChildren()
-          .Select(t => child.Match(t))
-          .Where(r => r.HasValue)
-          .Select(r => r.Value));
-      }
-      return new Result<IEnumerable<a>>();
-    }
-  }
-
-  public class Descendant<a> : Pattern<IEnumerable<a>> 
-  {
-    private readonly Pattern<Parse> parent;
-    private readonly Pattern<a> descendant;
-
-    public Descendant(Pattern<Parse> parent, Pattern<a> descendant)
-    {
-      this.parent = parent;
-      this.descendant = descendant;
-    }
-
-    public override Result<IEnumerable<a>> Match(Parse tree)
-    {
-      var newTree = parent.Match(tree);
-      if (newTree.HasValue)
-      {
-        Func<Parse, IEnumerable<a>> f = null;
-        f = (Parse t) => {
-          var d = this.descendant.Match(t);
-          var ds = t.GetChildren().SelectMany(f);
-          if (!d.HasValue) return ds;
-          return ds.Append(d.Value);
-        };
-        return new Result<IEnumerable<a>>(newTree.Value.GetChildren().SelectMany(f));
-      } 
-      return new Result<IEnumerable<a>>();
-    }
-  }
-
-  public class EntityName : Pattern<IEnumerable<Entity>>
-  {
-    private Associations associations;
-    private Thesaurus thesaurus;
-
-    public EntityName(Associations associations, Thesaurus thesaurus)
-    {
-      this.associations = associations;
-      this.thesaurus = thesaurus;
-    }
-
-    public override Result<IEnumerable<Entity>> Match(Parse tree)
-      => new Result<IEnumerable<Entity>>(associations
-      .EntityNames()
-      .Where(name => thesaurus.Describes(tree.Value, name, true))
-      .Select(name => associations.UncheckedGetEntity(name)));
-  }
-
-  public class VerbName : Pattern<IEnumerable<Verb>>
-  {
-    private Associations associations;
-    private Thesaurus thesaurus;
-
-    public VerbName(Associations associations, Thesaurus thesaurus)
-    {
-      this.associations = associations;
-      this.thesaurus = thesaurus;
-    }
-
-    public override Result<IEnumerable<Verb>> Match(Parse tree)
-      => new Result<IEnumerable<Verb>>(associations
-      .VerbNames()
-      .Where(name => thesaurus.Describes(tree.Value, name, true))
-      .Select(name => associations.UncheckedGetVerb(name)));
-  }
-
   public class QuestionProcess : IProcess
   {
     private Parser parser;
@@ -265,52 +34,6 @@ namespace WatsonAI
       this.kg = kg;
       this.thesaurus = thesaurus;
       this.associations = associations;
-    }
-
-    private void PrintVerbs(Stream stream)
-    {
-      var tree = this.parser.Parse(stream.RemainingInput);
-
-      var verb = new VerbName(associations, thesaurus);
-      var top = new Branch("TOP");
-
-      var query = new Descendant<IEnumerable<Verb>>(top, verb);
-
-      var verbs = query.Match(tree);
-
-      Console.WriteLine("Verbs: ");
-      if (verbs.HasValue)
-      {
-        foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
-        {
-          string verbName;
-          associations.TryNameVerb(v, out verbName);
-          Console.WriteLine($"{v} {verbName}");
-        }
-      }
-    }
-    
-    private void PrintEntities(Stream stream)
-    {
-      var tree = this.parser.Parse(stream.RemainingInput);
-
-      var entity = new EntityName(associations, thesaurus);
-      var top = new Branch("TOP");
-
-      var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
-
-      var entities = query.Match(tree);
-
-      Console.WriteLine("Entities: ");
-      if (entities.HasValue)
-      {
-        foreach (var e in entities.Value.Distinct())
-        {
-          string entityName;
-          associations.TryNameEntity(e, out entityName);
-          Console.WriteLine($"{e} {entityName}");
-        }
-      }
     }
 
     public Stream Process(Stream stream)
@@ -359,6 +82,52 @@ namespace WatsonAI
         }
       }
       return stream;
+    }
+
+    private void PrintVerbs(Stream stream)
+    {
+      var tree = this.parser.Parse(stream.RemainingInput);
+
+      var verb = new VerbName(associations, thesaurus);
+      var top = new Branch("TOP");
+
+      var query = new Descendant<IEnumerable<Verb>>(top, verb);
+
+      var verbs = query.Match(tree);
+
+      Console.WriteLine("Verbs: ");
+      if (verbs.HasValue)
+      {
+        foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
+        {
+          string verbName;
+          associations.TryNameVerb(v, out verbName);
+          Console.WriteLine($"{v} {verbName}");
+        }
+      }
+    }
+    
+    private void PrintEntities(Stream stream)
+    {
+      var tree = this.parser.Parse(stream.RemainingInput);
+
+      var entity = new EntityName(associations, thesaurus);
+      var top = new Branch("TOP");
+
+      var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
+
+      var entities = query.Match(tree);
+
+      Console.WriteLine("Entities: ");
+      if (entities.HasValue)
+      {
+        foreach (var e in entities.Value.Distinct())
+        {
+          string entityName;
+          associations.TryNameEntity(e, out entityName);
+          Console.WriteLine($"{e} {entityName}");
+        }
+      }
     }
 
     private List<Entity> GetSubjAnswers(Verb verb, Entity entity)
