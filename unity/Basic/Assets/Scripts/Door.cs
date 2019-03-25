@@ -9,43 +9,61 @@ namespace Doors
         public bool open = false;
         public float angleOpen = 0;
         public float angleClose = 0;
-        public bool single = true;
         public bool locked = false;
         public float speed = 100;
         bool activate = false;
 
+        Transform openTransform;
+        Transform closedTransform;
+        public float speedF = 1.0F;
+        float startTime;
+        float journeyLength;
+
+
         // Use this for initialization
         void Start()
         {
-            
+            openTransform = transform;
+            closedTransform = transform;
+            //openTransform.Rotate(Vector3.up, 90, 0);
+            journeyLength = Vector3.Distance(openTransform.position, closedTransform.position);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (activate && single)
+            if (activate)
             {
                 float currentAngle = transform.eulerAngles.y;
                 float target = open ? angleClose : angleOpen;
                 int sweep = open ? 1 : -1;
-                Debug.Log(currentAngle);
-                if (Mathf.Abs(currentAngle - target) > 1)
-                {
-                    transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime, 0);
-                }
-                else
-                {
-                    activate = false;
-                    open = !open;
-                }
+                //Debug.Log(currentAngle);
+                //if (Mathf.Abs(currentAngle - target) > 1)
+                //{
+                //    transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime, 0);
+                //}
+
+                //if ()
+                //{
+                //    activate = false;
+                //    open = !open;
+                //}
             }
+
+            //if (activate)
+            //{
+
+            //}
+
         }
 
         public void Activate()
         {
-            if (single && !locked)
+            if (!locked)
             {
                 activate = true;
+                startTime = Time.time;
+                
             }
         }
     }
