@@ -6,7 +6,7 @@ using System.Linq;
 namespace WatsonAI
 {
   /// <summary>
-  /// A pattern that matches against the decendents of a branch.
+  /// A pattern that matches against the decendants of a branch.
   /// A decendant is a child, child of child, etc.
   /// </summary>
   /// <typeparam name="a">The result of matching the child pattern.</typeparam>
@@ -16,7 +16,7 @@ namespace WatsonAI
     private readonly Pattern<a> descendant;
 
     /// <summary>
-    /// Construct a new pattern that matches against all children of a branch.
+    /// Construct a new pattern that matches against all decendants of a branch.
     /// </summary>
     /// <param name="parent"></param>
     /// <param name="child"></param>

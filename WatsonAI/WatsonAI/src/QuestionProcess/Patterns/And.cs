@@ -30,7 +30,8 @@ namespace WatsonAI
     /// Matches both patterns against the tree and returns the result of both.
     /// </summary>
     /// <param name="tree">The tree to match against.</param>
-    /// <returns>A Result with value Tuple containing the result of matching both patterns, or failure.</returns>
+    /// <returns>A Result with value Tuple containing the result of matching both patterns, 
+    /// or failure if either fail.</returns>
     public override Result<Tuple<a,b>> Match(Parse tree)
     {
       var lhsResult = lhs.Match(tree);
