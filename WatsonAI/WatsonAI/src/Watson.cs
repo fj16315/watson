@@ -115,7 +115,9 @@ namespace WatsonAI
       //  .Process(thesaurusDebug)
       //  .Process(question)
       //  .Process(fallback);
-      var output = question.Process(stream);
+      var output = stream
+        .ProcessWith(debugParse)
+        .ProcessWith(question);
       return output.Output();
     }
 

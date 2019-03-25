@@ -6,7 +6,7 @@ using System.Linq;
 namespace WatsonAI
 {
   /// <summary>
-  /// Interface for processing the InputOutput class.
+  /// Interface for processing Streams.
   /// </summary>
   public interface IProcess
   {
@@ -43,5 +43,20 @@ namespace WatsonAI
     public string Output()
       => string.Join(", ", output);
 
+    /// <summary>
+    /// Increments the position, indicating that a token has been dealt with.
+    /// </summary>
+    public void Consume()
+    {
+      this.position++;
+    }
+
+    /// <summary>
+    /// Calls the process on itself, for nice syntax.
+    /// </summary>
+    /// <param name="process">The process to use.</param>
+    /// <returns>The processed stream.</returns>
+    public Stream ProcessWith(IProcess process)
+      => process.Process(this);
   }
 }

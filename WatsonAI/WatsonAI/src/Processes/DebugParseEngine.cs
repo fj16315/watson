@@ -7,7 +7,7 @@ namespace WatsonAI
   /// <summary>
   /// Text engine that allows for printing the parse tree in console.
   /// </summary>
-  public class DebugParseEngine : IRule
+  public class DebugParseEngine : IProcess
   {
     private Parser parser;
 
@@ -31,18 +31,17 @@ namespace WatsonAI
     /// <summary>
     /// Typing 'debugparse x' will print the parse tree for x.
     /// </summary>
-    /// <param name="io">The InputOutput state struct.</param>
+    /// <param name="stream">The InputOutput state struct.</param>
     /// <returns>Output with parsetree appended when appropriate.</returns>
-    public InputOutput Process(InputOutput io)
+    public Stream Process(Stream stream)
     {
-      if (io.remainingInput.Trim().StartsWith("!p ", StringComparison.OrdinalIgnoreCase))
+      if (stream.RemainingInput.GetEnumerator().Current.Equals("!p", StringComparison.OrdinalIgnoreCase))
       {
-        io.remainingInput = io.remainingInput.Substring("!p ".Length);
-        var parse = this.parser.Parse(io.remainingInput).Show();
-        io.remainingInput = "";
-        io.output = parse;
+        stream.Consume();
+        var parse = this.parser.Parse(stream.RemainingInput).Show();
+        stream.AppendOutput(parse);
       }
-      return io;
+      return stream;
     }
   }
 }
