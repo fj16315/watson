@@ -1,5 +1,5 @@
-var request = require("request")
-    , AlexaSkill = require('./AlexaSkill')
+const request = require("request");
+var AlexaSkill = require('./AlexaSkill')
     , APP_ID     = process.env.APP_ID;
 
 var error = function (err, response, body) {
@@ -7,47 +7,34 @@ var error = function (err, response, body) {
 };
 
 //TODO: Change the contents of this function to handle our questions
-var getJsonFromUnity = function(color, shape, callback){
+var getJsonFromUnity = function(query, callback){
 
-  var command = "create " + color + " " + shape;
+  var options = 
+  { method: 'GET',
+    url: 'http://brass-monkey-watson.herokuapp.com',
+    qs: { command: query }
+    headers: 
+      { 'cache-control': 'no-cache' }
+  };
 
-  if(color == "thank you"){
-  	callback("thank you");
-  }else{
-    var options = 
-    { method: 'GET',
-      url: 'http://brass-monkey-watson.herokuapp.com/',
-      qs: { command: command },
-      headers: 
-        { 'postman-token': '230914f7-c478-4f13-32fd-e6593d8db4d1',
-          'cache-control': 'no-cache' }
-    };
+  var error_log = "";
 
-    var error_log = "";
-
-    request(options, function (error, response, body) {
-  	  if (!error) {
-  	    error_log = color + " " + shape;
-  	  }else{
-  		  error_log = "There was a mistake";
-  	  }
-  		callback(error_log);
-    });
-  }
+  request(options, function (error, response, body) {
+    if (!error) {
+      error_log = query;
+    }else{
+      error_log = "There was a mistake";
+    }
+    callback(error_log);
+  });
 };
 
-//TODO: Change the contents of this function to handle our questions
 var handleUnityRequest = function(intent, session, response){
-  getJsonFromUnity(intent.slots.color.value,intent.slots.shape.value,function(data){
-	  if(data != "thank you"){
-	    var text = 'The ' + data + ' has been created';
-	    var reprompt = 'Which shape would you like?';
-      response.ask(text, reprompt);
-	  }else{
-		  response.tell("You're welcome");
-	  }
-    }
-  );
+  getJsonFromUnity(intent.slots.query.value, function(data){
+    var text = data + ' has been asked';
+    var reprompt = 'What would you like to ask?';
+    response.ask(text, reprompt);
+  });
 };
 
 var Unity = function(){
@@ -66,9 +53,9 @@ Unity.prototype.eventHandlers.onLaunch = function(launchRequest, session, respon
   // This is when they launch the skill but don't specify what they want.
 
   //TODO: Needs changing
-  var output = 'Welcome to Unity. Create any color shape by saying create and providing a color and a shape'; 
+  var output = 'Welcome to Watson. Approach a character and ask them a question. Make sure to use their name at the start.'; 
   //TODO: Needs changing
-  var reprompt = 'Which shape would you like?';
+  var reprompt = 'What would you like to ask?';
 
   response.ask(output, reprompt);
 
@@ -77,14 +64,8 @@ Unity.prototype.eventHandlers.onLaunch = function(launchRequest, session, respon
 };
 
 Unity.prototype.intentHandlers = {
-  GetUnityIntent: function(intent, session, response){
+  AiQueryIntent: function(intent, session, response){
     handleUnityRequest(intent, session, response);
-  },
-
-  HelpIntent: function(intent, session, response){
-    //TODO: Needs changing
-    var speechOutput = 'Create a new colored shape. Which shape would you like?';
-    response.ask(speechOutput);
   }
 };
 

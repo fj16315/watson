@@ -12,7 +12,7 @@ public class AlexaInput : MonoBehaviour {
     {
         while (true)
         {
-            WWW w = new WWW("http://brass-monkey-alexa.herokuapp.com/?command");
+            WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
             yield return w;
 
             print("Waiting for webservice\n");
@@ -25,7 +25,7 @@ public class AlexaInput : MonoBehaviour {
 
             print("Extracted information");
 
-            WWW y = new WWW("http://brass-monkey-alexa.herokuapp.com/?command=empty");
+            WWW y = new WWW("http://brass-monkey-watson.herokuapp.com/?command=empty");
             yield return y;
 
             print("Cleaned webservice");
@@ -38,8 +38,17 @@ public class AlexaInput : MonoBehaviour {
     {
         var jsonstring = JSON.Parse(json);
         string command = jsonstring["command"];
-        print(command);
-        if (command == null) { return; }
-        else { ai.Query(command); }
+        if (command == null || command == "") { return; }
+        else {
+            Debug.Log("Command = " + command);
+            //ai.Query(command);
+        }
+    }
+
+    void Start ()
+    {
+        Debug.Log("Started webservice import...\n");
+
+        StartCoroutine(DownloadWebService());
     }
 }
