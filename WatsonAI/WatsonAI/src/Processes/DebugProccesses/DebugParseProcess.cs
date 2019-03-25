@@ -5,16 +5,16 @@ using System.Text;
 namespace WatsonAI
 {
   /// <summary>
-  /// Text engine that allows for printing the parse tree in console.
+  /// Process that allows for printing the parse tree in console.
   /// </summary>
-  public class DebugParseEngine : IProcess
+  public class DebugParseProcess : IProcess
   {
     private Parser parser;
 
     /// <summary>
-    /// Text engine for debuging the parser.
+    /// Process for debuging the parser.
     /// </summary>
-    public DebugParseEngine()
+    public DebugParseProcess()
     {
       this.parser = new Parser();
     }
@@ -23,19 +23,19 @@ namespace WatsonAI
     /// Text engine for debuging the specified Parser.
     /// </summary>
     /// <param name="parse">The parser to use.</param>
-    public DebugParseEngine(Parser parse)
+    public DebugParseProcess(Parser parse)
     {
       this.parser = parse;
     }
 
     /// <summary>
-    /// Typing 'debugparse x' will print the parse tree for x.
+    /// 'p' will print the parse tree for the string that follows.
     /// </summary>
-    /// <param name="stream">The InputOutput state struct.</param>
-    /// <returns>Output with parsetree appended when appropriate.</returns>
+    /// <param name="stream">The stream.</param>
+    /// <returns>Stream with parse tree appended to output if appropriate.</returns>
     public Stream Process(Stream stream)
     {
-      if (stream.RemainingInput.GetEnumerator().Current.Equals("!p", StringComparison.OrdinalIgnoreCase))
+      if (stream.NextToken().Equals("p", StringComparison.OrdinalIgnoreCase))
       {
         stream.Consume();
         var parse = this.parser.Parse(stream.RemainingInput).Show();

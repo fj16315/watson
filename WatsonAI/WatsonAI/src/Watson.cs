@@ -103,10 +103,9 @@ namespace WatsonAI
 
       var stream = Stream.Tokenise(parser, input);
 
+      var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsEngine();
-      var debugParse = new DebugParseEngine(parser);
       var fallback = new FallbackEngine();
-      var thesaurusDebug = new ThesaurusDebugEngine(thesaurus);
       var question = new QuestionProcess(parser, character, kg, thesaurus, associations);
 
       //var output = io
@@ -116,7 +115,7 @@ namespace WatsonAI
       //  .Process(question)
       //  .Process(fallback);
       var output = stream
-        .ProcessWith(debugParse)
+        .ProcessWith(debugs)
         .ProcessWith(question);
       return output.Output();
     }

@@ -44,6 +44,17 @@ namespace WatsonAI
       => string.Join(", ", output);
 
     /// <summary>
+    /// Returns the next value in the remaining stream.
+    /// </summary>
+    /// <returns></returns>
+    public string NextToken()
+    {
+      var remainingTokens = this.RemainingInput.GetEnumerator();
+      remainingTokens.MoveNext();
+      return remainingTokens.Current;
+    }
+
+    /// <summary>
     /// Increments the position, indicating that a token has been dealt with.
     /// </summary>
     public void Consume()
