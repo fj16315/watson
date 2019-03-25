@@ -99,14 +99,14 @@ namespace WatsonAI
       //Library contains arsenic 
       kg.AddVerbPhrase(new VerbPhrase(new Verb(19), new List<Valent> { Valent.Subj(new Entity(6)), Valent.Dobj(new Entity(11)) }));
 
-
+      Story story = new Story();
 
       var stream = Stream.Tokenise(parser, input);
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsEngine();
       var fallback = new FallbackEngine();
-      var question = new QuestionProcess(parser, character, kg, thesaurus, associations);
+      var question = new QuestionProcess(parser, character, story.Knowledge, thesaurus, story.Associations);
 
       //var output = io
       //  .Process(greetings)

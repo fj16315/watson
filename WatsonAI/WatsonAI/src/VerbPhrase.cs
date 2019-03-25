@@ -84,6 +84,9 @@ namespace WatsonAI
       this.entity = entity;
     }
 
+    public static Valent WithTag(Tag tag, Entity entity)
+      => new Valent(tag, null, entity);
+
     public static Valent Subj(Entity entity)
       => new Valent(Tag.Subj, null, entity);
 
