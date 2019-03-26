@@ -75,26 +75,8 @@ namespace WatsonAI
     /// </summary>
     /// <param name="input">The input given by the player. </param>
     /// <returns>Response to the player.</returns>
-    public string Run(string input, string characterName)
+    public string Run(string input)
     {
-      /*
-      //Actress kill Earl
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(1), new List<Valent> { Valent.Subj(new Entity(18)), Valent.Dobj(new Entity(23)) }));
-      //Earl owe money
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(3), new List<Valent> { Valent.Subj(new Entity(23)), Valent.Dobj(new Entity(15)) }));
-      //Actress inherit will
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(13), new List<Valent> { Valent.Subj(new Entity(18)), Valent.Dobj(new Entity(14)) }));
-      //Butler launder money
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(10), new List<Valent> { Valent.Subj(new Entity(21)), Valent.Dobj(new Entity(15)) }));
-      //Earl meet gangster
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(15), new List<Valent> { Valent.Subj(new Entity(23)), Valent.Dobj(new Entity(19)) }));
-      //Chamber contains money
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(19), new List<Valent> { Valent.Subj(new Entity(7)), Valent.Dobj(new Entity(15)) }));
-      //Suite contains money
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(19), new List<Valent> { Valent.Subj(new Entity(8)), Valent.Dobj(new Entity(15)) }));
-      //Library contains arsenic 
-      kg.AddVerbPhrase(new VerbPhrase(new Verb(19), new List<Valent> { Valent.Subj(new Entity(6)), Valent.Dobj(new Entity(11)) }));
-      */
       var knowledge = Story.Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
@@ -112,6 +94,18 @@ namespace WatsonAI
         .ProcessWith(fallback);
       return output.Output();
     }
+  
+    /// <summary>
+    /// Run the AI on some input speech from a character.
+    /// </summary>
+    /// <remarks> Currently ignores character. </remarks>
+    /// <param name="input">The input given by the player. </param>
+    /// <param name="character">The character the player is talking to.</param>
+    /// <returns>Response to the player.</returns>
+    public string Run(string input, Character character)
+    {
+      return Run(input);
+    }
   }
 
   /// <summary>
@@ -124,7 +118,7 @@ namespace WatsonAI
     /// </summary>
     /// <param name="input">The input given by the player. </param>
     /// <returns>Response to the player.</returns>
-    //string Run(string input);
+    string Run(string input);
 
     /// <summary>
     /// Run the AI on some input speech from a character.
@@ -132,6 +126,6 @@ namespace WatsonAI
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    string Run(string input, string characterName);
+    string Run(string input, Character character);
   }
 }
