@@ -26,7 +26,7 @@ public class FireLight : MonoBehaviour {
             distance = Vector3.Distance(transform.position, player.transform.position);
             if (distance < 12)
             {
-                diff = (float)(rand.Next(100, 140));
+                diff = (float)(rand.Next(110, 140));
                 l.intensity = diff / 100.0F;
             }
         }
