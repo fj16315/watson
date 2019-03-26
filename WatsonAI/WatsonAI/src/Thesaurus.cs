@@ -23,6 +23,7 @@ namespace WatsonAI
 
     public Thesaurus()
     {
+      this.associations = new Associations();
       this.entityNames = associations.EntityNames();
       var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
 
@@ -69,7 +70,6 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, bool stemInput = false)
     {
-
       if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
@@ -94,8 +94,7 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
-
-      if (entityNames.Contains(first) && entityNames.Contains(second) ) return false;
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
