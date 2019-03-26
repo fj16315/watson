@@ -258,7 +258,7 @@ ModelImporter:
     4300014: Hat
     4300016: Cuff_R
     7400000: Test
-    7400002: Idle
+    7400002: Idle1
     7400004: Idle2
     7400006: Hand_out
     7400008: hand_out_wait
@@ -335,7 +335,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle
+      name: Idle1
       takeName: Take 001
       firstFrame: 80
       lastFrame: 240
@@ -497,7 +497,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 0.012
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
