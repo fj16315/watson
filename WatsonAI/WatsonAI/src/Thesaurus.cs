@@ -71,6 +71,9 @@ namespace WatsonAI
     public bool Describes(string first, string second, bool stemInput = false)
     {
       if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
+      if (entityNames.Contains(first) && entityNames.Contains(stemmer.GetSteamWord(second))) return false;
+      if (entityNames.Contains(stemmer.GetSteamWord(first)) && entityNames.Contains(second)) return false;
+      if (entityNames.Contains(stemmer.GetSteamWord(first)) && entityNames.Contains(stemmer.GetSteamWord(second))) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
       {
@@ -94,7 +97,6 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
-      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
@@ -106,15 +108,18 @@ namespace WatsonAI
       return describes;
     }
 
-    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory) 
-      => (from synSet in wordNet.GetSynSets(first, lexicalCategory)
-          from relation in synSet.SemanticRelations
-          from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
-          where relatedSynSet.PartOfSpeech == lexicalCategory
-          from synonym in synSet.Words.Union(relatedSynSet.Words)
-          select synonym.Contains(second))
-        .Any(x => x);
+    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory)
+    {
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false; 
 
+      return (from synSet in wordNet.GetSynSets(first, lexicalCategory)
+       from relation in synSet.SemanticRelations
+       from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
+       where relatedSynSet.PartOfSpeech == lexicalCategory
+       from synonym in synSet.Words.Union(relatedSynSet.Words)
+       select synonym.Contains(second))
+       .Any(x => x);
+    }
     /// <summary>
     /// Checks if the first word describes the second through the built-in WordNet similarity function.
     /// Filters by lexical category and the specified relations.
@@ -129,7 +134,6 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
-      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory, relations);
       if (stemInput)
       { 
@@ -138,18 +142,21 @@ namespace WatsonAI
           || DescribesNoStemming(first, stemmer.GetSteamWord(second), lexicalCategory, relations)
           || DescribesNoStemming(stemmer.GetSteamWord(first), stemmer.GetSteamWord(second), lexicalCategory, relations);
       }
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       return describes;
     }
 
-    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory, SynSetRelation[] relations) 
-      => (from synSet in wordNet.GetSynSets(first, lexicalCategory)
-          from relation in relations
-          from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
-          where relatedSynSet.PartOfSpeech == lexicalCategory
-          from synonym in synSet.Words.Union(relatedSynSet.Words)
-          select synonym.Contains(second))
-         .Any(x => x);
-
+    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory, SynSetRelation[] relations)
+    {
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
+      return (from synSet in wordNet.GetSynSets(first, lexicalCategory)
+        from relation in relations
+        from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
+        where relatedSynSet.PartOfSpeech == lexicalCategory
+        from synonym in synSet.Words.Union(relatedSynSet.Words)
+        select synonym.Contains(second))
+         .Any(x => x); 
+        }
     /// <summary>
     /// Returns the synonyms of the first word.
     /// </summary>
