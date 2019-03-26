@@ -16,18 +16,22 @@ namespace WatsonAI
   public class Thesaurus
   {
     private WordNetEngine wordNet;
+    private Stemmer stemmer;
+    private Associations associations;
+    private IEnumerable<string> EntityNames {
+      get {
+        return associations.EntityNames();
+      }
+    }
+    private IEnumerable<string> VerbNames {
+      get {
+        return associations.VerbNames();
+      }
+    }
 
-    private Stemmer stemmer; 
-
-    /// <summary>
-    /// Constructor for a thesaurus.
-    /// </summary>
-    /// <remarks>
-    /// This loads in the dictionary files, so is slow to construct.
-    /// For best results, share the one instance of the thesaurus object.
-    /// </remarks>
     public Thesaurus()
     {
+      this.associations = new Associations();
       var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
 
       wordNet = new WordNetEngine();
@@ -40,6 +44,38 @@ namespace WatsonAI
     }
 
     /// <summary>
+    /// Constructor for a thesaurus.
+    /// </summary>
+    /// <param name="associations">takes in associations</param>
+    /// <remarks>
+    /// This loads in the dictionary files, so is slow to construct.
+    /// For best results, share the one instance of the thesaurus object.
+    /// </remarks>
+    public Thesaurus(Associations associations)
+    {
+      this.associations = associations;
+      var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
+
+      wordNet = new WordNetEngine();
+
+      System.Diagnostics.Debug.WriteLine("Loading thesaurus database...");
+      wordNet.LoadFromDirectory(directory);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+
+      this.stemmer = new Stemmer();
+    }
+
+    private bool AreWithinAssociations(string first, string second)
+      => EntityNames.Contains(first) && EntityNames.Contains(second)
+      || EntityNames.Contains(first) && EntityNames.Contains(stemmer.GetSteamWord(second))
+      || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(second)
+      || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(stemmer.GetSteamWord(second))
+      || VerbNames.Contains(first) && VerbNames.Contains(second)
+      || VerbNames.Contains(first) && VerbNames.Contains(stemmer.GetSteamWord(second))
+      || VerbNames.Contains(stemmer.GetSteamWord(first)) && VerbNames.Contains(second)
+      || VerbNames.Contains(stemmer.GetSteamWord(first)) && VerbNames.Contains(stemmer.GetSteamWord(second));
+
+    /// <summary>
     /// Checks if the first word describes the second through the built-in WordNet similarity function.
     /// </summary>
     /// <remarks>Case sensitive.</remarks>
@@ -49,6 +85,7 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, bool stemInput = false)
     {
+      if (AreWithinAssociations(first, second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
       {
@@ -72,6 +109,7 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
+      if (AreWithinAssociations(first, second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
@@ -106,6 +144,7 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
+      if (AreWithinAssociations(first, second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory, relations);
       if (stemInput)
       { 
@@ -117,14 +156,14 @@ namespace WatsonAI
       return describes;
     }
 
-    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory, SynSetRelation[] relations) 
+    private bool DescribesNoStemming(string first, string second, PartOfSpeech lexicalCategory, SynSetRelation[] relations)
       => (from synSet in wordNet.GetSynSets(first, lexicalCategory)
           from relation in relations
           from relatedSynSet in synSet.GetRelatedSynSets(relation, true)
           where relatedSynSet.PartOfSpeech == lexicalCategory
           from synonym in synSet.Words.Union(relatedSynSet.Words)
           select synonym.Contains(second))
-         .Any(x => x);
+         .Any(x => x); 
 
     /// <summary>
     /// Returns the synonyms of the first word.

@@ -120,7 +120,8 @@ namespace WatsonAI
       //  .Process(fallback);
       var output = stream
         .ProcessWith(debugs)
-        .ProcessWith(question);
+        .ProcessWith(question)
+        .ProcessWith(fallback);
       return output.Output();
     }
   }

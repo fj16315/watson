@@ -47,6 +47,8 @@ children child
 chose choose 
 chosen choose 
 clung cling 
+consumed consume 
+consumes consume 
 come come 
 corpora corpus 
 cost cost 

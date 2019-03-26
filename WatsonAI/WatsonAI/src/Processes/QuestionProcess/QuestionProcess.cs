@@ -25,8 +25,8 @@ namespace WatsonAI
 
     public Stream Process(Stream stream)
     {
-      PrintVerbs(stream);
-      PrintEntities(stream);
+      //PrintVerbs(stream);
+      //PrintEntities(stream);
 
       var tree = parser.Parse(stream.RemainingInput);
 
@@ -36,33 +36,65 @@ namespace WatsonAI
       var verbPhrase = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb));
 
       var top = new Branch("TOP");
-      var queryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, nounPhrase));
-      var queryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, verbPhrase));
 
+      var subjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("SQ"), nounPhrase));
+      var subjQuestionVerbPhrase = new Flatten<Verb>(new Children<IEnumerable<Verb>>(new Branch("SQ"), verbPhrase));
 
-      var pNs = queryN.Match(tree);
-      var pVs = queryV.Match(tree);
-      if (pNs.HasValue && pVs.HasValue)
+      var dobjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("VP"), nounPhrase));
+      var dobjQuestionVerbPhrase = verbPhrase;
+
+      var subjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, subjQuestionNounPhrase));
+      var subjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, subjQuestionVerbPhrase));
+
+      var dobjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, dobjQuestionNounPhrase));
+      var dobjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, dobjQuestionVerbPhrase));
+
+      // Deal with active case
+      var spNs = subjQueryN.Match(tree);
+      var spVs = subjQueryV.Match(tree);
+      if (spNs.HasValue && spVs.HasValue)
       {
-        var ns = pNs.Value;
-        var vs = pVs.Value;
-
-        var pairs = from n in ns
-                    from v in vs
+        var pairs = from n in spNs.Value
+                    from v in spVs.Value
                     select Tuple.Create(n, v);
 
         foreach (var p in pairs.Distinct())
         {
           var e = p.Item1;
           var v = p.Item2;
-          var answers = GetSubjAnswers(v, e);
+          var answers = query.GetDobjAnswers(v, e);
           string verbName;
           associations.TryNameVerb(v, out verbName);
           string entityName;
           associations.TryNameEntity(e, out entityName);
           if (answers.Count != 0)
           {
-            stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
+            stream.AppendOutput(GenerateActiveResponse(entityName, verbName, answers));
+          }
+        }
+      }
+
+      // Deal with passive case
+      var dpNs = dobjQueryN.Match(tree);
+      var dpVs = dobjQueryV.Match(tree);
+      if (dpNs.HasValue && dpVs.HasValue)
+      {
+        var pairs = from n in dpNs.Value
+                    from v in dpVs.Value
+                    select Tuple.Create(n, v);
+
+        foreach (var p in pairs.Distinct())
+        {
+          var e = p.Item1;
+          var v = p.Item2;
+          var answers = query.GetSubjAnswers(v, e);
+          string verbName;
+          associations.TryNameVerb(v, out verbName);
+          string entityName;
+          associations.TryNameEntity(e, out entityName);
+          if (answers.Count != 0)
+          {
+            stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
           }
         }
       }
@@ -115,75 +147,16 @@ namespace WatsonAI
       }
     }
 
-    private List<Entity> GetSubjAnswers(Verb verb, Entity entity)
+    private string GeneratePassiveResponse(string noun, string verb, List<Entity> answers)
     {
-      var answers = new List<Entity>();
-      foreach (VerbPhrase vp in kg.GetVerbPhrases())
-      {
-        if (vp.verb.Equals(verb))
-        {
-          var dobject = Valent.Dobj(entity);
-          if (vp.GetValents().Contains(dobject))
-          {
-            foreach (Valent nextValent in vp.GetValents())
-            {
-              if (nextValent.tag == Valent.Tag.Subj)
-              {
-                answers.Add(nextValent.entity);
-              }
-            }
-          }
-        } 
-      }
-      return answers;
+      string entityName;
+      associations.TryNameEntity(answers.FirstOrDefault(), out entityName);
+      var response = "The " + entityName + " " + verb;
+      response += " the " + noun;
+      return response;
     }
 
-    private List<Entity> GetIobjAnswers(Verb verb, Entity entity)
-    {
-      var answers = new List<Entity>();
-      foreach (VerbPhrase vp in kg.GetVerbPhrases())
-      {
-        if (vp.verb.Equals(verb))
-        {
-          var dobject = Valent.Dobj(entity);
-          if (vp.GetValents().Contains(dobject))
-          {
-            foreach (Valent nextValent in vp.GetValents())
-            {
-              if (nextValent.tag == Valent.Tag.Iobj)
-              {
-                answers.Add(nextValent.entity);
-              }
-            }
-          }
-        }
-      }
-      return answers;
-    }
-
-    private bool GetBoolAnswer(Verb verb, Entity subjEntity, Entity dobjEntity)
-    {
-      foreach (VerbPhrase vp in kg.GetVerbPhrases())
-      {
-        if (vp.verb.Equals(verb))
-        {
-          var dobject = Valent.Dobj(dobjEntity);
-          if (vp.GetValents().Contains(dobject))
-          {
-            foreach (Valent nextValent in vp.GetValents())
-            {
-              if (nextValent.tag == Valent.Tag.Subj && nextValent.entity.Equals(subjEntity))
-              {
-                return true;
-              }
-            }
-          }
-        }
-      }
-      return false;
-    }
-
-    private string GenerateResponse(string noun, string verb, List<Entity> answers)
+    private string GenerateActiveResponse(string noun, string verb, List<Entity> answers)
     {
       var response = "The " + noun + " " + verb;
       foreach (Entity entityAnswer in answers.Distinct())
