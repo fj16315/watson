@@ -20,6 +20,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
+    public AlexaInput alexa;
 
     // Character Fonts
     public Font fontDetective;
@@ -74,9 +75,7 @@ public class DialogueScreen : MonoBehaviour {
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
             {
-                queryResponse = ai.Run(stringToEdit);
-                UpdateReply(queryResponse);
-                Debug.Log(answer);
+                QueryAi();
             }
          
         }
@@ -90,6 +89,7 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         currentCharacter = character;
         UpdateReply("");
+        alexa.StartSession();
         ai.StartSession();
     }
 
@@ -100,7 +100,15 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         answerBox.text = "";
+        alexa.StopSession();
         Cursor.visible = false;
+    }
+
+    private void QueryAi()
+    {
+        queryResponse = ai.Run(stringToEdit);
+        UpdateReply(queryResponse);
+        Debug.Log(answer);
     }
 
     private void UpdateReply(string extra)
@@ -111,6 +119,12 @@ public class DialogueScreen : MonoBehaviour {
         answerBox.lineSpacing = prof.lineSpacing;
         answerBox.font = prof.font;
         answerBox.text = answer;
+    }
+
+    public void UpdateQuestion(string question)
+    {
+        stringToEdit = question;
+        QueryAi();
     }
 
     private NPCProfile GetProfile(string name)

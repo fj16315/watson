@@ -7,31 +7,39 @@ using SimpleJSON;
 public class AlexaInput : MonoBehaviour {
 
     public AIController ai;
+    public DialogueScreen dialogue;
+
+    private bool inDialogue;
 
     IEnumerator DownloadWebService()
     {
         while (true)
         {
-            WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
-            yield return w;
+            if(inDialogue)
+            {
+                WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
+                yield return w;
 
-            print("Waiting for webservice\n");
+                print("Waiting for webservice\n");
 
-            yield return new WaitForSeconds(1f);
+                yield return new WaitForSecondsRealtime(1f);
 
-            print("Received webservice\n");
+                print("Received webservice\n");
 
-            ExtractCommand(w.text);
+                ExtractCommand(w.text);
 
-            print("Extracted information");
+                print("Extracted information");
 
-            WWW y = new WWW("http://brass-monkey-watson.herokuapp.com/?command=empty");
-            yield return y;
+                WWW y = new WWW("http://brass-monkey-watson.herokuapp.com/?command=empty");
+                yield return y;
 
-            print("Cleaned webservice");
+                print("Cleaned webservice");
 
-            yield return new WaitForSeconds(5);
-        }
+                yield return new WaitForSecondsRealtime(5);
+            }
+
+            yield return null;
+        }       
     }
 
     void ExtractCommand(string json)
@@ -41,13 +49,26 @@ public class AlexaInput : MonoBehaviour {
         if (command == null || command == "") { return; }
         else {
             Debug.Log("Command = " + command);
+            dialogue.UpdateQuestion(command);
             //ai.Query(command);
         }
+    }
+
+    public void StartSession()
+    {
+        inDialogue = true;
+    }
+
+    public void StopSession()
+    {
+        inDialogue = false;
     }
 
     void Start ()
     {
         Debug.Log("Started webservice import...\n");
+
+        inDialogue = false;
 
         StartCoroutine(DownloadWebService());
     }
