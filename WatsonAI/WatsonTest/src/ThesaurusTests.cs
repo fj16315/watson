@@ -149,8 +149,8 @@ namespace WatsonTest
       associations.AddVerbName(new Verb(1), "consume");
       Thesaurus associationThesaurus = new Thesaurus(associations);
 
-      Assert.False(associationThesaurus.Describes("kill", "consume", true));
       Assert.False(associationThesaurus.Describes("kill", "consume"));
+      Assert.False(associationThesaurus.Describes("kill", "consume", true));
       Assert.False(associationThesaurus.Describes("kill", "consume", PartOfSpeech.Verb));
       Assert.False(associationThesaurus.Describes("kill", "consume", PartOfSpeech.Verb, true));
 

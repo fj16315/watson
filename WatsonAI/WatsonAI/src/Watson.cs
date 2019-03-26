@@ -8,7 +8,7 @@ namespace WatsonAI
   public class Watson : IWatson
   {
     private Parser parser = new Parser();
-    private Thesaurus thesaurus = new Thesaurus();
+    private Thesaurus thesaurus = new Thesaurus(Story.Associations);
 
     public Watson()
     {
