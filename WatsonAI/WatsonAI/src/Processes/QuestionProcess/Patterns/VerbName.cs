@@ -1,4 +1,5 @@
 ﻿using OpenNLP.Tools.Parser;
+using Syn.WordNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace WatsonAI
     public override Result<IEnumerable<Verb>> Match(Parse tree)
       => new Result<IEnumerable<Verb>>(associations
       .VerbNames()
-      .Where(name => thesaurus.Describes(tree.Value, name, true))
+      .Where(name => thesaurus.Describes(tree.Value, name, PartOfSpeech.Verb, true))
       .Select(name => associations.UncheckedGetVerb(name)));
   }
 }

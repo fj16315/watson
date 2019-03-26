@@ -1,4 +1,5 @@
 ﻿using OpenNLP.Tools.Parser;
+using Syn.WordNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace WatsonAI
     public override Result<IEnumerable<Entity>> Match(Parse tree)
       => new Result<IEnumerable<Entity>>(associations
       .EntityNames()
-      .Where(name => thesaurus.Describes(tree.Value, name, true))
+      .Where(name => thesaurus.Describes(tree.Value, name, PartOfSpeech.Noun, true))
       .Select(name => associations.UncheckedGetEntity(name)));
   }
 }

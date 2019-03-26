@@ -23,35 +23,45 @@
 
     static Story()
     {
-      var entities = new EntityBuilder { "cat", "earl", "dog" };
-      var verbs = new VerbBuilder { "kill", "owe", "consume" };
+      var entities = new EntityBuilder {
+        "actress", "butler", "countess", "earl",
+        "gangster", "money", "promotion", "money",
+        "study", "will", "belonging", "letter",
+        "colonel", "book", "arsenic", "barbital",
+        "nightshade", "murderer", "dead", "music", "chocolate"
+      };
+      var verbs = new VerbBuilder {
+        "poison", "marry", "owe", "employ",
+        "inherit", "prevent", "launder", "contain",
+        "own", "resent", "do", "blackmail",
+        "use", "kill", "be", "love", "like"};
       knowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
-        {"cat", "kill", "earl" },
-        {"dog", "owe", "cat" },
-        {"earl", "consume", "dog" }
+        //{"actress", "be", "murderer"},
+        {"earl", "love", "countess"},
+        {"countess", "love", "earl"},
+        {"countess", "love", "chocolate"},
+        {"earl", "like", "music"},
+        {"actress", "poison", "earl"},
+        {"earl", "be", "dead"},
+        //{"actress", "kill", "earl"},
+        {"countess", "marry", "earl"},
+        {"earl", "marry", "countess"},
+        {"earl", "owe", "gangster"},
+        {"earl", "employ", "butler"},
+        {"actress", "inherit", "money"},
+        {"earl", "prevent", "promotion"},
+        {"butler", "launder", "money"},
+        {"study", "contain", "will"},
+        {"earl", "own", "belonging"},
+        {"belonging", "contain", "letter"},
+        {"colonel", "resent", "earl"},
+        {"butler", "do", "book"}, // butler do book?
+        {"gangster", "blackmail", "butler"},
+        {"butler", "own", "arsenic"},
+        {"earl", "use", "barbital"},
+        {"belonging", "contain", "nightshade"},
       };
     }
-
-      //Demo story:
-      /*
-      {"actress", "poison", "earl"};
-      {"countess", "marry", "earl"};
-      {"earl", "marry", "countess"};
-      {"earl", "owe", "gangster"};
-      {"earl", "employ", "butler"};
-      {"actress", "inherit", "money"};
-      {"earl", "prevent", "promotion"};
-      {"butler", "launder", "money"};
-      {"study", "contain", "will"};
-      {"earl", "own", "belongings"};
-      {"belongings", "contain", "letter"};
-      {"colonel", "resent", "earl"};
-      {"butler", "do", "books"};
-      {"gangster", "blackmail", "butler"};
-      {"butler", "own", "arsenic"};
-      {"earl", "use", "barbital"};
-      {"belongings", "contain", "nightshade"};
-      */
   }
 }
