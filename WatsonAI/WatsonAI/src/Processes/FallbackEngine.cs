@@ -17,9 +17,25 @@ namespace WatsonAI
     /// <returns>The InputOutput state object with generic output as output.</returns>
     public InputOutput Process(InputOutput io)
     {
+      List<string> randomFallbacks = new List<string>();
+
+      randomFallbacks.AddRange(new List<string>
+      {
+        "I dont know.",
+        "Can you remain on task please?",
+        "We have got more urgent matters at hand.",
+        "I would rather be talking about the murder.",
+        "Please dont go off topic.",
+        "Dont you have more important things to discuss?",
+      });
+
+
       if (io.output.Length == 0)
       {
-        io.output = "What are you talking about!";
+        Random rnd = new Random();
+
+        io.output = randomFallbacks[rnd.Next(randomFallbacks.Count-1);
+
       }
       return io;
     }
