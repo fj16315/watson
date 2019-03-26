@@ -495,6 +495,16 @@ ModelImporter:
     2100062: blue_light
     2100064: blue
     2100066: gold
+    2100068: wood_white
+    2100070: grey_stone
+    2100072: black_metal
+    2100074: wood_mid
+    2100076: wood_light
+    2100078: fire_orange
+    2100080: fire_yellow
+    2100082: porcelain
+    2100084: shade_glass
+    2100086: brass
     2300000: base
     2300002: base 1
     2300004: billiards_walls
@@ -993,6 +1003,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: black_metal
+    second: {fileID: 2100000, guid: b67281b0f8a574e4face1e2158a581b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: blue
     second: {fileID: 2100000, guid: 69c094359a007d94cb467220141a30ea, type: 2}
   - first:
@@ -1003,13 +1018,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: brass
+    second: {fileID: 2100000, guid: e5bde7d688ed4714c939e5fcae5593fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: bulb
     second: {fileID: 2100000, guid: 05cd9562f447fdb45818ff74309c870a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: fire_orange
+    second: {fileID: 2100000, guid: 9a85aa986c27f3949b149f3191c8ccf2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fire_yellow
+    second: {fileID: 2100000, guid: e180e78fa2bb01c47a54db6bbe9e1cee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: gold
     second: {fileID: 2100000, guid: 5198694c7c907174ea8203e9d1f676aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey_stone
+    second: {fileID: 2100000, guid: bbc671e5997a4934797f1277fe75738e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -1028,12 +1063,37 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: porcelain
+    second: {fileID: 2100000, guid: ea4148cc13019c34a86fb3a936d3515e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shade_glass
+    second: {fileID: 2100000, guid: 002a67aa073e69a4ebc04c882d34e020, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: silver
     second: {fileID: 2100000, guid: f87e7f0e37d5a2940970cf02a871d869, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: window_frame
+    second: {fileID: 2100000, guid: 7feef3da40fbdea438033786938b275f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_light
+    second: {fileID: 2100000, guid: 702714faedfe42b44a960fd222ceabe9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_mid
+    second: {fileID: 2100000, guid: 09553b9ba83af2d42984d89f9f1a9e08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_white
     second: {fileID: 2100000, guid: 7feef3da40fbdea438033786938b275f, type: 2}
   materials:
     importMaterials: 1

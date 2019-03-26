@@ -11,22 +11,13 @@ namespace Doors
         public float angleClose = 0;
         public bool locked = false;
         public float speed = 100;
+        public int direction = 1;
+        
         bool activate = false;
-
-        Transform openTransform;
-        Transform closedTransform;
-        public float speedF = 1.0F;
-        float startTime;
-        float journeyLength;
-
 
         // Use this for initialization
         void Start()
         {
-            openTransform = transform;
-            closedTransform = transform;
-            //openTransform.Rotate(Vector3.up, 90, 0);
-            journeyLength = Vector3.Distance(openTransform.position, closedTransform.position);
         }
 
         // Update is called once per frame
@@ -37,23 +28,17 @@ namespace Doors
                 float currentAngle = transform.eulerAngles.y;
                 float target = open ? angleClose : angleOpen;
                 int sweep = open ? 1 : -1;
-                //Debug.Log(currentAngle);
-                //if (Mathf.Abs(currentAngle - target) > 1)
-                //{
-                //    transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime, 0);
-                //}
-
-                //if ()
-                //{
-                //    activate = false;
-                //    open = !open;
-                //}
+                float percentage = Mathf.Abs(currentAngle - target) / 90;
+                if (percentage < 0.04)
+                {
+                    activate = false;
+                    transform.Rotate(Vector3.up, Mathf.Abs(currentAngle - target) * sweep * direction, 0);
+                    open = !open;
+                } else
+                {
+                    transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime * direction, 0);
+                }
             }
-
-            //if (activate)
-            //{
-
-            //}
 
         }
 
@@ -62,8 +47,6 @@ namespace Doors
             if (!locked)
             {
                 activate = true;
-                startTime = Time.time;
-                
             }
         }
     }
