@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,6 +26,9 @@ namespace WatsonAI
 
       Debug.WriteLineIf(!AddEntities(entities), "Failed to add entities!");
       Debug.WriteLineIf(!AddVerbs(verbs), "Failed to add verbs!");
+
+      Debug.WriteLine($"Entities: {string.Join(", ", Associations.EntityNames()) }");
+      Debug.WriteLine($"Verbs: {string.Join(", ", Associations.VerbNames()) }");
     }
 
     /// <summary>
