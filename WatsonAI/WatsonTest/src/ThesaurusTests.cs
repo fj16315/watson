@@ -133,7 +133,9 @@ namespace WatsonTest
       Thesaurus associationThesaurus = new Thesaurus(associations);
 
       Assert.False(associationThesaurus.Describes("cat", "man"));
+      Assert.False(associationThesaurus.Describes("cat", "man", true));
       Assert.False(associationThesaurus.Describes("cat", "man", PartOfSpeech.Noun));
+      Assert.False(associationThesaurus.Describes("cat", "man", PartOfSpeech.Noun, true));
 
       Assert.False(associationThesaurus.Describes("cats", "men", true));
       Assert.False(associationThesaurus.Describes("cats", "men", PartOfSpeech.Noun, true));
@@ -147,8 +149,10 @@ namespace WatsonTest
       associations.AddVerbName(new Verb(1), "consume");
       Thesaurus associationThesaurus = new Thesaurus(associations);
 
+      Assert.False(associationThesaurus.Describes("kill", "consume", true));
       Assert.False(associationThesaurus.Describes("kill", "consume"));
       Assert.False(associationThesaurus.Describes("kill", "consume", PartOfSpeech.Verb));
+      Assert.False(associationThesaurus.Describes("kill", "consume", PartOfSpeech.Verb, true));
 
       Assert.False(associationThesaurus.Describes("killed", "consumes", true));
       Assert.False(associationThesaurus.Describes("killed", "consumes", PartOfSpeech.Verb, true));
