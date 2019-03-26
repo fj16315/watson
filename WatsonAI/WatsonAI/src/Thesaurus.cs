@@ -72,8 +72,7 @@ namespace WatsonAI
     private bool AreTriviallyEqual(string first, string second)
       => first.Equals(second, StringComparison.OrdinalIgnoreCase)
       || stemmer.GetSteamWord(first).Equals(second, StringComparison.OrdinalIgnoreCase)
-      || first.Equals(stemmer.GetSteamWord(second), StringComparison.OrdinalIgnoreCase)
-      || EntityNames.Contains(first) && EntityNames.Contains(second);
+      || first.Equals(stemmer.GetSteamWord(second), StringComparison.OrdinalIgnoreCase);
 
     private bool AreWithinVerbs(string first, string second)
       => VerbNames.Contains(first) && VerbNames.Contains(second)
@@ -82,7 +81,8 @@ namespace WatsonAI
       || VerbNames.Contains(stemmer.GetSteamWord(first)) && VerbNames.Contains(stemmer.GetSteamWord(second));
 
     private bool AreWithinEntities(string first, string second)
-      => EntityNames.Contains(first) && EntityNames.Contains(stemmer.GetSteamWord(second))
+      => EntityNames.Contains(first) && EntityNames.Contains(second)
+      || EntityNames.Contains(first) && EntityNames.Contains(stemmer.GetSteamWord(second))
       || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(second)
       || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(stemmer.GetSteamWord(second));
 
