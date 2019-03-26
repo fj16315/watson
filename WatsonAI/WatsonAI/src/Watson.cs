@@ -8,7 +8,7 @@ namespace WatsonAI
   public class Watson : IWatson
   {
     private Parser parser = new Parser();
-    private Thesaurus thesaurus = new Thesaurus();
+    private Thesaurus thesaurus;
     private Dictionary<Character, Knowledge> characters = new Dictionary<Character, Knowledge>();
     private Associations associations = new Associations();
 
@@ -47,7 +47,8 @@ namespace WatsonAI
       associations.AddEntityName(new Entity(21), "butler");
       associations.AddEntityName(new Entity(22), "police");
       associations.AddEntityName(new Entity(23), "Earl");
-
+      associations.AddEntityName(new Entity(24), "cat");
+      associations.AddEntityName(new Entity(25), "man");
 
 
       /*                Verbs                    */
@@ -71,7 +72,7 @@ namespace WatsonAI
       associations.AddVerbName(new Verb(18), "marry");
       associations.AddVerbName(new Verb(19), "contains");
 
-
+      this.thesaurus = new Thesaurus(associations);
     }
 
     /// <summary>
