@@ -7,17 +7,18 @@ namespace WatsonAI
   /// <summary>
   /// Textual engine for what to return when no other output has been generated.
   /// </summary>
-  public class FallbackEngine : IRule
+  public class FallbackProcess : IProcess
   {
-    /// <summary>
-    /// Generic response if no other output has been generated.
-    /// </summary>
-    /// <remarks>Should always be the last process.</remarks>
-    /// <param name="io">The InputOutput state struct.</param>
-    /// <returns>The InputOutput state object with generic output as output.</returns>
-    public InputOutput Process(InputOutput io)
+
+    private List<string> randomFallbacks;
+
+    public FallbackProcess() {
+      this.randomFallbacks = new List<string>();
+    }
+
+    public Stream Process(Stream stream)
     {
-      List<string> randomFallbacks = new List<string>();
+
 
       randomFallbacks.AddRange(new List<string>
       {
@@ -30,14 +31,14 @@ namespace WatsonAI
       });
 
 
-      if (io.output.Length == 0)
+      if (stream.Output().Length ==0)
       {
         Random rnd = new Random();
 
-        io.output = randomFallbacks[rnd.Next(randomFallbacks.Count-1);
+        stream.AppendOutput(randomFallbacks[rnd.Next(randomFallbacks.Count-1)]);
 
       }
-      return io;
+      return stream;
     }
   }
 }

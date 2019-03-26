@@ -105,7 +105,7 @@ namespace WatsonAI
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsEngine();
-      var fallback = new FallbackEngine();
+      var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, character, kg, thesaurus, associations);
 
       //var output = io
@@ -116,7 +116,8 @@ namespace WatsonAI
       //  .Process(fallback);
       var output = stream
         .ProcessWith(debugs)
-        .ProcessWith(question);
+        .ProcessWith(question)
+        .ProcessWith(fallback);
       return output.Output();
     }
 
