@@ -1,109 +1,187 @@
-﻿using System;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 
 namespace WatsonAI
 {
   /// <summary>
   /// Builds a new Knowledge object and its Associations
   /// </summary>
-  public class KnowledgeBuilder
+  public class KnowledgeBuilder : IEnumerable<VerbPhrase>
   {
-    private readonly Knowledge knowledge;
-    private readonly Associations associations;
+    public Knowledge Knowledge { get; }
+    public Associations Associations { get; }
 
     /// <summary>
-    /// Constructs empty Knowledge and Associations
+    /// Begins construction of a new instance of
+    /// <see cref="WatsonAI.Knowledge"/> with <paramref name="entities"/> and
+    /// <paramref name="verbs"/>.
     /// </summary>
-    public KnowledgeBuilder()
+    public KnowledgeBuilder(EntityBuilder entities, VerbBuilder verbs)
     {
-      knowledge = new Knowledge();
-      associations = new Associations();
+      Knowledge = new Knowledge();
+      Associations = new Associations();
+
+      Debug.WriteLineIf(!AddEntities(entities), "Failed to add entities!");
+      Debug.WriteLineIf(!AddVerbs(verbs), "Failed to add verbs!");
     }
 
     /// <summary>
-    /// Takes a list of entity names, and generates new Entities for each
-    /// in the Associations
+    /// Takes an <see cref="IEnumerable"/> of entity names, and generates a new
+    /// <see cref="WatsonAI.Entity"/> in <see cref="Associations"/> for each.
     /// </summary>
-    /// <param name="entities"></param>
-    public void AddEntities(List<string> entities)
+    public bool AddEntities<Names>(Names names) where Names : IEnumerable<string>
     {
-      for (int i = 0; i < entities.Count; i++)
-      {
-        associations.AddEntityName(new Entity((uint)i), entities[i]);
-      }
+      return names
+        .Select((e, i) => Associations.AddEntityName(new Entity((uint)i), e))
+        .All(b => b);
     }
 
     /// <summary>
-    /// Takes a list of verb names, and generates new Verbs for each
-    /// in the Associations
+    /// Takes an <see cref="IEnumerable"/> of verb names, and generates a new
+    /// <see cref="WatsonAI.Verb"/> in <see cref="Associations"/> for each.
     /// </summary>
-    /// <param name="verbs"></param>
-    public void AddVerbs(List<string> verbs)
+    public bool AddVerbs<Names>(Names names) where Names : IEnumerable<string>
     {
-      for (int i = 0; i < verbs.Count; i++)
-      {
-        associations.AddVerbName(new Verb((uint)i), verbs[i]);
-      }
+      return names
+        .Select((v, i) => Associations.AddVerbName(new Verb((uint)i), v))
+        .All(b => b);
     }
 
     /// <summary>
-    /// Adds a new VerbPhrase to Knowledge given a verb and the entities associated with it
+    /// Adds a new <see cref="WatsonAI.Valent"/> to
+    /// <see cref="Knowledge"/> constructed from the parameters.
     /// </summary>
-    /// <param name="verb"></param>
-    /// <param name="valents"></param>
-    /// <returns></returns>
-    public bool AddPhrase(string verb, List<Tuple<Valent.Tag, string>> valents)
+    public void Add(string subj_s, string verb_s, params Object[] objs_s)
     {
-      Verb knowledgeVerb;
-      if (!associations.TryGetVerb(verb, out knowledgeVerb))
+      var subj = Valent.Subj(Associations.UncheckedGetEntity(subj_s));
+
+      var valents = objs_s.Select(obj =>
       {
-        return false;
-      }
-      List<Valent> knowledgeValents = new List<Valent>();
-      foreach (var v in valents)
-      {
-        Entity knowledgeEntity;
-        if (!associations.TryGetEntity(v.Item2, out knowledgeEntity))
+        var entity = Associations.UncheckedGetEntity(obj.Name);
+        if (obj.IsDirect)
         {
-          return false;
+          return Valent.Dobj(entity);
         }
-        knowledgeValents.Add(Valent.WithTag(v.Item1, knowledgeEntity));
-      }
-      var verbPhrase = new VerbPhrase(knowledgeVerb, knowledgeValents);
-      knowledge.AddVerbPhrase(verbPhrase);
-      return true;
+        return Valent.Iobj(new Prep(), entity);
+      })
+      .Prepend(subj);
+
+      var verb = Associations.UncheckedGetVerb(verb_s);
+
+      var vp = new VerbPhrase(verb, valents.ToList());
+      Knowledge.AddVerbPhrase(vp);
     }
 
-    /// <summary>
-    /// Adds a new VerbPhrase given a simple 3 word statement:
-    /// "subj" -> "verb" -> "dobj"
-    /// e.g. "cat kill earl"
-    /// </summary>
-    /// <param name="subj"></param>
-    /// <param name="verb"></param>
-    /// <param name="dobj"></param>
-    /// <returns></returns>
-    public bool AddSimplePhrase(string subj, string verb, string dobj)
+    public void Add(string subj_s, string verb_s, string dobj_s)
     {
-      var valents = new List<Tuple<Valent.Tag, string>>();
-      valents.Add(Tuple.Create(Valent.Tag.Subj, subj));
-      valents.Add(Tuple.Create(Valent.Tag.Dobj, dobj));
-      return AddPhrase(verb, valents);
+      var verb = Associations.UncheckedGetVerb(verb_s);
+      var valents = new List<Valent>
+      {
+        Valent.Subj(Associations.UncheckedGetEntity(subj_s)),
+        Valent.Dobj(Associations.UncheckedGetEntity(dobj_s))
+      };
+
+      Knowledge.AddVerbPhrase(
+        new VerbPhrase(verb, valents)
+      );
     }
 
-    /// <summary>
-    /// Gets Associations
-    /// </summary>
-    /// <returns></returns>
-    public Associations Associations() 
-      => associations;
+    /// <remarks>
+    /// Here to allow collection initialisation
+    /// </remarks>
+    IEnumerator<VerbPhrase> IEnumerable<VerbPhrase>.GetEnumerator()
+      => Knowledge.GetVerbPhrases().GetEnumerator();
 
-    /// <summary>
-    /// Gets Knowledge
-    /// </summary>
-    /// <returns></returns>
-    public Knowledge Knowledge()
-      => knowledge;
+    /// <remarks>
+    /// Here to allow collection initialisation
+    /// </remarks>
+    IEnumerator IEnumerable.GetEnumerator()
+      => Knowledge.GetVerbPhrases().GetEnumerator();
+  }
+
+  public class EntityBuilder : IEnumerable<string>
+  {
+    public HashSet<string> Names { get; }
+
+    public EntityBuilder()
+    {
+      Names = new HashSet<string>();
+    }
+
+    public bool Add(string entityName)
+    {
+      return Names.Add(entityName);
+    }
+
+    IEnumerator<string> IEnumerable<string>.GetEnumerator()
+      => Names.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+      => Names.GetEnumerator();
+  }
+
+  public class VerbBuilder : IEnumerable<string>
+  {
+    public HashSet<string> Names { get; }
+
+    public VerbBuilder()
+    {
+      Names = new HashSet<string>();
+    }
+
+    public bool Add(string verbName)
+    {
+      return Names.Add(verbName);
+    }
+
+    IEnumerator<string> IEnumerable<string>.GetEnumerator()
+      => Names.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+      => Names.GetEnumerator();
+  }
+
+  public struct Object
+  {
+    public string Prep { get; }
+    public string Name { get; }
+
+    public bool HasPrep
+    {
+      get
+      {
+        return Prep != null;
+      }
+    }
+
+    public bool IsDirect
+    {
+      get
+      {
+        return !HasPrep;
+      }
+    }
+
+    public bool IsIndirect
+    {
+      get
+      {
+        return HasPrep;
+      }
+    }
+
+    private Object(string prep, string name)
+    {
+      Name = name;
+      Prep = prep;
+    }
+
+    public static Object Direct(string name)
+      => new Object(null, name);
+
+    public static Object Indirect(string prep, string name)
+      => new Object(prep, name);
   }
 }
