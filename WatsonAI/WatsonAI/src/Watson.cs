@@ -9,7 +9,6 @@ namespace WatsonAI
   {
     private Parser parser = new Parser();
     private Thesaurus thesaurus = new Thesaurus();
-    private Story story = new Story();
 
     public Watson()
     {
@@ -96,28 +95,16 @@ namespace WatsonAI
       //Library contains arsenic 
       kg.AddVerbPhrase(new VerbPhrase(new Verb(19), new List<Valent> { Valent.Subj(new Entity(6)), Valent.Dobj(new Entity(11)) }));
       */
-      var knowledge = new Knowledge();
+      var knowledge = Story.Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
-      foreach (var c in story.Characters)
-      {
-        if (characterName.Equals(c.Name))
-        {
-          knowledge = c.Knowledge;
-        }
-      }
+      //TODO: Add in Character Knowledge dictionary in story class  
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsEngine();
-      var fallback = new FallbackEngine();
-      var question = new QuestionProcess(parser, knowledge, thesaurus, story.Associations);
+      var fallback = new FallbackProcess();
+      var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
 
-      //var output = io
-      //  .Process(greetings)
-      //  .Process(debugParse)
-      //  .Process(thesaurusDebug)
-      //  .Process(question)
-      //  .Process(fallback);
       var output = stream
         .ProcessWith(debugs)
         .ProcessWith(question)

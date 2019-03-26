@@ -7,7 +7,8 @@ namespace WatsonAI
   public class QuestionProcess : IProcess
   {
     private Parser parser;
-    private Knowledge kg;
+    private KnowledgeQuery query;
+    private Knowledge knowledge;
     private Thesaurus thesaurus;
     private Associations associations;
 
@@ -15,12 +16,13 @@ namespace WatsonAI
     /// Text engine for debuging the specified Parser.
     /// </summary>
     /// <param name="parse">The parser to use.</param>
-    public QuestionProcess(Parser parse, Knowledge kg, Thesaurus thesaurus, Associations associations)
+    public QuestionProcess(Parser parse, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
     {
       this.parser = parse;
-      this.kg = kg;
+      this.knowledge = knowledge;
       this.thesaurus = thesaurus;
       this.associations = associations;
+      this.query = new KnowledgeQuery(knowledge);
     }
 
     public Stream Process(Stream stream)
