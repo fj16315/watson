@@ -7,30 +7,18 @@ namespace WatsonAI
   public class QuestionProcess : IProcess
   {
     private Parser parser;
-    private Character character;
-    private KnowledgeQuery query;
+    private Knowledge kg;
     private Thesaurus thesaurus;
     private Associations associations;
-
-    /// <summary>
-    /// Text engine for debuging the parser.
-    /// </summary>
-    public QuestionProcess(Character character, Knowledge kg)
-    {
-      this.parser = new Parser();
-      this.character = character;
-      this.query = new KnowledgeQuery(kg);
-    }
 
     /// <summary>
     /// Text engine for debuging the specified Parser.
     /// </summary>
     /// <param name="parse">The parser to use.</param>
-    public QuestionProcess(Parser parse, Character character, Knowledge kg, Thesaurus thesaurus, Associations associations)
+    public QuestionProcess(Parser parse, Knowledge kg, Thesaurus thesaurus, Associations associations)
     {
       this.parser = parse;
-      this.character = character;
-      this.query = new KnowledgeQuery(kg);
+      this.kg = kg;
       this.thesaurus = thesaurus;
       this.associations = associations;
     }

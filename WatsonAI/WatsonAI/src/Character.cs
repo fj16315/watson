@@ -9,9 +9,11 @@ namespace WatsonAI
   /// </summary>
   public class Character
   {
-    public string name { get; }
+    public string Name { get; }
     
-    public bool murderer { get; }
+    public bool Murderer { get; }
+
+    public Knowledge Knowledge { get; set; }
 
     /// <summary>
     /// Constructor for a character.
@@ -20,8 +22,9 @@ namespace WatsonAI
     /// <param name="murderer">Whether they are the murderer or not.</param>
     public Character(string name, bool murderer)
     {
-      this.name = name;
-      this.murderer = murderer;
+      this.Name = name;
+      this.Murderer = murderer;
+      this.Knowledge = new Knowledge();
     }
   }
 }

@@ -18,8 +18,8 @@ public class MainClass
       path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
       Directory.SetCurrentDirectory(path);
     }
-    Character character = new Character("Actress", false);
-    IWatson watson = new Watson(character);
+    string character = "earl";
+    IWatson watson = new Watson();
 
     while (true)
     {
