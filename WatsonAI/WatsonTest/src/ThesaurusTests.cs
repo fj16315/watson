@@ -139,6 +139,9 @@ namespace WatsonTest
 
       Assert.False(associationThesaurus.Describes("cats", "men", true));
       Assert.False(associationThesaurus.Describes("cats", "men", PartOfSpeech.Noun, true));
+      
+      Assert.False(associationThesaurus.Describes("cats", "cat"));
+      Assert.False(associationThesaurus.Describes("cat", "cat", true));
     }
 
     [Fact]
@@ -156,6 +159,9 @@ namespace WatsonTest
 
       Assert.False(associationThesaurus.Describes("killed", "consumes", true));
       Assert.False(associationThesaurus.Describes("killed", "consumes", PartOfSpeech.Verb, true));
+
+      Assert.False(associationThesaurus.Describes("kill", "kill"));
+      Assert.False(associationThesaurus.Describes("kill", "killed", true));
     }
 
     [Fact]
