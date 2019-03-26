@@ -37,8 +37,8 @@ namespace WatsonAI
 
     public Stream Process(Stream stream)
     {
-      PrintVerbs(stream);
-      PrintEntities(stream);
+      //PrintVerbs(stream);
+      //PrintEntities(stream);
 
       var tree = parser.Parse(stream.RemainingInput);
 
@@ -53,7 +53,7 @@ namespace WatsonAI
       var subjQuestionVerbPhrase = new Flatten<Verb>(new Children<IEnumerable<Verb>>(new Branch("SQ"), verbPhrase));
 
       var dobjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("VP"), nounPhrase));
-      var dobjQuestionVerbPhrase = verbPhrase;//new Flatten<Verb>(new Children<IEnumerable<Verb>>(new Branch("VP"), verbPhrase));
+      var dobjQuestionVerbPhrase = verbPhrase;
 
       var subjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, subjQuestionNounPhrase));
       var subjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, subjQuestionVerbPhrase));
@@ -61,36 +61,13 @@ namespace WatsonAI
       var dobjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, dobjQuestionNounPhrase));
       var dobjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, dobjQuestionVerbPhrase));
 
+      // Deal with active case
       var spNs = subjQueryN.Match(tree);
       var spVs = subjQueryV.Match(tree);
       if (spNs.HasValue && spVs.HasValue)
       {
         var pairs = from n in spNs.Value
                     from v in spVs.Value
-                    select Tuple.Create(n, v);
-
-        foreach (var p in pairs.Distinct())
-        {
-          var e = p.Item1;
-          var v = p.Item2;
-          var answers = query.GetSubjAnswers(v, e);
-          string verbName;
-          associations.TryNameVerb(v, out verbName);
-          string entityName;
-          associations.TryNameEntity(e, out entityName);
-          if (answers.Count != 0)
-          {
-            stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
-          }
-        }
-      }
-
-      var dpNs = dobjQueryN.Match(tree);
-      var dpVs = dobjQueryV.Match(tree);
-      if (dpNs.HasValue && dpVs.HasValue)
-      {
-        var pairs = from n in dpNs.Value
-                    from v in dpVs.Value
                     select Tuple.Create(n, v);
 
         foreach (var p in pairs.Distinct())
@@ -104,7 +81,32 @@ namespace WatsonAI
           associations.TryNameEntity(e, out entityName);
           if (answers.Count != 0)
           {
-            stream.AppendOutput(GenerateResponse(entityName, verbName, answers));
+            stream.AppendOutput(GenerateActiveResponse(entityName, verbName, answers));
+          }
+        }
+      }
+
+      // Deal with passive case
+      var dpNs = dobjQueryN.Match(tree);
+      var dpVs = dobjQueryV.Match(tree);
+      if (dpNs.HasValue && dpVs.HasValue)
+      {
+        var pairs = from n in dpNs.Value
+                    from v in dpVs.Value
+                    select Tuple.Create(n, v);
+
+        foreach (var p in pairs.Distinct())
+        {
+          var e = p.Item1;
+          var v = p.Item2;
+          var answers = query.GetSubjAnswers(v, e);
+          string verbName;
+          associations.TryNameVerb(v, out verbName);
+          string entityName;
+          associations.TryNameEntity(e, out entityName);
+          if (answers.Count != 0)
+          {
+            stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
           }
         }
       }
@@ -157,7 +159,16 @@ namespace WatsonAI
       }
     }
 
-    private string GenerateResponse(string noun, string verb, List<Entity> answers)
+    private string GeneratePassiveResponse(string noun, string verb, List<Entity> answers)
+    {
+      string entityName;
+      associations.TryNameEntity(answers.FirstOrDefault(), out entityName);
+      var response = "The " + entityName + " " + verb;
+      response += " the " + noun;
+      return response;
+    }
+
+    private string GenerateActiveResponse(string noun, string verb, List<Entity> answers)
     {
       var response = "The " + noun + " " + verb;
       foreach (Entity entityAnswer in answers.Distinct())

@@ -21,8 +21,8 @@ namespace WatsonAI
       {
         if (vp.verb.Equals(verb))
         {
-          var dobject = Valent.Subj(entity);
-          if (vp.GetValents().Contains(dobject))
+          var sobject = Valent.Subj(entity);
+          if (vp.GetValents().Contains(sobject))
           {
             foreach (Valent nextValent in vp.GetValents())
             {
