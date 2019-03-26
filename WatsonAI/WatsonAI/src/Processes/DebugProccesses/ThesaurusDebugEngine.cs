@@ -10,13 +10,16 @@ namespace WatsonAI
   public class DebugThesaurusProcess : IProcess
   {
     private Thesaurus thesaurus;
+    private Associations associations;
 
     /// <summary>
     /// Text engine for debugging the parser.
     /// </summary>
     public DebugThesaurusProcess()
     {
-      this.thesaurus = new Thesaurus();
+      associations.AddEntityName(new Entity(0), "cat");
+      associations.AddEntityName(new Entity(1), "man");
+      this.thesaurus = new Thesaurus(associations);
     }
 
     /// <summary>

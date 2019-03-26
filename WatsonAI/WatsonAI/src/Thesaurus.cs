@@ -16,18 +16,36 @@ namespace WatsonAI
   public class Thesaurus
   {
     private WordNetEngine wordNet;
+    private Stemmer stemmer;
+    private Associations associations;
+    private IEnumerable<string> entityNames;
 
-    private Stemmer stemmer; 
 
+    public Thesaurus()
+    {
+      this.entityNames = associations.EntityNames();
+      var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
+
+      wordNet = new WordNetEngine();
+
+      System.Diagnostics.Debug.WriteLine("Loading thesaurus database...");
+      wordNet.LoadFromDirectory(directory);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+
+      this.stemmer = new Stemmer();
+    }
     /// <summary>
     /// Constructor for a thesaurus.
     /// </summary>
+    /// <param name="associations">takes in associations</param>
     /// <remarks>
     /// This loads in the dictionary files, so is slow to construct.
     /// For best results, share the one instance of the thesaurus object.
     /// </remarks>
-    public Thesaurus()
+    public Thesaurus(Associations associations)
     {
+      this.associations = associations;
+      this.entityNames = associations.EntityNames();
       var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
 
       wordNet = new WordNetEngine();
@@ -39,6 +57,8 @@ namespace WatsonAI
       this.stemmer = new Stemmer();
     }
 
+  
+
     /// <summary>
     /// Checks if the first word describes the second through the built-in WordNet similarity function.
     /// </summary>
@@ -49,6 +69,8 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, bool stemInput = false)
     {
+
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
       {
@@ -72,6 +94,8 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
+
+      if (entityNames.Contains(first) && entityNames.Contains(second) ) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
@@ -106,6 +130,7 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
+      if (entityNames.Contains(first) && entityNames.Contains(second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory, relations);
       if (stemInput)
       { 
