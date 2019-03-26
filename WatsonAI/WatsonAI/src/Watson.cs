@@ -101,11 +101,12 @@ namespace WatsonAI
       //TODO: Add in Character Knowledge dictionary in story class  
 
       var debugs = new DebugProcesses(parser, thesaurus);
-      var greetings = new GreetingsEngine();
+      var greetings = new GreetingsProcess(parser,thesaurus);
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
 
       var output = stream
+        .ProcessWith(greetings)
         .ProcessWith(debugs)
         .ProcessWith(question)
         .ProcessWith(fallback);
