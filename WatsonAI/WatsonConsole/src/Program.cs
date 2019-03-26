@@ -18,14 +18,13 @@ public class MainClass
       path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
       Directory.SetCurrentDirectory(path);
     }
-    string character = "earl";
     IWatson watson = new Watson();
 
     while (true)
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      Console.WriteLine(watson.Run(line, character));
+      Console.WriteLine(watson.Run(line));
       if (line == "") { break; }
     }
   }
