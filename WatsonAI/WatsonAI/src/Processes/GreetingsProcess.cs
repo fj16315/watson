@@ -42,12 +42,31 @@ namespace WatsonAI
       var tree = parser.Parse(stream.RemainingInput);
       var top = new Branch("TOP");
       var hello = new Descendant<string>(top, new Word(thesaurus, "hello"));
-
       var result = hello.Match(tree);
 
       if (result.HasValue) 
       {
-        stream.AppendOutput("Hello Watson");
+        var listOfGreetings = new List<string>();
+        listOfGreetings.AddRange(new List<string>
+          {"Hey", 
+           "Hi",
+           "Wassup",
+           "Good evening",
+           "G'day",
+           "Salutations,"
+        });
+        Random rnd = new Random();
+        Random watson = new Random();
+
+        if (watson.Next(2) == 1) 
+        { 
+          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity-1)] + ", Watson" );
+        }
+        else 
+        {
+          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity - 1)]);
+        }
+
       }
       return stream;
     }
