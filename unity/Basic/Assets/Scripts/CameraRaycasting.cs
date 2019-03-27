@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     public GameObject masterCanvas, speechCanvas;
     PlayerController player;
     public MasterControl controller;
+    public GameState state;
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,7 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     if (obj.CanPickUp())
                     {
+                        state.PickUp(entity.gameObject);
                         player.PickUp(entity.gameObject);
                     }
                     else if (container != null)

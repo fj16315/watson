@@ -104,6 +104,7 @@ public class DialogueScreen : MonoBehaviour {
         {
             nextButton.SetActive(true);
             UpdateReply(state.NextString());
+
         }
         
     }

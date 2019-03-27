@@ -32,6 +32,7 @@ public class MasterControl : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("exit");
             notebook.Activate(!paused);
             Pause(!paused);
             if (!paused)

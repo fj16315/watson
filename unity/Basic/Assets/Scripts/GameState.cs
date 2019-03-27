@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Doors;
 using NPC;
+using Things;
 
 public class GameState : MonoBehaviour {
 
@@ -19,6 +20,11 @@ public class GameState : MonoBehaviour {
     public NPCController police;
     public DialogueScreen dialogue;
     public CameraRaycasting raycasting;
+
+    // Tutorial variables
+    bool saved = false;
+    bool exited = false;
+    bool pickup = false;
 
     // Use this for initialization
     void Start () {
@@ -52,7 +58,51 @@ public class GameState : MonoBehaviour {
 
     public void ContinueTutorial()
     {
-        currentString++;
+        if (RuleSatisfied(subState))
+        {
+            currentString++;
+        }
+    }
+
+    private bool RuleSatisfied(int stage)
+    {
+        switch (currentState)
+        {
+            case State.TUTORIAL:
+                
+                switch (stage)
+                {
+                    // Save a clue
+                    case 0:
+                        return exited;
+                    // Exit conversation
+                    case 1:
+                        return pickup;
+                    // Pick something up
+                    case 2:
+                        return saved;
+                }
+
+                break;
+            case State.PLAY:
+                break;
+            case State.END:
+                break;
+        }
+        return false;
+    }
+
+    public void PickUp(GameObject obj)
+    {
+        if (obj.GetComponent<Thing>().objName.Equals("Notebook"))
+        {
+            pickup = true;
+        }
+    }
+
+    public void ExitTutorial()
+    {
+        exited = true;
     }
 
 }
