@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 95630355662870228}
   - component: {fileID: 114831233044589234}
   m_Layer: 0
-  m_Name: Butler_old
+  m_Name: Butler_no_prop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

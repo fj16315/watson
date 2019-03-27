@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 95096798749868858}
   - component: {fileID: 114315878563036648}
   m_Layer: 0
-  m_Name: Countess
+  m_Name: Countess_no_prop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

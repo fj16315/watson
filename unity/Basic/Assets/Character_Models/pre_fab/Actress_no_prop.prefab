@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 95244757226844958}
   - component: {fileID: 114884499647815348}
   m_Layer: 0
-  m_Name: Actress_old
+  m_Name: Actress_no_prop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
