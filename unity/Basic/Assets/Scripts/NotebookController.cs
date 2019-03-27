@@ -59,6 +59,8 @@ namespace Notebook
         public Text gangsterClueBox;
         public Text policeClueBox;
 
+        public Text inventoryText;
+
         // Use this for initialization
         void Start()
         {
@@ -103,6 +105,7 @@ namespace Notebook
         public void Activate(bool active)
         {
             container.SetActive(active);
+            UpdateInventory();
             if (currentPageEnum == Page.CHARACTER)
             {
                 ChangeCharacter((int)currentCharEnum);
@@ -131,6 +134,7 @@ namespace Notebook
                     case Page.INVENTORY:
                         invtPage.SetActive(true);
                         currentPage = invtPage;
+                        UpdateInventory();
                         break;
                     case Page.ITEM:
                         itemPage.SetActive(true);
@@ -245,6 +249,11 @@ namespace Notebook
                 result += "- \"" + clue + "\"\n";
             }
             return result;
+        }
+
+        public void UpdateInventory()
+        {
+            inventoryText.text = player.list;
         }
 
     }
