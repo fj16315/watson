@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
 	console.log(last_value);
 	console.log(req.query.command);
   if(req.query.command == undefined || req.query.command == ""){
-	res.send("{ \"command\":\"" + last_value + "\"}");
+		res.send("{ \"command\":\"" + last_value + "\"}");
   }else{
 	if(req.query.command == "empty"){
 		last_value = "";
