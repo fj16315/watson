@@ -165,6 +165,7 @@ ModelImporter:
     100318: pasted__pasted__Character1_Spine1
     100320: pasted__pasted__Character1_Spine2
     100322: Right_Glove
+    100324: pCylinder3
     400000: //RootNode
     400002: Body
     400004: Dress_Lower
@@ -327,13 +328,18 @@ ModelImporter:
     400318: pasted__pasted__Character1_Spine1
     400320: pasted__pasted__Character1_Spine2
     400322: Right_Glove
+    400324: pCylinder3
     2100000: Actress_Shader
+    2100002: lambert1
+    2300000: pCylinder3
+    3300000: pCylinder3
     4300000: Body
     4300002: Right_Glove
     4300004: Left_Glove
     4300006: Hair
     4300008: Dress_Upper
     4300010: Dress_Lower
+    4300012: pCylinder3
     7400000: A-Pose
     7400002: Test
     7400004: Idle1
@@ -659,7 +665,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.011
+    previousCalculatedGlobalScale: 0.012
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

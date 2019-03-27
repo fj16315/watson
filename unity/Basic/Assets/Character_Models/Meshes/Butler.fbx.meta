@@ -131,6 +131,7 @@ ModelImporter:
     100250: pasted__Ring
     100252: pasted__Spine_Curve
     100254: pasted__Thumb
+    100256: Cloth
     400000: Body
     400002: Bowtie
     400004: //RootNode
@@ -259,11 +260,15 @@ ModelImporter:
     400250: pasted__Ring
     400252: pasted__Spine_Curve
     400254: pasted__Thumb
+    400256: Cloth
     2100000: lambert7
+    2100002: Default_Material
     2300000: Body
     2300002: Jacket
+    2300004: Cloth
     3300000: Body
     3300002: Jacket
+    3300004: Cloth
     4300000: Trousers
     4300002: ShoeL
     4300004: Body
@@ -275,6 +280,7 @@ ModelImporter:
     4300016: Jacket
     4300018: Hair
     4300020: Hair2
+    4300022: Cloth
     7400000: Test
     7400002: Idle1
     7400004: Idle2
@@ -546,7 +552,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.012
+    previousCalculatedGlobalScale: 0.012499999
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
