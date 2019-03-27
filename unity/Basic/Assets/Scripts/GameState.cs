@@ -14,6 +14,7 @@ public class GameState : MonoBehaviour {
     public List<string> tutorialStrings;
     private int currentString = 0;
     private bool started = false;
+    public bool alexa = false;
 
     // Useful game things
     public List<Door> entryDoors;
