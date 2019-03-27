@@ -28,7 +28,8 @@
         "gangster", "money", "promotion", "money",
         "study", "will", "belonging", "letter",
         "colonel", "book", "arsenic", "barbital",
-        "nightshade", "murderer", "dead", "music", "chocolate"
+        "nightshade", "murderer", "dead", "music", "chocolate",
+        "house", "earth", "england", "universe", "dorset"
       };
       var verbs = new VerbBuilder {
         "poison", "marry", "owe", "employ",
@@ -53,6 +54,11 @@
         {"earl", "prevent", "promotion"},
         {"butler", "launder", "money"},
         {"study", "contain", "will"},
+        {"house", "contain", "study"},
+        {"dorset", "contain", "house"},
+        {"england", "contain", "house"},
+        {"earth", "contain", "england"},
+        {"universe", "contain", "england"},
         {"earl", "own", "belonging"},
         {"belonging", "contain", "letter"},
         {"colonel", "resent", "earl"},

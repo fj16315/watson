@@ -31,6 +31,6 @@ namespace WatsonAI
     /// <param name="tree">The tree to match against.</param>
     /// <returns>The result containing the matching string, or failure.</returns>
     public override Result<string> Match(Parse tree) 
-      => thesaurus.Describes(tree.Value, word) ? new Result<string>(word) : new Result<string>();
+      => thesaurus.Describes(tree.Value, word, true) ? new Result<string>(word) : Result<string>.Fail;
   }
 }
