@@ -44,7 +44,7 @@ namespace WatsonAI
       var hello = new Descendant<string>(top, new Word(thesaurus, "hello"));
       var result = hello.Match(tree);
 
-      if (result.HasValue) 
+      if (result.HasValue && result.Value.GetEnumerator().Current != null) 
       {
         var listOfGreetings = new List<string>();
         listOfGreetings.AddRange(new List<string>
