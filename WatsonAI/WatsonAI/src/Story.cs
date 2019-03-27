@@ -44,7 +44,7 @@
         {"earl", "like", "music"},
         {"actress", "poison", "earl"},
         {"earl", "be", "dead"},
-        //{"actress", "kill", "earl"},
+        {"actress", "kill", "earl"},
         {"countess", "marry", "earl"},
         {"earl", "marry", "countess"},
         {"earl", "owe", "gangster"},
