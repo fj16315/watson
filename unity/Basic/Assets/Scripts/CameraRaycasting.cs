@@ -139,20 +139,23 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    else if (thing.CanPickUp())
+                    else if (thing != null && thing.CanPickUp())
                     {
                         message = "Pick up ";
                     }
-                    message += thing.objName;
+                    else if (thing != null)
+                    {
+                        message += thing.objName;
+                    }
                     break;
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    if (door.locked)
+                    if (door != null && door.locked)
                     {
                         message = "Locked door";
                     }
-                    else
+                    else if (door != null)
                     {
                         if (door.open)
                         {

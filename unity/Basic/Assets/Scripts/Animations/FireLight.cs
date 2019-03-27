@@ -19,16 +19,14 @@ public class FireLight : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-
+	void FixedUpdate () {
         
         if ((counter++ % 3 ) == 0)
         {
             distance = Vector3.Distance(transform.position, player.transform.position);
             if (distance < 12)
             {
-                diff = (float)(rand.Next(100, 140));
+                diff = (float)(rand.Next(110, 160));
                 l.intensity = diff / 100.0F;
             }
         }
