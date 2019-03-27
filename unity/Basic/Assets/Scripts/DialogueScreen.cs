@@ -169,6 +169,10 @@ public class DialogueScreen : MonoBehaviour {
     public void SaveButton()
     {
         state.SaveClue();
+        if (queryResponse == "")
+        {
+            queryResponse = "My first clue!";
+        }
         notebook.LogResponse(currentCharacter, queryResponse);
     }
 

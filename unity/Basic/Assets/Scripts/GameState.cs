@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour {
     bool saved = false;
     bool exited = false;
     bool pickup = false;
+    bool notebook = false;
 
     // Use this for initialization
     void Start () {
@@ -40,6 +41,7 @@ public class GameState : MonoBehaviour {
             started = true;
         }
 	}
+
 
     // -------------------- States --------------------
 
@@ -69,6 +71,24 @@ public class GameState : MonoBehaviour {
             {
                 subState = 2;
             }
+            else if (currentString == 5)
+            {
+                subState = 3;
+            }
+            else if (currentString == 6)
+            {
+                subState = 4;
+            }
+            else if (currentString == 10)
+            {
+                currentState = State.PLAY;
+                subState = 0;
+                entryDoors[0].locked = false;
+                entryDoors[1].locked = false;
+                entryDoors[0].Activate();
+                entryDoors[1].Activate();
+                raycasting.CloseDialogue();
+            }
         }
     }
 
@@ -80,17 +100,15 @@ public class GameState : MonoBehaviour {
                 
                 switch (stage)
                 {
-                    // Click through
                     case 0:
                         return true;
-                    // Save a clue
                     case 1:
                         return exited;
-                    // Exit conversation
                     case 2:
                         return pickup;
-                    // Pick something up
                     case 3:
+                        return notebook;
+                    case 4:
                         return saved;
                 }
 
@@ -107,6 +125,10 @@ public class GameState : MonoBehaviour {
     {
         if (obj.GetComponent<Thing>().objName.Equals("Notebook"))
         {
+            if (!pickup)
+            {
+                currentString++;
+            }
             pickup = true;
         }
     }
@@ -122,7 +144,16 @@ public class GameState : MonoBehaviour {
 
     public void SaveClue()
     {
+        if (!saved)
+        {
+            //currentString++;
+        }
         saved = true;
+    }
+
+    public void OpenNotebook()
+    {
+        notebook = true;
     }
 
 }

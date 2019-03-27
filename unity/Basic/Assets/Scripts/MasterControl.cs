@@ -11,6 +11,7 @@ public class MasterControl : MonoBehaviour {
     public GameObject masterCanvas;
     public NotebookController notebook;
     public RigidbodyFirstPersonController fpc;
+    public GameState state;
 
     // State variables
     public bool paused = false;
