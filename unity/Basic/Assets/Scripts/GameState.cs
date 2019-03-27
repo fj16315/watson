@@ -20,6 +20,7 @@ public class GameState : MonoBehaviour {
     public NPCController police;
     public DialogueScreen dialogue;
     public CameraRaycasting raycasting;
+    public Thing notebookThing;
 
     // Tutorial variables
     bool saved = false;
@@ -70,6 +71,7 @@ public class GameState : MonoBehaviour {
             else if (currentString == 4)
             {
                 subState = 2;
+                notebookThing.pickup = true;
             }
             else if (currentString == 5)
             {
