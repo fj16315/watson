@@ -3864,6 +3864,7 @@ MonoBehaviour:
   earlClueBox: {fileID: 69951975}
   gangsterClueBox: {fileID: 1597919653}
   policeClueBox: {fileID: 1266951561}
+  inventoryText: {fileID: 927971641}
 --- !u!1 &328878936
 GameObject:
   m_ObjectHideFlags: 0
