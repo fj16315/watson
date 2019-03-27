@@ -139,20 +139,23 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    else if (thing.CanPickUp())
+                    if (thing != null)
                     {
-                        message = "Pick up ";
+                        if (thing.CanPickUp())
+                        {
+                            message = "Pick up ";
+                        }
+                        message += thing.objName;
                     }
-                    message += thing.objName;
                     break;
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    if (door.locked)
+                    if (door != null && door.locked)
                     {
                         message = "Locked door";
                     }
-                    else
+                    else if (door != null)
                     {
                         if (door.open)
                         {
@@ -173,7 +176,7 @@ public class CameraRaycasting : MonoBehaviour
         }
     }
 
-    private void SpeechDialogue(NPCController character)
+    public void SpeechDialogue(NPCController character)
     {
         converse = true;
         controller.Pause(true);

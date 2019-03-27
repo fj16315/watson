@@ -232,6 +232,12 @@ ModelImporter:
     100452: kitchen_door
     100454: knobs 1
     100456: knobs 2
+    100458: upper_ceiling1
+    100460: billiards_floor
+    100462: dining_floor
+    100464: hall_floor
+    100466: kitchen_floor
+    100468: salon_floor
     400000: base
     400002: base 1
     400004: billiards_door
@@ -461,6 +467,12 @@ ModelImporter:
     400452: kitchen_door
     400454: knobs 1
     400456: knobs 2
+    400458: upper_ceiling1
+    400460: billiards_floor
+    400462: dining_floor
+    400464: hall_floor
+    400466: kitchen_floor
+    400468: salon_floor
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -505,6 +517,7 @@ ModelImporter:
     2100082: porcelain
     2100084: shade_glass
     2100086: brass
+    2100088: wallpaper_yellow
     2300000: base
     2300002: base 1
     2300004: billiards_walls
@@ -665,6 +678,12 @@ ModelImporter:
     2300314: door_hole 2
     2300316: knobs 1
     2300318: knobs 2
+    2300320: upper_ceiling1
+    2300322: billiards_floor
+    2300324: dining_floor
+    2300326: hall_floor
+    2300328: kitchen_floor
+    2300330: salon_floor
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -825,6 +844,12 @@ ModelImporter:
     3300314: door_hole 2
     3300316: knobs 1
     3300318: knobs 2
+    3300320: upper_ceiling1
+    3300322: billiards_floor
+    3300324: dining_floor
+    3300326: hall_floor
+    3300328: kitchen_floor
+    3300330: salon_floor
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -983,6 +1008,12 @@ ModelImporter:
     4300310: knobs
     4300312: door_hole
     4300314: door_frame
+    4300316: upper_ceiling1
+    4300318: salon_floor
+    4300320: billiards_floor
+    4300322: kitchen_floor
+    4300324: dining_floor
+    4300326: hall_floor
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
