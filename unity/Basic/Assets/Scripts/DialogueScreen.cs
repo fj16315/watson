@@ -9,7 +9,7 @@ public class DialogueScreen : MonoBehaviour {
 
     public GUISkin skin;
     bool show = false;
-    //bool query = false;
+    public GameState state;
     public string stringToEdit = "";
     string answer = "";
     string queryResponse = "";
@@ -17,9 +17,11 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject replyBubble;
     public Text answerBox;
     public GameObject saveButton;
+    public GameObject nextButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
+    public AlexaInput alexa;
 
     // Character Fonts
     public Font fontDetective;
@@ -67,18 +69,22 @@ public class DialogueScreen : MonoBehaviour {
             int x = Screen.width/2 + 116;
             int y = Screen.height/2 + 164;
 
+            //if (!(state.currentState == GameState.State.TUTORIAL && state.subState == 0))
+            //{
             stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
+            //}
 
-            //GUI.Box(new Rect(x - width - 10, y - height, width, height), answer);
-
-            if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
+            if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox" && state.currentState == GameState.State.PLAY)
             {
-                queryResponse = ai.Run(stringToEdit);
-                UpdateReply(queryResponse);
-                Debug.Log(answer);
+                QueryAi();
             }
-         
+
+            //if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
+            //{
+            //    ShowScreen(currentCharacter);
+            //}
+
         }
     }
 
@@ -86,11 +92,21 @@ public class DialogueScreen : MonoBehaviour {
     {
         show = true;
         replyBubble.SetActive(true);
+        currentCharacter = character;
         textBubble.SetActive(true);
         saveButton.SetActive(true);
-        currentCharacter = character;
-        UpdateReply("");
-        ai.StartSession();
+        if (!(state.currentState == GameState.State.TUTORIAL))
+        {
+            alexa.StartSession();
+            ai.StartSession();
+            UpdateReply("");
+        } else
+        {
+            nextButton.SetActive(true);
+            UpdateReply(state.NextString());
+
+        }
+        
     }
 
     public void HideScreen()
@@ -99,8 +115,17 @@ public class DialogueScreen : MonoBehaviour {
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
         saveButton.SetActive(false);
+        nextButton.SetActive(false);
         answerBox.text = "";
+        alexa.StopSession();
         Cursor.visible = false;
+    }
+
+    private void QueryAi()
+    {
+        queryResponse = ai.Run(stringToEdit);
+        UpdateReply(queryResponse);
+        Debug.Log(answer);
     }
 
     private void UpdateReply(string extra)
@@ -111,6 +136,12 @@ public class DialogueScreen : MonoBehaviour {
         answerBox.lineSpacing = prof.lineSpacing;
         answerBox.font = prof.font;
         answerBox.text = answer;
+    }
+
+    public void UpdateQuestion(string question)
+    {
+        stringToEdit = question;
+        QueryAi();
     }
 
     private NPCProfile GetProfile(string name)
@@ -137,7 +168,14 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
+        state.SaveClue();
         notebook.LogResponse(currentCharacter, queryResponse);
+    }
+
+    public void NextButton()
+    {
+        state.ContinueTutorial();
+        UpdateReply(state.NextString());
     }
 
 }

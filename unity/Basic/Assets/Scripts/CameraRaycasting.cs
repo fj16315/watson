@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     public GameObject masterCanvas, speechCanvas;
     PlayerController player;
     public MasterControl controller;
+    public GameState state;
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,7 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     if (obj.CanPickUp())
                     {
+                        state.PickUp(entity.gameObject);
                         player.PickUp(entity.gameObject);
                     }
                     else if (container != null)
@@ -102,6 +104,7 @@ public class CameraRaycasting : MonoBehaviour
             // Exit speech
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
             {
+                state.ExitTutorial();
                 CloseDialogue();
             }
         }
@@ -139,20 +142,23 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    else if (thing.CanPickUp())
+                    if (thing != null)
                     {
-                        message = "Pick up ";
+                        if (thing.CanPickUp())
+                        {
+                            message = "Pick up ";
+                        }
+                        message += thing.objName;
                     }
-                    message += thing.objName;
                     break;
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    if (door.locked)
+                    if (door != null && door.locked)
                     {
                         message = "Locked door";
                     }
-                    else
+                    else if (door != null)
                     {
                         if (door.open)
                         {
@@ -173,7 +179,7 @@ public class CameraRaycasting : MonoBehaviour
         }
     }
 
-    private void SpeechDialogue(NPCController character)
+    public void SpeechDialogue(NPCController character)
     {
         converse = true;
         controller.Pause(true);
