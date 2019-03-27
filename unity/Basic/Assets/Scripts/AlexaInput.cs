@@ -8,6 +8,7 @@ public class AlexaInput : MonoBehaviour {
 
     public AIController ai;
     public DialogueScreen dialogue;
+    public GameState state;
 
     private bool inDialogue;
 
@@ -15,7 +16,7 @@ public class AlexaInput : MonoBehaviour {
     {
         while (true)
         {
-            if(inDialogue)
+            if(inDialogue && state.currentState == GameState.State.PLAY)
             {
                 WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
                 yield return w;
@@ -49,8 +50,11 @@ public class AlexaInput : MonoBehaviour {
         if (command == null || command == "") { return; }
         else {
             Debug.Log("Command = " + command);
-            dialogue.UpdateQuestion(command);
-            //ai.Query(command);
+            if (command != "undefined")
+            {
+                dialogue.UpdateQuestion(command);
+                //ai.Query(command);
+            }
         }
     }
 

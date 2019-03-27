@@ -139,12 +139,12 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    else if (thing != null && thing.CanPickUp())
+                    if (thing != null)
                     {
-                        message = "Pick up ";
-                    }
-                    else if (thing != null)
-                    {
+                        if (thing.CanPickUp())
+                        {
+                            message = "Pick up ";
+                        }
                         message += thing.objName;
                     }
                     break;
@@ -176,7 +176,7 @@ public class CameraRaycasting : MonoBehaviour
         }
     }
 
-    private void SpeechDialogue(NPCController character)
+    public void SpeechDialogue(NPCController character)
     {
         converse = true;
         controller.Pause(true);
