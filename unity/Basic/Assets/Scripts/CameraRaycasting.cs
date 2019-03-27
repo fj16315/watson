@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     public GameObject masterCanvas, speechCanvas;
     PlayerController player;
     public MasterControl controller;
+    public GameState state;
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,7 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     if (obj.CanPickUp())
                     {
+                        state.PickUp(entity.gameObject);
                         player.PickUp(entity.gameObject);
                     }
                     else if (container != null)
@@ -102,6 +104,7 @@ public class CameraRaycasting : MonoBehaviour
             // Exit speech
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
             {
+                state.ExitTutorial();
                 CloseDialogue();
             }
         }
@@ -114,7 +117,10 @@ public class CameraRaycasting : MonoBehaviour
                 // NPC
                 case (int)ToM.CHARACTER:
                     NPCController npc = entity.GetComponent<NPCController>();
-                    message = "Talk to " + npc.charName;
+                    if (npc != null)
+                    {
+                        message = "Talk to " + npc.charName;
+                    }
                     break;
                 // THING
                 case (int)ToM.THING:
@@ -183,7 +189,7 @@ public class CameraRaycasting : MonoBehaviour
         speechCanvas.GetComponent<DialogueScreen>().ShowScreen(character);
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
         converse = false;
         controller.Pause(false);

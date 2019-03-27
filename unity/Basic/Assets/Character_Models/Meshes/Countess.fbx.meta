@@ -82,6 +82,102 @@ ModelImporter:
     100152: pasted__Character1_Spine1
     100154: pasted__Character1_Spine2
     100156: Scarf2
+    100158: Handbag
+    100160: Handbag_joints
+    100162: joint1
+    100164: joint2
+    100166: joint3
+    100168: pasted__Character1_Ctrl_ChestEndEffector
+    100170: pasted__Character1_Ctrl_ChestOriginEffector
+    100172: pasted__Character1_Ctrl_Head
+    100174: pasted__Character1_Ctrl_HeadEffector
+    100176: pasted__Character1_Ctrl_Hips
+    100178: pasted__Character1_Ctrl_HipsEffector
+    100180: pasted__Character1_Ctrl_LeftAnkleEffector
+    100182: pasted__Character1_Ctrl_LeftArm
+    100184: pasted__Character1_Ctrl_LeftElbowEffector
+    100186: pasted__Character1_Ctrl_LeftFoot
+    100188: pasted__Character1_Ctrl_LeftFootEffector
+    100190: pasted__Character1_Ctrl_LeftForeArm
+    100192: pasted__Character1_Ctrl_LeftHand
+    100194: pasted__Character1_Ctrl_LeftHandIndex1
+    100196: pasted__Character1_Ctrl_LeftHandIndex2
+    100198: pasted__Character1_Ctrl_LeftHandIndex3
+    100200: pasted__Character1_Ctrl_LeftHandIndex4
+    100202: pasted__Character1_Ctrl_LeftHandIndexEffector
+    100204: pasted__Character1_Ctrl_LeftHandMiddle1
+    100206: pasted__Character1_Ctrl_LeftHandMiddle2
+    100208: pasted__Character1_Ctrl_LeftHandMiddle3
+    100210: pasted__Character1_Ctrl_LeftHandMiddle4
+    100212: pasted__Character1_Ctrl_LeftHandMiddleEffector
+    100214: pasted__Character1_Ctrl_LeftHandPinky1
+    100216: pasted__Character1_Ctrl_LeftHandPinky2
+    100218: pasted__Character1_Ctrl_LeftHandPinky3
+    100220: pasted__Character1_Ctrl_LeftHandPinky4
+    100222: pasted__Character1_Ctrl_LeftHandPinkyEffector
+    100224: pasted__Character1_Ctrl_LeftHandRing1
+    100226: pasted__Character1_Ctrl_LeftHandRing2
+    100228: pasted__Character1_Ctrl_LeftHandRing3
+    100230: pasted__Character1_Ctrl_LeftHandRing4
+    100232: pasted__Character1_Ctrl_LeftHandRingEffector
+    100234: pasted__Character1_Ctrl_LeftHandThumb1
+    100236: pasted__Character1_Ctrl_LeftHandThumb2
+    100238: pasted__Character1_Ctrl_LeftHandThumb3
+    100240: pasted__Character1_Ctrl_LeftHandThumb4
+    100242: pasted__Character1_Ctrl_LeftHandThumbEffector
+    100244: pasted__Character1_Ctrl_LeftHipEffector
+    100246: pasted__Character1_Ctrl_LeftKneeEffector
+    100248: pasted__Character1_Ctrl_LeftLeg
+    100250: pasted__Character1_Ctrl_LeftShoulder
+    100252: pasted__Character1_Ctrl_LeftShoulderEffector
+    100254: pasted__Character1_Ctrl_LeftToeBase
+    100256: pasted__Character1_Ctrl_LeftUpLeg
+    100258: pasted__Character1_Ctrl_LeftWristEffector
+    100260: pasted__Character1_Ctrl_Neck
+    100262: pasted__Character1_Ctrl_Reference
+    100264: pasted__Character1_Ctrl_RightAnkleEffector
+    100266: pasted__Character1_Ctrl_RightArm
+    100268: pasted__Character1_Ctrl_RightElbowEffector
+    100270: pasted__Character1_Ctrl_RightFoot
+    100272: pasted__Character1_Ctrl_RightFootEffector
+    100274: pasted__Character1_Ctrl_RightForeArm
+    100276: pasted__Character1_Ctrl_RightHand
+    100278: pasted__Character1_Ctrl_RightHandIndex1
+    100280: pasted__Character1_Ctrl_RightHandIndex2
+    100282: pasted__Character1_Ctrl_RightHandIndex3
+    100284: pasted__Character1_Ctrl_RightHandIndex4
+    100286: pasted__Character1_Ctrl_RightHandIndexEffector
+    100288: pasted__Character1_Ctrl_RightHandMiddle1
+    100290: pasted__Character1_Ctrl_RightHandMiddle2
+    100292: pasted__Character1_Ctrl_RightHandMiddle3
+    100294: pasted__Character1_Ctrl_RightHandMiddle4
+    100296: pasted__Character1_Ctrl_RightHandMiddleEffector
+    100298: pasted__Character1_Ctrl_RightHandPinky1
+    100300: pasted__Character1_Ctrl_RightHandPinky2
+    100302: pasted__Character1_Ctrl_RightHandPinky3
+    100304: pasted__Character1_Ctrl_RightHandPinky4
+    100306: pasted__Character1_Ctrl_RightHandPinkyEffector
+    100308: pasted__Character1_Ctrl_RightHandRing1
+    100310: pasted__Character1_Ctrl_RightHandRing2
+    100312: pasted__Character1_Ctrl_RightHandRing3
+    100314: pasted__Character1_Ctrl_RightHandRing4
+    100316: pasted__Character1_Ctrl_RightHandRingEffector
+    100318: pasted__Character1_Ctrl_RightHandThumb1
+    100320: pasted__Character1_Ctrl_RightHandThumb2
+    100322: pasted__Character1_Ctrl_RightHandThumb3
+    100324: pasted__Character1_Ctrl_RightHandThumb4
+    100326: pasted__Character1_Ctrl_RightHandThumbEffector
+    100328: pasted__Character1_Ctrl_RightHipEffector
+    100330: pasted__Character1_Ctrl_RightKneeEffector
+    100332: pasted__Character1_Ctrl_RightLeg
+    100334: pasted__Character1_Ctrl_RightShoulder
+    100336: pasted__Character1_Ctrl_RightShoulderEffector
+    100338: pasted__Character1_Ctrl_RightToeBase
+    100340: pasted__Character1_Ctrl_RightUpLeg
+    100342: pasted__Character1_Ctrl_RightWristEffector
+    100344: pasted__Character1_Ctrl_Spine
+    100346: pasted__Character1_Ctrl_Spine1
+    100348: pasted__Character1_Ctrl_Spine2
     400000: //RootNode
     400002: Dress1
     400004: Feathers_Polys
@@ -161,7 +257,104 @@ ModelImporter:
     400152: pasted__Character1_Spine1
     400154: pasted__Character1_Spine2
     400156: Scarf2
+    400158: Handbag
+    400160: Handbag_joints
+    400162: joint1
+    400164: joint2
+    400166: joint3
+    400168: pasted__Character1_Ctrl_ChestEndEffector
+    400170: pasted__Character1_Ctrl_ChestOriginEffector
+    400172: pasted__Character1_Ctrl_Head
+    400174: pasted__Character1_Ctrl_HeadEffector
+    400176: pasted__Character1_Ctrl_Hips
+    400178: pasted__Character1_Ctrl_HipsEffector
+    400180: pasted__Character1_Ctrl_LeftAnkleEffector
+    400182: pasted__Character1_Ctrl_LeftArm
+    400184: pasted__Character1_Ctrl_LeftElbowEffector
+    400186: pasted__Character1_Ctrl_LeftFoot
+    400188: pasted__Character1_Ctrl_LeftFootEffector
+    400190: pasted__Character1_Ctrl_LeftForeArm
+    400192: pasted__Character1_Ctrl_LeftHand
+    400194: pasted__Character1_Ctrl_LeftHandIndex1
+    400196: pasted__Character1_Ctrl_LeftHandIndex2
+    400198: pasted__Character1_Ctrl_LeftHandIndex3
+    400200: pasted__Character1_Ctrl_LeftHandIndex4
+    400202: pasted__Character1_Ctrl_LeftHandIndexEffector
+    400204: pasted__Character1_Ctrl_LeftHandMiddle1
+    400206: pasted__Character1_Ctrl_LeftHandMiddle2
+    400208: pasted__Character1_Ctrl_LeftHandMiddle3
+    400210: pasted__Character1_Ctrl_LeftHandMiddle4
+    400212: pasted__Character1_Ctrl_LeftHandMiddleEffector
+    400214: pasted__Character1_Ctrl_LeftHandPinky1
+    400216: pasted__Character1_Ctrl_LeftHandPinky2
+    400218: pasted__Character1_Ctrl_LeftHandPinky3
+    400220: pasted__Character1_Ctrl_LeftHandPinky4
+    400222: pasted__Character1_Ctrl_LeftHandPinkyEffector
+    400224: pasted__Character1_Ctrl_LeftHandRing1
+    400226: pasted__Character1_Ctrl_LeftHandRing2
+    400228: pasted__Character1_Ctrl_LeftHandRing3
+    400230: pasted__Character1_Ctrl_LeftHandRing4
+    400232: pasted__Character1_Ctrl_LeftHandRingEffector
+    400234: pasted__Character1_Ctrl_LeftHandThumb1
+    400236: pasted__Character1_Ctrl_LeftHandThumb2
+    400238: pasted__Character1_Ctrl_LeftHandThumb3
+    400240: pasted__Character1_Ctrl_LeftHandThumb4
+    400242: pasted__Character1_Ctrl_LeftHandThumbEffector
+    400244: pasted__Character1_Ctrl_LeftHipEffector
+    400246: pasted__Character1_Ctrl_LeftKneeEffector
+    400248: pasted__Character1_Ctrl_LeftLeg
+    400250: pasted__Character1_Ctrl_LeftShoulder
+    400252: pasted__Character1_Ctrl_LeftShoulderEffector
+    400254: pasted__Character1_Ctrl_LeftToeBase
+    400256: pasted__Character1_Ctrl_LeftUpLeg
+    400258: pasted__Character1_Ctrl_LeftWristEffector
+    400260: pasted__Character1_Ctrl_Neck
+    400262: pasted__Character1_Ctrl_Reference
+    400264: pasted__Character1_Ctrl_RightAnkleEffector
+    400266: pasted__Character1_Ctrl_RightArm
+    400268: pasted__Character1_Ctrl_RightElbowEffector
+    400270: pasted__Character1_Ctrl_RightFoot
+    400272: pasted__Character1_Ctrl_RightFootEffector
+    400274: pasted__Character1_Ctrl_RightForeArm
+    400276: pasted__Character1_Ctrl_RightHand
+    400278: pasted__Character1_Ctrl_RightHandIndex1
+    400280: pasted__Character1_Ctrl_RightHandIndex2
+    400282: pasted__Character1_Ctrl_RightHandIndex3
+    400284: pasted__Character1_Ctrl_RightHandIndex4
+    400286: pasted__Character1_Ctrl_RightHandIndexEffector
+    400288: pasted__Character1_Ctrl_RightHandMiddle1
+    400290: pasted__Character1_Ctrl_RightHandMiddle2
+    400292: pasted__Character1_Ctrl_RightHandMiddle3
+    400294: pasted__Character1_Ctrl_RightHandMiddle4
+    400296: pasted__Character1_Ctrl_RightHandMiddleEffector
+    400298: pasted__Character1_Ctrl_RightHandPinky1
+    400300: pasted__Character1_Ctrl_RightHandPinky2
+    400302: pasted__Character1_Ctrl_RightHandPinky3
+    400304: pasted__Character1_Ctrl_RightHandPinky4
+    400306: pasted__Character1_Ctrl_RightHandPinkyEffector
+    400308: pasted__Character1_Ctrl_RightHandRing1
+    400310: pasted__Character1_Ctrl_RightHandRing2
+    400312: pasted__Character1_Ctrl_RightHandRing3
+    400314: pasted__Character1_Ctrl_RightHandRing4
+    400316: pasted__Character1_Ctrl_RightHandRingEffector
+    400318: pasted__Character1_Ctrl_RightHandThumb1
+    400320: pasted__Character1_Ctrl_RightHandThumb2
+    400322: pasted__Character1_Ctrl_RightHandThumb3
+    400324: pasted__Character1_Ctrl_RightHandThumb4
+    400326: pasted__Character1_Ctrl_RightHandThumbEffector
+    400328: pasted__Character1_Ctrl_RightHipEffector
+    400330: pasted__Character1_Ctrl_RightKneeEffector
+    400332: pasted__Character1_Ctrl_RightLeg
+    400334: pasted__Character1_Ctrl_RightShoulder
+    400336: pasted__Character1_Ctrl_RightShoulderEffector
+    400338: pasted__Character1_Ctrl_RightToeBase
+    400340: pasted__Character1_Ctrl_RightUpLeg
+    400342: pasted__Character1_Ctrl_RightWristEffector
+    400344: pasted__Character1_Ctrl_Spine
+    400346: pasted__Character1_Ctrl_Spine1
+    400348: pasted__Character1_Ctrl_Spine2
     2100000: lambert5
+    2100002: lambert1
     4300000: Dress1
     4300002: Glasses3
     4300004: pasted__Body
@@ -175,6 +368,7 @@ ModelImporter:
     4300020: nurbsToPoly7
     4300022: nurbsToPoly8
     4300024: Hair1
+    4300026: Handbag
     7400000: Test
     7400002: Idle1
     7400004: Idle2
@@ -196,6 +390,7 @@ ModelImporter:
     13700020: nurbsToPoly8
     13700022: pasted__Body
     13700024: Scarf2
+    13700026: Handbag
     2186277476908879412: ImportLogs
   externalObjects:
   - first:
@@ -449,7 +644,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    previousCalculatedGlobalScale: 0.0117999995
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

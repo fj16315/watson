@@ -11,6 +11,7 @@ public class MasterControl : MonoBehaviour {
     public GameObject masterCanvas;
     public NotebookController notebook;
     public RigidbodyFirstPersonController fpc;
+    public GameState state;
 
     // State variables
     public bool paused = false;
@@ -32,6 +33,7 @@ public class MasterControl : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //Debug.Log("exit");
             notebook.Activate(!paused);
             Pause(!paused);
             if (!paused)
