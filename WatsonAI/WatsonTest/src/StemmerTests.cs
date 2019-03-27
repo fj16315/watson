@@ -14,7 +14,7 @@ namespace WatsonTest
     /// This is done because the construction is expensive as it must read in data files.
     /// An alternative to static is XUnit fixtures, this may be needed in future.
     /// </summary>
-    private static Stemmer stemmer = new Stemmer();
+    private static Stemmer stemmer = new Stemmer("");
 
     [Fact]
     public void StemmingVerbs()

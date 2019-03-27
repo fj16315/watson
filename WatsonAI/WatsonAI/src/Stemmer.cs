@@ -1,6 +1,7 @@
 ﻿using Annytab.Stemmer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using WatsonAI.Properties;
@@ -19,10 +20,10 @@ namespace WatsonAI
     /// <summary>
     /// Constructurs a new stemmer.
     /// </summary>
-    public Stemmer()
+    public Stemmer(string path)
     {
       this.stemmer = new EnglishStemmer();
-      this.irregularStems = ReadInIrregularStems();
+      this.irregularStems = ReadInIrregularStems(path);
     }
 
     /// <summary>
@@ -47,12 +48,14 @@ namespace WatsonAI
     /// Read in the irregular stems from the resources file.
     /// </summary>
     /// <returns>A dictionary containing mapping from irregular to stemmed word.</returns>
-    private Dictionary<string,string> ReadInIrregularStems()
+    private Dictionary<string,string> ReadInIrregularStems(string path)
     {
-      var lines = Resources.IrregularStems.Split(
+      //var lines = File.ReadAllLines(Path.Combine(path, "res"));
+      var lines = IrregularStems.Get().Split(
         new[] { "\r\n", "\r", "\n" },
         StringSplitOptions.None);
-      var maps = lines.Select(line => line.Split(' '));
+
+      var maps = lines.Select(line => line.Split(new[] { " " }, StringSplitOptions.None));
       var dict = new Dictionary<string, string>();
       foreach (var map in maps)
       {

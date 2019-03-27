@@ -40,7 +40,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer();
+      this.stemmer = new Stemmer(directory);
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer();
+      this.stemmer = new Stemmer(directory);
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer();
+      this.stemmer = new Stemmer(path);
     }
 
     private bool AreWithinAssociations(string first, string second)
