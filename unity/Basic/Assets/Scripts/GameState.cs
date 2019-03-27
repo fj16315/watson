@@ -159,4 +159,9 @@ public class GameState : MonoBehaviour {
         notebook = true;
     }
 
+    public void UseAlexa()
+    {
+        alexa = !alexa;
+    }
+
 }
