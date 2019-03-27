@@ -117,7 +117,10 @@ public class CameraRaycasting : MonoBehaviour
                 // NPC
                 case (int)ToM.CHARACTER:
                     NPCController npc = entity.GetComponent<NPCController>();
-                    message = "Talk to " + npc.charName;
+                    if (npc != null)
+                    {
+                        message = "Talk to " + npc.charName;
+                    }
                     break;
                 // THING
                 case (int)ToM.THING:
@@ -186,7 +189,7 @@ public class CameraRaycasting : MonoBehaviour
         speechCanvas.GetComponent<DialogueScreen>().ShowScreen(character);
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
         converse = false;
         controller.Pause(false);

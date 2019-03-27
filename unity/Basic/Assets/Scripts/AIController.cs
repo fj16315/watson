@@ -23,7 +23,8 @@ public class AIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      if (!Application.isEditor)
+        StartUp();
+        if (!Application.isEditor)
         {
             StartUp();
         }
