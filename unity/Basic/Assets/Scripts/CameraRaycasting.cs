@@ -104,6 +104,7 @@ public class CameraRaycasting : MonoBehaviour
             // Exit speech
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
             {
+                state.ExitTutorial();
                 CloseDialogue();
             }
         }

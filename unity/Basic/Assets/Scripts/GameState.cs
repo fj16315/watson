@@ -61,6 +61,14 @@ public class GameState : MonoBehaviour {
         if (RuleSatisfied(subState))
         {
             currentString++;
+            if (currentString == 2)
+            {
+                subState = 1;
+            }
+            else if (currentString == 4)
+            {
+                subState = 2;
+            }
         }
     }
 
@@ -72,14 +80,17 @@ public class GameState : MonoBehaviour {
                 
                 switch (stage)
                 {
-                    // Save a clue
+                    // Click through
                     case 0:
+                        return true;
+                    // Save a clue
+                    case 1:
                         return exited;
                     // Exit conversation
-                    case 1:
+                    case 2:
                         return pickup;
                     // Pick something up
-                    case 2:
+                    case 3:
                         return saved;
                 }
 
@@ -102,7 +113,16 @@ public class GameState : MonoBehaviour {
 
     public void ExitTutorial()
     {
+        if (!exited)
+        {
+            currentString++;
+        }
         exited = true;
+    }
+
+    public void SaveClue()
+    {
+        saved = true;
     }
 
 }

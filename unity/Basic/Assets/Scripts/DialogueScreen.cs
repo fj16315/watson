@@ -168,6 +168,7 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
+        state.SaveClue();
         notebook.LogResponse(currentCharacter, queryResponse);
     }
 
