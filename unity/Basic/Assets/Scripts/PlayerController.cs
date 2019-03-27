@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
         else
         {
             GUI.skin = skin;
-            GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
+            //GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
         }
     }
 

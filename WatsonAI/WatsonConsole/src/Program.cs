@@ -16,9 +16,9 @@ public class MainClass
     if (Directory.Exists(Path.Combine(path, "bin")))
     {
       path = Path.Combine(path, "bin", "debug", "netcoreapp2.1");
-      Directory.SetCurrentDirectory(path);
     }
-    IWatson watson = new Watson();
+
+    IWatson watson = new Watson(path);
 
     while (true)
     {

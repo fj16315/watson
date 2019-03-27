@@ -17,6 +17,7 @@ namespace WatsonAI
     /// </summary>
     public DebugThesaurusProcess()
     {
+      this.associations = new Associations();
       associations.AddEntityName(new Entity(0), "cat");
       associations.AddEntityName(new Entity(1), "man");
       this.thesaurus = new Thesaurus(associations);

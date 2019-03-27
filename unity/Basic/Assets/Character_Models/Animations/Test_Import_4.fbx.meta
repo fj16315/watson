@@ -1,0 +1,340 @@
+fileFormatVersion: 2
+guid: 6467d934edb71f040851a753f089267a
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Body
+    100002: Hat3
+    100004: Model1
+    100006: Moustache
+    100008: pasted__Index
+    100010: pasted__L_Elbow_Ctrl
+    100012: pasted__Little
+    100014: pasted__Middle
+    100016: pasted__nurbsCircle1
+    100018: pasted__nurbsCircle1 1
+    100020: pasted__nurbsCircle2
+    100022: pasted__nurbsCircle2 1
+    100024: pasted__nurbsCircle3
+    100026: pasted__nurbsCircle4
+    100028: pasted__nurbsCircle4 1
+    100030: pasted__nurbsCircle4 2
+    100032: pasted__nurbsCircle4 3
+    100034: pasted__nurbsCircle4 4
+    100036: pasted__nurbsCircle4 5
+    100038: pasted__nurbsCircle5
+    100040: pasted__nurbsCircle5 1
+    100042: pasted__nurbsCircle5 2
+    100044: pasted__nurbsCircle5 3
+    100046: pasted__nurbsCircle5 4
+    100048: pasted__nurbsCircle5 5
+    100050: pasted__nurbsCircle5 6
+    100052: pasted__nurbsCircle5 7
+    100054: pasted__nurbsCircle6
+    100056: pasted__nurbsCircle7
+    100058: pasted__nurbsCircle8
+    100060: pasted__nurbsCircle9
+    100062: pasted__pasted__Chest_CTRL
+    100064: pasted__pasted__Head_CTRL
+    100066: pasted__pasted__Head_J
+    100068: pasted__pasted__HeadTop_J
+    100070: pasted__pasted__Hip_CTRL
+    100072: pasted__pasted__Hip_J
+    100074: pasted__pasted__IK_L_Hand
+    100076: pasted__pasted__IK_L_Leg
+    100078: pasted__pasted__IK_R_Hand
+    100080: pasted__pasted__IK_R_Leg
+    100082: pasted__pasted__IK_Spine
+    100084: pasted__pasted__L_Clavical_J
+    100086: pasted__pasted__L_Elbow_J
+    100088: pasted__pasted__L_Foot_CTRL
+    100090: pasted__pasted__L_Index01_J
+    100092: pasted__pasted__L_Index02_J
+    100094: pasted__pasted__L_Index03_J
+    100096: pasted__pasted__L_Index04_J
+    100098: pasted__pasted__L_LegFoot_J
+    100100: pasted__pasted__L_LegKnee_J
+    100102: pasted__pasted__L_LegToe_J
+    100104: pasted__pasted__L_LegTop_J
+    100106: pasted__pasted__L_Little01_J
+    100108: pasted__pasted__L_Little02_J
+    100110: pasted__pasted__L_Little03_J
+    100112: pasted__pasted__L_Little04_J
+    100114: pasted__pasted__L_Middle01_J
+    100116: pasted__pasted__L_Middle02_J
+    100118: pasted__pasted__L_Middle03_J
+    100120: pasted__pasted__L_Middle04_J
+    100122: pasted__pasted__L_Ring01_J
+    100124: pasted__pasted__L_Ring02_J
+    100126: pasted__pasted__L_Ring03_J
+    100128: pasted__pasted__L_Ring04_J
+    100130: pasted__pasted__L_Shoulder_J
+    100132: pasted__pasted__L_Thumb01_J
+    100134: pasted__pasted__L_Thumb02_J
+    100136: pasted__pasted__L_Thumb03_J
+    100138: pasted__pasted__L_Toe_Tip
+    100140: pasted__pasted__L_Wrist_CTRL
+    100142: pasted__pasted__L_Wrist_J
+    100144: pasted__pasted__Master_CTRL
+    100146: pasted__pasted__Neck_J
+    100148: pasted__pasted__R_Clavical_J
+    100150: pasted__pasted__R_Elbow_J
+    100152: pasted__pasted__R_Foot_CTRL
+    100154: pasted__pasted__R_Index01_J
+    100156: pasted__pasted__R_Index02_J
+    100158: pasted__pasted__R_Index03_J
+    100160: pasted__pasted__R_Index04_J
+    100162: pasted__pasted__R_LegFoot_J
+    100164: pasted__pasted__R_LegKnee_J
+    100166: pasted__pasted__R_LegToe_J
+    100168: pasted__pasted__R_LegTop_J
+    100170: pasted__pasted__R_Little01_J
+    100172: pasted__pasted__R_Little02_J
+    100174: pasted__pasted__R_Little03_J
+    100176: pasted__pasted__R_Little04_J
+    100178: pasted__pasted__R_Middle01_J
+    100180: pasted__pasted__R_Middle02_J
+    100182: pasted__pasted__R_Middle03_J
+    100184: pasted__pasted__R_Middle04_J
+    100186: pasted__pasted__R_Ring01_J
+    100188: pasted__pasted__R_Ring02_J
+    100190: pasted__pasted__R_Ring03_J
+    100192: pasted__pasted__R_Ring04_J
+    100194: pasted__pasted__R_Shoulder_J
+    100196: pasted__pasted__R_Thumb01_J
+    100198: pasted__pasted__R_Thumb02_J
+    100200: pasted__pasted__R_Thumb03_J
+    100202: pasted__pasted__R_Toe_Tip
+    100204: pasted__pasted__R_Wrist_CTRL1
+    100206: pasted__pasted__R_Wrist_J
+    100208: pasted__pasted__Spine01_J
+    100210: pasted__pasted__Spine02_J
+    100212: pasted__pasted__Spine03_J
+    100214: pasted__pasted__Spine_Curve
+    100216: pasted__R_Elbow_Ctrl
+    100218: pasted__Rig
+    100220: pasted__Rig_And_Controlers
+    100222: pasted__Ring
+    100224: pasted__Thumb
+    100226: Shoes1
+    100228: //RootNode
+    100230: Tie3
+    100232: Trousers3
+    100234: UnderShirt4
+    400000: Body
+    400002: Hat3
+    400004: Model1
+    400006: Moustache
+    400008: pasted__Index
+    400010: pasted__L_Elbow_Ctrl
+    400012: pasted__Little
+    400014: pasted__Middle
+    400016: pasted__nurbsCircle1
+    400018: pasted__nurbsCircle1 1
+    400020: pasted__nurbsCircle2
+    400022: pasted__nurbsCircle2 1
+    400024: pasted__nurbsCircle3
+    400026: pasted__nurbsCircle4
+    400028: pasted__nurbsCircle4 1
+    400030: pasted__nurbsCircle4 2
+    400032: pasted__nurbsCircle4 3
+    400034: pasted__nurbsCircle4 4
+    400036: pasted__nurbsCircle4 5
+    400038: pasted__nurbsCircle5
+    400040: pasted__nurbsCircle5 1
+    400042: pasted__nurbsCircle5 2
+    400044: pasted__nurbsCircle5 3
+    400046: pasted__nurbsCircle5 4
+    400048: pasted__nurbsCircle5 5
+    400050: pasted__nurbsCircle5 6
+    400052: pasted__nurbsCircle5 7
+    400054: pasted__nurbsCircle6
+    400056: pasted__nurbsCircle7
+    400058: pasted__nurbsCircle8
+    400060: pasted__nurbsCircle9
+    400062: pasted__pasted__Chest_CTRL
+    400064: pasted__pasted__Head_CTRL
+    400066: pasted__pasted__Head_J
+    400068: pasted__pasted__HeadTop_J
+    400070: pasted__pasted__Hip_CTRL
+    400072: pasted__pasted__Hip_J
+    400074: pasted__pasted__IK_L_Hand
+    400076: pasted__pasted__IK_L_Leg
+    400078: pasted__pasted__IK_R_Hand
+    400080: pasted__pasted__IK_R_Leg
+    400082: pasted__pasted__IK_Spine
+    400084: pasted__pasted__L_Clavical_J
+    400086: pasted__pasted__L_Elbow_J
+    400088: pasted__pasted__L_Foot_CTRL
+    400090: pasted__pasted__L_Index01_J
+    400092: pasted__pasted__L_Index02_J
+    400094: pasted__pasted__L_Index03_J
+    400096: pasted__pasted__L_Index04_J
+    400098: pasted__pasted__L_LegFoot_J
+    400100: pasted__pasted__L_LegKnee_J
+    400102: pasted__pasted__L_LegToe_J
+    400104: pasted__pasted__L_LegTop_J
+    400106: pasted__pasted__L_Little01_J
+    400108: pasted__pasted__L_Little02_J
+    400110: pasted__pasted__L_Little03_J
+    400112: pasted__pasted__L_Little04_J
+    400114: pasted__pasted__L_Middle01_J
+    400116: pasted__pasted__L_Middle02_J
+    400118: pasted__pasted__L_Middle03_J
+    400120: pasted__pasted__L_Middle04_J
+    400122: pasted__pasted__L_Ring01_J
+    400124: pasted__pasted__L_Ring02_J
+    400126: pasted__pasted__L_Ring03_J
+    400128: pasted__pasted__L_Ring04_J
+    400130: pasted__pasted__L_Shoulder_J
+    400132: pasted__pasted__L_Thumb01_J
+    400134: pasted__pasted__L_Thumb02_J
+    400136: pasted__pasted__L_Thumb03_J
+    400138: pasted__pasted__L_Toe_Tip
+    400140: pasted__pasted__L_Wrist_CTRL
+    400142: pasted__pasted__L_Wrist_J
+    400144: pasted__pasted__Master_CTRL
+    400146: pasted__pasted__Neck_J
+    400148: pasted__pasted__R_Clavical_J
+    400150: pasted__pasted__R_Elbow_J
+    400152: pasted__pasted__R_Foot_CTRL
+    400154: pasted__pasted__R_Index01_J
+    400156: pasted__pasted__R_Index02_J
+    400158: pasted__pasted__R_Index03_J
+    400160: pasted__pasted__R_Index04_J
+    400162: pasted__pasted__R_LegFoot_J
+    400164: pasted__pasted__R_LegKnee_J
+    400166: pasted__pasted__R_LegToe_J
+    400168: pasted__pasted__R_LegTop_J
+    400170: pasted__pasted__R_Little01_J
+    400172: pasted__pasted__R_Little02_J
+    400174: pasted__pasted__R_Little03_J
+    400176: pasted__pasted__R_Little04_J
+    400178: pasted__pasted__R_Middle01_J
+    400180: pasted__pasted__R_Middle02_J
+    400182: pasted__pasted__R_Middle03_J
+    400184: pasted__pasted__R_Middle04_J
+    400186: pasted__pasted__R_Ring01_J
+    400188: pasted__pasted__R_Ring02_J
+    400190: pasted__pasted__R_Ring03_J
+    400192: pasted__pasted__R_Ring04_J
+    400194: pasted__pasted__R_Shoulder_J
+    400196: pasted__pasted__R_Thumb01_J
+    400198: pasted__pasted__R_Thumb02_J
+    400200: pasted__pasted__R_Thumb03_J
+    400202: pasted__pasted__R_Toe_Tip
+    400204: pasted__pasted__R_Wrist_CTRL1
+    400206: pasted__pasted__R_Wrist_J
+    400208: pasted__pasted__Spine01_J
+    400210: pasted__pasted__Spine02_J
+    400212: pasted__pasted__Spine03_J
+    400214: pasted__pasted__Spine_Curve
+    400216: pasted__R_Elbow_Ctrl
+    400218: pasted__Rig
+    400220: pasted__Rig_And_Controlers
+    400222: pasted__Ring
+    400224: pasted__Thumb
+    400226: Shoes1
+    400228: //RootNode
+    400230: Tie3
+    400232: Trousers3
+    400234: UnderShirt4
+    2100000: Gangster_Shader
+    4300000: Body
+    4300002: UnderShirt4
+    4300004: Moustache
+    4300006: Trousers3
+    4300008: Tie3
+    4300010: Hat3
+    4300012: Shoes1
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Body
+    13700002: Hat3
+    13700004: Moustache
+    13700006: Shoes1
+    13700008: Tie3
+    13700010: Trousers3
+    13700012: UnderShirt4
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
