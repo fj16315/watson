@@ -6282,6 +6282,7 @@ MonoBehaviour:
   police: {fileID: 1281919462}
   dialogue: {fileID: 570466025}
   raycasting: {fileID: 1361230746}
+  notebookThing: {fileID: 1508302238}
 --- !u!1 &539464632
 GameObject:
   m_ObjectHideFlags: 0
@@ -14903,7 +14904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  pickup: 1
+  pickup: 0
   objName: Notebook
   category: 0
 --- !u!65 &1508302239
