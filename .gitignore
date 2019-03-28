@@ -45,3 +45,17 @@ Thumbs.db
 # Brass Monkey Added:
 ###
 .vs/
+
+unity/Basic/Builds/
+
+unity/Basic/Assembly-CSharp-Editor-firstpass\.csproj
+
+unity/Basic/Assembly-CSharp-firstpass\.csproj
+
+unity/Basic/Assembly-CSharp\.csproj
+
+unity/Basic/Basic\.sln
+
+unity/Basic/Assembly-CSharp-Editor\.csproj
+
+WatsonAI/OpenNlp

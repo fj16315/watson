@@ -21,6 +21,8 @@
     /// </summary>
     public T Value { get; }
 
+    public static Result<T> Fail { get { return new Result<T>(false); } }
+
     /// <summary>
     /// Construct a Result type from a value.
     /// </summary>
@@ -29,6 +31,12 @@
     {
       HasValue = true;
       Value = value;
+    }
+
+    private Result(bool hasValue)
+    {
+      HasValue = hasValue;
+      Value = default(T);
     }
 
     /// <summary>

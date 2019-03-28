@@ -6,6 +6,7 @@ using NPC;
 using Things;
 using Doors;
 using Containers;
+using UnityStandardAssets.Characters.FirstPerson;
 
 // (T)ype (o)f (M)essage
 enum ToM : int {CHARACTER, THING, DOOR};
@@ -21,16 +22,15 @@ public class CameraRaycasting : MonoBehaviour
     Collider entity;
     public GUISkin skin;
     public string stringToEdit = "Who are you?";
-    GameObject masterCanvas, speechCanvas;
+    public GameObject masterCanvas, speechCanvas;
     PlayerController player;
+    public MasterControl controller;
+    public GameState state;
 
     // Use this for initialization
     void Start()
     {
-        masterCanvas = GameObject.Find("MasterCanvas");
-        speechCanvas = GameObject.Find("SpeechCanvas");
         player = Object.FindObjectOfType<PlayerController>();
-        //speechCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,9 +49,9 @@ public class CameraRaycasting : MonoBehaviour
                 display = true;
 
                 // Interact with character
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !controller.paused)
                 {
-                    SpeechDialogue();
+                    SpeechDialogue(npc);
                 }
             }
 
@@ -60,10 +60,11 @@ public class CameraRaycasting : MonoBehaviour
             {
                 type = (int)ToM.THING;
                 Container container = entity.GetComponent<Container>();
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !controller.paused)
                 {
                     if (obj.CanPickUp())
                     {
+                        state.PickUp(entity.gameObject);
                         player.PickUp(entity.gameObject);
                     }
                     else if (container != null)
@@ -79,7 +80,7 @@ public class CameraRaycasting : MonoBehaviour
             {
                 type = (int)ToM.DOOR;
                 // Interact with door
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !controller.paused)
                 {
                     door.Activate();
                 }
@@ -101,12 +102,13 @@ public class CameraRaycasting : MonoBehaviour
         if (converse)
         {
             // Exit speech
-            if (Event.current.isKey && Event.current.keyCode == KeyCode.LeftControl && GUI.GetNameOfFocusedControl() == "TextBox")
+            if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
             {
+                state.ExitTutorial();
                 CloseDialogue();
             }
         }
-        if (display && !converse)
+        if (display && !converse && !controller.paused)
         {
             string message = "";
 
@@ -115,7 +117,10 @@ public class CameraRaycasting : MonoBehaviour
                 // NPC
                 case (int)ToM.CHARACTER:
                     NPCController npc = entity.GetComponent<NPCController>();
-                    message = "Talk to " + npc.charName;
+                    if (npc != null)
+                    {
+                        message = "Talk to " + npc.charName;
+                    }
                     break;
                 // THING
                 case (int)ToM.THING:
@@ -140,20 +145,23 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    else if (thing.CanPickUp())
+                    if (thing != null)
                     {
-                        message = "Pick up ";
+                        if (thing.CanPickUp())
+                        {
+                            message = "Pick up ";
+                        }
+                        message += thing.objName;
                     }
-                    message += thing.objName;
                     break;
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    if (door.locked)
+                    if (door != null && door.locked)
                     {
                         message = "Locked door";
                     }
-                    else
+                    else if (door != null)
                     {
                         if (door.open)
                         {
@@ -174,35 +182,17 @@ public class CameraRaycasting : MonoBehaviour
         }
     }
 
-    private void Pause(bool pause)
+    public void SpeechDialogue(NPCController character)
     {
-        switch (pause)
-        {
-            case true:
-                Time.timeScale = 0;
-                break;
-            default:
-                Time.timeScale = 1;
-                break;
-        }
-    }
-
-    private void SpeechDialogue()
-    {
-        masterCanvas.SetActive(false);
         converse = true;
-        Pause(true);
-        speechCanvas.GetComponent<DialogueScreen>().ShowScreen();
-        //speechCanvas.SetActive(true);
+        controller.Pause(true);
+        speechCanvas.GetComponent<DialogueScreen>().ShowScreen(character);
     }
 
-    private void CloseDialogue()
+    public void CloseDialogue()
     {
-        masterCanvas.SetActive(true);
         converse = false;
-        Pause(false);
+        controller.Pause(false);
         speechCanvas.GetComponent<DialogueScreen>().HideScreen();
-        //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        //speechCanvas.SetActive(false);
     }
 }

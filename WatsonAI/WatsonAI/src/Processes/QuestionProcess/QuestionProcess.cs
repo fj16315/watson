@@ -37,66 +37,94 @@ namespace WatsonAI
       var nounPhrase = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(new Branch("NP"), noun));
       var verbPhrase = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb));
 
+
       var top = new Branch("TOP");
 
       var subjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("SQ"), nounPhrase));
       var subjQuestionVerbPhrase = new Flatten<Verb>(new Children<IEnumerable<Verb>>(new Branch("SQ"), verbPhrase));
 
-      var dobjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("VP"), nounPhrase));
-      var dobjQuestionVerbPhrase = verbPhrase;
-
       var subjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, subjQuestionNounPhrase));
       var subjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, subjQuestionVerbPhrase));
 
-      var dobjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, dobjQuestionNounPhrase));
-      var dobjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, dobjQuestionVerbPhrase));
+      var whoWhatQ = new Descendant<string>(top, new Word(thesaurus, "who") | new Word(thesaurus, "what"));
+      var whereQ = new Descendant<string>(top, new Word(thesaurus, "where"));
 
-      // Deal with active case
-      var spNs = subjQueryN.Match(tree);
-      var spVs = subjQueryV.Match(tree);
-      if (spNs.HasValue && spVs.HasValue)
+      if (whereQ.Match(tree).HasValue)
       {
-        var pairs = from n in spNs.Value
-                    from v in spVs.Value
-                    select Tuple.Create(n, v);
-
-        foreach (var p in pairs.Distinct())
+        var nouns = subjQueryN.Match(tree);
+        if (nouns.HasValue && nouns.Value.Any())
         {
-          var e = p.Item1;
-          var v = p.Item2;
-          var answers = query.GetDobjAnswers(v, e);
-          string verbName;
-          associations.TryNameVerb(v, out verbName);
-          string entityName;
-          associations.TryNameEntity(e, out entityName);
-          if (answers.Count != 0)
+          var contains = associations.UncheckedGetVerb("contain");
+          foreach (var n in nouns.Value.Distinct())
           {
-            stream.AppendOutput(GenerateActiveResponse(entityName, verbName, answers));
+            var answers = query.GetSubjAnswers(contains, n);
+            string entityName;
+            associations.TryNameEntity(n, out entityName);
+            if (answers.Count != 0)
+            {
+              stream.AppendOutput(GenerateActiveResponse(entityName, "is in", answers));
+            }
           }
         }
       }
-
-      // Deal with passive case
-      var dpNs = dobjQueryN.Match(tree);
-      var dpVs = dobjQueryV.Match(tree);
-      if (dpNs.HasValue && dpVs.HasValue)
+      if (whoWhatQ.Match(tree).HasValue)
       {
-        var pairs = from n in dpNs.Value
-                    from v in dpVs.Value
-                    select Tuple.Create(n, v);
+        var dobjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("VP"), nounPhrase));
+        var dobjQuestionVerbPhrase = verbPhrase;
 
-        foreach (var p in pairs.Distinct())
+
+        var dobjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, dobjQuestionNounPhrase));
+        var dobjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, dobjQuestionVerbPhrase));
+
+        //(TOP (SBARQ (WHADVP (WRB Where)) (SQ (VP (VBZ is)) (NP (DT the) (NN will))) (. ?)))
+
+        // Deal with active case
+        var spNs = subjQueryN.Match(tree);
+        var spVs = subjQueryV.Match(tree);
+        if (spNs.HasValue && spVs.HasValue && spNs.Value.Any() && spVs.Value.Any())
         {
-          var e = p.Item1;
-          var v = p.Item2;
-          var answers = query.GetSubjAnswers(v, e);
-          string verbName;
-          associations.TryNameVerb(v, out verbName);
-          string entityName;
-          associations.TryNameEntity(e, out entityName);
-          if (answers.Count != 0)
+          var pairs = from n in spNs.Value
+                      from v in spVs.Value
+                      select Tuple.Create(n, v);
+
+          foreach (var p in pairs.Distinct())
           {
-            stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
+            var e = p.Item1;
+            var v = p.Item2;
+            var answers = query.GetDobjAnswers(v, e);
+            string verbName;
+            associations.TryNameVerb(v, out verbName);
+            string entityName;
+            associations.TryNameEntity(e, out entityName);
+            if (answers.Count != 0)
+            {
+              stream.AppendOutput(GenerateActiveResponse(entityName, verbName, answers));
+            }
+          }
+        }
+
+        // Deal with passive case
+        var dpNs = dobjQueryN.Match(tree);
+        var dpVs = dobjQueryV.Match(tree);
+        if (dpNs.HasValue && dpVs.HasValue && dpNs.Value.Any() && dpVs.Value.Any())
+        {
+          var pairs = from n in dpNs.Value
+                      from v in dpVs.Value
+                      select Tuple.Create(n, v);
+
+          foreach (var p in pairs.Distinct())
+          {
+            var e = p.Item1;
+            var v = p.Item2;
+            var answers = query.GetSubjAnswers(v, e);
+            string verbName;
+            associations.TryNameVerb(v, out verbName);
+            string entityName;
+            associations.TryNameEntity(e, out entityName);
+            if (answers.Count != 0)
+            {
+              stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
+            }
           }
         }
       }

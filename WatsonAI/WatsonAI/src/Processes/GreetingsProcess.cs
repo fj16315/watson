@@ -44,17 +44,16 @@ namespace WatsonAI
       var hello = new Descendant<string>(top, new Word(thesaurus, "hello"));
       var result = hello.Match(tree);
 
-      if (result.HasValue && result.Value.GetEnumerator().Current != null) 
+      if (result.HasValue)
       {
-        var listOfGreetings = new List<string>();
-        listOfGreetings.AddRange(new List<string>
+        var listOfGreetings = new List<string>
           {"Hey", 
            "Hi",
            "Wassup",
            "Good evening",
            "G'day",
            "Salutations,"
-        });
+        };
         Random rnd = new Random();
         Random watson = new Random();
 

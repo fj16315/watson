@@ -40,7 +40,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer();
+      this.stemmer = new Stemmer(directory);
     }
 
     /// <summary>
@@ -62,7 +62,30 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer();
+      this.stemmer = new Stemmer(directory);
+    }
+
+    /// <summary>
+    /// Constructor for a thesaurus.
+    /// </summary>
+    /// <param name="associations">takes in associations</param>
+    /// <param name="path">Location of the root res directory.</param>
+    /// <remarks>
+    /// This loads in the dictionary files, so is slow to construct.
+    /// For best results, share the one instance of the thesaurus object.
+    /// </remarks>
+    public Thesaurus(string path, Associations associations)
+    {
+      this.associations = associations;
+      var directory = Path.Combine(path, "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
+
+      wordNet = new WordNetEngine();
+
+      System.Diagnostics.Debug.WriteLine("Loading thesaurus database...");
+      wordNet.LoadFromDirectory(directory);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+
+      this.stemmer = new Stemmer(path);
     }
 
     private bool AreWithinAssociations(string first, string second)
@@ -85,6 +108,23 @@ namespace WatsonAI
       || EntityNames.Contains(first) && EntityNames.Contains(stemmer.GetSteamWord(second))
       || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(second)
       || EntityNames.Contains(stemmer.GetSteamWord(first)) && EntityNames.Contains(stemmer.GetSteamWord(second));
+
+    /// <summary>
+    /// Constructor for a thesaurus given a path to the location of the data files.
+    /// </summary>
+    /// This loads in the dictionary files, so is slow to construct.
+    /// For best results, share the one instance of the thesaurus object.
+    /// <param name="stringToPath">Path to the root of the data files. (Parent of res)</param>
+    public Thesaurus(string stringToPath)
+    {
+      var directory = Path.Combine(stringToPath, "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
+
+      wordNet = new WordNetEngine();
+
+      System.Diagnostics.Debug.WriteLine("Loading thesaurus database...");
+      wordNet.LoadFromDirectory(directory);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+    }
 
     /// <summary>
     /// Checks if the first word describes the second through the built-in WordNet similarity function.
@@ -286,5 +326,13 @@ namespace WatsonAI
     /// <returns>The stemmed word.</returns>
     public string Stem(string word) 
       => stemmer.GetSteamWord(word);
+
+    /// <summary>
+    /// Returns the possible parts of speech of a word according to WordNet.
+    /// </summary>
+    /// <param name="word">A string word to get the parts of speech of.</param>
+    /// <returns>A WordNet PartOfSpeech IEnumerable - the parts of speech.</returns>
+    public IEnumerable<PartOfSpeech> GetPartsOfSpeech(string word)
+      => wordNet.GetSynSets(word).Select(ss => ss.PartOfSpeech);
   }
 }

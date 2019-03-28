@@ -43,9 +43,13 @@ namespace WatsonAI
           if (!d.HasValue) return ds;
           return ds.Append(d.Value);
         };
-        return new Result<IEnumerable<a>>(newTree.Value.GetChildren().SelectMany(f));
-      } 
-      return new Result<IEnumerable<a>>();
+        var results = newTree.Value.GetChildren().SelectMany(f);
+        if (results.Any())
+        {
+          return new Result<IEnumerable<a>>(results);
+        }
+      }
+      return Result<IEnumerable<a>>.Fail;
     }
   }
 }

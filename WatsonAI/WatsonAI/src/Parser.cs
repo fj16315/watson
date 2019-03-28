@@ -34,6 +34,18 @@ namespace WatsonAI
       System.Diagnostics.Debug.WriteLine("Load completed.");
     }
 
+    public Parser(string stringToPath) {
+      var modelPathParse = stringToPath;
+      modelPathParse = Path.Combine(modelPathParse, "res", "Models") + Path.DirectorySeparatorChar;
+
+      this.tokenizer = new EnglishRuleBasedTokenizer(false);
+
+      System.Diagnostics.Debug.WriteLine("Loading parser database...");
+      this.parser = new EnglishTreebankParser(modelPathParse);
+      System.Diagnostics.Debug.WriteLine("Load completed.");
+
+    }
+
     /// <summary>
     /// Generates a parse tree of the gramaitical structure of the sentence.
     /// </summary>

@@ -7,11 +7,6 @@ namespace WatsonAI
 {
   public class Watson : IWatson
   {
-    private Parser parser = new Parser();
-    private Thesaurus thesaurus = new Thesaurus(Story.Associations);
-
-    public Watson()
-    {
       // Constructor to initialise the dictionary.
 
       /*                Places                 */
@@ -68,6 +63,16 @@ namespace WatsonAI
       associations.AddVerbName(new Verb(18), "marry");
       associations.AddVerbName(new Verb(19), "contains");
       */
+    private readonly Parser parser;
+    private readonly Thesaurus thesaurus; 
+
+    /// <summary>
+    /// Constructs a new Watson with path to the location of the data files.
+    /// </summary>
+    /// <param name="stringToPath"></param>
+    public Watson(string stringToPath) {
+      this.parser = new Parser(stringToPath);
+      this.thesaurus = new Thesaurus(stringToPath, Story.Associations);
     }
 
     /// <summary>

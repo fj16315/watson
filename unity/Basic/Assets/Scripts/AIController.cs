@@ -1,106 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEditor;
-using GameAI;
+using WatsonAI;
 using System;
 using System.Linq;
+using System.IO;
+using UnityEditor;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 public class AIController : MonoBehaviour
 {
-  GameAI.Entity countess;
-  GameAI.Entity key;
-  GameAI.Entity prize;
-  GameAI.Entity box;
-  GameAI.Entity gangster;
-  GameAI.Entity room;
+    private bool newSession = false;
+    private Watson watson;
+    private bool loaded = false;
 
-  GameAI.Relation has;
-  GameAI.Relation unlocks;
-  GameAI.Relation contains;
+    public AIController()
+    {
 
-  GameAI.KnowledgeGraph graph_all;
-
-  GameAI.Associations assocs;
-
-  GameAI.Query query;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-    this.countess = new GameAI.Entity(0);
-    this.key      = new GameAI.Entity(1);
-    this.prize    = new GameAI.Entity(2);
-    this.box      = new GameAI.Entity(3);
-    this.gangster = new GameAI.Entity(4);
-    this.room     = new GameAI.Entity(5);
-
-    this.has      = new GameAI.Relation(1);
-    this.unlocks  = new GameAI.Relation(2);
-    this.contains = new GameAI.Relation(4);
-
-    this.graph_all = new GameAI.KnowledgeGraphBuilder(6)
-      .AddEdge(countess, has, box)
-      .AddEdge(key, unlocks, box)
-      .AddEdge(box, contains, prize)
-      .AddEdge(room, contains, countess)
-      .AddEdge(room, contains, key)
-      .AddEdge(room, contains, prize)
-      .AddEdge(room, contains, box)
-      .AddEdge(room, contains, gangster)
-      .Build();
-
-    this.assocs = new GameAI.Associations(6, 3);
-
-    assocs.SetNameOf(countess, "countess");
-    assocs.SetNameOf(key, "key");
-    assocs.SetNameOf(prize, "prize");
-    assocs.SetNameOf(box, "box");
-    assocs.SetNameOf(gangster, "gangster");
-    assocs.SetNameOf(room, "room");
-
-    assocs.SetNameOf(new Relation((int?)has.AsSingleRelation() ?? 0), "has");
-    assocs.SetNameOf(new Relation((int?)unlocks.AsSingleRelation() ?? 0), "unlocks");
-    assocs.SetNameOf(new Relation((int?)contains.AsSingleRelation() ?? 0), "contains");
-
-    assocs.entityWords.Add( "countess",
-      new List<Entity>( new Entity[] { countess } ) );
-    assocs.entityWords.Add( "key",
-      new List<Entity>( new Entity[] { key } ) );
-    assocs.entityWords.Add( "prize",
-      new List<Entity>( new Entity[] { prize } ) );
-    assocs.entityWords.Add( "box",
-      new List<Entity>( new Entity[] { box } ) );
-    assocs.entityWords.Add( "gangster",
-      new List<Entity>( new Entity[] { box } ) );
-    assocs.entityWords.Add( "room",
-      new List<Entity>( new Entity[] { room } ) );
-
-    assocs.relationWords.Add( "has",
-      new List<Relation>( new Relation[] { has } ) );
-    assocs.relationWords.Add( "unlocks",
-      new List<Relation>( new Relation[] { unlocks } ) );
-    assocs.relationWords.Add( "contains",
-      new List<Relation>( new Relation[] { contains } ) );
-
-    var parser = new GameAI.Parser("Assets/AI/englishPCFG.ser.gz");
-    this.query = new GameAI.Query(parser);
-
-    // query.logger = (string s) => {
-    //   Debug.Log(s);
-    //   return null;
-    // };
-
-    // var question = "What unlocks the box?";
-    // var result = query.Run(assocs, question, graph_all);
-    //
-    // Debug.Log(question);
-    // foreach (var entity in result)
-    // {
-    //   Debug.Log($"Answer: {assocs.NameOf(entity)}");
-    // }
-    // Debug.Log("----------------");
-  }
+        StartUp();
+        if (!Application.isEditor)
+        {
+            StartUp();
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -108,10 +36,71 @@ public class AIController : MonoBehaviour
 
     }
 
-    public string Query(string question)
-      => String.Join( ", ",
-            query.Run(assocs, question, graph_all)
-            .Select(assocs.NameOf)
-         );
+    void StartUp()
+    {
+        string path = "Assets/StreamingAssets";
+        if (!Application.isEditor) path = "Watson_Data/StreamingAssets/";
+        this.watson = new Watson(path);
+        loaded = true;
+    }
+
+    public string Run(string input) 
+    {
+        string aiResponse = watson.Run(input);
+        SaveFile(input, aiResponse);
+        this.newSession = false;
+        return aiResponse; 
+    }
+
+    public void StartSession() {
+        this.newSession = true;
+        if (!loaded)
+        {
+            StartUp();
+        }
+    }
+
+
+    public void SaveFile(string userInput, string aiResponse)
+    {
+        string path = Path.Combine(Application.persistentDataPath, "inputs.txt");
+        Debug.Log(path);
+
+       
+        // This text is added only once to the file.
+        if (!File.Exists(path))
+        {
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                if (this.newSession)
+                {
+                    sw.WriteLine("");
+                    sw.WriteLine("New Session");
+                }
+                // Create a file to write to
+                sw.WriteLine("User: " + userInput);
+                sw.WriteLine("AI: " + aiResponse);
+            }
+            
+        }
+
+        // This text is always added, making the file longer over time
+        // if it is not deleted.
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            if (this.newSession)
+            {
+                sw.WriteLine("");
+                sw.WriteLine("New Session");
+            }
+            // Create a file to write to
+            sw.WriteLine("User: " + userInput);
+            sw.WriteLine("AI: " + aiResponse);
+        }
+    }
+
+   
 
 }
+
+

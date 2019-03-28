@@ -91,6 +91,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle + .5f;
         }
 
+        public void ToggleMouse()
+        {
+            m_MouseLook.lockCursor = !m_MouseLook.lockCursor;
+        }
 
         private void FixedUpdate()
         {

@@ -6,7 +6,7 @@ using Things;
 public class PlayerController : MonoBehaviour {
 
     public List<GameObject> inventory;
-    string list = "";
+    public string list = "";
     public GUISkin skin;
     public GUISkin winskin;
     bool won = false;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
         else
         {
             GUI.skin = skin;
-            GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
+            //GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
         }
     }
 
@@ -51,7 +51,12 @@ public class PlayerController : MonoBehaviour {
         list = "";
         for (int i = 0; i < inventory.Count; i++)
         {
-            list += inventory[i].GetComponent<Thing>().objName + '\n';
+            string itemName = inventory[i].GetComponent<Thing>().objName;
+            if (itemName != "Notebook")
+            {
+                list += "- " + itemName +'\n';
+            }
+            
         }
     }
 

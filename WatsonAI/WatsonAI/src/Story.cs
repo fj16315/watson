@@ -34,8 +34,7 @@ namespace WatsonAI
         "gangster", "money", "promotion", "money",
         "study", "will", "belonging", "letter",
         "colonel", "book", "arsenic", "barbital",
-        "nightshade", "murderer", "dead", "music", "chocolate",
-        "policeman"
+        "nightshade", "murderer", "dead", "music", "chocolate"
       };
       var verbs = new VerbBuilder {
         "poison", "marry", "owe", "employ",
@@ -60,6 +59,11 @@ namespace WatsonAI
         {"earl", "prevent", "promotion"},
         {"butler", "launder", "money"},
         {"study", "contain", "will"},
+        {"house", "contain", "study"},
+        {"dorset", "contain", "house"},
+        {"england", "contain", "house"},
+        {"earth", "contain", "england"},
+        {"universe", "contain", "england"},
         {"earl", "own", "belonging"},
         {"belonging", "contain", "letter"},
         {"colonel", "resent", "earl"},
@@ -128,3 +132,6 @@ namespace WatsonAI
     }
   }
 }
+
+        "nightshade", "murderer", "dead", "music", "chocolate",
+        "house", "earth", "england", "universe", "dorset"
