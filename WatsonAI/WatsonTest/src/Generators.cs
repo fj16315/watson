@@ -48,6 +48,14 @@ namespace WatsonTest
            }))()
          );
 
+    public static Arbitrary<Result<T>> Result<T>()
+      => Arb.From(
+           // This generates empty results with a 25% chance
+           from b in Gen.Choose(0, 3).Select(0.Equals)
+           from t in Arb.Generate<T>()
+           select b ? new Result<T>() : new Result<T>(t)
+         );
+
     public static Arbitrary<Verb> Verb()
       => Arb.From(
            from n in Arb.Generate<uint>()
