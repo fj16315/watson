@@ -24,7 +24,7 @@ public class MainClass
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      Console.WriteLine(watson.Run(line));
+      Console.WriteLine(watson.Run(line, 1));
       if (line == "") { break; }
     }
   }

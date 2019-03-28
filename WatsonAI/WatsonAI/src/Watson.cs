@@ -102,9 +102,24 @@ namespace WatsonAI
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    public string Run(string input, Character character)
+    public string Run(string input, int character)
     {
-      return Run(input);
+      var knowledge = Story.Characters[character].Knowledge;
+
+      var stream = Stream.Tokenise(parser, input);
+      //TODO: Add in Character Knowledge dictionary in story class  
+
+      var debugs = new DebugProcesses(parser, thesaurus);
+      var greetings = new GreetingsProcess(parser, thesaurus);
+      var fallback = new FallbackProcess();
+      var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
+
+      var output = stream
+        .ProcessWith(greetings)
+        .ProcessWith(debugs)
+        .ProcessWith(question)
+        .ProcessWith(fallback);
+      return output.Output();
     }
   }
 
@@ -126,6 +141,6 @@ namespace WatsonAI
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    string Run(string input, Character character);
+    string Run(string input, int character);
   }
 }
