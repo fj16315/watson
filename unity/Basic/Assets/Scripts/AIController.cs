@@ -44,9 +44,9 @@ public class AIController : MonoBehaviour
         loaded = true;
     }
 
-    public string Run(string input) 
+    public string Run(string input, int character) 
     {
-        string aiResponse = watson.Run(input);
+        string aiResponse = watson.Run(input, character);
         SaveFile(input, aiResponse);
         this.newSession = false;
         return aiResponse; 

@@ -34,7 +34,8 @@ namespace WatsonAI
         "gangster", "money", "promotion", "money",
         "study", "will", "belonging", "letter",
         "colonel", "book", "arsenic", "barbital",
-        "nightshade", "murderer", "dead", "music", "chocolate"
+        "nightshade", "murderer", "dead", "music", "chocolate",
+        "house", "earth", "england", "universe", "dorset", "policeman"
       };
       var verbs = new VerbBuilder {
         "poison", "marry", "owe", "employ",
@@ -132,6 +133,3 @@ namespace WatsonAI
     }
   }
 }
-
-        "nightshade", "murderer", "dead", "music", "chocolate",
-        "house", "earth", "england", "universe", "dorset"

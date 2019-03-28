@@ -123,7 +123,7 @@ public class DialogueScreen : MonoBehaviour {
 
     private void QueryAi()
     {
-        queryResponse = ai.Run(stringToEdit);
+        queryResponse = ai.Run(stringToEdit, 2);
         UpdateReply(queryResponse);
         Debug.Log(answer);
     }
