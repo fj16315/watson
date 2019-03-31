@@ -30,7 +30,9 @@ namespace WatsonAI
       //PrintVerbs(stream);
       //PrintEntities(stream);
 
-      var tree = parser.Parse(stream.RemainingInput);
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput);
+      var tree = parser.Parse(remainingInput);
 
       var noun = new EntityName(associations, thesaurus);
       var verb = new VerbName(associations, thesaurus);
@@ -133,7 +135,9 @@ namespace WatsonAI
 
     private void PrintVerbs(Stream stream)
     {
-      var tree = this.parser.Parse(stream.RemainingInput);
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput, Read.Peek);
+      var tree = parser.Parse(remainingInput);
 
       var verb = new VerbName(associations, thesaurus);
       var top = new Branch("TOP");
@@ -156,7 +160,9 @@ namespace WatsonAI
     
     private void PrintEntities(Stream stream)
     {
-      var tree = this.parser.Parse(stream.RemainingInput);
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput, Read.Peek);
+      var tree = parser.Parse(remainingInput);
 
       var entity = new EntityName(associations, thesaurus);
       var top = new Branch("TOP");

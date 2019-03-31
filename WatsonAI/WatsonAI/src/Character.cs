@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   /// <summary>
   /// Basic overview of character containing information for game mechanics.

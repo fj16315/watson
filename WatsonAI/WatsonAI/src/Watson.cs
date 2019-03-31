@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   public class Watson : IWatson
   {
@@ -92,12 +87,10 @@ namespace WatsonAI
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
 
-      var output = stream
-        .ProcessWith(greetings)
-        .ProcessWith(debugs)
-        .ProcessWith(question)
-        .ProcessWith(fallback);
-      return output.Output();
+      var output = new Processor()
+        .AddProcesses(greetings, debugs, question, fallback)
+        .Process(stream);
+      return string.Join(", ", output.Output);
     }
   
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WatsonAI
 {
@@ -39,7 +38,10 @@ namespace WatsonAI
     /// <returns>Mutated stream.</returns>
     public Stream Process(Stream stream)
     {
-      var tree = parser.Parse(stream.RemainingInput);
+      var streamNew = stream.Clone();
+      string word;
+      streamNew.NextToken(out word);
+      var tree = parser.Parse(word);
       var top = new Branch("TOP");
       var hello = new Descendant<string>(top, new Word(thesaurus, "hello"));
       var result = hello.Match(tree);
@@ -57,15 +59,16 @@ namespace WatsonAI
         Random rnd = new Random();
         Random watson = new Random();
 
+        var index = rnd.Next(listOfGreetings.Capacity);
         if (watson.Next(2) == 1) 
         { 
-          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity-1)] + ", Watson" );
+          stream.AppendOutput(listOfGreetings[index] + ", Watson" );
         }
         else 
         {
-          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity - 1)]);
+          stream.AppendOutput(listOfGreetings[index]);
         }
-
+        return streamNew;
       }
       return stream;
     }

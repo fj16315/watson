@@ -9,14 +9,14 @@ namespace WatsonAI
   /// </summary>
   public class DebugParseProcess : IProcess
   {
-    private Parser parser;
+    private readonly Parser parser;
 
     /// <summary>
     /// Process for debuging the parser.
     /// </summary>
     public DebugParseProcess()
     {
-      this.parser = new Parser();
+      parser = new Parser();
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace WatsonAI
     /// <param name="parse">The parser to use.</param>
     public DebugParseProcess(Parser parse)
     {
-      this.parser = parse;
+      parser = parse;
     }
 
     /// <summary>
@@ -35,10 +35,11 @@ namespace WatsonAI
     /// <returns>Stream with parse tree appended to output if appropriate.</returns>
     public Stream Process(Stream stream)
     {
-      if (stream.NextToken().Equals("p", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("p".Equals))
       {
-        stream.Consume();
-        var parse = this.parser.Parse(stream.RemainingInput).Show();
+        List<string> remainingInput;
+        stream.RemainingInput(out remainingInput, Read.Consume);
+        var parse = parser.Parse(remainingInput).Show();
         stream.AppendOutput(parse);
       }
       return stream;

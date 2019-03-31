@@ -1,10 +1,7 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 using OpenNLP.Tools.Parser;
-using OpenNLP.Tools.PosTagger;
-using OpenNLP.Tools.SentenceDetect;
 using OpenNLP.Tools.Tokenize;
 
 namespace WatsonAI
