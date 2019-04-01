@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokingController : MonoBehaviour
+public class SmokingAnimationControl : MonoBehaviour
 {
     public ParticleSystem smoke;
     public Animator anim;
