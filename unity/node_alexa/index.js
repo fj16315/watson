@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
 	console.log("Command = ", req.query.command);
 	console.log("Greeting = ", req.query.greeting);
   if(req.query.command == undefined || req.query.command == ""){
-	res.send("{ \"command\":\"" + last_value + "\"}\n{ \"greeting\":\"" + greeting + "\"}");
+	res.send("{ \"command\":\"" + last_value + "\", \"greeting\":\"" + greeting + "\"}");
   }else{
 	if(req.query.command == "empty"){
 		last_value = "";
@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
 	}else{
 		last_value = req.query.command;
 		greeting = req.query.greeting;
-		res.send("{ \"command\":\"" + last_value + "\"}\n{ \"greeting\":\"" + greeting + "\"}");
+		res.send("{ \"command\":\"" + last_value + "\"},\n{ \"greeting\":\"" + greeting + "\"}");
 	}
   }
 })

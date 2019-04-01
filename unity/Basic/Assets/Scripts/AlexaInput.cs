@@ -46,7 +46,9 @@ public class AlexaInput : MonoBehaviour {
 
     void ExtractCommand(string json)
     {
+        Debug.Log(json);
         var jsonstring = JSON.Parse(json);
+        Debug.Log(jsonstring);
         string command = jsonstring["command"];
         if (command == null || command == "") { return; }
         else {
