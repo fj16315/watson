@@ -59,7 +59,7 @@ namespace WatsonAI
         Random rnd = new Random();
         Random watson = new Random();
 
-        var index = rnd.Next(listOfGreetings.Capacity);
+        var index = rnd.Next(listOfGreetings.Count-1);
         if (watson.Next(2) == 1) 
         { 
           stream.AppendOutput(listOfGreetings[index] + ", Watson" );
