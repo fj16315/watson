@@ -1,21 +1,23 @@
 var express = require('express')
     ,app = express()
-    ,last_value;
+    ,last_value
+    ,greeting;
 
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function (req, res) {
-	console.log(last_value);
-	console.log(req.query.command);
+	console.log("Command = ", req.query.command);
+	console.log("Greeting = ", req.query.greeting);
   if(req.query.command == undefined || req.query.command == ""){
-		res.send("{ \"command\":\"" + last_value + "\"}");
+	res.send("{ \"command\":\"" + last_value + "\"}\n{ \"greeting\":\"" + greeting + "\"}");
   }else{
 	if(req.query.command == "empty"){
 		last_value = "";
 		res.send("{}");
 	}else{
-		res.send("{ \"command\":\"" + req.query.command + "\"}");
 		last_value = req.query.command;
+		greeting = req.query.greeting;
+		res.send("{ \"command\":\"" + last_value + "\"}\n{ \"greeting\":\"" + greeting + "\"}");
 	}
   }
 })
