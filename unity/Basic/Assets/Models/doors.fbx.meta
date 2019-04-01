@@ -243,6 +243,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: window_frame
     second: {fileID: 2100000, guid: 7feef3da40fbdea438033786938b275f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_white
+    second: {fileID: 2100000, guid: 8301817dad0ec1043b8d3e2f613c11d7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
