@@ -17,7 +17,7 @@ public class AlexaInput : MonoBehaviour {
     {
         while (true)
         {
-            if(inDialogue && state.currentState == GameState.State.PLAY)
+            if(inDialogue && state.currentState == GameState.State.PLAY && state.alexa)
             {
                 WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
                 yield return w;

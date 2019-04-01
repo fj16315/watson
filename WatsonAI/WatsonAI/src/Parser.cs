@@ -60,6 +60,9 @@ namespace WatsonAI
       return this.parser.DoParse(tokens);
     }
 
+    public Parse Parse(IEnumerable<string> tokens) 
+      => this.parser.DoParse(tokens);
+
     /// <summary>
     /// Splits the sentence into tokens (words).
     /// </summary>

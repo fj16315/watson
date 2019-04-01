@@ -14,12 +14,14 @@ public class GameState : MonoBehaviour {
     public List<string> tutorialStrings;
     private int currentString = 0;
     private bool started = false;
+    public bool alexa = false;
 
     // Useful game things
     public List<Door> entryDoors;
     public NPCController police;
     public DialogueScreen dialogue;
     public CameraRaycasting raycasting;
+    public Thing notebookThing;
 
     // Tutorial variables
     bool saved = false;
@@ -70,6 +72,7 @@ public class GameState : MonoBehaviour {
             else if (currentString == 4)
             {
                 subState = 2;
+                notebookThing.pickup = true;
             }
             else if (currentString == 5)
             {
@@ -154,6 +157,11 @@ public class GameState : MonoBehaviour {
     public void OpenNotebook()
     {
         notebook = true;
+    }
+
+    public void UseAlexa()
+    {
+        alexa = !alexa;
     }
 
 }
