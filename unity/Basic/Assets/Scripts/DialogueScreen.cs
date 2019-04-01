@@ -18,6 +18,7 @@ public class DialogueScreen : MonoBehaviour {
     public Text answerBox;
     public GameObject saveButton;
     public GameObject nextButton;
+    public GameObject skipButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
@@ -103,6 +104,7 @@ public class DialogueScreen : MonoBehaviour {
         } else
         {
             nextButton.SetActive(true);
+            skipButton.SetActive(true);
             UpdateReply(state.NextString());
 
         }
@@ -116,6 +118,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
+        skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
@@ -174,12 +177,18 @@ public class DialogueScreen : MonoBehaviour {
             queryResponse = "My first clue!";
         }
         notebook.LogResponse(currentCharacter, queryResponse);
+        UpdateReply(state.NextString());
     }
 
     public void NextButton()
     {
         state.ContinueTutorial();
         UpdateReply(state.NextString());
+    }
+
+    public void SkipButton()
+    {
+        state.EndTutorial();
     }
 
 }
