@@ -5045,6 +5045,7 @@ MonoBehaviour:
   angleClose: 0
   locked: 1
   direction: 1
+  doorName: Entry
 --- !u!4 &407455062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4945391837379990, guid: 9b6eba5dea9e77a4abd8f45df1ffffb6,
@@ -7816,7 +7817,6 @@ GameObject:
   - component: {fileID: 674974413}
   - component: {fileID: 674974414}
   - component: {fileID: 674974415}
-  - component: {fileID: 674974416}
   m_Layer: 0
   m_Name: Kitchen
   m_TagString: Untagged
@@ -7870,22 +7870,7 @@ MonoBehaviour:
   angleClose: 235
   locked: 0
   direction: 1
---- !u!114 &674974416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674974412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694cdc38ced0f764e9ef1412dffe8ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  pickup: 0
-  objName: Kitchen
-  category: 0
+  doorName: Kitchen
 --- !u!1 &678800291
 GameObject:
   m_ObjectHideFlags: 0
@@ -14358,6 +14343,7 @@ MonoBehaviour:
   angleClose: 0
   locked: 1
   direction: -1
+  doorName: Entry
 --- !u!1 &1306321274
 GameObject:
   m_ObjectHideFlags: 0
@@ -14783,7 +14769,6 @@ GameObject:
   - component: {fileID: 1332337506}
   - component: {fileID: 1332337508}
   - component: {fileID: 1332337507}
-  - component: {fileID: 1332337509}
   m_Layer: 0
   m_Name: Salon
   m_TagString: Untagged
@@ -14824,6 +14809,7 @@ MonoBehaviour:
   angleClose: 45
   locked: 0
   direction: 1
+  doorName: Drawing Room
 --- !u!65 &1332337508
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14837,22 +14823,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9353101, y: 3.3000085, z: 0.42373395}
   m_Center: {x: 0.8928247, y: -0.10800135, z: 0.0032307007}
---- !u!114 &1332337509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332337505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694cdc38ced0f764e9ef1412dffe8ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  pickup: 0
-  objName: Salon
-  category: 0
 --- !u!1 &1341504187
 GameObject:
   m_ObjectHideFlags: 0
@@ -18185,7 +18155,6 @@ GameObject:
   - component: {fileID: 1673839740}
   - component: {fileID: 1673839742}
   - component: {fileID: 1673839741}
-  - component: {fileID: 1673839743}
   m_Layer: 0
   m_Name: Billiards
   m_TagString: Untagged
@@ -18226,6 +18195,7 @@ MonoBehaviour:
   angleClose: 35
   locked: 0
   direction: -1
+  doorName: Billiards Room
 --- !u!65 &1673839742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18239,22 +18209,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19681105, y: 3.349399, z: 1.7072186}
   m_Center: {x: -0.08007435, y: -0.30018973, z: 0.84071326}
---- !u!114 &1673839743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673839739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694cdc38ced0f764e9ef1412dffe8ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  pickup: 0
-  objName: Billiards Room
-  category: 0
 --- !u!1 &1678344784
 GameObject:
   m_ObjectHideFlags: 0
@@ -22059,7 +22013,6 @@ GameObject:
   - component: {fileID: 2072128730}
   - component: {fileID: 2072128732}
   - component: {fileID: 2072128731}
-  - component: {fileID: 2072128733}
   m_Layer: 0
   m_Name: Front
   m_TagString: Untagged
@@ -22098,6 +22051,7 @@ MonoBehaviour:
   angleClose: 0
   locked: 1
   direction: 1
+  doorName: Front
 --- !u!65 &2072128732
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22111,22 +22065,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3377085, y: 3.0386007, z: 0.1716795}
   m_Center: {x: -1.1443114, y: 1.5592822, z: 0.94183207}
---- !u!114 &2072128733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072128729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694cdc38ced0f764e9ef1412dffe8ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  pickup: 0
-  objName: Front
-  category: 0
 --- !u!1 &2075019935
 GameObject:
   m_ObjectHideFlags: 0
@@ -22543,7 +22481,6 @@ GameObject:
   - component: {fileID: 2088978710}
   - component: {fileID: 2088978712}
   - component: {fileID: 2088978711}
-  - component: {fileID: 2088978713}
   m_Layer: 0
   m_Name: Dining
   m_TagString: Untagged
@@ -22584,6 +22521,7 @@ MonoBehaviour:
   angleClose: 225
   locked: 0
   direction: -1
+  doorName: Dining Room
 --- !u!65 &2088978712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22597,22 +22535,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.21396907, y: 3.2733493, z: 1.7255584}
   m_Center: {x: -0.07689026, y: -0.16285062, z: 0.8634157}
---- !u!114 &2088978713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088978709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694cdc38ced0f764e9ef1412dffe8ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  pickup: 0
-  objName: Dining Room
-  category: 0
 --- !u!1 &2094012021
 GameObject:
   m_ObjectHideFlags: 0
