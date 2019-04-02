@@ -70,11 +70,11 @@ namespace WatsonAI
         var index = rnd.Next(listOfGreetings.Count);
         if (watson.Next(2) == 1) 
         { 
-          stream.AppendOutput(listOfGreetings[index] + ", Watson" );
+          streamNew.AppendOutput(listOfGreetings[index] + ", Watson" );
         }
         else 
         {
-          stream.AppendOutput(listOfGreetings[index]);
+          streamNew.AppendOutput(listOfGreetings[index]);
         }
         return streamNew;
       }
