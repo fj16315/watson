@@ -112,12 +112,10 @@
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
 
-      var output = stream
-        .Process(greetings)
-        .Process(debugs)
-        .Process(question)
-        .Process(fallback);
-      return output.Output();
+      var output = new Processor()
+        .AddProcesses(greetings, debugs, question, fallback)
+        .Process(stream);
+      return string.Join(", ", output.Output);
     }
   }
 

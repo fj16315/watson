@@ -98,7 +98,6 @@ namespace WatsonAI
           {"countess", "love", "earl"},
           {"earl", "like", "music"},
           {"earl", "be", "dead"},
-          {"actress", "kill", "earl"},
           {"countess", "marry", "earl"},
           {"earl", "marry", "countess"},
           {"earl", "employ", "butler"},
