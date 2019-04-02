@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   /// <summary>
   /// Process that applies all the debug processes.
@@ -11,6 +7,7 @@ namespace WatsonAI
   {
     private DebugParseProcess debugParse;
     private DebugThesaurusProcess debugThesaurus;
+    private DebugPronounProcess debugPronounProcess;
 
     /// <summary>
     /// Process that contains all debugging processes.
@@ -19,8 +16,9 @@ namespace WatsonAI
     /// <param name="thesaurus">Instance of the thesaurus to use.</param>
     public DebugProcesses(Parser parser, Thesaurus thesaurus)
     {
-      this.debugParse = new DebugParseProcess(parser);
-      this.debugThesaurus = new DebugThesaurusProcess(thesaurus);
+      debugParse = new DebugParseProcess(parser);
+      debugThesaurus = new DebugThesaurusProcess(thesaurus);
+      debugPronounProcess = new DebugPronounProcess();
     }
 
     /// <summary>
@@ -30,11 +28,11 @@ namespace WatsonAI
     /// <returns>Debug processes applied to output.</returns>
     public Stream Process(Stream stream)
     {
-      if (stream.NextToken().Equals("!", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("!".Equals))
       {
-        stream.Consume();
-        stream.ProcessWith(debugParse);
-        stream.ProcessWith(debugThesaurus);
+        debugParse.Process(stream);
+        debugThesaurus.Process(stream);
+        debugPronounProcess.Process(stream);
       }
       return stream;
     }

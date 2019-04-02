@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC;
+using System;
 
 namespace Notebook
 {
@@ -42,14 +43,14 @@ namespace Notebook
         Character currentCharEnum = Character.ACTRESS;
 
         // Character clues
-        List<string> cluesActress = new List<string>();
-        List<string> cluesButler = new List<string>();
-        List<string> cluesColonel = new List<string>();
-        List<string> cluesCountess = new List<string>();
-        List<string> cluesEarl = new List<string>();
-        List<string> cluesGangster = new List<string>();
-        List<string> cluesPolice = new List<string>();
-        List<List<string>> cluesDirectory = new List<List<string>>();
+        List<Tuple<string, string> > cluesActress = new List<Tuple<string, string> >();
+        List<Tuple<string, string>> cluesButler = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesColonel = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesCountess = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesEarl = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesGangster = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesPolice = new List<Tuple<string, string>>();
+        List<List<Tuple<string, string>>> cluesDirectory = new List<List<Tuple<string, string>>>();
 
         public Text actressClueBox;
         public Text butlerClueBox;
@@ -206,13 +207,13 @@ namespace Notebook
             //}
         }
 
-        public void AddClue(List<int> characters, List<int> items, string clue)
-        {
-            foreach (int character in characters)
-            {
-                cluesDirectory[character].Add(clue);
-            }
-        }
+        //public void AddClue(List<int> characters, List<int> items, string question, string clue)
+        //{
+        //    foreach (int character in characters)
+        //    {
+        //        cluesDirectory[character].Add(new Tuple<string, string>(question, clue));
+        //    }
+        //}
 
         public int CharToEnum(string name)
         {
@@ -236,17 +237,22 @@ namespace Notebook
             return (int)Character.POLICE; // Default
         }
 
-        public void LogResponse(NPCController character, string message)
+        public void LogResponse(NPCController character, string question, string clue)
         {
-            cluesDirectory[CharToEnum(character.name)].Add(message);
+            cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
         public string UpdateClues(int character)
         {
             string result = "";
-            foreach (string clue in cluesDirectory[character])
+            foreach (Tuple<string, string> exchange in cluesDirectory[character])
             {
-                result += "- \"" + clue + "\"\n";
+                result += "<b>>  </b>";
+                if (exchange.Item1 != "")
+                {
+                    result += "<i>\"" + exchange.Item1 + "</i>\"<b>  ~  ";
+                }
+                result += "\"" + exchange.Item2 + "\"</b>\n";
             }
             return result;
         }

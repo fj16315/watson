@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   public class Watson : IWatson
   {
@@ -91,13 +86,14 @@ namespace WatsonAI
       var greetings = new GreetingsProcess(parser,thesaurus);
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
+      var prePronoun = new PronounsProcess(new Character("actress", false));
+      
 
-      var output = stream
-        .ProcessWith(greetings)
-        .ProcessWith(debugs)
-        .ProcessWith(question)
-        .ProcessWith(fallback);
-      return output.Output();
+      var output = new Processor()
+        .AddPreProcesses(prePronoun)
+        .AddProcesses(greetings,  debugs, question, fallback)
+        .Process(stream);
+      return string.Join(", ", output.Output);
     }
   
     /// <summary>

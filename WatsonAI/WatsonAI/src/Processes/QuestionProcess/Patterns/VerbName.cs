@@ -1,6 +1,5 @@
 ﻿using OpenNLP.Tools.Parser;
 using Syn.WordNet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

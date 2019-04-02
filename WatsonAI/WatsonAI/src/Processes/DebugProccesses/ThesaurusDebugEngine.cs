@@ -39,57 +39,55 @@ namespace WatsonAI
     /// <returns>Output with parsetree appended when appropriate.</returns>
     public Stream Process(Stream stream)
     {
-      Console.WriteLine(stream.NextToken());
-      if (stream.NextToken().Equals("ts", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("ts".Equals))
       {
-        stream.Consume();
-        foreach (var word in this.thesaurus.GetSynonyms(stream.NextToken(), true))
+        string word;
+        stream.NextToken(out word);
+        foreach (var syn in thesaurus.GetSynonyms(word, true))
         {
-          Console.Write($"{word}, ");
+          stream.AppendOutput(syn);
         }
       }
 
-      if (stream.NextToken().Equals("t", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("t".Equals))
       {
-        stream.Consume();
-        foreach (var word in this.thesaurus.GetSynonyms(stream.NextToken()))
+        string word;
+        stream.NextToken(out word);
+        foreach (var syn in thesaurus.GetSynonyms(word))
         {
-          Console.Write($"{word}, ");
+          stream.AppendOutput(syn);
         }
       }
 
-      if (stream.NextToken().Equals("d", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("d".Equals))
       {
-        stream.Consume();
-        var word1 = stream.NextToken();
-        stream.Consume();
-        var word2 = stream.NextToken();
-        stream.AppendOutput($"{this.thesaurus.Describes(word1, word2)} ");
+        string word1, word2;
+        stream.NextToken(out word1);
+        stream.NextToken(out word2);
+        stream.AppendOutput($"{thesaurus.Describes(word1, word2)}");
       }
 
-      if (stream.NextToken().Equals("ds", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("ds".Equals))
       {
-        stream.Consume();
-        var word1 = stream.NextToken();
-        stream.Consume();
-        var word2 = stream.NextToken();
-        stream.AppendOutput($"{this.thesaurus.Describes(word1, word2, true)} ");
+        string word1, word2;
+        stream.NextToken(out word1);
+        stream.NextToken(out word2);
+        stream.AppendOutput($"{thesaurus.Describes(word1, word2, true)}");
       }
 
-      if (stream.NextToken().Equals("s", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("s".Equals))
       {
-        stream.Consume();
-        var word1 = stream.NextToken();
-        stream.Consume();
-        var word2 = stream.NextToken();
-        stream.AppendOutput($"{this.thesaurus.Similarity(word1, word2)} ");
+        string word1, word2;
+        stream.NextToken(out word1);
+        stream.NextToken(out word2);
+        stream.AppendOutput($"{thesaurus.Similarity(word1, word2)}");
       }
 
-      if (stream.NextToken().Equals("steam", StringComparison.OrdinalIgnoreCase))
+      if (stream.ConsumeIf("steam".Equals))
       {
-        stream.Consume();
-        var word = stream.NextToken();
-        stream.AppendOutput($"{this.thesaurus.Stem(word)}");
+        string word1;
+        stream.NextToken(out word1);
+        stream.AppendOutput($"{thesaurus.Stem(word1)}");
       }
       return stream;
     }

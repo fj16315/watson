@@ -23,6 +23,7 @@ public class DialogueScreen : MonoBehaviour {
     private NPCController currentCharacter;
     public NotebookController notebook;
     public AlexaInput alexa;
+    private bool freshReply = true;
 
     // Character Fonts
     public Font fontDetective;
@@ -78,7 +79,6 @@ public class DialogueScreen : MonoBehaviour {
                 GUI.SetNextControlName("TextBox");
                 stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
                 GUI.FocusControl("TextBox");
-
                 QueryAi();
             }
 
@@ -123,6 +123,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         queryResponse = ai.Run(stringToEdit);
         UpdateReply(queryResponse);
+        freshReply = true;
         Debug.Log(answer);
     }
 
@@ -166,18 +167,22 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+        if (freshReply)
         {
-            queryResponse = "My first clue!";
-        }
-        if (queryResponse != "")
-        {
-            notebook.LogResponse(currentCharacter, queryResponse);
-        }
-        if (state.currentState == GameState.State.TUTORIAL)
-        {
-            state.SaveClue();
-            UpdateReply(state.NextString());
+            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            {
+                queryResponse = "My first clue!";
+            }
+            if (queryResponse != "")
+            {
+                notebook.LogResponse(currentCharacter, stringToEdit, queryResponse);
+            }
+            if (state.currentState == GameState.State.TUTORIAL)
+            {
+                state.SaveClue();
+                UpdateReply(state.NextString());
+            }
+            freshReply = false;
         }
     }
 

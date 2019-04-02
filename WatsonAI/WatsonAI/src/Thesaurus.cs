@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
-using Annytab.Stemmer;
 
 namespace WatsonAI
 {
@@ -31,7 +29,7 @@ namespace WatsonAI
 
     public Thesaurus()
     {
-      this.associations = new Associations();
+      associations = new Associations();
       var directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "WordNet", "dict") + Path.DirectorySeparatorChar;
 
       wordNet = new WordNetEngine();
@@ -40,7 +38,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer(directory);
+      stemmer = new Stemmer(directory);
     }
 
     /// <summary>
@@ -62,7 +60,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer(directory);
+      stemmer = new Stemmer(directory);
     }
 
     /// <summary>
@@ -85,7 +83,7 @@ namespace WatsonAI
       wordNet.LoadFromDirectory(directory);
       System.Diagnostics.Debug.WriteLine("Load completed.");
 
-      this.stemmer = new Stemmer(path);
+      stemmer = new Stemmer(path);
     }
 
     private bool AreWithinAssociations(string first, string second)

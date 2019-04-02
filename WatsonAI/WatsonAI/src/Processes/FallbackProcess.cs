@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace WatsonAI
 {
@@ -10,17 +9,10 @@ namespace WatsonAI
   public class FallbackProcess : IProcess
   {
 
-    private List<string> randomFallbacks;
+    private string[] randomFallbacks;
 
     public FallbackProcess() {
-      this.randomFallbacks = new List<string>();
-    }
-
-    public Stream Process(Stream stream)
-    {
-
-
-      randomFallbacks.AddRange(new List<string>
+      randomFallbacks = new string[]
       {
         "I dont know.",
         "Can you remain on task please?",
@@ -28,15 +20,16 @@ namespace WatsonAI
         "I would rather be talking about the murder.",
         "Please dont go off topic.",
         "Dont you have more important things to discuss?",
-      });
+      };
+    }
 
-
-      if (stream.Output().Length ==0)
+    public Stream Process(Stream stream)
+    {
+      if (!stream.Output.Any())
       {
-        Random rnd = new Random();
-
-        stream.AppendOutput(randomFallbacks[rnd.Next(randomFallbacks.Count-1)]);
-
+        var rnd = new Random();
+        var index = rnd.Next(randomFallbacks.Length);
+        stream.AppendOutput(randomFallbacks[index]);
       }
       return stream;
     }
