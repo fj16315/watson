@@ -59,7 +59,7 @@
       associations.AddVerbName(new Verb(19), "contains");
       */
     private readonly Parser parser;
-    private readonly Thesaurus thesaurus; 
+    private readonly Thesaurus thesaurus;
 
     /// <summary>
     /// Constructs a new Watson with path to the location of the data files.
@@ -102,7 +102,8 @@
     /// <returns>Response to the player.</returns>
     public string Run(string input, int character)
     {
-      var knowledge = Story.Characters[character].Knowledge;
+      var name = (Story.Names)character;
+      var knowledge = Story.Characters[name].Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
       //TODO: Add in Character Knowledge dictionary in story class  
@@ -137,6 +138,6 @@
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    string Run(string input, int character);
+    string Run(string input,  int character);
   }
 }

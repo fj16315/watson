@@ -8,8 +8,10 @@ namespace WatsonAI
   /// </summary>
   public static class Story
   {
+    public enum Names : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
     private static readonly KnowledgeBuilder universeKnowledgeBuilder;
-    public static List<Character> Characters { get; }
+    public static Dictionary<Names, Character> Characters { get; }
+    //public static List<Character> Characters { get; }
     public static Knowledge Knowledge { get; }
     public static Associations Associations { get; }
 
@@ -64,7 +66,7 @@ namespace WatsonAI
       Knowledge = universeKnowledgeBuilder.Knowledge;
       Associations = universeKnowledgeBuilder.Associations;
 
-      Characters = new List<Character>
+      /*Characters = new List<Character>
       {
         new Character("actress", true),
         new Character("countess", false),
@@ -72,6 +74,15 @@ namespace WatsonAI
         new Character("gangster", false),
         new Character("policeman", false),
         new Character("butler", false)
+      };*/
+      Characters = new Dictionary<Names, Character>
+      {
+        {Names.ACTRESS, new Character("actress", true)},
+        {Names.COUNTESS, new Character("countess", false)},
+        {Names.COLONEL, new Character("colonel", false)},
+        {Names.GANGSTER, new Character("gangster", false)},
+        {Names.POLICE, new Character("policeman", false)},
+        {Names.BUTLER, new Character("butler", false)},
       };
 
       var characterKnowledgeBuilders = new List<KnowledgeBuilder>
@@ -175,9 +186,9 @@ namespace WatsonAI
         }
       };
 
-      for (int i = 0; i < Characters.Count; i++)
+      foreach (KeyValuePair<Names, Character> c in Characters)
       {
-        Characters[i].Knowledge = characterKnowledgeBuilders[i].Knowledge;
+        c.Value.Knowledge = characterKnowledgeBuilders[(int) c.Key].Knowledge;
       }
     }
   }
