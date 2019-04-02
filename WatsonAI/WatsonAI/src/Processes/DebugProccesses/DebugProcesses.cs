@@ -7,6 +7,7 @@
   {
     private DebugParseProcess debugParse;
     private DebugThesaurusProcess debugThesaurus;
+    private DebugPronounProcess debugPronounProcess;
 
     /// <summary>
     /// Process that contains all debugging processes.
@@ -17,6 +18,7 @@
     {
       debugParse = new DebugParseProcess(parser);
       debugThesaurus = new DebugThesaurusProcess(thesaurus);
+      debugPronounProcess = new DebugPronounProcess();
     }
 
     /// <summary>
@@ -30,6 +32,7 @@
       {
         debugParse.Process(stream);
         debugThesaurus.Process(stream);
+        debugPronounProcess.Process(stream);
       }
       return stream;
     }

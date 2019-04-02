@@ -87,9 +87,10 @@
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var prePronoun = new PronounsProcess(new Character("actress", false));
+      
 
       var output = new Processor()
-        //.AddPreProcesses(prePronoun)
+        .AddPreProcesses(prePronoun)
         .AddProcesses(greetings,  debugs, question, fallback)
         .Process(stream);
       return string.Join(", ", output.Output);
