@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace NPC
 {
+    public enum Character : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
+
     public class NPCController : MonoBehaviour
     {
 
@@ -20,6 +22,29 @@ namespace NPC
         {
 
         }
+
+        public NPC.Character GetEnum()
+        {
+            switch (charName)
+            {
+                case "Actress":
+                    return Character.ACTRESS;
+                case "Butler":
+                    return Character.BUTLER;
+                case "Colonel":
+                    return Character.COLONEL;
+                case "Countess":
+                    return Character.COUNTESS;
+                case "Earl":
+                    return Character.EARL;
+                case "Gangster":
+                    return Character.GANGSTER;
+                case "Police":
+                    return Character.POLICE;
+            }
+            return Character.POLICE; // Default
+        }
+
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using UnityEditor;
 using System.Runtime.Serialization.Formatters.Binary;
+using NPC;
 
 
 public class AIController : MonoBehaviour
@@ -14,6 +15,7 @@ public class AIController : MonoBehaviour
     private bool newSession = false;
     private Watson watson;
     private bool loaded = false;
+    private NPCController currentCharacter;
 
     public AIController()
     {
@@ -45,14 +47,15 @@ public class AIController : MonoBehaviour
 
     public string Run(string input) 
     {
-        string aiResponse = watson.Run(input);
+        string aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
         SaveFile(input, aiResponse);
         this.newSession = false;
         return aiResponse; 
     }
 
-    public void StartSession() {
+    public void StartSession(NPCController character) {
         this.newSession = true;
+        currentCharacter = character;
         if (!loaded)
         {
             StartUp();
@@ -98,7 +101,6 @@ public class AIController : MonoBehaviour
         }
     }
 
-   
 
 }
 
