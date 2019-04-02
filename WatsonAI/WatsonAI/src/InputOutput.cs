@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WatsonAI
+﻿namespace WatsonAI
 {
   /// <summary>
   /// Stores the state of the input text processing.
@@ -22,8 +18,8 @@ namespace WatsonAI
     public InputOutput(string input)
     {
       this.input = input;
-      this.remainingInput = input;
-      this.output = "";
+      remainingInput = input;
+      output = "";
     }
 
     /// <summary>

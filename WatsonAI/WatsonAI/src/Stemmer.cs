@@ -1,10 +1,7 @@
 ﻿using Annytab.Stemmer;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using WatsonAI.Properties;
 
 namespace WatsonAI
 {
@@ -22,8 +19,8 @@ namespace WatsonAI
     /// </summary>
     public Stemmer(string path)
     {
-      this.stemmer = new EnglishStemmer();
-      this.irregularStems = ReadInIrregularStems(path);
+      stemmer = new EnglishStemmer();
+      irregularStems = ReadInIrregularStems(path);
     }
 
     /// <summary>
