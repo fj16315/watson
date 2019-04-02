@@ -80,7 +80,6 @@
       var knowledge = Story.Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
-      //TODO: Add in Character Knowledge dictionary in story class  
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsProcess(parser,thesaurus);
@@ -88,10 +87,9 @@
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var prePronoun = new PronounsProcess(new Character("actress", false));
       
-
       var output = new Processor()
         .AddPreProcesses(prePronoun)
-        .AddProcesses(greetings,  debugs, question, fallback)
+        .AddProcesses(greetings, debugs, question, fallback)
         .Process(stream);
       return string.Join(", ", output.Output);
     }
