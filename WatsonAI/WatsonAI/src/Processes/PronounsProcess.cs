@@ -25,6 +25,7 @@ namespace WatsonAI
           ReplaceWords(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }, tokens, i);
 
           ReplaceWords(new List<string> { "I", "am" }, new List<string> { "Watson", "is"  }, tokens, i);
+          ReplaceWords(new List<string> { "I", "'m" }, new List<string> { "Watson", "is"  }, tokens, i);
           ReplaceWords(new List<string> { "am", "I" }, new List<string> { "is", "Watson" }, tokens, i);
         }
 
