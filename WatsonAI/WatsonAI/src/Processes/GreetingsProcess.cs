@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OpenNLP.Tools.Parser;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WatsonAI
 {
@@ -31,6 +31,7 @@ namespace WatsonAI
       this.thesaurus = thesaurus;
       this.associations = associations;
     }
+
     /// <summary>
     /// Checks for a greeting at the start of the string. 
     /// and adds a greeting to the output.
@@ -39,7 +40,16 @@ namespace WatsonAI
     /// <returns>Mutated stream.</returns>
     public Stream Process(Stream stream)
     {
-      var tree = parser.Parse(stream.RemainingInput);
+      var streamNew = stream.Clone();
+      string word;
+      streamNew.NextToken(out word);
+
+      Parse tree;
+      if (!parser.Parse(word, out tree))
+      {
+        return stream;
+      }
+
       var top = new Branch("TOP");
       var hello = new Descendant<string>(top, new Word(thesaurus, "hello"));
       var result = hello.Match(tree);
@@ -57,15 +67,16 @@ namespace WatsonAI
         Random rnd = new Random();
         Random watson = new Random();
 
+        var index = rnd.Next(listOfGreetings.Count);
         if (watson.Next(2) == 1) 
         { 
-          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity-1)] + ", Watson" );
+          streamNew.AppendOutput(listOfGreetings[index] + ", Watson" );
         }
         else 
         {
-          stream.AppendOutput(listOfGreetings[rnd.Next(listOfGreetings.Capacity - 1)]);
+          streamNew.AppendOutput(listOfGreetings[index]);
         }
-
+        return streamNew;
       }
       return stream;
     }

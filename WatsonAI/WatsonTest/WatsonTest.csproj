@@ -17,4 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\WatsonAI\WatsonAI.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenNLP">
+      <HintPath>..\WatsonAI\libs\OpenNLP.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

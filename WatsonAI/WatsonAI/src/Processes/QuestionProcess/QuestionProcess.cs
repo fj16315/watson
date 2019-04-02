@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenNLP.Tools.Parser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,7 +31,13 @@ namespace WatsonAI
       //PrintVerbs(stream);
       //PrintEntities(stream);
 
-      var tree = parser.Parse(stream.RemainingInput);
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput);
+      Parse tree;
+      if (!parser.Parse(remainingInput, out tree))
+      {
+        return stream;
+      }
 
       var noun = new EntityName(associations, thesaurus);
       var verb = new VerbName(associations, thesaurus);
@@ -133,46 +140,56 @@ namespace WatsonAI
 
     private void PrintVerbs(Stream stream)
     {
-      var tree = this.parser.Parse(stream.RemainingInput);
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput, Read.Peek);
 
-      var verb = new VerbName(associations, thesaurus);
-      var top = new Branch("TOP");
-
-      var query = new Descendant<IEnumerable<Verb>>(top, verb);
-
-      var verbs = query.Match(tree);
-
-      Console.WriteLine("Verbs: ");
-      if (verbs.HasValue)
+      Parse tree;
+      if (parser.Parse(remainingInput, out tree))
       {
-        foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
+        var verb = new VerbName(associations, thesaurus);
+        var top = new Branch("TOP");
+
+        var query = new Descendant<IEnumerable<Verb>>(top, verb);
+
+        var verbs = query.Match(tree);
+
+        Console.WriteLine("Verbs: ");
+        if (verbs.HasValue)
         {
-          string verbName;
-          associations.TryNameVerb(v, out verbName);
-          Console.WriteLine($"{v} {verbName}");
+          foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
+          {
+            string verbName;
+            associations.TryNameVerb(v, out verbName);
+            Console.WriteLine($"{v} {verbName}");
+          }
         }
       }
     }
     
     private void PrintEntities(Stream stream)
     {
-      var tree = this.parser.Parse(stream.RemainingInput);
-
-      var entity = new EntityName(associations, thesaurus);
-      var top = new Branch("TOP");
-
-      var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
-
-      var entities = query.Match(tree);
-
-      Console.WriteLine("Entities: ");
-      if (entities.HasValue)
+      List<string> remainingInput;
+      stream.RemainingInput(out remainingInput, Read.Peek);
+      
+      Parse tree;
+      if (parser.Parse(remainingInput, out tree))
       {
-        foreach (var e in entities.Value.Distinct())
+        var entity = new EntityName(associations, thesaurus);
+        var top = new Branch("TOP");
+
+        var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
+
+        var entities = query.Match(tree);
+
+        Console.WriteLine("Entities: ");
+        if (entities.HasValue)
         {
-          string entityName;
-          associations.TryNameEntity(e, out entityName);
-          Console.WriteLine($"{e} {entityName}");
+          foreach (var e in entities.Value.Distinct())
+          {
+            string entityName;
+            associations.TryNameEntity(e, out entityName);
+            Console.WriteLine($"{e} {entityName}");
+          }
         }
       }
     }
