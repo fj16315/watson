@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenNLP.Tools.Parser;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,8 +40,11 @@ namespace WatsonAI
       {
         List<string> remainingInput;
         stream.RemainingInput(out remainingInput, Read.Consume);
-        var parse = parser.Parse(remainingInput).Show();
-        stream.AppendOutput(parse);
+        Parse parse;
+        if (parser.Parse(remainingInput, out parse))
+        {
+          stream.AppendOutput(parse.Show());
+        }
       }
       return stream;
     }
