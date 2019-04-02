@@ -57,6 +57,16 @@ public class MasterControl : MonoBehaviour {
             OpenNotebook();
             notebook.ChangePage((int)Page.INVENTORY);
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            OpenNotebook();
+            notebook.ChangePage((int)Page.NOTES);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            OpenNotebook();
+            notebook.ChangePage((int)Page.MENU);
+        }
     }
 
     public void Pause(bool pause)
