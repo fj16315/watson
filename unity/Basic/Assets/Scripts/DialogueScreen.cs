@@ -100,7 +100,10 @@ public class DialogueScreen : MonoBehaviour {
         } else
         {
             nextButton.SetActive(true);
-            skipButton.SetActive(true);
+            if (Application.isEditor)
+            {
+                skipButton.SetActive(true);
+            }
             UpdateReply(state.NextString());
         }
         
@@ -113,7 +116,10 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
-        skipButton.SetActive(false);
+        if (Application.isEditor)
+        {
+            skipButton.SetActive(false);
+        }
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;

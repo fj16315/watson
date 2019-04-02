@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.20536664, g: 0.17079033, b: 0.3584906, a: 1}
+  m_FogColor: {r: 0.18004078, g: 0.12148452, b: 0.3962264, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.014
   m_LinearFogStart: 0
@@ -1388,7 +1388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &116216518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1404,10 +1404,10 @@ RectTransform:
   m_Father: {fileID: 2075019936}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 170}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 85, y: -314.98502}
+  m_SizeDelta: {x: 30, y: 209.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &116216519
 MonoBehaviour:
@@ -9933,7 +9933,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 170}
+  m_SizeDelta: {x: 30, y: 209.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959874779
 MonoBehaviour:
@@ -12733,7 +12733,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 170}
+  m_SizeDelta: {x: 30, y: 209.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202545342
 MonoBehaviour:
@@ -20026,7 +20026,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 170}
+  m_SizeDelta: {x: 30, y: 209.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1906463733
 MonoBehaviour:
@@ -20695,7 +20695,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 170}
+  m_SizeDelta: {x: 30, y: 209.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970614777
 MonoBehaviour:

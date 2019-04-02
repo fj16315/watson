@@ -28,19 +28,34 @@ public class MasterControl : MonoBehaviour {
         Debug.Log("Launch: " + launch.ToString());
         notebook.Activate(false);
     }
+
+    void OpenNotebook()
+    {
+        notebook.Activate(!paused);
+        Pause(!paused);
+        if (!paused)
+        {
+            state.OpenNotebook();
+            Cursor.visible = false;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //Debug.Log("exit");
-            notebook.Activate(!paused);
-            Pause(!paused);
-            if (!paused)
-            {
-                state.OpenNotebook();
-                Cursor.visible = false;
-            }
+            OpenNotebook();
+            notebook.ChangePage((int)Page.MENU);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            OpenNotebook();
+            notebook.ChangePage((int)Page.CHARACTER);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenNotebook();
+            notebook.ChangePage((int)Page.INVENTORY);
         }
     }
 

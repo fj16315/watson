@@ -85,6 +85,10 @@ public class CameraRaycasting : MonoBehaviour
                 }
                 display = true;
             }
+            else
+            {
+                display = false;
+            }
 
         }
         else
