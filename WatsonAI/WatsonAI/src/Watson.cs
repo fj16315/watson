@@ -113,10 +113,10 @@
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
 
       var output = stream
-        .ProcessWith(greetings)
-        .ProcessWith(debugs)
-        .ProcessWith(question)
-        .ProcessWith(fallback);
+        .Process(greetings)
+        .Process(debugs)
+        .Process(question)
+        .Process(fallback);
       return output.Output();
     }
   }

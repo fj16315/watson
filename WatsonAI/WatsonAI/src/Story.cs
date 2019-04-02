@@ -10,20 +10,6 @@ namespace WatsonAI
   {
     private static readonly KnowledgeBuilder universeKnowledgeBuilder;
     public static List<Character> Characters { get; }
-    /*public static Knowledge Knowledge
-    {
-      get
-      {
-        return universeKnowledgeBuilder.Knowledge;
-      }
-    }
-    public static Associations Associations
-    {
-      get
-      {
-        return universeKnowledgeBuilder.Associations;
-      }
-    }*/
     public static Knowledge Knowledge { get; }
     public static Associations Associations { get; }
 
@@ -77,59 +63,123 @@ namespace WatsonAI
 
       Knowledge = universeKnowledgeBuilder.Knowledge;
       Associations = universeKnowledgeBuilder.Associations;
-      Characters = new List<Character>();
-      //Console.WriteLine("Associations assigned to Story");
 
-      var characterKnowledgeBuilders = new List<KnowledgeBuilder>();
-
-      Characters.Add(new Character("actress", true));
-      Characters.Add(new Character("countess", false));
-      Characters.Add(new Character("colonel", false));
-      Characters.Add(new Character("gangster", false));
-      Characters.Add(new Character("policeman", false));
-      Characters.Add(new Character("butler", false));
-
-      foreach (var c in Characters)
+      Characters = new List<Character>
       {
-        var characterKnowledgeBuilder = new KnowledgeBuilder(entities, verbs);
-        characterKnowledgeBuilders.Add(characterKnowledgeBuilder);
+        new Character("actress", true),
+        new Character("countess", false),
+        new Character("colonel", false),
+        new Character("gangster", false),
+        new Character("policeman", false),
+        new Character("butler", false)
+      };
+
+      var characterKnowledgeBuilders = new List<KnowledgeBuilder>
+      {
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"actress", "poison", "earl"},
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"}
+        },
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"},
+          {"countess", "love", "chocolate"},
+          {"belonging", "contain", "letter"},
+          {"belonging", "contain", "nightshade"}
+        },
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"actress", "poison", "earl"},
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"}
+        },
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"actress", "poison", "earl"},
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"}
+        },
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"actress", "poison", "earl"},
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"}
+        },
+        new KnowledgeBuilder(entities, verbs)
+        {
+          {"actress", "poison", "earl"},
+          {"earl", "love", "countess"},
+          {"countess", "love", "earl"},
+          {"earl", "like", "music"},
+          {"earl", "be", "dead"},
+          {"actress", "kill", "earl"},
+          {"countess", "marry", "earl"},
+          {"earl", "marry", "countess"},
+          {"earl", "employ", "butler"},
+          {"actress", "inherit", "money"},
+          {"study", "contain", "will"},
+          {"earl", "own", "belonging"},
+          {"earl", "use", "barbital"}
+        }
+      };
+
+      for (int i = 0; i < Characters.Count; i++)
+      {
+        Characters[i].Knowledge = characterKnowledgeBuilders[i].Knowledge;
       }
-
-      characterKnowledgeBuilders[0].Add("actress", "poison", "earl");
-      characterKnowledgeBuilders[0].Add("earl", "love", "countess");
-      characterKnowledgeBuilders[0].Add("countess", "love", "earl");
-      characterKnowledgeBuilders[0].Add("earl", "like", "music");
-      characterKnowledgeBuilders[0].Add("earl", "be", "dead");
-      characterKnowledgeBuilders[0].Add("actress", "kill", "earl");
-      characterKnowledgeBuilders[0].Add("countess", "marry", "earl");
-      characterKnowledgeBuilders[0].Add("earl", "marry", "countess");
-      characterKnowledgeBuilders[0].Add("earl", "employ", "butler");
-      characterKnowledgeBuilders[0].Add("actress", "inherit", "money");
-      characterKnowledgeBuilders[0].Add("study", "contain", "will");
-      characterKnowledgeBuilders[0].Add("earl", "own", "belonging");
-      characterKnowledgeBuilders[0].Add("earl", "use", "barbital");
-      Characters[0].Knowledge = characterKnowledgeBuilders[0].Knowledge;
-
-      characterKnowledgeBuilders[1].Add("earl", "love", "countess");
-      characterKnowledgeBuilders[1].Add("countess", "love", "earl");
-      characterKnowledgeBuilders[1].Add("earl", "like", "music");
-      characterKnowledgeBuilders[1].Add("earl", "be", "dead");
-      characterKnowledgeBuilders[1].Add("countess", "marry", "earl");
-      characterKnowledgeBuilders[1].Add("earl", "marry", "countess");
-      characterKnowledgeBuilders[1].Add("earl", "employ", "butler");
-      characterKnowledgeBuilders[1].Add("countess", "inherit", "money");
-      characterKnowledgeBuilders[1].Add("study", "contain", "will");
-      characterKnowledgeBuilders[1].Add("earl", "own", "belonging");
-      characterKnowledgeBuilders[1].Add("earl", "use", "barbital");
-      characterKnowledgeBuilders[1].Add("countess", "love", "chocolate");
-      characterKnowledgeBuilders[1].Add("belonging", "contain", "letter");
-      characterKnowledgeBuilders[1].Add("belonging", "contain", "nightshade");
-      Characters[1].Knowledge = characterKnowledgeBuilders[1].Knowledge;
-
-      Characters[2].Knowledge = universeKnowledgeBuilder.Knowledge;
-      Characters[3].Knowledge = universeKnowledgeBuilder.Knowledge;
-      Characters[4].Knowledge = universeKnowledgeBuilder.Knowledge;
-      Characters[5].Knowledge = universeKnowledgeBuilder.Knowledge;
     }
   }
 }
