@@ -62,7 +62,6 @@ public class DialogueScreen : MonoBehaviour {
         GUI.skin = skin;
         if (show)
         {
-            //Cursor.visible = true;
             int width = 750;
             int height = 215;
             GUI.SetNextControlName("TextBox");
@@ -70,21 +69,18 @@ public class DialogueScreen : MonoBehaviour {
             int x = Screen.width/2 + 116;
             int y = Screen.height/2 + 164;
 
-            //if (!(state.currentState == GameState.State.TUTORIAL && state.subState == 0))
-            //{
             stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
-            //}
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox" && state.currentState == GameState.State.PLAY)
             {
+                // Highlight dialogue box
+                GUI.SetNextControlName("TextBox");
+                stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
+                GUI.FocusControl("TextBox");
+
                 QueryAi();
             }
-
-            //if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
-            //{
-            //    ShowScreen(currentCharacter);
-            //}
 
         }
     }
@@ -106,7 +102,6 @@ public class DialogueScreen : MonoBehaviour {
             nextButton.SetActive(true);
             skipButton.SetActive(true);
             UpdateReply(state.NextString());
-
         }
         
     }
@@ -171,13 +166,19 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        state.SaveClue();
-        if (queryResponse == "")
+        if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
         {
             queryResponse = "My first clue!";
         }
-        notebook.LogResponse(currentCharacter, queryResponse);
-        UpdateReply(state.NextString());
+        if (queryResponse != "")
+        {
+            notebook.LogResponse(currentCharacter, queryResponse);
+        }
+        if (state.currentState == GameState.State.TUTORIAL)
+        {
+            state.SaveClue();
+            UpdateReply(state.NextString());
+        }
     }
 
     public void NextButton()
