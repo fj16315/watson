@@ -8,7 +8,7 @@ using NPC;
 namespace Notebook
 {
     enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
-    enum Character : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
+    //enum Character : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
     enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour

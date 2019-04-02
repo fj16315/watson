@@ -95,7 +95,7 @@ public class DialogueScreen : MonoBehaviour {
         if (!(state.currentState == GameState.State.TUTORIAL))
         {
             alexa.StartSession();
-            ai.StartSession();
+            ai.StartSession(currentCharacter);
             UpdateReply("");
         } else
         {
