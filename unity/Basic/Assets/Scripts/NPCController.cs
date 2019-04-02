@@ -23,23 +23,23 @@ namespace NPC
 
         }
 
-        public NPC.Character GetEnum()
+        public Character GetEnum()
         {
-            switch (charName)
+            switch (name.ToLower())
             {
-                case "Actress":
+                case "actress":
                     return Character.ACTRESS;
-                case "Butler":
+                case "butler":
                     return Character.BUTLER;
-                case "Colonel":
+                case "colonel":
                     return Character.COLONEL;
-                case "Countess":
+                case "countess":
                     return Character.COUNTESS;
-                case "Earl":
+                case "earl":
                     return Character.EARL;
-                case "Gangster":
+                case "gangster":
                     return Character.GANGSTER;
-                case "Police":
+                case "police":
                     return Character.POLICE;
             }
             return Character.POLICE; // Default
