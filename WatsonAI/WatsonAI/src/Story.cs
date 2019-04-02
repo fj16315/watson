@@ -11,9 +11,20 @@ namespace WatsonAI
     public enum Names : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
     private static readonly KnowledgeBuilder universeKnowledgeBuilder;
     public static Dictionary<Names, Character> Characters { get; }
-    //public static List<Character> Characters { get; }
-    public static Knowledge Knowledge { get; }
-    public static Associations Associations { get; }
+    public static Knowledge Knowledge
+    {
+      get
+      {
+        return universeKnowledgeBuilder.Knowledge;
+      }
+    }
+    public static Associations association
+    {
+      get
+      {
+        return universeKnowledgeBuilder.Associations;
+      }
+    }
 
     static Story()
     {
@@ -63,18 +74,6 @@ namespace WatsonAI
         {"belonging", "contain", "nightshade"},
       };
 
-      Knowledge = universeKnowledgeBuilder.Knowledge;
-      Associations = universeKnowledgeBuilder.Associations;
-
-      /*Characters = new List<Character>
-      {
-        new Character("actress", true),
-        new Character("countess", false),
-        new Character("colonel", false),
-        new Character("gangster", false),
-        new Character("policeman", false),
-        new Character("butler", false)
-      };*/
       Characters = new Dictionary<Names, Character>
       {
         {Names.ACTRESS, new Character("actress", true)},
@@ -186,7 +185,7 @@ namespace WatsonAI
         }
       };
 
-      foreach (KeyValuePair<Names, Character> c in Characters)
+      foreach (var c in Characters)
       {
         c.Value.Knowledge = characterKnowledgeBuilders[(int) c.Key].Knowledge;
       }
