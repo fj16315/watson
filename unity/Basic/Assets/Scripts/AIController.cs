@@ -47,8 +47,8 @@ public class AIController : MonoBehaviour
 
     public string Run(string input) 
     {
-        //string aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
-        string aiResponse = watson.Run(input);
+        string aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
+        //string aiResponse = watson.Run(input);
         SaveFile(input, aiResponse);
         this.newSession = false;
         return aiResponse; 
