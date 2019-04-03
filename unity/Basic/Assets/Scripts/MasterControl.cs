@@ -38,6 +38,7 @@ public class MasterControl : MonoBehaviour {
             Pause(!paused);
             if (!paused)
             {
+                state.OpenNotebook();
                 Cursor.visible = false;
             }
         }
