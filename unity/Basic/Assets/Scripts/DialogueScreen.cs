@@ -11,6 +11,7 @@ public class DialogueScreen : MonoBehaviour {
     bool show = false;
     public GameState state;
     public string stringToEdit = "";
+    private string lastQuestion = "";
     string answer = "";
     string queryResponse = "";
     private AIController ai;
@@ -43,6 +44,7 @@ public class DialogueScreen : MonoBehaviour {
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
         saveButton.SetActive(false);
+        skipButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -92,6 +94,8 @@ public class DialogueScreen : MonoBehaviour {
         currentCharacter = character;
         textBubble.SetActive(true);
         saveButton.SetActive(true);
+        stringToEdit = "";
+        lastQuestion = "";
         if (!(state.currentState == GameState.State.TUTORIAL))
         {
             alexa.StartSession();
@@ -116,10 +120,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
-        if (Application.isEditor)
-        {
-            skipButton.SetActive(false);
-        }
+        skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
@@ -127,10 +128,14 @@ public class DialogueScreen : MonoBehaviour {
 
     private void QueryAi()
     {
-        queryResponse = ai.Run(stringToEdit, 2);
-        UpdateReply(queryResponse);
-        freshReply = true;
-        Debug.Log(answer);
+        if (stringToEdit != lastQuestion)
+        {
+            queryResponse = ai.Run(stringToEdit, 2);
+            UpdateReply(queryResponse);
+            freshReply = true;
+            Debug.Log(answer);
+            lastQuestion = stringToEdit;
+        }
     }
 
     private void UpdateReply(string extra)

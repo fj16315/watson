@@ -39,6 +39,7 @@ public class MenuController : MonoBehaviour {
                 else if (opacity < 1) delta = 1;
                 loadingLogo.color = new Color(255f, 255f, 255f, ((float)opacity)/255);
                 time = Time.time;
+                Debug.Log(opacity);
             }
         }
     }
@@ -65,7 +66,7 @@ public class MenuController : MonoBehaviour {
 
     IEnumerator LoadSceneAsync()
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync("Dev_James", LoadSceneMode.Single);
+        AsyncOperation async = SceneManager.LoadSceneAsync("Dev_James");
 
         while (!async.isDone)
         {
