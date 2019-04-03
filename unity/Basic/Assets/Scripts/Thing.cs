@@ -40,8 +40,9 @@ namespace Things
             GUI.skin = skin;
             if (show)
             {
+                //Debug.Log(description);
                 //Draw the GUI layer
-                GUI.Box(new Rect(Screen.width, Screen.height, Screen.width/2, Screen.height/2), description);
+                GUI.Box(new Rect(0, 0, Screen.width, Screen.height), description);
 
                 //show until escape pressed
                 if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)

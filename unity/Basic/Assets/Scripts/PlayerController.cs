@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public GUISkin skin;
     public GUISkin winskin;
     bool won = false;
+    public MasterControl controller;
 
 	// Use this for initialization
 	void Start () {
@@ -38,12 +39,15 @@ public class PlayerController : MonoBehaviour {
     public void PickUp(GameObject obj)
     {
         inventory.Add(obj);
-        obj.SetActive(false);
-        GenerateList();
-        if (obj.GetComponent<Thing>().objName.Equals("Prize!"))
+        //obj.SetActive(false);
+        obj.transform.Translate(0, -10, 0);
+        Thing t = obj.GetComponent<Thing>();
+        if (t.description != "")
         {
-            won = true;
+            controller.Pause(true);
+            t.InspectObject();
         }
+        GenerateList();
     }
 
     private void GenerateList()
