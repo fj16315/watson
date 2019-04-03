@@ -59,5 +59,25 @@ namespace WatsonAI
         }
       }
     }
+
+    private List<Character> FindCharactersInInput(List<string> tokens) 
+    {
+
+      var characterList = Story.Characters.Values.ToList();
+      List<Character> characters = new List<Character>();
+      foreach (var token in tokens)
+      {
+        foreach( var name in characterList)
+        { 
+          if (token.Equals(name.Name))
+          {
+            characters.Add(name);
+          }
+        }
+
+      }
+      return characters;
+
+    }
   }
 }
