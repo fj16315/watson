@@ -31,7 +31,11 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       List<string> remainingInput;
-      stream.RemainingInput(out remainingInput);
+      if (!stream.RemainingInput(out remainingInput))
+      {
+        return stream;
+      }
+
       Parse tree;
       if (!parser.Parse(remainingInput, out tree))
       {
@@ -124,7 +128,7 @@ namespace WatsonAI
             associations.TryNameVerb(v, out verbName);
             string entityName;
             associations.TryNameEntity(e, out entityName);
-            if (answers.Count != 0)
+            if (answers.Any())
             {
               stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
             }
@@ -137,7 +141,10 @@ namespace WatsonAI
     private void PrintVerbs(Stream stream)
     {
       List<string> remainingInput;
-      stream.RemainingInput(out remainingInput, Read.Peek);
+      if (!stream.RemainingInput(out remainingInput, Read.Peek))
+      {
+        return;
+      }
 
       Parse tree;
       if (parser.Parse(remainingInput, out tree))
@@ -165,8 +172,11 @@ namespace WatsonAI
     private void PrintEntities(Stream stream)
     {
       List<string> remainingInput;
-      stream.RemainingInput(out remainingInput, Read.Peek);
-      
+      if (!stream.RemainingInput(out remainingInput, Read.Peek))
+      {
+        return;
+      }
+
       Parse tree;
       if (parser.Parse(remainingInput, out tree))
       {
