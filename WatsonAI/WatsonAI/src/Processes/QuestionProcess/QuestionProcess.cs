@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using static WatsonAI.Patterns;
+
 namespace WatsonAI
 {
   public class QuestionProcess : IProcess
@@ -27,29 +29,26 @@ namespace WatsonAI
 
     public Stream Process(Stream stream)
     {
-      //PrintVerbs(stream);
-      //PrintEntities(stream);
-
       List<string> remainingInput;
       stream.RemainingInput(out remainingInput);
       var tree = parser.Parse(remainingInput);
 
       var noun = new EntityName(associations, thesaurus);
       var verb = new VerbName(associations, thesaurus);
-      var nounPhrase = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(new Branch("NP"), noun));
-      var verbPhrase = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(new Branch("VP"), verb));
+      var nounPhrase = (Branch("NP") >= noun).Flatten();
+      var verbPhrase = (Branch("VP") >= verb).Flatten();
 
 
-      var top = new Branch("TOP");
+      var top = Branch("TOP");
 
-      var subjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("SQ"), nounPhrase));
-      var subjQuestionVerbPhrase = new Flatten<Verb>(new Children<IEnumerable<Verb>>(new Branch("SQ"), verbPhrase));
+      var subjQuestionNounPhrase = (Branch("SQ") > nounPhrase).Flatten();
+      var subjQuestionVerbPhrase = (Branch("SQ") > verbPhrase).Flatten();
 
-      var subjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, subjQuestionNounPhrase));
-      var subjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, subjQuestionVerbPhrase));
+      var subjQueryN = (top >= subjQuestionNounPhrase).Flatten();
+      var subjQueryV = (top >= subjQuestionVerbPhrase).Flatten();
 
-      var whoWhatQ = new Descendant<string>(top, new Word(thesaurus, "who") | new Word(thesaurus, "what"));
-      var whereQ = new Descendant<string>(top, new Word(thesaurus, "where"));
+      var whoWhatQ = top >= (Word(thesaurus, "who") | Word(thesaurus, "what"));
+      var whereQ = top >= Word(thesaurus, "where");
 
       if (whereQ.Match(tree).HasValue)
       {
@@ -71,14 +70,11 @@ namespace WatsonAI
       }
       if (whoWhatQ.Match(tree).HasValue)
       {
-        var dobjQuestionNounPhrase = new Flatten<Entity>(new Children<IEnumerable<Entity>>(new Branch("VP"), nounPhrase));
+        var dobjQuestionNounPhrase = (Branch("VP") > nounPhrase).Flatten();
         var dobjQuestionVerbPhrase = verbPhrase;
 
-
-        var dobjQueryN = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, dobjQuestionNounPhrase));
-        var dobjQueryV = new Flatten<Verb>(new Descendant<IEnumerable<Verb>>(top, dobjQuestionVerbPhrase));
-
-        //(TOP (SBARQ (WHADVP (WRB Where)) (SQ (VP (VBZ is)) (NP (DT the) (NN will))) (. ?)))
+        var dobjQueryN = (top >= dobjQuestionNounPhrase).Flatten();
+        var dobjQueryV = (top >= dobjQuestionVerbPhrase).Flatten();
 
         // Deal with active case
         var spNs = subjQueryN.Match(tree);
@@ -140,16 +136,16 @@ namespace WatsonAI
       var tree = parser.Parse(remainingInput);
 
       var verb = new VerbName(associations, thesaurus);
-      var top = new Branch("TOP");
+      var top = Branch("TOP");
 
-      var query = new Descendant<IEnumerable<Verb>>(top, verb);
+      var query = (top >= verb).Flatten();
 
       var verbs = query.Match(tree);
 
       Console.WriteLine("Verbs: ");
       if (verbs.HasValue)
       {
-        foreach (var v in verbs.Value.SelectMany(x => x).Distinct())
+        foreach (var v in verbs.Value.Distinct())
         {
           string verbName;
           associations.TryNameVerb(v, out verbName);
@@ -165,9 +161,9 @@ namespace WatsonAI
       var tree = parser.Parse(remainingInput);
 
       var entity = new EntityName(associations, thesaurus);
-      var top = new Branch("TOP");
+      var top = Branch("TOP");
 
-      var query = new Flatten<Entity>(new Descendant<IEnumerable<Entity>>(top, entity));
+      var query = (top >= entity).Flatten();
 
       var entities = query.Match(tree);
 

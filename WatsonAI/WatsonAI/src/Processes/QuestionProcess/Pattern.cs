@@ -1,4 +1,6 @@
-﻿using OpenNLP.Tools.Parser;
+﻿using System.Collections.Generic;
+
+using OpenNLP.Tools.Parser;
 
 namespace WatsonAI
 {
@@ -23,5 +25,39 @@ namespace WatsonAI
     /// <returns>Or of pattern lhs and pattern rhs.</returns>
     public static Pattern<a> operator |(Pattern<a> lhs, Pattern<a> rhs)
       => new Or<a>(lhs, rhs);
+
+    public static Children<a> operator >(Branch branch, Pattern<a> child)
+      => new Children<a>(branch, child);
+
+    public static Children<a> operator <(Branch branch, Pattern<a> child)
+    {
+      throw new System.NotSupportedException("Operator < is not supported for Patterns, it is just required for compilation.");
+    }
+
+    public static Descendant<a> operator >=(Branch branch, Pattern<a> child)
+      => new Descendant<a>(branch, child);
+
+    public static Descendant<a> operator <=(Branch branch, Pattern<a> child)
+    {
+      throw new System.NotSupportedException("Operator <= is not supported for Patterns, it is just required for compilation.");
+    }
+  }
+
+  public static class Patterns
+  {
+    public static Word Word(Thesaurus t, string word)
+      => new Word(t, word);
+
+    public static Branch Branch(string name)
+      => new Branch(name);
+
+    public static And<a, b> And<a, b>(Pattern<a> lhs, Pattern<b> rhs)
+      => new And<a, b>(lhs, rhs);
+  }
+
+  public static class FlattenExtension
+  {
+    public static Flatten<a> Flatten<a>(this Pattern<IEnumerable<IEnumerable<a>>> pattern)
+      => new Flatten<a>(pattern);
   }
 }
