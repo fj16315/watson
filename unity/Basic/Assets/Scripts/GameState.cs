@@ -8,7 +8,6 @@ using Things;
 public class GameState : MonoBehaviour {
 
     public enum State : int { TUTORIAL, PLAY, END };
-    public int subState = 0; // Define different rules within States
     public State currentState = State.TUTORIAL;
 
     public List<string> tutorialStrings;
@@ -32,7 +31,7 @@ public class GameState : MonoBehaviour {
     // Use this for initialization
     void Start () {
         currentState = State.TUTORIAL;
-        subState = 0;
+        currentString = 0;
 	}
 	
 	// Update is called once per frame
@@ -43,12 +42,6 @@ public class GameState : MonoBehaviour {
             started = true;
         }
 	}
-
-
-    // -------------------- States --------------------
-
-    // ------------------- TUTORIAL -------------------
-    // 0 - First instruction, only character bubble
 
     public string NextString()
     {
@@ -62,37 +55,28 @@ public class GameState : MonoBehaviour {
 
     public void ContinueTutorial()
     {
-        if (RuleSatisfied(subState))
+        if (RuleSatisfied(currentString))
         {
             currentString++;
             if (currentString == 2)
             {
-                subState = 1;
-            }
-            else if (currentString == 4)
-            {
-                subState = 2;
                 notebookThing.pickup = true;
-            }
-            else if (currentString == 5)
-            {
-                subState = 3;
-            }
-            else if (currentString == 6)
-            {
-                subState = 4;
             }
             else if (currentString == 10)
             {
-                currentState = State.PLAY;
-                subState = 0;
-                entryDoors[0].locked = false;
-                entryDoors[1].locked = false;
-                entryDoors[0].Activate();
-                entryDoors[1].Activate();
-                raycasting.CloseDialogue();
+                EndTutorial();
             }
         }
+    }
+
+    public void EndTutorial()
+    {
+        currentState = State.PLAY;
+        entryDoors[0].locked = false;
+        entryDoors[1].locked = false;
+        entryDoors[0].Activate();
+        entryDoors[1].Activate();
+        raycasting.CloseDialogue();
     }
 
     private bool RuleSatisfied(int stage)
@@ -103,19 +87,18 @@ public class GameState : MonoBehaviour {
                 
                 switch (stage)
                 {
-                    case 0:
-                        return true;
-                    case 1:
-                        return exited;
                     case 2:
-                        return pickup;
-                    case 3:
-                        return notebook;
+                        return exited;
                     case 4:
+                        return pickup;
+                    case 5:
+                        return notebook;
+                    case 6:
                         return saved;
+                    default:
+                        return true;
                 }
 
-                break;
             case State.PLAY:
                 break;
             case State.END:
@@ -141,22 +124,26 @@ public class GameState : MonoBehaviour {
         if (!exited)
         {
             currentString++;
+            exited = true;
         }
-        exited = true;
     }
 
     public void SaveClue()
     {
-        if (!saved)
+        if (!saved && exited && pickup && notebook)
         {
-            //currentString++;
+            currentString++;
+            saved = true;
         }
-        saved = true;
     }
 
     public void OpenNotebook()
     {
-        notebook = true;
+        if (!notebook && exited && pickup)
+        {
+            notebook = true;
+            currentString++;
+        }
     }
 
     public void UseAlexa()

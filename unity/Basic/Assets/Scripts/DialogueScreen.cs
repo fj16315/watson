@@ -18,6 +18,7 @@ public class DialogueScreen : MonoBehaviour {
     public Text answerBox;
     public GameObject saveButton;
     public GameObject nextButton;
+    public GameObject skipButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
@@ -61,7 +62,6 @@ public class DialogueScreen : MonoBehaviour {
         GUI.skin = skin;
         if (show)
         {
-            //Cursor.visible = true;
             int width = 750;
             int height = 215;
             GUI.SetNextControlName("TextBox");
@@ -69,21 +69,18 @@ public class DialogueScreen : MonoBehaviour {
             int x = Screen.width/2 + 116;
             int y = Screen.height/2 + 164;
 
-            //if (!(state.currentState == GameState.State.TUTORIAL && state.subState == 0))
-            //{
             stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
-            //}
 
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox" && state.currentState == GameState.State.PLAY)
             {
+                // Highlight dialogue box
+                GUI.SetNextControlName("TextBox");
+                stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
+                GUI.FocusControl("TextBox");
+
                 QueryAi();
             }
-
-            //if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
-            //{
-            //    ShowScreen(currentCharacter);
-            //}
 
         }
     }
@@ -103,8 +100,8 @@ public class DialogueScreen : MonoBehaviour {
         } else
         {
             nextButton.SetActive(true);
+            skipButton.SetActive(true);
             UpdateReply(state.NextString());
-
         }
         
     }
@@ -116,6 +113,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
+        skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
@@ -123,7 +121,7 @@ public class DialogueScreen : MonoBehaviour {
 
     private void QueryAi()
     {
-        queryResponse = ai.Run(stringToEdit);
+        queryResponse = ai.Run(stringToEdit, 2);
         UpdateReply(queryResponse);
         Debug.Log(answer);
     }
@@ -168,18 +166,30 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        state.SaveClue();
-        if (queryResponse == "")
+        if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
         {
             queryResponse = "My first clue!";
         }
-        notebook.LogResponse(currentCharacter, queryResponse);
+        if (queryResponse != "")
+        {
+            notebook.LogResponse(currentCharacter, queryResponse);
+        }
+        if (state.currentState == GameState.State.TUTORIAL)
+        {
+            state.SaveClue();
+            UpdateReply(state.NextString());
+        }
     }
 
     public void NextButton()
     {
         state.ContinueTutorial();
         UpdateReply(state.NextString());
+    }
+
+    public void SkipButton()
+    {
+        state.EndTutorial();
     }
 
 }

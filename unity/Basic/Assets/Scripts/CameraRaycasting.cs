@@ -157,19 +157,24 @@ public class CameraRaycasting : MonoBehaviour
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
+                    string doorName = "";
+                    if (entity.GetComponent<Thing>() != null)
+                    {
+                        doorName = entity.GetComponent<Thing>().objName;
+                    }
                     if (door != null && door.locked)
                     {
-                        message = "Locked door";
+                        message = "Locked " + doorName + " door";   
                     }
                     else if (door != null)
                     {
                         if (door.open)
                         {
-                            message = "Close door";
+                            message = "Close " + doorName + " door";
                         }
                         else
                         {
-                            message = "Open door";
+                            message = "Open " + doorName + " door";
                         }
                     }
                     break;

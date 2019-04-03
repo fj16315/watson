@@ -1,5 +1,5 @@
-const request = require("request");
-var AlexaSkill = require('./AlexaSkill')
+var request = require("request")
+    , AlexaSkill = require('./AlexaSkill')
     , APP_ID     = process.env.APP_ID;
 
 var error = function (err, response, body) {
@@ -7,12 +7,14 @@ var error = function (err, response, body) {
 };
 
 //TODO: Change the contents of this function to handle our questions
-var getJsonFromUnity = function(query, callback){
+var getJsonFromUnity = function(query, greeting, callback){
 
   var options = 
   { method: 'GET',
-    url: 'http://brass-monkey-watson.herokuapp.com',
-    qs: { command: query }
+    uri: 'http://brass-monkey-watson.herokuapp.com',
+    qs: { command: query, 
+          greeting: greeting
+    },
     headers: 
       { 'cache-control': 'no-cache' }
   };
@@ -29,9 +31,9 @@ var getJsonFromUnity = function(query, callback){
   });
 };
 
-var handleUnityRequest = function(intent, session, response){
-  getJsonFromUnity(intent.slots.query.value, function(data){
-    var text = data + ' has been asked';
+var handleUnityRequest = function(intent, session, response, greeting){
+  getJsonFromUnity(intent.slots.query.value, greeting, function(data){
+    var text = ' ';
     var reprompt = 'What would you like to ask?';
     response.ask(text, reprompt);
   });
@@ -52,9 +54,8 @@ Unity.prototype.eventHandlers.onSessionStarted = function(sessionStartedRequest,
 Unity.prototype.eventHandlers.onLaunch = function(launchRequest, session, response){
   // This is when they launch the skill but don't specify what they want.
 
-  //TODO: Needs changing
   var output = 'Welcome to Watson. Approach a character and ask them a question. Make sure to use their name at the start.'; 
-  //TODO: Needs changing
+  
   var reprompt = 'What would you like to ask?';
 
   response.ask(output, reprompt);
@@ -65,7 +66,10 @@ Unity.prototype.eventHandlers.onLaunch = function(launchRequest, session, respon
 
 Unity.prototype.intentHandlers = {
   AiQueryIntent: function(intent, session, response){
-    handleUnityRequest(intent, session, response);
+    handleUnityRequest(intent, session, response, false);
+  },
+  GreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
   }
 };
 
