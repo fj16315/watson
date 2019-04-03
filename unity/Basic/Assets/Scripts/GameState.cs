@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Doors;
 using NPC;
 using Things;
@@ -21,12 +22,26 @@ public class GameState : MonoBehaviour {
     public DialogueScreen dialogue;
     public CameraRaycasting raycasting;
     public Thing notebookThing;
+    public MasterControl controller;
 
     // Tutorial variables
     bool saved = false;
     bool exited = false;
     bool pickup = false;
     bool notebook = false;
+
+    // Solution variables
+    public Toggle who;
+    public Toggle why;
+    public Toggle how;
+
+    public bool who_check = false;
+    public bool why_check = false;
+    public bool how_check = false;
+    public List<Toggle> checkboxes;
+
+    private int score = 0;
+    private int incorrect_check = 0;
 
     // Use this for initialization
     void Start () {
@@ -149,6 +164,42 @@ public class GameState : MonoBehaviour {
     public void UseAlexa()
     {
         alexa = !alexa;
+    }
+
+    public void CheckBoxes()
+    {
+        foreach (Toggle clue in checkboxes)
+        {
+            if (clue.isOn && clue == who)
+            {
+                who_check = true;
+            }
+            else if (clue.isOn && clue == why)
+            {
+                why_check = true;
+            }
+            else if (clue.isOn && clue == how)
+            {
+                how_check = true;
+            }
+            else if (clue.isOn)
+            {
+                who_check = false;
+                why_check = false;
+                how_check = false;
+                incorrect_check++;
+            }
+        }
+        if (who_check && why_check && how_check)
+        {
+            score = CalculateScore();
+            controller.EndGame(score);
+        }
+    }
+
+    private int CalculateScore()
+    {
+        return 100 - incorrect_check * 10;
     }
 
 }

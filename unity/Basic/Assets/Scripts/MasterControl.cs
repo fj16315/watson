@@ -18,10 +18,6 @@ public class MasterControl : MonoBehaviour {
     private float launch;
     private float end;
 
-    // Scoring variables
-    public NPCController who;
-    public GameObject what;
-
     // Use this for initialization
     void Start () {
         launch = Time.realtimeSinceStartup;
@@ -42,6 +38,7 @@ public class MasterControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // TODO replace with switch
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenNotebook();
@@ -49,22 +46,34 @@ public class MasterControl : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            OpenNotebook();
+            if (!paused)
+            {
+                OpenNotebook();
+            }
             notebook.ChangePage((int)Page.CHARACTER);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            OpenNotebook();
+            if (!paused)
+            {
+                OpenNotebook();
+            }
             notebook.ChangePage((int)Page.INVENTORY);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            OpenNotebook();
+            if (!paused)
+            {
+                OpenNotebook();
+            }
             notebook.ChangePage((int)Page.NOTES);
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            OpenNotebook();
+            if (!paused)
+            {
+                OpenNotebook();
+            }
             notebook.ChangePage((int)Page.MENU);
         }
     }
@@ -94,16 +103,17 @@ public class MasterControl : MonoBehaviour {
         }
     }
 
-    public void EndGame()
+    public void EndGame(int score)
     {
         end = Time.realtimeSinceStartup;
         Debug.Log("End: " + end.ToString());
         Stats.Time = end - launch;
+        Stats.Score = score;
         SceneManager.LoadScene("End_Scene", LoadSceneMode.Single);
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
     }
 }
