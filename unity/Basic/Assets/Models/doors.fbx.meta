@@ -1,0 +1,305 @@
+fileFormatVersion: 2
+guid: fee05fbc1a7b541408dab7f2df49c089
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: billiards_door
+    100002: dining_door
+    100004: door
+    100006: door 1
+    100008: door 2
+    100010: door_frame
+    100012: door_frame 1
+    100014: door_frame 2
+    100016: door_hole
+    100018: door_hole 1
+    100020: door_hole 2
+    100022: //RootNode
+    100024: kitchen_door
+    100026: knobs
+    100028: knobs 1
+    100030: knobs 2
+    100032: new_house:dining_door
+    100034: new_house:door
+    100036: new_house:door 1
+    100038: new_house:door_frame
+    100040: new_house:door_frame 1
+    100042: new_house:door_frame 2
+    100044: new_house:door_frame 3
+    100046: new_house:door_hole
+    100048: new_house:door_l
+    100050: new_house:door_l 1
+    100052: new_house:door_r
+    100054: new_house:door_r 1
+    100056: new_house:entry_door
+    100058: new_house:front_door
+    100060: new_house:knobs
+    100062: salon_door
+    100064: door 3
+    100066: door 4
+    100068: door1
+    100070: door1 1
+    100072: door_frame 3
+    100074: door_frame 4
+    100076: door_left
+    100078: door_left 1
+    100080: door_right
+    100082: door_right 1
+    100084: entry_door
+    100086: front_door
+    100088: knobs 3
+    100090: knobs 4
+    100092: knobs1
+    100094: knobs1 1
+    400000: billiards_door
+    400002: dining_door
+    400004: door
+    400006: door 1
+    400008: door 2
+    400010: door_frame
+    400012: door_frame 1
+    400014: door_frame 2
+    400016: door_hole
+    400018: door_hole 1
+    400020: door_hole 2
+    400022: //RootNode
+    400024: kitchen_door
+    400026: knobs
+    400028: knobs 1
+    400030: knobs 2
+    400032: new_house:dining_door
+    400034: new_house:door
+    400036: new_house:door 1
+    400038: new_house:door_frame
+    400040: new_house:door_frame 1
+    400042: new_house:door_frame 2
+    400044: new_house:door_frame 3
+    400046: new_house:door_hole
+    400048: new_house:door_l
+    400050: new_house:door_l 1
+    400052: new_house:door_r
+    400054: new_house:door_r 1
+    400056: new_house:entry_door
+    400058: new_house:front_door
+    400060: new_house:knobs
+    400062: salon_door
+    400064: door 3
+    400066: door 4
+    400068: door1
+    400070: door1 1
+    400072: door_frame 3
+    400074: door_frame 4
+    400076: door_left
+    400078: door_left 1
+    400080: door_right
+    400082: door_right 1
+    400084: entry_door
+    400086: front_door
+    400088: knobs 3
+    400090: knobs 4
+    400092: knobs1
+    400094: knobs1 1
+    2100000: new_house_blinn1
+    2100002: new_house_mat_door
+    2100004: window_frame
+    2100006: silver
+    2100008: wood_white
+    2300000: door
+    2300002: door 1
+    2300004: door 2
+    2300006: door_frame
+    2300008: door_frame 1
+    2300010: door_frame 2
+    2300012: door_hole
+    2300014: door_hole 1
+    2300016: door_hole 2
+    2300018: knobs
+    2300020: knobs 1
+    2300022: knobs 2
+    2300024: new_house:door
+    2300026: new_house:door 1
+    2300028: new_house:door_frame
+    2300030: new_house:door_frame 1
+    2300032: new_house:door_frame 2
+    2300034: new_house:door_frame 3
+    2300036: new_house:door_hole
+    2300038: new_house:door_l
+    2300040: new_house:door_l 1
+    2300042: new_house:door_r
+    2300044: new_house:door_r 1
+    2300046: new_house:knobs
+    2300048: door 3
+    2300050: door 4
+    2300052: door1
+    2300054: door1 1
+    2300056: door_frame 3
+    2300058: door_frame 4
+    2300060: knobs 3
+    2300062: knobs 4
+    2300064: knobs1
+    2300066: knobs1 1
+    3300000: door
+    3300002: door 1
+    3300004: door 2
+    3300006: door_frame
+    3300008: door_frame 1
+    3300010: door_frame 2
+    3300012: door_hole
+    3300014: door_hole 1
+    3300016: door_hole 2
+    3300018: knobs
+    3300020: knobs 1
+    3300022: knobs 2
+    3300024: new_house:door
+    3300026: new_house:door 1
+    3300028: new_house:door_frame
+    3300030: new_house:door_frame 1
+    3300032: new_house:door_frame 2
+    3300034: new_house:door_frame 3
+    3300036: new_house:door_hole
+    3300038: new_house:door_l
+    3300040: new_house:door_l 1
+    3300042: new_house:door_r
+    3300044: new_house:door_r 1
+    3300046: new_house:knobs
+    3300048: door 3
+    3300050: door 4
+    3300052: door1
+    3300054: door1 1
+    3300056: door_frame 3
+    3300058: door_frame 4
+    3300060: knobs 3
+    3300062: knobs 4
+    3300064: knobs1
+    3300066: knobs1 1
+    4300000: new_house:door_frame
+    4300002: new_house:door
+    4300004: new_house:door_frame
+    4300006: new_house:door_l
+    4300008: new_house:door_r
+    4300010: new_house:door_frame
+    4300012: new_house:door_l
+    4300014: new_house:door_r
+    4300016: new_house:door
+    4300018: new_house:knobs
+    4300020: new_house:door_hole
+    4300022: new_house:door_frame
+    4300024: door
+    4300026: knobs
+    4300028: door_hole
+    4300030: door_frame
+    4300032: door
+    4300034: knobs
+    4300036: door_hole
+    4300038: door_frame
+    4300040: door
+    4300042: knobs
+    4300044: door_hole
+    4300046: door_frame
+    4300048: door1
+    4300050: knobs1
+    4300052: door1
+    4300054: knobs1
+    4300056: knobs
+    4300058: door
+    4300060: door_frame
+    4300062: door
+    4300064: knobs
+    4300066: door_frame
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_blinn1
+    second: {fileID: 2100000, guid: 7feef3da40fbdea438033786938b275f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: silver
+    second: {fileID: 2100000, guid: f87e7f0e37d5a2940970cf02a871d869, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window_frame
+    second: {fileID: 2100000, guid: 7feef3da40fbdea438033786938b275f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

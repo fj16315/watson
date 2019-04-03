@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: 66e39fc63475de44f8d2acfc13322996
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Body
+    100004: Body4
+    100006: Body5
+    100008: Dress
+    100010: Glove
+    100012: Glove1
+    100014: Hair
+    100016: transform1
+    100018: transform2
+    100020: Chest
+    100022: Chest_CTRL
+    100024: Controlers
+    100026: Head
+    100028: Head_Ctrl
+    100030: Head_top
+    100032: Hip
+    100034: Hip_CTRL
+    100036: IKGroup
+    100038: Left_arm_IK
+    100040: Left_Clavical
+    100042: Left_Elbow
+    100044: Left_Elbow 1
+    100046: Left_Foot
+    100048: left_foot_CTRL
+    100050: Left_Foot_Middle
+    100052: Left_foot_Tip
+    100054: Left_Glove
+    100056: Left_Knee
+    100058: Left_Knee 1
+    100060: Left_Leg_IK
+    100062: Left_Leg_top
+    100064: Left_Shoulder
+    100066: Left_Wrist
+    100068: Left_Wrist 1
+    100070: Master_CTRL
+    100072: Model
+    100074: nCloth1
+    100076: Neck
+    100078: polySurface4
+    100080: polySurface6
+    100082: Rig
+    100084: Right_arm_IK
+    100086: Right_Clavical
+    100088: Right_Elbow
+    100090: Right_Elbow 1
+    100092: Right_Foot
+    100094: Right_foot_CTRL
+    100096: Right_Foot_Middle
+    100098: Right_foot_Tip
+    100100: Right_Glove
+    100102: Right_Knee
+    100104: Right_Knee 1
+    100106: Right_Leg_IK
+    100108: Right_Leg_top
+    100110: Right_Shoulder
+    100112: Right_Wrist
+    100114: Right_Wrist 1
+    100116: Spine1
+    100118: Spine2
+    100120: Spine_Curve
+    100122: Spine_IK
+    100124: Dress_Lower
+    100126: Dress_Upper
+    400000: //RootNode
+    400002: Body
+    400004: Body4
+    400006: Body5
+    400008: Dress
+    400010: Glove
+    400012: Glove1
+    400014: Hair
+    400016: transform1
+    400018: transform2
+    400020: Chest
+    400022: Chest_CTRL
+    400024: Controlers
+    400026: Head
+    400028: Head_Ctrl
+    400030: Head_top
+    400032: Hip
+    400034: Hip_CTRL
+    400036: IKGroup
+    400038: Left_arm_IK
+    400040: Left_Clavical
+    400042: Left_Elbow
+    400044: Left_Elbow 1
+    400046: Left_Foot
+    400048: left_foot_CTRL
+    400050: Left_Foot_Middle
+    400052: Left_foot_Tip
+    400054: Left_Glove
+    400056: Left_Knee
+    400058: Left_Knee 1
+    400060: Left_Leg_IK
+    400062: Left_Leg_top
+    400064: Left_Shoulder
+    400066: Left_Wrist
+    400068: Left_Wrist 1
+    400070: Master_CTRL
+    400072: Model
+    400074: nCloth1
+    400076: Neck
+    400078: polySurface4
+    400080: polySurface6
+    400082: Rig
+    400084: Right_arm_IK
+    400086: Right_Clavical
+    400088: Right_Elbow
+    400090: Right_Elbow 1
+    400092: Right_Foot
+    400094: Right_foot_CTRL
+    400096: Right_Foot_Middle
+    400098: Right_foot_Tip
+    400100: Right_Glove
+    400102: Right_Knee
+    400104: Right_Knee 1
+    400106: Right_Leg_IK
+    400108: Right_Leg_top
+    400110: Right_Shoulder
+    400112: Right_Wrist
+    400114: Right_Wrist 1
+    400116: Spine1
+    400118: Spine2
+    400120: Spine_Curve
+    400122: Spine_IK
+    400124: Dress_Lower
+    400126: Dress_Upper
+    2100000: lambert1
+    2100002: lambert3
+    2100004: lambert4
+    2100006: lambert2
+    2100008: Gloves
+    2100010: Hair1
+    2100012: Dress
+    2100014: Default_Material
+    2300000: Body
+    2300002: Dress
+    2300004: Glove
+    2300006: Glove1
+    2300008: Hair
+    2300010: Left_Glove
+    2300012: polySurface4
+    2300014: polySurface6
+    2300016: Right_Glove
+    2300018: Dress_Lower
+    2300020: Dress_Upper
+    3300000: Body
+    3300002: Dress
+    3300004: Glove
+    3300006: Glove1
+    3300008: Hair
+    3300010: Left_Glove
+    3300012: polySurface4
+    3300014: polySurface6
+    3300016: Right_Glove
+    3300018: Dress_Lower
+    3300020: Dress_Upper
+    4300000: Body
+    4300002: Glove1
+    4300004: Hair
+    4300006: Dress
+    4300008: Glove
+    4300010: Right_Glove
+    4300012: Left_Glove
+    4300014: polySurface6
+    4300016: polySurface4
+    4300018: Dress_Upper
+    4300020: Dress_Lower
+    9500000: //RootNode
+    13700000: Body
+    13700002: Dress_Upper
+    13700004: Hair
+    13700006: Left_Glove
+    13700008: Right_Glove
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.2
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Hip
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

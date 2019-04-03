@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: d9ae0629dfa286943bfd0f8645740e02
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BudHand
+  fontNames:
+  - BudHand
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 286a3ba26ffdff64c9572c152e61c77c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
