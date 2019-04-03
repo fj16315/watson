@@ -17,6 +17,12 @@ public class MenuController : MonoBehaviour {
 
     public void LaunchGame()
     {
+        Stats.Menu = true;
         SceneManager.LoadScene("Dev_James", LoadSceneMode.Single);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

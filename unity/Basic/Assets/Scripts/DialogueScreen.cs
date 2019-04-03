@@ -23,6 +23,7 @@ public class DialogueScreen : MonoBehaviour {
     private NPCController currentCharacter;
     public NotebookController notebook;
     public AlexaInput alexa;
+    private bool freshReply = true;
 
     // Character Fonts
     public Font fontDetective;
@@ -78,7 +79,6 @@ public class DialogueScreen : MonoBehaviour {
                 GUI.SetNextControlName("TextBox");
                 stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
                 GUI.FocusControl("TextBox");
-
                 QueryAi();
             }
 
@@ -95,12 +95,15 @@ public class DialogueScreen : MonoBehaviour {
         if (!(state.currentState == GameState.State.TUTORIAL))
         {
             alexa.StartSession();
-            ai.StartSession();
+            ai.StartSession(currentCharacter);
             UpdateReply("");
         } else
         {
             nextButton.SetActive(true);
-            skipButton.SetActive(true);
+            if (Application.isEditor)
+            {
+                skipButton.SetActive(true);
+            }
             UpdateReply(state.NextString());
         }
         
@@ -113,7 +116,10 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
-        skipButton.SetActive(false);
+        if (Application.isEditor)
+        {
+            skipButton.SetActive(false);
+        }
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
@@ -123,6 +129,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         queryResponse = ai.Run(stringToEdit, 2);
         UpdateReply(queryResponse);
+        freshReply = true;
         Debug.Log(answer);
     }
 
@@ -166,18 +173,22 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+        if (freshReply)
         {
-            queryResponse = "My first clue!";
-        }
-        if (queryResponse != "")
-        {
-            notebook.LogResponse(currentCharacter, queryResponse);
-        }
-        if (state.currentState == GameState.State.TUTORIAL)
-        {
-            state.SaveClue();
-            UpdateReply(state.NextString());
+            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            {
+                queryResponse = "My first clue!";
+            }
+            if (queryResponse != "")
+            {
+                notebook.LogResponse(currentCharacter, stringToEdit, queryResponse);
+            }
+            if (state.currentState == GameState.State.TUTORIAL)
+            {
+                state.SaveClue();
+                UpdateReply(state.NextString());
+            }
+            freshReply = false;
         }
     }
 
