@@ -18,10 +18,10 @@ namespace WatsonAI
     /// <summary>
     /// Text engine for debuging the specified Parser.
     /// </summary>
-    /// <param name="parse">The parser to use.</param>
-    public QuestionProcess(Parser parse, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
+    /// <param name="parser">The parser to use.</param>
+    public QuestionProcess(Parser parser, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
     {
-      this.parser = parse;
+      this.parser = parser;
       this.knowledge = knowledge;
       this.thesaurus = thesaurus;
       this.associations = associations;
@@ -136,6 +136,16 @@ namespace WatsonAI
         }
       }
       return stream;
+    }
+
+    public IEnumerable<Entity> GetEntityAnswers(string input)
+    {
+      throw new NotImplementedException();
+    }
+
+    public bool GetBooleanAnswer(string input)
+    {
+      throw new NotImplementedException();
     }
 
     private void PrintVerbs(Stream stream)
