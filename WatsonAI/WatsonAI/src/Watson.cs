@@ -80,13 +80,13 @@
       var knowledge = Story.Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
-      //TODO: Add in Character Knowledge dictionary in story class  
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsProcess(parser,thesaurus);
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
-
+     
+      
       var output = new Processor()
         .AddProcesses(greetings, debugs, question, fallback)
         .Process(stream);
@@ -100,10 +100,12 @@
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    public string Run(string input, int character)
+    public string Run(string input, int characterInt)
     {
-      var name = (Story.Names)character;
+      var name = (Story.Names)characterInt;
+      var character = Story.Characters[name];
       var knowledge = Story.Characters[name].Knowledge;
+
 
       var stream = Stream.Tokenise(parser, input);
       //TODO: Add in Character Knowledge dictionary in story class  
@@ -112,8 +114,9 @@
       var greetings = new GreetingsProcess(parser, thesaurus);
       var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
-
+      var prePronoun = new PronounsProcess(character);
       var output = new Processor()
+        .AddPreProcesses(prePronoun)
         .AddProcesses(greetings, debugs, question, fallback)
         .Process(stream);
       return string.Join(", ", output.Output);
