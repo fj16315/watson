@@ -10,6 +10,7 @@
 [Oo]bj/
 [Tt]emp/
 [Uu]nityGenerated/
+*/*/node_modules/
 # file on crash reports
 sysinfo.txt
 # Unity3D generated meta files
@@ -57,3 +58,5 @@ unity/Basic/Assembly-CSharp\.csproj
 unity/Basic/Basic\.sln
 
 unity/Basic/Assembly-CSharp-Editor\.csproj
+
+WatsonAI/OpenNlp

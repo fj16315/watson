@@ -11,15 +11,12 @@ public class MasterControl : MonoBehaviour {
     public GameObject masterCanvas;
     public NotebookController notebook;
     public RigidbodyFirstPersonController fpc;
+    public GameState state;
 
     // State variables
     public bool paused = false;
     private float launch;
     private float end;
-
-    // Scoring variables
-    public NPCController who;
-    public GameObject what;
 
     // Use this for initialization
     void Start () {
@@ -27,17 +24,57 @@ public class MasterControl : MonoBehaviour {
         Debug.Log("Launch: " + launch.ToString());
         notebook.Activate(false);
     }
+
+    void OpenNotebook()
+    {
+        notebook.Activate(!paused);
+        Pause(!paused);
+        if (!paused)
+        {
+            state.OpenNotebook();
+            Cursor.visible = false;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        // TODO replace with switch
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            notebook.Activate(!paused);
-            Pause(!paused);
+            OpenNotebook();
+            notebook.ChangePage((int)Page.MENU);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
             if (!paused)
             {
-                Cursor.visible = false;
+                OpenNotebook();
             }
+            notebook.ChangePage((int)Page.CHARACTER);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (!paused)
+            {
+                OpenNotebook();
+            }
+            notebook.ChangePage((int)Page.INVENTORY);
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            if (!paused)
+            {
+                OpenNotebook();
+            }
+            notebook.ChangePage((int)Page.NOTES);
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (!paused)
+            {
+                OpenNotebook();
+            }
+            notebook.ChangePage((int)Page.MENU);
         }
     }
 
@@ -66,16 +103,17 @@ public class MasterControl : MonoBehaviour {
         }
     }
 
-    public void EndGame()
+    public void EndGame(int score)
     {
         end = Time.realtimeSinceStartup;
         Debug.Log("End: " + end.ToString());
         Stats.Time = end - launch;
+        Stats.Score = score;
         SceneManager.LoadScene("End_Scene", LoadSceneMode.Single);
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
     }
 }

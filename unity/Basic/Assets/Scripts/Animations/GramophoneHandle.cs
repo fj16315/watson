@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GramophoneHandle : MonoBehaviour {
 
-    public float RotationSpeed = 100;
+    public float RotationSpeed = 40;
     public bool Activated = true;
 
 	// Use this for initialization

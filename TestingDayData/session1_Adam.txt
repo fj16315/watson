@@ -1,0 +1,99 @@
+
+
+New Session
+User: helo
+AI: Please dont go off topic.
+User: hello
+AI: Wassup
+User: who is dead
+AI: I dont know.
+User: who is suspicious?
+AI: I would rather be talking about the murder.
+User: what do you want to talk about
+AI: We have got more urgent matters at hand.
+
+New Session
+User: hello
+AI: G'day, Watson
+User: who is dead
+AI: I dont know.
+User: who is suspicious
+AI: Can you remain on task please?
+User: what were you doing at the time
+AI: I would rather be talking about the murder.
+User: who killed the earl?
+AI: The actress kill the earl
+User: are you sure?
+AI: I dont know.
+
+New Session
+User: hello
+AI: Salutations,, Watson
+User: did you kill the earl?]
+AI: I would rather be talking about the murder.
+User: did you kill the earl?
+AI: Please dont go off topic.
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: hello
+AI: Wassup
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: why did the actress kill the earl?
+AI: Please dont go off topic.
+User: why was the earl killed?
+AI: I would rather be talking about the murder.
+User: why was the earl killed?
+AI: I would rather be talking about the murder.
+User: why was the earl killed?
+AI: Can you remain on task please?
+User: why was the earl killed?
+AI: I dont know.
+User: why was the earl killed?
+AI: Can you remain on task please?
+
+New Session
+User: hello
+AI: Wassup
+User: why was the earl killed?
+AI: I dont know.
+
+New Session
+User: how was the earl killed?
+AI: Please dont go off topic.
+
+New Session
+User: hello
+AI: Hi
+User: why was the earl killed?
+AI: We have got more urgent matters at hand.

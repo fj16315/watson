@@ -9,7 +9,7 @@ public class DialogueScreen : MonoBehaviour {
 
     public GUISkin skin;
     bool show = false;
-    //bool query = false;
+    public GameState state;
     public string stringToEdit = "";
     string answer = "";
     string queryResponse = "";
@@ -17,9 +17,13 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject replyBubble;
     public Text answerBox;
     public GameObject saveButton;
+    public GameObject nextButton;
+    public GameObject skipButton;
     public GameObject textBubble;
     private NPCController currentCharacter;
     public NotebookController notebook;
+    public AlexaInput alexa;
+    private bool freshReply = true;
 
     // Character Fonts
     public Font fontDetective;
@@ -59,7 +63,6 @@ public class DialogueScreen : MonoBehaviour {
         GUI.skin = skin;
         if (show)
         {
-            //Cursor.visible = true;
             int width = 750;
             int height = 215;
             GUI.SetNextControlName("TextBox");
@@ -70,15 +73,15 @@ public class DialogueScreen : MonoBehaviour {
             stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
             GUI.FocusControl("TextBox");
 
-            //GUI.Box(new Rect(x - width - 10, y - height, width, height), answer);
-
-            if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox")
+            if (Event.current.isKey && Event.current.keyCode == KeyCode.Return && GUI.GetNameOfFocusedControl() == "TextBox" && state.currentState == GameState.State.PLAY)
             {
-                queryResponse = ai.Run(stringToEdit);
-                UpdateReply(queryResponse);
-                Debug.Log(answer);
+                // Highlight dialogue box
+                GUI.SetNextControlName("TextBox");
+                stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
+                GUI.FocusControl("TextBox");
+                QueryAi();
             }
-         
+
         }
     }
 
@@ -86,11 +89,24 @@ public class DialogueScreen : MonoBehaviour {
     {
         show = true;
         replyBubble.SetActive(true);
+        currentCharacter = character;
         textBubble.SetActive(true);
         saveButton.SetActive(true);
-        currentCharacter = character;
-        UpdateReply("");
-        ai.StartSession();
+        if (!(state.currentState == GameState.State.TUTORIAL))
+        {
+            alexa.StartSession();
+            ai.StartSession(currentCharacter);
+            UpdateReply("");
+        } else
+        {
+            nextButton.SetActive(true);
+            if (Application.isEditor)
+            {
+                skipButton.SetActive(true);
+            }
+            UpdateReply(state.NextString());
+        }
+        
     }
 
     public void HideScreen()
@@ -99,8 +115,22 @@ public class DialogueScreen : MonoBehaviour {
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
         saveButton.SetActive(false);
+        nextButton.SetActive(false);
+        if (Application.isEditor)
+        {
+            skipButton.SetActive(false);
+        }
         answerBox.text = "";
+        alexa.StopSession();
         Cursor.visible = false;
+    }
+
+    private void QueryAi()
+    {
+        queryResponse = ai.Run(stringToEdit);
+        UpdateReply(queryResponse);
+        freshReply = true;
+        Debug.Log(answer);
     }
 
     private void UpdateReply(string extra)
@@ -111,6 +141,12 @@ public class DialogueScreen : MonoBehaviour {
         answerBox.lineSpacing = prof.lineSpacing;
         answerBox.font = prof.font;
         answerBox.text = answer;
+    }
+
+    public void UpdateQuestion(string question)
+    {
+        stringToEdit = question;
+        QueryAi();
     }
 
     private NPCProfile GetProfile(string name)
@@ -137,7 +173,34 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        notebook.LogResponse(currentCharacter, queryResponse);
+        if (freshReply)
+        {
+            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            {
+                queryResponse = "My first clue!";
+            }
+            if (queryResponse != "")
+            {
+                notebook.LogResponse(currentCharacter, stringToEdit, queryResponse);
+            }
+            if (state.currentState == GameState.State.TUTORIAL)
+            {
+                state.SaveClue();
+                UpdateReply(state.NextString());
+            }
+            freshReply = false;
+        }
+    }
+
+    public void NextButton()
+    {
+        state.ContinueTutorial();
+        UpdateReply(state.NextString());
+    }
+
+    public void SkipButton()
+    {
+        state.EndTutorial();
     }
 
 }

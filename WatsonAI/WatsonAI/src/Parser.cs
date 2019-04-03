@@ -1,10 +1,7 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 using OpenNLP.Tools.Parser;
-using OpenNLP.Tools.PosTagger;
-using OpenNLP.Tools.SentenceDetect;
 using OpenNLP.Tools.Tokenize;
 
 namespace WatsonAI
@@ -43,7 +40,6 @@ namespace WatsonAI
       System.Diagnostics.Debug.WriteLine("Loading parser database...");
       this.parser = new EnglishTreebankParser(modelPathParse);
       System.Diagnostics.Debug.WriteLine("Load completed.");
-
     }
 
     /// <summary>
@@ -53,11 +49,25 @@ namespace WatsonAI
     /// To avoid buggy results, tokenize before parsing, even though parse accepts a string.
     /// </remarks>
     /// <param name="sentence">The sentence.</param>
-    /// <returns>A parse tree of the sentence.</returns>
-    public Parse Parse(string sentence)
+    /// <param name="parse">A parse tree of the sentence or null.</param>
+    /// <returns>True if there is a parse, false if the parse is null.</returns>
+    public bool Parse(string sentence, out Parse parse)
     {
       var tokens = Tokenize(sentence);
-      return this.parser.DoParse(tokens);
+      parse = this.parser.DoParse(tokens);
+      return parse != null;
+    }
+
+    /// <summary>
+    /// Generates a parse tree of the gramaitical structure of the sentence.
+    /// </summary>
+    /// <param name="tokens">An IEnumerable of tokens to parse.</param>
+    /// <param name="parse">A parse tree of the sentence or null.</param>
+    /// <returns>True if there is a parse, false if the parse is null.</returns>
+    public bool Parse(IEnumerable<string> tokens, out Parse parse)
+    {
+      parse = this.parser.DoParse(tokens);
+      return parse != null;
     }
 
     /// <summary>

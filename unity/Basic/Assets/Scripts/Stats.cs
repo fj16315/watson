@@ -2,6 +2,7 @@
 {
     private static int score;
     private static float time;
+    private static bool menu = false;
 
     public static int Score
     {
@@ -24,6 +25,18 @@
         set
         {
             time = value;
+        }
+    }
+
+    public static bool Menu
+    {
+        get
+        {
+            return menu;
+        }
+        set
+        {
+            menu = value;
         }
     }
 }

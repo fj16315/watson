@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Record : MonoBehaviour {
 
-    public float RotationSpeed = 100;
+    public float RotationSpeed = 40;
     public bool Activated = true;
 
     // Use this for initialization

@@ -1,0 +1,71 @@
+
+
+New Session
+User: hello
+AI: G'day, Watson
+User: where is the will
+AI: Can you remain on task please?
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: where is the will?
+AI: The will is in the study
+User: where is the will?
+AI: The will is in the study
+User: where is the will?
+AI: The will is in the study
+User: where is the will?
+AI: The will is in the study
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: who killed the earl?
+AI: The actress kill the earl
+
+New Session
+User: who killed the earl?
+AI: The actress kill the earl
+User: why did you kill the earl?
+AI: I dont know.
+User: the earl?
+AI: I dont know.
+User: who inherits the money?
+AI: The actress inherit the money
+
+New Session
+User: the actress killed the earl
+AI: We have got more urgent matters at hand.
+
+New Session
+User: where is the will?
+AI: The will is in the study
+
+New Session
+User: where is the will?
+AI: The will is in the study
+User: who is going to inherit the money 
+AI: The actress inherit the money
+User: who is going to inherit the money ?
+AI: The actress inherit the money

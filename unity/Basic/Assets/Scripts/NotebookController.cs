@@ -4,16 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC;
+using System;
 
 namespace Notebook
 {
-    enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
-    enum Character : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
-    enum Item : int { KEY, BOOK, POISON };
+    public enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
+    public enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour
     {
-
         public GameObject container;
         public PlayerController player;
 
@@ -39,17 +38,17 @@ namespace Notebook
         public GameObject charGangster;
         public GameObject charPolice;
         GameObject currentChar;
-        Character currentCharEnum = Character.ACTRESS;
+        Character currentCharEnum = Character.POLICE;
 
         // Character clues
-        List<string> cluesActress = new List<string>();
-        List<string> cluesButler = new List<string>();
-        List<string> cluesColonel = new List<string>();
-        List<string> cluesCountess = new List<string>();
-        List<string> cluesEarl = new List<string>();
-        List<string> cluesGangster = new List<string>();
-        List<string> cluesPolice = new List<string>();
-        List<List<string>> cluesDirectory = new List<List<string>>();
+        List<Tuple<string, string> > cluesActress = new List<Tuple<string, string> >();
+        List<Tuple<string, string>> cluesButler = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesColonel = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesCountess = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesEarl = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesGangster = new List<Tuple<string, string>>();
+        List<Tuple<string, string>> cluesPolice = new List<Tuple<string, string>>();
+        List<List<Tuple<string, string>>> cluesDirectory = new List<List<Tuple<string, string>>>();
 
         public Text actressClueBox;
         public Text butlerClueBox;
@@ -58,6 +57,8 @@ namespace Notebook
         public Text earlClueBox;
         public Text gangsterClueBox;
         public Text policeClueBox;
+
+        public Text inventoryText;
 
         // Use this for initialization
         void Start()
@@ -103,6 +104,7 @@ namespace Notebook
         public void Activate(bool active)
         {
             container.SetActive(active);
+            UpdateInventory();
             if (currentPageEnum == Page.CHARACTER)
             {
                 ChangeCharacter((int)currentCharEnum);
@@ -131,6 +133,7 @@ namespace Notebook
                     case Page.INVENTORY:
                         invtPage.SetActive(true);
                         currentPage = invtPage;
+                        UpdateInventory();
                         break;
                     case Page.ITEM:
                         itemPage.SetActive(true);
@@ -151,62 +154,51 @@ namespace Notebook
 
         public void ChangeCharacter(int target)
         {
-            //if ((int)currentCharEnum != target)
-            //{
-                currentChar.SetActive(false);
-                switch ((Character)target)
-                {
-                    case Character.ACTRESS:
-                        charActress.SetActive(true);
-                        actressClueBox.text = UpdateClues(target);
-                        currentChar = charActress;
-                        currentCharEnum = Character.ACTRESS;
-                        break;
-                    case Character.BUTLER:
-                        charButler.SetActive(true);
-                        butlerClueBox.text = UpdateClues(target);
-                        currentChar = charButler;
-                        currentCharEnum = Character.BUTLER;
-                        break;
-                    case Character.COLONEL:
-                        charColonel.SetActive(true);
-                        colonelClueBox.text = UpdateClues(target);
-                        currentChar = charColonel;
-                        currentCharEnum = Character.COLONEL;
-                        break;
-                    case Character.COUNTESS:
-                        charCountess.SetActive(true);
-                        countessClueBox.text = UpdateClues(target);
-                        currentChar = charCountess;
-                        currentCharEnum = Character.COUNTESS;
-                        break;
-                    case Character.EARL:
-                        charEarl.SetActive(true);
-                        earlClueBox.text = UpdateClues(target);
-                        currentChar = charEarl;
-                        currentCharEnum = Character.EARL;
-                        break;
-                    case Character.GANGSTER:
-                        charGangster.SetActive(true);
-                        gangsterClueBox.text = UpdateClues(target);
-                        currentChar = charGangster;
-                        currentCharEnum = Character.GANGSTER;
-                        break;
-                    case Character.POLICE:
-                        charPolice.SetActive(true);
-                        policeClueBox.text = UpdateClues(target);
-                        currentChar = charPolice;
-                        currentCharEnum = Character.POLICE;
-                        break;
-                }
-            //}
-        }
-
-        public void AddClue(List<int> characters, List<int> items, string clue)
-        {
-            foreach (int character in characters)
+            currentChar.SetActive(false);
+            switch ((Character)target)
             {
-                cluesDirectory[character].Add(clue);
+                case Character.ACTRESS:
+                    charActress.SetActive(true);
+                    actressClueBox.text = UpdateClues(target);
+                    currentChar = charActress;
+                    currentCharEnum = Character.ACTRESS;
+                    break;
+                case Character.BUTLER:
+                    charButler.SetActive(true);
+                    butlerClueBox.text = UpdateClues(target);
+                    currentChar = charButler;
+                    currentCharEnum = Character.BUTLER;
+                    break;
+                case Character.COLONEL:
+                    charColonel.SetActive(true);
+                    colonelClueBox.text = UpdateClues(target);
+                    currentChar = charColonel;
+                    currentCharEnum = Character.COLONEL;
+                    break;
+                case Character.COUNTESS:
+                    charCountess.SetActive(true);
+                    countessClueBox.text = UpdateClues(target);
+                    currentChar = charCountess;
+                    currentCharEnum = Character.COUNTESS;
+                    break;
+                case Character.EARL:
+                    charEarl.SetActive(true);
+                    earlClueBox.text = UpdateClues(target);
+                    currentChar = charEarl;
+                    currentCharEnum = Character.EARL;
+                    break;
+                case Character.GANGSTER:
+                    charGangster.SetActive(true);
+                    gangsterClueBox.text = UpdateClues(target);
+                    currentChar = charGangster;
+                    currentCharEnum = Character.GANGSTER;
+                    break;
+                case Character.POLICE:
+                    charPolice.SetActive(true);
+                    policeClueBox.text = UpdateClues(target);
+                    currentChar = charPolice;
+                    currentCharEnum = Character.POLICE;
+                    break;
             }
         }
 
@@ -232,19 +224,29 @@ namespace Notebook
             return (int)Character.POLICE; // Default
         }
 
-        public void LogResponse(NPCController character, string message)
+        public void LogResponse(NPCController character, string question, string clue)
         {
-            cluesDirectory[CharToEnum(character.name)].Add(message);
+            cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
         public string UpdateClues(int character)
         {
             string result = "";
-            foreach (string clue in cluesDirectory[character])
+            foreach (Tuple<string, string> exchange in cluesDirectory[character])
             {
-                result += "- \"" + clue + "\"\n";
+                result += "<b>>  </b>";
+                if (exchange.Item1 != "")
+                {
+                    result += "<i>\"" + exchange.Item1 + "</i>\"<b>  ~  ";
+                }
+                result += "\"" + exchange.Item2 + "\"</b>\n";
             }
             return result;
+        }
+
+        public void UpdateInventory()
+        {
+            inventoryText.text = player.list;
         }
 
     }

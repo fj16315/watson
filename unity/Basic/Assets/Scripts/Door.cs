@@ -9,41 +9,51 @@ namespace Doors
         public bool open = false;
         public float angleOpen = 0;
         public float angleClose = 0;
-        public bool single = true;
         public bool locked = false;
-        public float speed = 100;
+        public int direction = 1;
+        public string doorName = "";
+        int step = 3;
+        int rounds;
+        int counter = 0;
+        
         bool activate = false;
 
         // Use this for initialization
         void Start()
         {
-            
+            rounds = 90 / step;
+        }
+
+        private void FixedUpdate()
+        {
+            if (activate)
+            {
+
+                if (counter++ < rounds)
+                {
+                    //float target = open ? angleClose : angleOpen;
+                    int sweep = open ? 1 : -1;
+                    transform.Rotate(Vector3.up, step * sweep * direction, 0);
+                }
+                else
+                {
+                    open = !open;
+                    activate = false;
+                    counter = 0;
+                }
+
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (activate && single)
-            {
-                float currentAngle = transform.eulerAngles.y;
-                float target = open ? angleClose : angleOpen;
-                int sweep = open ? 1 : -1;
-                Debug.Log(currentAngle);
-                if (Mathf.Abs(currentAngle - target) > 1)
-                {
-                    transform.Rotate(Vector3.up, speed * sweep * Time.deltaTime, 0);
-                }
-                else
-                {
-                    activate = false;
-                    open = !open;
-                }
-            }
+
         }
 
         public void Activate()
         {
-            if (single && !locked)
+            if (!locked)
             {
                 activate = true;
             }
