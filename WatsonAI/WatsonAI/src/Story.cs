@@ -8,7 +8,7 @@ namespace WatsonAI
   /// </summary>
   public static class Story
   {
-    public enum Names : int { ACTRESS, BUTLER, COLONEL, COUNTESS, EARL, GANGSTER, POLICE };
+    public enum Names : int { ACTRESS, BUTLER, COLONEL, COUNTESS, GANGSTER, POLICE };
     private static readonly KnowledgeBuilder universeKnowledgeBuilder;
     public static Dictionary<Names, Character> Characters { get; }
     public static Knowledge Knowledge
@@ -18,7 +18,7 @@ namespace WatsonAI
         return universeKnowledgeBuilder.Knowledge;
       }
     }
-    public static Associations association
+    public static Associations Associations
     {
       get
       {
