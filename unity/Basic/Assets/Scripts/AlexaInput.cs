@@ -11,6 +11,7 @@ public class AlexaInput : MonoBehaviour {
     public GameState state;
 
     private bool inDialogue;
+    private string lastCommand;
 
     IEnumerator DownloadWebService()
     {
@@ -45,15 +46,17 @@ public class AlexaInput : MonoBehaviour {
 
     void ExtractCommand(string json)
     {
+        Debug.Log(json);
         var jsonstring = JSON.Parse(json);
+        Debug.Log(jsonstring);
         string command = jsonstring["command"];
         if (command == null || command == "") { return; }
         else {
             Debug.Log("Command = " + command);
-            if (command != "undefined")
+            if (command != "undefined" && !command.Equals(lastCommand))
             {
                 dialogue.UpdateQuestion(command);
-                //ai.Query(command);
+                lastCommand = command;
             }
         }
     }
