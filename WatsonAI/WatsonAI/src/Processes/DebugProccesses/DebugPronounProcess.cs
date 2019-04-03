@@ -8,12 +8,14 @@ namespace WatsonAI
   {
     private readonly PronounsProcess pronounProcess;
 
-
+    /// <summary>
+    /// Construct a new DebugPronounProcess with character actress.
+    /// </summary>
     public DebugPronounProcess()
     {
       this.pronounProcess = new PronounsProcess(new Character("actress", false));
-
     }
+
     /// <summary>
     /// 'pp' will replace personal pronouns in a sentence with the appropriate replacements
     /// </summary>
@@ -26,6 +28,21 @@ namespace WatsonAI
         List<string> remainingInput;
         stream.RemainingInput(out remainingInput, Read.Consume);
         pronounProcess.PreProcess(ref remainingInput);
+        pronounProcess.PostProcess(ref remainingInput);
+        stream.AppendOutput(string.Join(" ", remainingInput));
+      }
+      if (stream.ConsumeIf("ppre".Equals))
+      {
+        List<string> remainingInput;
+        stream.RemainingInput(out remainingInput, Read.Consume);
+        pronounProcess.PreProcess(ref remainingInput);
+        stream.AppendOutput(string.Join(" ", remainingInput));
+      }
+      if (stream.ConsumeIf("ppos".Equals))
+      {
+        List<string> remainingInput;
+        stream.RemainingInput(out remainingInput, Read.Consume);
+        pronounProcess.PostProcess(ref remainingInput);
         stream.AppendOutput(string.Join(" ", remainingInput));
       }
       return stream;

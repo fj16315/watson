@@ -45,7 +45,7 @@ public class AIController : MonoBehaviour
         loaded = true;
     }
 
-    public string Run(string input) 
+    public string Run(string input, int character) 
     {
         string aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
         //string aiResponse = watson.Run(input);
