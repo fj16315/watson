@@ -10120,7 +10120,7 @@ GameObject:
   - component: {fileID: 960222630}
   - component: {fileID: 960222631}
   m_Layer: 0
-  m_Name: FireDiningRoom
+  m_Name: FireDrawingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10193,6 +10193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1826286831}
+  flickerDistance: 12
 --- !u!1 &963414655
 GameObject:
   m_ObjectHideFlags: 0
@@ -17003,7 +17004,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.516602, b: 0.1607843, a: 1}
   m_Intensity: 1.4
-  m_Range: 14
+  m_Range: 9.6
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -17042,6 +17043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1826286831}
+  flickerDistance: 12
 --- !u!1 &1549226495
 GameObject:
   m_ObjectHideFlags: 0
