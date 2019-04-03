@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 using OpenNLP.Tools.Parser;
 
@@ -31,7 +33,7 @@ namespace WatsonAI
 
     public static Children<a> operator <(Branch branch, Pattern<a> child)
     {
-      throw new System.NotSupportedException("Operator < is not supported for Patterns, it is just required for compilation.");
+      throw new NotSupportedException("Operator < is not supported for Patterns, it is just required for compilation.");
     }
 
     public static Descendant<a> operator >=(Branch branch, Pattern<a> child)
@@ -39,7 +41,7 @@ namespace WatsonAI
 
     public static Descendant<a> operator <=(Branch branch, Pattern<a> child)
     {
-      throw new System.NotSupportedException("Operator <= is not supported for Patterns, it is just required for compilation.");
+      throw new NotSupportedException("Operator <= is not supported for Patterns, it is just required for compilation.");
     }
   }
 
@@ -55,9 +57,12 @@ namespace WatsonAI
       => new And<a, b>(lhs, rhs);
   }
 
-  public static class FlattenExtension
+  public static class PatternExtension
   {
-    public static Flatten<a> Flatten<a>(this Pattern<IEnumerable<IEnumerable<a>>> pattern)
-      => new Flatten<a>(pattern);
+    public static Pattern<IEnumerable<a>> Flatten<a>(this Pattern<IEnumerable<IEnumerable<a>>> pattern)
+      => pattern.Map(e => e.SelectMany(x => x));
+
+    public static Pattern<b> Map<a, b>(this Pattern<a> pattern, Func<a, b> func)
+      => new Map<a, b>(pattern, func);
   }
 }
