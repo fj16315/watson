@@ -22,6 +22,7 @@ namespace WatsonAI
     {
       Knowledge = new Knowledge();
       Associations = new Associations();
+      //Console.WriteLine("Added new associations");
 
       Debug.WriteLineIf(!AddEntities(entities), "Failed to add entities!");
       Debug.WriteLineIf(!AddVerbs(verbs), "Failed to add verbs!");
