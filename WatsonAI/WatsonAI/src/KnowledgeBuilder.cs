@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 
 namespace WatsonAI
 {
@@ -22,10 +23,12 @@ namespace WatsonAI
     {
       Knowledge = new Knowledge();
       Associations = new Associations();
-      //Console.WriteLine("Added new associations");
 
-      Debug.WriteLineIf(!AddEntities(entities), "Failed to add entities!");
-      Debug.WriteLineIf(!AddVerbs(verbs), "Failed to add verbs!");
+      var successE = AddEntities(entities);
+      var successV = AddVerbs(verbs);
+
+      Debug.WriteLineIf(successE, "Failed to add entities!");
+      Debug.WriteLineIf(successV, "Failed to add verbs!");
 
       Debug.WriteLine($"Entities: {string.Join(", ", Associations.EntityNames()) }");
       Debug.WriteLine($"Verbs: {string.Join(", ", Associations.VerbNames()) }");
