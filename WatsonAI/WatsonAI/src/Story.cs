@@ -27,7 +27,8 @@ namespace WatsonAI
         "poison", "marry", "owe", "employ",
         "inherit", "prevent", "launder", "contain",
         "own", "resent", "do", "blackmail",
-        "use", "kill", "be", "love", "like"};
+        "use", "kill", "be", "love", "like"
+      };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
         //{"actress", "be", "murderer"},
