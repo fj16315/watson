@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Doors;
 using NPC;
-using Things;
 
 public class GameState : MonoBehaviour {
 
@@ -21,7 +20,7 @@ public class GameState : MonoBehaviour {
     public NPCController police;
     public DialogueScreen dialogue;
     public CameraRaycasting raycasting;
-    public Thing notebookThing;
+    public Interactable notebookInteractable;
     public MasterControl controller;
 
     // Tutorial variables
@@ -75,7 +74,7 @@ public class GameState : MonoBehaviour {
             currentString++;
             if (currentString == 2)
             {
-                notebookThing.pickup = true;
+                notebookInteractable.pickup = true;
             }
             else if (currentString == 10)
             {
@@ -124,7 +123,7 @@ public class GameState : MonoBehaviour {
 
     public void PickUp(GameObject obj)
     {
-        if (obj.GetComponent<Thing>().objName.Equals("Notebook"))
+        if (obj.GetComponent<Interactable>().objName.Equals("Notebook"))
         {
             if (!pickup)
             {

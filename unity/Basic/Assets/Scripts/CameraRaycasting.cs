@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC;
-using Things;
 using Doors;
 using Containers;
 using UnityStandardAssets.Characters.FirstPerson;
 
 // (T)ype (o)f (M)essage
-enum ToM : int {CHARACTER, THING, DOOR};
+enum ToM : int {CHARACTER, INTERACTABLE, DOOR};
 
 public class CameraRaycasting : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class CameraRaycasting : MonoBehaviour
             entity = objectHit.collider;
             NPCController npc = entity.GetComponent<NPCController>();
             Door door = entity.GetComponent<Door>();
-            Thing obj = entity.GetComponent<Thing>();
+            Interactable obj = entity.GetComponent<Interactable>();
 
             if (npc != null)
             {
@@ -58,7 +57,7 @@ public class CameraRaycasting : MonoBehaviour
             }       
             else if (obj != null)
             {
-                type = (int)ToM.THING;
+                type = (int)ToM.INTERACTABLE;
                 Container container = entity.GetComponent<Container>();
                 if (Input.GetMouseButtonDown(0) && !controller.paused)
                 {
@@ -125,9 +124,9 @@ public class CameraRaycasting : MonoBehaviour
                         message = "Talk to " + npc.charName;
                     }
                     break;
-                // THING
-                case (int)ToM.THING:
-                    Thing thing = entity.GetComponent<Thing>();
+                // Interactable
+                case (int)ToM.INTERACTABLE:
+                    Interactable interactable = entity.GetComponent<Interactable>();
                     Container container = entity.GetComponent<Container>();
                     if (container != null)
                     {
@@ -148,13 +147,13 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    if (thing != null)
+                    if (interactable != null)
                     {
-                        if (thing.CanPickUp())
+                        if (interactable.CanPickUp())
                         {
                             message = "Pick up ";
                         }
-                        message += thing.objName;
+                        message += interactable.objName;
                     }
                     break;
                 // DOOR

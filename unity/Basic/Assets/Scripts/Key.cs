@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
 
-public class Key : Things.Thing
+public class Key : Interactable
 {
 
     // Use this for initialization
