@@ -185,6 +185,11 @@ namespace WatsonAI
     {
       process.PostProcess(ref output);
     }
+
+    public void ClearOutput()
+    {
+      output = new List<string>();
+    }
   }
 
   public enum Read

@@ -12,10 +12,11 @@ namespace WatsonAI
     public static Dictionary<Names, Character> Characters { get; }
     public static Knowledge Knowledge;
     public static Associations Associations;
+    public static EntityBuilder entities;
 
     static Story()
     {
-      var entities = new EntityBuilder {
+      entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
         "gangster", "money", "promotion", "money",
         "study", "will", "belonging", "letter",
