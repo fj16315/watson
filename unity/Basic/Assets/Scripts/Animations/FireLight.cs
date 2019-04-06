@@ -11,6 +11,7 @@ public class FireLight : MonoBehaviour {
     float distance;
     float hop = 0.02F;
     float diff;
+    public float flickerDistance = 12;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,7 @@ public class FireLight : MonoBehaviour {
         if ((counter++ % 3 ) == 0)
         {
             distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < 12)
+            if (distance < flickerDistance)
             {
                 diff = (float)(rand.Next(110, 160));
                 l.intensity = diff / 100.0F;
@@ -33,7 +34,7 @@ public class FireLight : MonoBehaviour {
         if (counter % 8 == 0)
         {
             distance = Vector3.Distance(transform.position, player.transform.position);
-            if (rand.Next(0, 10) >= 5 && distance < 12)
+            if (rand.Next(0, 10) >= 5 && distance < flickerDistance)
             {
                 l.transform.Translate(0, hop, 0);
                 counter = 1;

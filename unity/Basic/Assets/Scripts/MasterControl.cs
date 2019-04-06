@@ -116,4 +116,9 @@ public class MasterControl : MonoBehaviour {
     {
         SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
     }
+
+    public void TogglePaused()
+    {
+        Pause(!paused);
+    }
 }
