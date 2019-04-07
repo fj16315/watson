@@ -9,26 +9,53 @@ namespace WatsonAI
   /// </summary>
   public class FallbackProcess : IProcess
   {
+    private string[] randomNonesenseResponses;
+    private string[] randomUniverseResponses;
+    private string[] randomEntitiesResponses;
 
-    private string[] randomFallbacks;
-
+    /// <summary>
+    /// Initialises random responses to the different fallbacks
+    /// </summary>
     public FallbackProcess() {
-      randomFallbacks = new string[]
+      randomNonesenseResponses = new string[]
       {
-        "I dont know.",
         "Can you remain on task please?",
         "We have got more urgent matters at hand.",
         "I would rather be talking about the murder.",
         "Please dont go off topic.",
         "Dont you have more important things to discuss?",
       };
+
+      randomUniverseResponses = new string[]
+      {
+        "I don't know, but someone else might.",
+        "Other people in the house will know.",
+        "Well I'm not sure about that but ask the others in the house."
+      };
+
+      randomEntitiesResponses = new string[]
+      {
+        "I really couldn't answer that.",
+        "I'm not sure about that.",
+        "Well no-one in the house could answer that!"
+      };
     }
 
+    /// <summary>
+    /// Process determines which category of fallback it is,
+    /// then returns an appropriate random response
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <returns></returns>
     public Stream Process(Stream stream)
     {
+      var rnd = new Random();
+      var nonesenseIndex = rnd.Next(randomNonesenseResponses.Length);
+      var universeIndex = rnd.Next(randomUniverseResponses.Length);
+      var entitiesIndex = rnd.Next(randomEntitiesResponses.Length);
       var input = new List<string>();
       bool flag = false;
-      if (stream.Output.Contains<string>("!u"))
+      if (stream.Output.Contains("!u"))
       {
         stream.ClearOutput();
         stream.RemainingInput(out input, Read.Peek);
@@ -41,11 +68,11 @@ namespace WatsonAI
         }
         if (flag)
         {
-          stream.AppendOutput("I really couldn't answer that.");
+          stream.AppendOutput(randomEntitiesResponses[entitiesIndex]);
         }
         else
         {
-          stream.AppendOutput("You're talking nonesense, can we get back on track please?");
+          stream.AppendOutput(randomNonesenseResponses[nonesenseIndex]);
         }
       }
       else if (!stream.Output.Any())
@@ -55,9 +82,8 @@ namespace WatsonAI
           Console.WriteLine(o);
         }
         stream.ClearOutput();
-        stream.AppendOutput("I don't know, but someone else might.");
+        stream.AppendOutput(randomUniverseResponses[universeIndex]);
       }
-      flag = false;
       return stream;
     }
   }

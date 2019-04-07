@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace WatsonAI
 {
+  /// <summary>
+  /// Process for querying the universe Knowledge
+  /// </summary>
   public class UniverseQuestionProcess : IProcess
   {
     private Parser parser;
@@ -13,6 +16,13 @@ namespace WatsonAI
     private Thesaurus thesaurus;
     private Associations associations;
 
+    /// <summary>
+    /// Constructs a new UniverseQuestionProcess similar to QuestionProcess
+    /// </summary>
+    /// <param name="parse"></param>
+    /// <param name="knowledge"></param>
+    /// <param name="thesaurus"></param>
+    /// <param name="associations"></param>
     public UniverseQuestionProcess(Parser parse, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
     {
       this.parser = parse;
@@ -22,6 +32,13 @@ namespace WatsonAI
       this.query = new KnowledgeQuery(knowledge);
     }
 
+    /// <summary>
+    /// Queries the universe Knowledge if the character's Knowledge
+    /// returned no response. Appends the output with a tag if the
+    /// universe Knowledge returned nothing
+    /// </summary>
+    /// <param name="stream"></param>
+    /// <returns></returns>
     public Stream Process(Stream stream)
     {
       if (!stream.Output.Any())

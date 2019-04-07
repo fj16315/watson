@@ -186,6 +186,9 @@ namespace WatsonAI
       process.PostProcess(ref output);
     }
 
+    /// <summary>
+    /// Resets output to be empty
+    /// </summary>
     public void ClearOutput()
     {
       output = new List<string>();

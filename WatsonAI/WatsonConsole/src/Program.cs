@@ -24,7 +24,7 @@ public class MainClass
     {
       Console.Write("> ");
       var line = Console.ReadLine();
-      Console.WriteLine(watson.Run(line, 1));
+      Console.WriteLine(watson.Run(line, (int)Story.Names.ACTRESS));
       if (line == "") { break; }
     }
   }
