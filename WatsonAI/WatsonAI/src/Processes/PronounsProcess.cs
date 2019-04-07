@@ -4,16 +4,22 @@ using System.Linq;
 
 namespace WatsonAI
 {
+  /// <summary>
+  /// Implements a pre-process and post-process that remove and add, respectively, pronouns.
+  /// </summary>
   public class PronounsProcess : IPreProcess, IPostProcess
   {
     Character character;
-
 
     public PronounsProcess(Character character)
     {
       this.character = character;
     }
 
+    /// <summary>
+    /// Implements a pre-process that replaces pronouns with the character name in the input stream.
+    /// </summary>
+    /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public void PreProcess(ref List<string> tokens) 
     {
       for (int i = 0; i < tokens.Count; i++)
@@ -37,6 +43,10 @@ namespace WatsonAI
       }
     }
 
+    /// <summary>
+    /// Implements a post-process that replaces character names with pronouns in the ouput stream.
+    /// </summary>
+    /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public void PostProcess(ref List<string> tokens)
     {
       for (int i = 0; i < tokens.Count; i++)
@@ -62,22 +72,19 @@ namespace WatsonAI
 
     private List<Character> FindCharactersInInput(List<string> tokens) 
     {
-
-      var characterList = Story.Characters.Values.ToList();
-      List<Character> characters = new List<Character>();
+      var storyCharacters = Story.Characters.Values.ToList();
+      var inputCharacters = new List<Character>();
       foreach (var token in tokens)
       {
-        foreach( var name in characterList)
+        foreach(var character in storyCharacters)
         { 
-          if (token.Equals(name.Name))
+          if (token.Equals(character.Name))
           {
-            characters.Add(name);
+            inputCharacters.Add(character);
           }
         }
-
       }
-      return characters;
-
+      return inputCharacters;
     }
   }
 }
