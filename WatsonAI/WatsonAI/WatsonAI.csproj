@@ -224,6 +224,7 @@
   <ItemGroup>
     <Compile Remove="src\HiveMind.cs" />
     <Compile Remove="src\EntityQuery.cs" />
+    <Compile Remove="src\Processes\QuestionProcess\Patterns\Flatten.cs" />
   </ItemGroup>
 
   <ItemGroup>

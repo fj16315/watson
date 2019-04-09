@@ -12,10 +12,12 @@ namespace WatsonAI
     public static Dictionary<Names, Character> Characters { get; }
     public static Knowledge Knowledge;
     public static Associations Associations;
+    public static EntityBuilder entities;
+    public static VerbBuilder verbs;
 
     static Story()
     {
-      var entities = new EntityBuilder {
+      entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
         "gangster", "money", "promotion", "money",
         "study", "will", "belonging", "letter",
@@ -23,11 +25,12 @@ namespace WatsonAI
         "nightshade", "murderer", "dead", "music", "chocolate",
         "house", "earth", "england", "universe", "dorset", "policeman"
       };
-      var verbs = new VerbBuilder {
+      verbs = new VerbBuilder {
         "poison", "marry", "owe", "employ",
         "inherit", "prevent", "launder", "contain",
         "own", "resent", "do", "blackmail",
-        "use", "kill", "be", "love", "like"};
+        "use", "kill", "be", "love", "like"
+      };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
         //{"actress", "be", "murderer"},
@@ -73,8 +76,10 @@ namespace WatsonAI
         {Names.BUTLER, new Character("butler", false)},
       };
 
-      var characterKnowledgeBuilders = new List<KnowledgeBuilder>
+      //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
+      var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
       {
+        {Names.ACTRESS,
         new KnowledgeBuilder(entities, verbs)
         {
           {"actress", "poison", "earl"},
@@ -90,7 +95,8 @@ namespace WatsonAI
           {"study", "contain", "will"},
           {"earl", "own", "belonging"},
           {"earl", "use", "barbital"}
-        },
+        }},
+        {Names.BUTLER,
         new KnowledgeBuilder(entities, verbs)
         {
           {"earl", "love", "countess"},
@@ -107,7 +113,8 @@ namespace WatsonAI
           {"countess", "love", "chocolate"},
           {"belonging", "contain", "letter"},
           {"belonging", "contain", "nightshade"}
-        },
+        }},
+        {Names.COLONEL,
         new KnowledgeBuilder(entities, verbs)
         {
           {"actress", "poison", "earl"},
@@ -123,7 +130,8 @@ namespace WatsonAI
           {"study", "contain", "will"},
           {"earl", "own", "belonging"},
           {"earl", "use", "barbital"}
-        },
+        }},
+        {Names.COUNTESS,
         new KnowledgeBuilder(entities, verbs)
         {
           {"actress", "poison", "earl"},
@@ -139,8 +147,10 @@ namespace WatsonAI
           {"study", "contain", "will"},
           {"earl", "own", "belonging"},
           {"earl", "use", "barbital"}
-        },
-        new KnowledgeBuilder(entities, verbs),
+        }},
+        {Names.EARL,
+        new KnowledgeBuilder(entities, verbs)},
+        {Names.GANGSTER,
         new KnowledgeBuilder(entities, verbs)
         {
           {"actress", "poison", "earl"},
@@ -156,7 +166,8 @@ namespace WatsonAI
           {"study", "contain", "will"},
           {"earl", "own", "belonging"},
           {"earl", "use", "barbital"}
-        },
+        }},
+        {Names.POLICE,
         new KnowledgeBuilder(entities, verbs)
         {
           {"actress", "poison", "earl"},
@@ -172,12 +183,12 @@ namespace WatsonAI
           {"study", "contain", "will"},
           {"earl", "own", "belonging"},
           {"earl", "use", "barbital"}
-        }
+        }}
       };
 
       foreach (var c in Characters)
       {
-        c.Value.Knowledge = characterKnowledgeBuilders[(int) c.Key].Knowledge;
+        c.Value.Knowledge = characterKnowledgeBuilders[c.Key].Knowledge;
       }
     }
   }

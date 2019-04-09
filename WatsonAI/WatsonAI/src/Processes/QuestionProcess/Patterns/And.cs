@@ -1,5 +1,6 @@
-﻿using OpenNLP.Tools.Parser;
-using System;
+﻿using System;
+
+using OpenNLP.Tools.Parser;
 
 namespace WatsonAI
 {

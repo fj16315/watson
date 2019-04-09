@@ -11,6 +11,7 @@ namespace Doors
         public float angleClose = 0;
         public bool locked = false;
         public int direction = 1;
+        public string doorName = "";
         int step = 3;
         int rounds;
         int counter = 0;

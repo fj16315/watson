@@ -40,13 +40,14 @@ namespace WatsonAI
 
       var debugs = new DebugProcesses(parser, thesaurus);
       var greetings = new GreetingsProcess(parser, thesaurus);
-      var fallback = new FallbackProcess();
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
+      var fallback = new FallbackProcess();
       var prePronoun = new PronounsProcess(character);
+      var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
 
       var output = new Processor()
         .AddPreProcesses(prePronoun)
-        .AddProcesses(greetings, debugs, question, fallback)
+        .AddProcesses(greetings, debugs, question, universeQuestion, fallback)
         .Process(stream);
 
       var response = string.Join(", ", output.Output);

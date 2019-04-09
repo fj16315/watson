@@ -11,6 +11,7 @@ public class DialogueScreen : MonoBehaviour {
     bool show = false;
     public GameState state;
     public string stringToEdit = "";
+    private string lastQuestion = "";
     string answer = "";
     string queryResponse = "";
     private AIController ai;
@@ -23,6 +24,7 @@ public class DialogueScreen : MonoBehaviour {
     private NPCController currentCharacter;
     public NotebookController notebook;
     public AlexaInput alexa;
+    private bool freshReply = true;
 
     // Character Fonts
     public Font fontDetective;
@@ -42,6 +44,7 @@ public class DialogueScreen : MonoBehaviour {
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
         saveButton.SetActive(false);
+        skipButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -78,7 +81,6 @@ public class DialogueScreen : MonoBehaviour {
                 GUI.SetNextControlName("TextBox");
                 stringToEdit = GUI.TextField(new Rect(x, y, width, height), stringToEdit);
                 GUI.FocusControl("TextBox");
-
                 QueryAi();
             }
 
@@ -92,15 +94,20 @@ public class DialogueScreen : MonoBehaviour {
         currentCharacter = character;
         textBubble.SetActive(true);
         saveButton.SetActive(true);
+        stringToEdit = "";
+        lastQuestion = "";
         if (!(state.currentState == GameState.State.TUTORIAL))
         {
             alexa.StartSession();
-            ai.StartSession();
+            ai.StartSession(currentCharacter);
             UpdateReply("");
         } else
         {
             nextButton.SetActive(true);
-            skipButton.SetActive(true);
+            if (Application.isEditor)
+            {
+                skipButton.SetActive(true);
+            }
             UpdateReply(state.NextString());
         }
         
@@ -121,9 +128,14 @@ public class DialogueScreen : MonoBehaviour {
 
     private void QueryAi()
     {
-        queryResponse = ai.Run(stringToEdit, 2);
-        UpdateReply(queryResponse);
-        Debug.Log(answer);
+        if (stringToEdit != lastQuestion)
+        {
+            queryResponse = ai.Run(stringToEdit, 2);
+            UpdateReply(queryResponse);
+            freshReply = true;
+            Debug.Log(answer);
+            lastQuestion = stringToEdit;
+        }
     }
 
     private void UpdateReply(string extra)
@@ -166,18 +178,22 @@ public class DialogueScreen : MonoBehaviour {
 
     public void SaveButton()
     {
-        if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+        if (freshReply)
         {
-            queryResponse = "My first clue!";
-        }
-        if (queryResponse != "")
-        {
-            notebook.LogResponse(currentCharacter, queryResponse);
-        }
-        if (state.currentState == GameState.State.TUTORIAL)
-        {
-            state.SaveClue();
-            UpdateReply(state.NextString());
+            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            {
+                queryResponse = "My first clue!";
+            }
+            if (queryResponse != "")
+            {
+                notebook.LogResponse(currentCharacter, stringToEdit, queryResponse);
+            }
+            if (state.currentState == GameState.State.TUTORIAL)
+            {
+                state.SaveClue();
+                UpdateReply(state.NextString());
+            }
+            freshReply = false;
         }
     }
 
