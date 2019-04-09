@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace WatsonTest
 {
-  public class PronounsProcessTests
+  public class PronounsPreProcessTests
   {
-    private Character character;
+    private readonly Character character;
     private PronounsProcess pronounsProcess;
-    private static Parser parser = new Parser();
+    private static readonly Parser parser = new Parser();
      
-    public PronounsProcessTests()
+    public PronounsPreProcessTests()
     {
       character = new Character("actress", true);
       pronounsProcess = new PronounsProcess(this.character);
@@ -106,11 +106,107 @@ namespace WatsonTest
       Assert.Equal(new List<string> { "Watson", "enjoy", "playing", "minecraft", "." }, tokens);
     }
 
-    //[Fact]
-    //public void It()
-    //{
-    //  Assert.True(false);
-    //}
+    [Fact]
+    public void ItSingleEntity()
+    {
+      var input = "the study is brown, where is it?";
+      List<string> tokens;
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "the", "study", "is", "brown", ",", "what", "colour", "is", "the", "study", "?" }, tokens);
+    }
+
+    [Fact]
+    public void ItMultipleEntities()
+    {
+      var input = "the cat ate the dog, why did it do that?";
+      List<string> tokens;
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "the", "cat", "ate", "the", "dog", ",", "why", "did", "the", "cat", "do", "that", "?" }, tokens);
+      
+      input = "the cat and the mouse ate the dog, why did it do that?";
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      //TODO: Need to do something special here.
+    }
+
+    [Fact]
+    public void ItSingleEntityWithMemory()
+    {
+      // Test "it" from last user input
+      var inputMemory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, inputMemory);
+
+      var memoryInput = "the study is brown.";
+      inputMemory.AppendInput(memoryInput);
+
+      var input = "where is it?";
+      List<string> tokens;
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "is", "the", "study", "?" }, tokens);
+      
+
+      // Test "it" from last character response
+      var responseMemory = new Memory(character, 3);
+      memoryPronounsProcess = new PronounsProcess(character, responseMemory);
+
+      var memoryResponse = "the study is brown.";
+      inputMemory.AppendResponse(memoryResponse);
+
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "is", "the", "study", "?" }, tokens);
+    }
+
+    [Fact]
+    public void ItResponseOverridesInput()
+    {
+      var memory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, memory);
+
+      var memoryInput = "the study is brown.";
+      memory.AppendInput(memoryInput);
+      var memoryResponse = "the music is lame.";
+      memory.AppendResponse(memoryResponse);
+
+      var input = "where is it?";
+      List<string> tokens;
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "is", "the", "music", "?" }, tokens);
+    }
+
+    [Fact]
+    public void ItMultipleEntitiesWithMemory()
+    {
+      // Test "it" from last user input
+      var inputMemory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, inputMemory);
+
+      var memoryInput = "the study is brown.";
+      inputMemory.AppendInput(memoryInput);
+
+      var input = "where is it?";
+      List<string> tokens;
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      //TODO: Need to do something special here.
+      
+
+      // Test "it" from last character response
+      var responseMemory = new Memory(character, 3);
+      memoryPronounsProcess = new PronounsProcess(character, responseMemory);
+
+      var memoryResponse = "the study is brown.";
+      inputMemory.AppendResponse(memoryResponse);
+
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      //TODO: Need to do something special here.
+    }
+
 
     //[Fact]
     //public void He()

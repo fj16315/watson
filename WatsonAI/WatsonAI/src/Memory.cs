@@ -69,7 +69,7 @@ namespace WatsonAI
     {
       inputs.Add(input);
       if (inputs.Count > capacity)
-      {O(n)
+      {
         inputs.RemoveAt(0);
       }
     }

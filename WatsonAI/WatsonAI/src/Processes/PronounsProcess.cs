@@ -9,11 +9,18 @@ namespace WatsonAI
   /// </summary>
   public class PronounsProcess : IPreProcess, IPostProcess
   {
-    Character character;
+    private readonly Character character;
+    private readonly Memory inputMemory;
 
     public PronounsProcess(Character character)
     {
       this.character = character;
+    }
+
+    public PronounsProcess(Character character, Memory inputMemory)
+    {
+      this.character = character;
+      this.inputMemory = inputMemory;
     }
 
     /// <summary>
