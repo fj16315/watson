@@ -1,7 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WatsonAI
 {
+  /// <summary>
+  /// Represents the memory of one character.
+  /// </summary>
+  /// <remarks>
+  /// Stores the lists of inputs and responses backwards for constant 
+  /// time complexity adding, up to the capacity, then linear.
+  /// Accessing a memory element has constant time complexity.
+  /// </remarks>
   public class Memory
   {
     private readonly List<string> inputs;
@@ -13,9 +22,11 @@ namespace WatsonAI
     /// The inputs that the player gave to the character that are
     /// stored in the memory.
     /// </summary>
+    /// <remarks>This returns a lazy view of the list.</remarks>
     public IEnumerable<string> Inputs {
       get {
-        foreach (var input in this.inputs)
+        // This uses as enumerable to allow for LINQ to reverse lazily.
+        foreach (var input in inputs.AsEnumerable().Reverse())
         {
           yield return input;
         }
@@ -26,9 +37,11 @@ namespace WatsonAI
     /// The responses that the character has given to the player that 
     /// are stored in the memory.
     /// </summary>
+    /// <remarks>This returns a lazy view of the list.</remarks>
     public IEnumerable<string> Responses {
       get {
-        foreach (var response in this.responses)
+        // This uses as enumerable to allow for LINQ to reverse lazily.
+        foreach (var response in responses.AsEnumerable().Reverse())
         {
           yield return response;
         }
@@ -54,35 +67,35 @@ namespace WatsonAI
     /// <param name="input">The input to add.</param>
     public void AppendInput(string input)
     {
-      this.inputs.Insert(0, input);
-      if (this.inputs.Count > capacity)
-      {
-        this.inputs.RemoveAt(0);
+      inputs.Add(input);
+      if (inputs.Count > capacity)
+      {O(n)
+        inputs.RemoveAt(0);
       }
     }
 
     /// <summary>
     /// Store a new character response in the memory.
     /// </summary>
-    /// <param name="response"></param>
+    /// <param name="response">The response to add.</param>
     public void AppendResponse(string response)
     {
-      this.responses.Insert(0, response);
-      if (this.responses.Count > capacity)
+      responses.Add(response);
+      if (responses.Count > capacity)
       {
-        this.responses.RemoveAt(0);
+        responses.RemoveAt(0);
       }
     }
 
     /// <summary>
     /// Gets the last input given by the player.
     /// </summary>
-    /// <returns>The last input given by the player.</returns>
+    /// <returns>The last input given by the player, or empty if there is none.</returns>
     public string GetLastInput()
     {
-      if (this.inputs.Count > 0)
+      if (inputs.Count > 0)
       {
-        return this.inputs[0];
+        return inputs[inputs.Count - 1];
       }
       return "";
     }
@@ -90,12 +103,12 @@ namespace WatsonAI
     /// <summary>
     /// Gets the last response given by the character.
     /// </summary>
-    /// <returns>The last response given by the character.</returns>
+    /// <returns>The last response given by the character, or empty if there is none.</returns>
     public string GetLastResponse()
     {
-      if (this.responses.Count > 0)
+      if (responses.Count > 0)
       {
-        return this.responses[0];
+        return responses[inputs.Count - 1];
       }
       return "";
     }
