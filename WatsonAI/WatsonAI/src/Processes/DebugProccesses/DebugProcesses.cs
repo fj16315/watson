@@ -18,7 +18,7 @@
     {
       debugParse = new DebugParseProcess(parser);
       debugThesaurus = new DebugThesaurusProcess(thesaurus);
-      debugPronounProcess = new DebugPronounProcess();
+      debugPronounProcess = new DebugPronounProcess(parser);
     }
 
     /// <summary>

@@ -42,7 +42,7 @@ namespace WatsonAI
       var greetings = new GreetingsProcess(parser, thesaurus);
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var fallback = new FallbackProcess();
-      var prePronoun = new PronounsProcess(character);
+      var prePronoun = new PronounsProcess(character, characterMemories[character], parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
 
       var output = new Processor()

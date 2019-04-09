@@ -13,7 +13,7 @@ namespace WatsonTest
     public PronounsPreProcessTests()
     {
       character = new Character("actress", true);
-      pronounsProcess = new PronounsProcess(this.character);
+      pronounsProcess = new PronounsProcess(this.character, parser);
     }
 
     [Fact]
@@ -113,7 +113,7 @@ namespace WatsonTest
       List<string> tokens;
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
       pronounsProcess.PreProcess(ref tokens);
-      Assert.Equal(new List<string> { "the", "study", "is", "brown", ",", "what", "colour", "is", "the", "study", "?" }, tokens);
+      Assert.Equal(new List<string> { "the", "study", "is", "brown", ",", "where", "is", "the", "study", "?" }, tokens);
     }
 
     [Fact]
@@ -129,6 +129,7 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
       pronounsProcess.PreProcess(ref tokens);
       //TODO: Need to do something special here.
+      Assert.True(false);
     }
 
     [Fact]
@@ -136,7 +137,7 @@ namespace WatsonTest
     {
       // Test "it" from last user input
       var inputMemory = new Memory(character, 3);
-      var memoryPronounsProcess = new PronounsProcess(character, inputMemory);
+      var memoryPronounsProcess = new PronounsProcess(character, inputMemory, parser);
 
       var memoryInput = "the study is brown.";
       inputMemory.AppendInput(memoryInput);
@@ -150,7 +151,7 @@ namespace WatsonTest
 
       // Test "it" from last character response
       var responseMemory = new Memory(character, 3);
-      memoryPronounsProcess = new PronounsProcess(character, responseMemory);
+      memoryPronounsProcess = new PronounsProcess(character, responseMemory, parser);
 
       var memoryResponse = "the study is brown.";
       inputMemory.AppendResponse(memoryResponse);
@@ -164,7 +165,7 @@ namespace WatsonTest
     public void ItResponseOverridesInput()
     {
       var memory = new Memory(character, 3);
-      var memoryPronounsProcess = new PronounsProcess(character, memory);
+      var memoryPronounsProcess = new PronounsProcess(character, memory, parser);
 
       var memoryInput = "the study is brown.";
       memory.AppendInput(memoryInput);
@@ -183,7 +184,7 @@ namespace WatsonTest
     {
       // Test "it" from last user input
       var inputMemory = new Memory(character, 3);
-      var memoryPronounsProcess = new PronounsProcess(character, inputMemory);
+      var memoryPronounsProcess = new PronounsProcess(character, inputMemory, parser);
 
       var memoryInput = "the study is brown.";
       inputMemory.AppendInput(memoryInput);
@@ -197,7 +198,7 @@ namespace WatsonTest
 
       // Test "it" from last character response
       var responseMemory = new Memory(character, 3);
-      memoryPronounsProcess = new PronounsProcess(character, responseMemory);
+      memoryPronounsProcess = new PronounsProcess(character, responseMemory, parser);
 
       var memoryResponse = "the study is brown.";
       inputMemory.AppendResponse(memoryResponse);
@@ -205,6 +206,7 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
       pronounsProcess.PreProcess(ref tokens);
       //TODO: Need to do something special here.
+      Assert.True(false);
     }
 
 
