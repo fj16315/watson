@@ -15,16 +15,17 @@ namespace WatsonTest
     {
       var entityBuilder = new EntityBuilder()
       {
-        "actress", "earl", "murderer", "dave"
+        "actress", "earl", "murderer", "dave", "herbology"
       };
       var verbBuilder = new VerbBuilder()
       {
-        "kill", "love", "be"
+        "kill", "love", "be", "study"
       };
       this.builder = new KnowledgeBuilder(entityBuilder, verbBuilder)
       {
         { "actress" , "kill", "earl" },
-        { "actress" , "be", "murderer" },
+        { "actress" , "study", "herbology" },
+        { "actress" , "be", Object.Direct("murderer"), Object.Indirect("of", "earl") },
         { "earl" , "love", "dave" },
         { "study" , "contain", "actress" }
       };
@@ -207,6 +208,63 @@ namespace WatsonTest
     }
 
     [Fact]
+    public void UnnamedTestCase15()
+    {
+      var input = "Who is the murderer of the earl?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "actress" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "Who is the murderer of the earl?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
+    public void UnnamedTestCase16()
+    {
+      var input = "Who is the earl's murderer?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "actress" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "Who is the earl's murderer?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
+    public void AmbitiousTestCase1()
+    {
+      var input = "Where is the earl's murderer?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "study" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "Where is the actress's murderer?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    // Lover of means that he loves
+    [Fact]
+    public void AmbitiousTestCase2()
+    {
+      var input = "Who is the lover of dave?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "earl" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "Who is the lover of dave?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
     public void Where1()
     {
       var input = "Where is the actress?";
@@ -257,6 +315,30 @@ namespace WatsonTest
       var input = "What room is the actress in?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "study" };
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
+    public void SameWordForNounAndVerb()
+    {
+      var input = "What does the actress study?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "herbology" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "What does the actress learn?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new[] { "herbology" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "Who studies herbology?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new[] { "actress" };
+      AssertEntityEquals(expectedAnswers, answers);
+
+      input = "What does the earl study?";
+      answers = questionProcess.GetEntityAnswers(input);
+      expectedAnswers = new string[0];
       AssertEntityEquals(expectedAnswers, answers);
     }
 
