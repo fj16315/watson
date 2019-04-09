@@ -96,13 +96,25 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         stringToEdit = "";
         lastQuestion = "";
-        if (!(state.currentState == GameState.State.TUTORIAL &&
-              currentCharacter.charName == "Police"))
+        /* If not in tutorial and talking to Policeman, and not in story-dump
+           and talking to Butler, launch AI session.
+        */
+        if (!((state.currentState == GameState.State.TUTORIAL &&
+              currentCharacter.charName == "Police") ||
+              (state.currentState == GameState.State.STORY &&
+              currentCharacter.charName == "Butler")))
         {
+            // If players choose to skip getting the story dump from the butler
+            // then just change the state to PLAY.
+            if(state.currentState == GameState.State.STORY)
+            {
+                state.currentState = GameState.State.PLAY;
+            }
             alexa.StartSession();
             ai.StartSession(currentCharacter);
             UpdateReply("");
-        } else
+        }
+        else
         {
             nextButton.SetActive(true);
             if (Application.isEditor)
@@ -200,7 +212,15 @@ public class DialogueScreen : MonoBehaviour {
 
     public void NextButton()
     {
-        state.ContinueTutorial();
+        switch(state.currentState)
+        {
+            case GameState.State.TUTORIAL:
+                state.ContinueTutorial();
+                break;
+            case GameState.State.STORY:
+                state.ContinueStory();
+                break;
+        }
         UpdateReply(state.NextString());
     }
 

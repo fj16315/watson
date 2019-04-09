@@ -7,10 +7,11 @@ using NPC;
 
 public class GameState : MonoBehaviour {
 
-    public enum State : int { TUTORIAL, PLAY, END };
+    public enum State : int { TUTORIAL, STORY, PLAY, END };
     public State currentState = State.TUTORIAL;
 
     public List<string> tutorialStrings;
+    public List<string> storyStrings;
     private int currentString = 0;
     private bool started = false;
     public bool alexa = false;
@@ -59,9 +60,20 @@ public class GameState : MonoBehaviour {
 
     public string NextString()
     {
-        if (currentString < tutorialStrings.Capacity)
+        Debug.Log("currentString = " + currentString);
+        if( currentState == State.TUTORIAL )
         {
-            return tutorialStrings[currentString];
+            if (currentString < tutorialStrings.Capacity)
+            {
+                return tutorialStrings[currentString];
+            }
+        }
+        else if( currentState == State.STORY )
+        {
+            if (currentString < storyStrings.Capacity)
+            {
+                return storyStrings[currentString];
+            }
         }
 
         return "";
@@ -83,9 +95,20 @@ public class GameState : MonoBehaviour {
         }
     }
 
+    public void ContinueStory()
+    {
+        currentString++;
+        if( currentString >= storyStrings.Capacity )
+        {
+            currentState = State.PLAY;
+            raycasting.CloseDialogue();
+        }
+    }
+
     public void EndTutorial()
     {
-        currentState = State.PLAY;
+        currentState = State.STORY;
+        currentString = 0;
         entryDoors[0].locked = false;
         entryDoors[1].locked = false;
         entryDoors[0].Activate();
@@ -112,7 +135,8 @@ public class GameState : MonoBehaviour {
                     default:
                         return true;
                 }
-
+            case State.STORY:
+                break;
             case State.PLAY:
                 break;
             case State.END:
@@ -200,5 +224,4 @@ public class GameState : MonoBehaviour {
     {
         return 100 - incorrect_check * 10;
     }
-
 }

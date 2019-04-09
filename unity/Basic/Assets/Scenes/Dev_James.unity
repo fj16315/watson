@@ -4377,17 +4377,17 @@ PrefabInstance:
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.17425
+      value: 11.11
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12394993
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3745861
+      value: 1.886
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
@@ -6710,6 +6710,10 @@ MonoBehaviour:
   - Great, you're all ready to solve the mystery.
   - Find clues by searching the house and talking to everyone you meet.
   - I'll unlock these doors now. Come back to me when you have solved the case!
+  storyStrings:
+  - Test 1
+  - Test 2
+  - Test 3
   alexa: 0
   entryDoors:
   - {fileID: 403571995}
@@ -6717,7 +6721,7 @@ MonoBehaviour:
   police: {fileID: 646669894}
   dialogue: {fileID: 570466025}
   raycasting: {fileID: 1361230746}
-  notebookInteractable: {fileID: 0}
+  notebookInteractable: {fileID: 1508302238}
   controller: {fileID: 526429955}
   who: {fileID: 1196870605}
   why: {fileID: 194090793}
