@@ -21,16 +21,16 @@ namespace WatsonAI
     {
       var entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
-        "gangster", "scrap", "nightshade", "belongings", /*"fast-acting",*/
+        "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
         "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
         "arsenic", /*"rat poison",*/ "kitchen", "plants", "nervous", /*"barbital tolerance",*/
-        "barbital", /*"sleeping aid",*/, "bathroom", "book", "estate", "promotion",
+        "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
         "war", "note", "will", "desk", "study", /*"slow-acting",*/"herbology"
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
         "resent", "want", "prevent", "marry", "use", "employ", "owe", "meet",
-        "send", "receive"
+        "send", "receive", "be"
       };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
@@ -67,7 +67,7 @@ namespace WatsonAI
         /*{"earl", "have", "barbital tolerance"},*/
         {"earl", "employ", "butler"},
         /*{"butler", "stealing from", "earl"},*/
-        {"butler", "is", "nervous"},
+        {"butler", "be", "nervous"},
         /*{"butler", "allergic to", "plants"},*/
         /*{"butler", "have", "rat poison"},*/
         /*{"kitchen", "contain", "rat poison"},*/
@@ -140,7 +140,7 @@ namespace WatsonAI
           {"study", "contain", "book"},
           {"earl", "employ", "butler"},
           // /*{"butler", "stealing from", "earl"},*/ // Not sure how to represent _and_ needs hiding/omitting in this graph
-          {"butler", "is", "nervous"},
+          {"butler", "be", "nervous"},
           /*{"butler", "allergic to", "plants"},*/
           /*{"butler", "have", "rat poison"},*/
           /*{"kitchen", "contain", "rat poison"},*/
@@ -200,7 +200,7 @@ namespace WatsonAI
           /*{"barbital", "is", "sleeping aid"},*/
           /*{"earl", "have", "barbital tolerance"},*/
           {"earl", "employ", "butler"},
-          {"butler", "is", "nervous"},
+          {"butler", "be", "nervous"},
           /*{"butler", "have", "rat poison"},*/
           /*{"kitchen", "contain", "rat poison"},*/
           {"earl", "meet", "gangster"},
@@ -209,6 +209,9 @@ namespace WatsonAI
           /*{"master bedroom", "contain", "letter"},*/
           {"earl", "receive", "letter"}
         },
+        // Earl
+        new KnowledgeBuilder(entities, verbs)
+        {},
         // Gangster
         new KnowledgeBuilder(entities, verbs)
         {
@@ -219,7 +222,7 @@ namespace WatsonAI
           {"earl", "marry", "countess"},
           {"countess", "marry", "earl"},
           /*{"butler", "stealing from", "earl"},*/
-          {"butler", "is", "nervous"},
+          {"butler", "be", "nervous"},
           {"earl", "owe", "gangster"},
           {"earl", "meet", "gangster"},
           {"gangster", "meet", "earl"},
