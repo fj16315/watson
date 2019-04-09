@@ -96,7 +96,8 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         stringToEdit = "";
         lastQuestion = "";
-        if (!(state.currentState == GameState.State.TUTORIAL))
+        if (!(state.currentState == GameState.State.TUTORIAL &&
+              currentCharacter.charName == "Police"))
         {
             alexa.StartSession();
             ai.StartSession(currentCharacter);
