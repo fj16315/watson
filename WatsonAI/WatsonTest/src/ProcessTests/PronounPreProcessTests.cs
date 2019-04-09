@@ -145,7 +145,7 @@ namespace WatsonTest
       var input = "where is it?";
       List<string> tokens;
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
-      pronounsProcess.PreProcess(ref tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "where", "is", "the", "study", "?" }, tokens);
       
 
@@ -154,10 +154,10 @@ namespace WatsonTest
       memoryPronounsProcess = new PronounsProcess(character, responseMemory, parser);
 
       var memoryResponse = "the study is brown.";
-      inputMemory.AppendResponse(memoryResponse);
+      responseMemory.AppendResponse(memoryResponse);
 
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
-      pronounsProcess.PreProcess(ref tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "where", "is", "the", "study", "?" }, tokens);
     }
 
@@ -175,7 +175,7 @@ namespace WatsonTest
       var input = "where is it?";
       List<string> tokens;
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
-      pronounsProcess.PreProcess(ref tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "where", "is", "the", "music", "?" }, tokens);
     }
 
@@ -192,7 +192,7 @@ namespace WatsonTest
       var input = "where is it?";
       List<string> tokens;
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
-      pronounsProcess.PreProcess(ref tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
       //TODO: Need to do something special here.
       
 
@@ -201,10 +201,10 @@ namespace WatsonTest
       memoryPronounsProcess = new PronounsProcess(character, responseMemory, parser);
 
       var memoryResponse = "the study is brown.";
-      inputMemory.AppendResponse(memoryResponse);
+      responseMemory.AppendResponse(memoryResponse);
 
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
-      pronounsProcess.PreProcess(ref tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
       //TODO: Need to do something special here.
       Assert.True(false);
     }

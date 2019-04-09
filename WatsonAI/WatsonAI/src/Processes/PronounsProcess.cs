@@ -1,6 +1,7 @@
 ﻿using OpenNLP.Tools.Parser;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using static WatsonAI.Patterns;
@@ -13,7 +14,7 @@ namespace WatsonAI
   public class PronounsProcess : IPreProcess, IPostProcess
   {
     private readonly Character character;
-    private readonly Memory inputMemory;
+    private readonly Memory memory;
     private readonly Parser parser;
 
 
@@ -23,10 +24,10 @@ namespace WatsonAI
       this.parser = parser;
     }
 
-    public PronounsProcess(Character character, Memory inputMemory, Parser parser)
+    public PronounsProcess(Character character, Memory memory, Parser parser)
     {
       this.character = character;
-      this.inputMemory = inputMemory;
+      this.memory = memory;
       this.parser = parser;
     }
 
@@ -36,15 +37,8 @@ namespace WatsonAI
     /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public void PreProcess(ref List<string> tokens)
     {
-      var replacingIt = false;
       string entity = "";
-      if (tokens.Contains("it"))
-      {
-        if (FindItWord(tokens, out entity))
-        {
-          replacingIt = true;
-        }
-      }
+      var replacingItWord = CheckForItWord(tokens, out entity);
 
       for (int i = 0; i < tokens.Count; i++)
       {
@@ -65,7 +59,7 @@ namespace WatsonAI
         ReplaceWords(new List<string> { "my" }, new List<string> { "Watson", "'s" }, tokens, i);
         ReplaceWords(new List<string> { "mine" }, new List<string> { "Watson", "'s" }, tokens, i);
 
-        if (replacingIt)
+        if (replacingItWord)
         {
           ReplaceWords(new List<string> { "it" }, new List<string> { "the", entity }, tokens, i);
         }
@@ -118,11 +112,38 @@ namespace WatsonAI
       return inputCharacters;
     }
 
-    private bool FindItWord(List<string> tokens, out string word)
+    private bool CheckForItWord(List<string> tokens, out string word)
     {
-      var sentenceUpToIt = tokens.Take(tokens.FindIndex(x => x == "it"));
+      if (tokens.Contains("it"))
+      {
+        var sentenceUpToIt = tokens.Take(tokens.FindIndex(x => x == "it"));
+        if (FindItWord(sentenceUpToIt, out word))
+        {
+          return true;
+        }
+        else if (this.memory != null)
+        {
+          var inputTokens = parser.Tokenize(memory.GetLastInput());
+          if (FindItWord(inputTokens, out word))
+          {
+            return true;
+          }
+          // This will replace if a later entity is found in the response to the player.
+          var responseTokens = parser.Tokenize(memory.GetLastResponse());
+          if (FindItWord(responseTokens, out word))
+          {
+            return true;
+          }
+        }
+      }
+      word = "";
+      return false;
+    }
+
+    private bool FindItWord(IEnumerable<string> tokens, out string word)
+    {
       Parse parse;
-      var parseExists = parser.Parse(sentenceUpToIt, out parse);
+      var parseExists = parser.Parse(tokens, out parse);
 
       if (parseExists)
       {
