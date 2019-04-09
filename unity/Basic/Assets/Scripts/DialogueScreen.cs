@@ -15,6 +15,7 @@ public class DialogueScreen : MonoBehaviour {
     string answer = "";
     string queryResponse = "";
     private AIController ai;
+    public Camera camera;
     public GameObject replyBubble;
     public Text answerBox;
     public GameObject saveButton;
@@ -96,6 +97,7 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         stringToEdit = "";
         lastQuestion = "";
+        camera.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
         if (!(state.currentState == GameState.State.TUTORIAL))
         {
             alexa.StartSession();
