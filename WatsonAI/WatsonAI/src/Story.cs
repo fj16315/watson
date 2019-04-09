@@ -27,17 +27,18 @@ namespace WatsonAI
         "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
         "arsenic", /*"rat poison",*/ "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
-        "war", "note", "will", "desk", "study", /*"slow-acting",*/"herbology"
+        "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
+        "daughter", "money", "allergy",
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
         "resent", "want", "prevent", "marry", "use", "employ", "owe", "meet",
-        "send", "receive", "be"
+        "send", "receive", "be", "steal", "get"
       };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
         //{"actress", "be", "murderer"},
-        /*{"actress", "be", "earl's daughter"},*/
+        {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
         {"actress", "study", "herbology"},
         {"actress", "have", "scrap"},
         {"scrap", "about", "nightshade"},
@@ -47,7 +48,7 @@ namespace WatsonAI
         /*{"nightshade", "look like", "blackcurrants"},*/
         /*{"dining room", "contain", "blackcurrants"},*/
         //{"nightshade", "poison", "earl"},
-        /*{"actress", "gets", "contents of will"},*/
+        {"actress", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
         {"will", "on", "desk"},
         {"study", "contain", "desk"},
         {"study", "contain", "will"},
@@ -66,11 +67,11 @@ namespace WatsonAI
         {"study", "contain", "book"},
         /*{"barbital", "is", "sleeping aid"},*/
         {"bathroom", "contain", "barbital"},
-        /*{"earl", "have", "barbital tolerance"},*/
+        {"earl", "have", Object.Direct("tolerance"), Object.Indirect("to", "barbital")},
         {"earl", "employ", "butler"},
-        /*{"butler", "stealing from", "earl"},*/
+        {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
         {"butler", "be", "nervous"},
-        /*{"butler", "allergic to", "plants"},*/
+        {"butler", "have", Object.Direct("allergy"), Object.Indirect("to", "plants")},
         /*{"butler", "have", "rat poison"},*/
         /*{"kitchen", "contain", "rat poison"},*/
         {"earl", "owe", "gangster"},
@@ -104,7 +105,7 @@ namespace WatsonAI
           new KnowledgeBuilder(entities, verbs)
           {
             //{"actress", "be", "murderer"},
-            /*{"actress", "be", "earl's daughter"},*/
+            {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
             {"actress", "study", "herbology"},
             {"actress", "have", "scrap"},
             {"scrap", "about", "nightshade"},
@@ -114,7 +115,7 @@ namespace WatsonAI
             /*{"nightshade", "look like", "blackcurrants"},*/
             /*{"dining room", "contain", "blackcurrants"},*/
             //{"nightshade", "poison", "earl"},
-            /*{"actress", "gets", "contents of will"},*/
+            {"actress", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"earl", "fight", "war"},
             /*{"earl", "friends with", "colonel"},*/ //Probably just a like relation
             {"colonel", "fight", "war"},
@@ -137,7 +138,7 @@ namespace WatsonAI
             {"earl", "fight", "war"},
             /*{"earl", "friends with", "colonel"},*/ //Probably just a like relation
             {"colonel", "fight", "war"},
-            /*{"countess", "gets", "contents of will"},*/
+            {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"colonel", "want", "promotion"},
             {"earl", "marry", "countess"},
             {"countess", "marry", "earl"},
@@ -145,9 +146,9 @@ namespace WatsonAI
             {"book", "about", "barbital"},
             {"study", "contain", "book"},
             {"earl", "employ", "butler"},
-            // /*{"butler", "stealing from", "earl"},*/ // Not sure how to represent _and_ needs hiding/omitting in this graph
+            // {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")}, // needs hiding/omitting in this graph
             {"butler", "be", "nervous"},
-            /*{"butler", "allergic to", "plants"},*/
+            {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
             /*{"butler", "have", "rat poison"},*/
             /*{"kitchen", "contain", "rat poison"},*/
             {"earl", "owe", "gangster"},
@@ -164,11 +165,11 @@ namespace WatsonAI
           Names.COLONEL,
           new KnowledgeBuilder(entities, verbs)
           {
-            /*{"actress", "be", "earl's daughter"},*/
+            {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
             {"colonel", "own", "belongings"},
             /*{"nightshade", "is", "fast-acting"},*/
             /*{"dining room", "contain", "blackcurrants"},*/
-            /*{"countess", "gets", "contents of will"},*/
+            {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
             {"study", "contain", "will"},
@@ -192,7 +193,7 @@ namespace WatsonAI
           {
             {"actress", "study", "herbology"},
             /*{"dining room", "contain", "blackcurrants"},*/
-            /*{"countess", "gets", "contents of will"},*/
+            {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
             {"study", "contain", "will"},
@@ -208,7 +209,7 @@ namespace WatsonAI
             /*{"countess", "wants to sell", "estate"},*/
             {"earl", "use", "barbital"},
             /*{"barbital", "is", "sleeping aid"},*/
-            /*{"earl", "have", "barbital tolerance"},*/
+            {"earl", "have", Object.Direct("tolerance"), Object.Indirect("to", "barbital")},
             {"earl", "employ", "butler"},
             {"butler", "be", "nervous"},
             /*{"butler", "have", "rat poison"},*/
@@ -234,7 +235,7 @@ namespace WatsonAI
             {"colonel", "fight", "war"},
             {"earl", "marry", "countess"},
             {"countess", "marry", "earl"},
-            /*{"butler", "stealing from", "earl"},*/
+            {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
             {"butler", "be", "nervous"},
             {"earl", "owe", "gangster"},
             {"earl", "meet", "gangster"},
@@ -250,21 +251,6 @@ namespace WatsonAI
         {
           Names.POLICE,
           new KnowledgeBuilder(entities, verbs)
-          {
-            {"actress", "poison", "earl"},
-            {"earl", "love", "countess"},
-            {"countess", "love", "earl"},
-            {"earl", "like", "music"},
-            {"earl", "be", "dead"},
-            {"actress", "kill", "earl"},
-            {"countess", "marry", "earl"},
-            {"earl", "marry", "countess"},
-            {"earl", "employ", "butler"},
-            {"actress", "inherit", "money"},
-            {"study", "contain", "will"},
-            {"earl", "own", "belonging"},
-            {"earl", "use", "barbital"}
-          }
         }
       };
 
