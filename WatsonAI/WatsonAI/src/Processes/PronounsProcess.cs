@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenNLP.Tools.Parser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,16 +12,19 @@ namespace WatsonAI
   {
     private readonly Character character;
     private readonly Memory inputMemory;
+    private readonly Parser parser;
+
 
     public PronounsProcess(Character character)
     {
       this.character = character;
     }
 
-    public PronounsProcess(Character character, Memory inputMemory)
+    public PronounsProcess(Character character, Memory inputMemory, Parser parser)
     {
       this.character = character;
       this.inputMemory = inputMemory;
+      this.parser = parser;
     }
 
     /// <summary>
@@ -33,7 +37,7 @@ namespace WatsonAI
       {
         if (i < tokens.Count-1)
         {
-          ReplaceWords(new List<string> { "you","are"  }, new List<string> { this.character.Name,"is" }, tokens, i);
+          ReplaceWords(new List<string> { "you","are"  }, new List<string> { this.character.Name, "is" }, tokens, i);
           ReplaceWords(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }, tokens, i);
 
           ReplaceWords(new List<string> { "I", "am" }, new List<string> { "Watson", "is"  }, tokens, i);
@@ -47,6 +51,15 @@ namespace WatsonAI
         ReplaceWords(new List<string> { "me" }, new List<string> { "Watson" }, tokens, i);
         ReplaceWords(new List<string> { "my" }, new List<string> { "Watson", "'s" }, tokens, i);
         ReplaceWords(new List<string> { "mine" }, new List<string> { "Watson", "'s" }, tokens, i);
+      }
+      if (tokens.Contains("it"))
+      {
+        var sentenceUpToIt = tokens.Take(tokens.FindIndex(x => x == "it"));
+        Parse parse;
+        var tree = parser.Parse(sentenceUpToIt, out parse);
+
+
+
       }
     }
 
