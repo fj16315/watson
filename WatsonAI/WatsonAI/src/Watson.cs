@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace WatsonAI
 {
@@ -34,15 +35,16 @@ namespace WatsonAI
     {
       var name = (Story.Names)characterInt;
       var character = Story.Characters[name];
+      var characters = Story.Characters.Values.ToList();
       var knowledge = Story.Characters[name].Knowledge;
 
       var stream = Stream.Tokenise(parser, input);
 
-      var debugs = new DebugProcesses(parser, thesaurus);
+      var debugs = new DebugProcesses(characters, parser, thesaurus);
       var greetings = new GreetingsProcess(parser, thesaurus);
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var fallback = new FallbackProcess();
-      var prePronoun = new PronounsProcess(character, characterMemories[character], parser);
+      var prePronoun = new PronounsProcess(character, characters, characterMemories[character], parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
 
       var output = new Processor()

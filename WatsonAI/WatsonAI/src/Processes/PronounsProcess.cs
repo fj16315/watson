@@ -1,7 +1,6 @@
 ﻿using OpenNLP.Tools.Parser;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 using static WatsonAI.Patterns;
@@ -16,17 +15,20 @@ namespace WatsonAI
     private readonly Character character;
     private readonly Memory memory;
     private readonly Parser parser;
+    private readonly List<Character> characters;
 
 
-    public PronounsProcess(Character character, Parser parser)
+    public PronounsProcess(Character character, List<Character> characters, Parser parser)
     {
       this.character = character;
+      this.characters = characters;
       this.parser = parser;
     }
 
-    public PronounsProcess(Character character, Memory memory, Parser parser)
+    public PronounsProcess(Character character, List<Character> characters, Memory memory, Parser parser)
     {
       this.character = character;
+      this.characters = characters;
       this.memory = memory;
       this.parser = parser;
     }
@@ -39,14 +41,17 @@ namespace WatsonAI
     {
       string entity = "";
       var replacingItWord = CheckForItWord(tokens, out entity);
+      var inputCharacters = FindCharactersInInput(tokens);
 
       for (int i = 0; i < tokens.Count; i++)
       {
         if (i < tokens.Count - 1)
         {
+          ReplaceWords(new List<string> { "do", "you" }, new List<string> { "does", this.character.Name }, tokens, i);
           ReplaceWords(new List<string> { "you", "are" }, new List<string> { this.character.Name, "is" }, tokens, i);
           ReplaceWords(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }, tokens, i);
 
+          ReplaceWords(new List<string> { "do", "I" }, new List<string> { "does", "Watson" }, tokens, i);
           ReplaceWords(new List<string> { "I", "am" }, new List<string> { "Watson", "is" }, tokens, i);
           ReplaceWords(new List<string> { "I", "'m" }, new List<string> { "Watson", "is" }, tokens, i);
           ReplaceWords(new List<string> { "am", "I" }, new List<string> { "is", "Watson" }, tokens, i);
@@ -63,7 +68,34 @@ namespace WatsonAI
         {
           ReplaceWords(new List<string> { "it" }, new List<string> { "the", entity }, tokens, i);
         }
+        if (inputCharacters.Any())
+        {
+          var inputCharacter = inputCharacters.First();
+          if (inputCharacter.Gender == Gender.Male)
+          {
+            ReplaceWords(new List<string> { "him" }, new List<string> { inputCharacter.Name }, tokens, i);
+            ReplaceWords(new List<string> { "his" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
+            ReplaceWords(new List<string> { "he" }, new List<string> { inputCharacter.Name }, tokens, i);
+          }
+          if (inputCharacter.Gender == Gender.Female)
+          {
+            ReplaceWords(new List<string> { "her" }, new List<string> { inputCharacter.Name }, tokens, i);
+            ReplaceWords(new List<string> { "her", "'s" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
+            ReplaceWords(new List<string> { "she" }, new List<string> { inputCharacter.Name }, tokens, i);
+          }
+          if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
+          {
+            ReplaceWords(new List<string> { "them" }, new List<string> { inputCharacter.Name }, tokens, i);
+            ReplaceWords(new List<string> { "their", "'s" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
+            if (inputCharacters.Count == 1)
+            {
+              ReplaceWords(new List<string> { "they" }, new List<string> { inputCharacter.Name }, tokens, i);
+              ReplaceWords(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }, tokens, i);
+            }
+          }
+        }
       }
+      
 
       //TODO: Else here is a good place to introduce the failstate.
     }
@@ -97,13 +129,13 @@ namespace WatsonAI
 
     private List<Character> FindCharactersInInput(List<string> tokens)
     {
-      var storyCharacters = Story.Characters.Values.ToList();
+      var storyCharacters = this.characters;
       var inputCharacters = new List<Character>();
       foreach (var token in tokens)
       {
         foreach (var character in storyCharacters)
         {
-          if (token.Equals(character.Name))
+          if (token.Equals(character.Name, StringComparison.OrdinalIgnoreCase))
           {
             inputCharacters.Add(character);
           }

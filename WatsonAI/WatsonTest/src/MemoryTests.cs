@@ -6,7 +6,7 @@ namespace WatsonTest
 {
   public class MemoryTests
   {
-    public static Character testCharacter = new Character("dave", false);
+    public static Character testCharacter = new Character("dave", false, Gender.Male);
 
     [Fact]
     public void EmptyMemoryIsEmpty()
