@@ -123,14 +123,14 @@ namespace WatsonAI
         }
         else if (this.memory != null)
         {
-          var inputTokens = parser.Tokenize(memory.GetLastInput());
-          if (FindItWord(inputTokens, out word))
+          var response = memory.GetLastResponse();
+          var responseTokens = parser.Tokenize(response);
+          if (FindItWord(responseTokens, out word))
           {
             return true;
           }
-          // This will replace if a later entity is found in the response to the player.
-          var responseTokens = parser.Tokenize(memory.GetLastResponse());
-          if (FindItWord(responseTokens, out word))
+          var inputTokens = parser.Tokenize(memory.GetLastInput());
+          if (FindItWord(inputTokens, out word))
           {
             return true;
           }

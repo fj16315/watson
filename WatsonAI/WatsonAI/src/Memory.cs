@@ -108,7 +108,7 @@ namespace WatsonAI
     {
       if (responses.Count > 0)
       {
-        return responses[inputs.Count - 1];
+        return responses[responses.Count - 1];
       }
       return "";
     }
