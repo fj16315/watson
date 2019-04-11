@@ -134,18 +134,42 @@ namespace WatsonAI
         }
         if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
         {
-          replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string> { inputCharacter.Name }));
-          replacing.Add(Tuple.Create(new List<string> { "their" }, new List<string> { inputCharacter.Name, "'s" }));
-          replacing.Add(Tuple.Create(new List<string> { "their", "'s" }, new List<string> { inputCharacter.Name, "'s" }));
           if (inputCharacters.Count == 1)
           {
             replacing.Add(Tuple.Create(new List<string> { "they", "are" }, new List<string> { inputCharacter.Name, "is" }));
-            replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string> { inputCharacter.Name }));
+            replacing.Add(Tuple.Create(new List<string> { "they", "'re" }, new List<string> { inputCharacter.Name, "is" }));
             replacing.Add(Tuple.Create(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }));
           }
         }
+        replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()))));
+        replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()))));
+        var theirReplacement = new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()));
+        theirReplacement.Add("'s");
+        replacing.Add(Tuple.Create(new List<string> { "their" }, theirReplacement));
+        replacing.Add(Tuple.Create(new List<string> { "their", "'s" }, theirReplacement));
       }
       return replacing;
+    }
+
+    /// <summary>
+    /// Converts a list of nouns into multiple noun sentence form: eg. [eggs, bacon, ham] => "eggs, bacon and ham".
+    /// </summary>
+    /// <param name="enumerable"></param>
+    /// <returns></returns>
+    private List<string> MultiNounSentence(List<string> tokens)
+    {
+      var sentence = new List<string>(tokens);
+
+      for (int i = 0; i < tokens.Count - 2; i++)
+      {
+        sentence.Insert(2 * i + 1, ",");
+      }
+
+      if (tokens.Count > 1)
+      {
+        sentence.Insert(sentence.Count - 1, "and");
+      }
+      return sentence;
     }
 
     /// <summary>

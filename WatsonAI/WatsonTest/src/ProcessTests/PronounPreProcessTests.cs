@@ -17,6 +17,7 @@ namespace WatsonTest
       {
         new Character("actress", true, Gender.Female),
         new Character("earl", true, Gender.Male),
+        new Character("dave", true, Gender.Male),
         new Character("butler", true, Gender.Other)
       };
       character = new Character("actress", true, Gender.Female);
@@ -457,6 +458,11 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "the", "butler", "is", "stupid", ",", "where", "is", "butler", "?" }, tokens);
+
+      input = "the butler is stupid, I hope they're not ugly too";
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "the", "butler", "is", "stupid", ",", "Watson", "hope", "butler", "is", "not", "ugly", "too" }, tokens);
     }
 
     [Fact]
@@ -466,6 +472,12 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "the", "butler", "and", "actress", "are", "stupid", ",", "where", "are", "butler", "and", "actress", "?" }, tokens);
+
+      input = "butler, actress, dave and earl are ugly, where are they?";
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "butler", ",", "actress", ",", "dave", "and", "earl", "are", "ugly", ",",
+        "where", "are", "butler", ",", "actress", ",", "dave", "and", "earl", "?" }, tokens);
     }
 
     //[Fact] public void TheySinglePersonWithMemory()
@@ -507,7 +519,7 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "butler", "is", "cool", "and", "actress", "is", "ugly", ",",
-        "but", "does", "Watson", "love", "butler", "and", "actress", "'s", "cat", "?" }, tokens);
+        "but", "does", "actress", "love", "butler", "and", "actress", "'s", "cat", "?" }, tokens);
     }
 
     //[Fact]
@@ -628,7 +640,13 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "butler", "is", "cool", "and", "actress", "is", "ugly", ",",
-        "but", "does", "this", "cat", "belong", "to", "actress", "and", "butler", "?" }, tokens);
+        "but", "does", "this", "cat", "belong", "to", "butler", "and", "actress", "?" }, tokens);
+
+      input = "butler, actress, dave and earl are ugly, but does this cat belong to them?";
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      pronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "butler", ",", "actress", ",", "dave", "and", "earl", "are", "ugly", ",",
+        "but", "does", "this", "cat", "belong", "to", "butler", ",", "actress", ",", "dave", "and", "earl", "?" }, tokens);
     }
 
     //[Fact]
