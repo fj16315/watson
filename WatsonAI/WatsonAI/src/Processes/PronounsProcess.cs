@@ -43,59 +43,56 @@ namespace WatsonAI
       var replacingItWord = CheckForItWord(tokens, out entity);
       var inputCharacters = FindCharactersInInput(tokens);
 
-      for (int i = 0; i < tokens.Count; i++)
+      var replacing = new List<Tuple<List<string>, List<string>>>
       {
-        if (i < tokens.Count - 1)
-        {
-          ReplaceWords(new List<string> { "do", "you" }, new List<string> { "does", this.character.Name }, tokens, i);
-          ReplaceWords(new List<string> { "you", "are" }, new List<string> { this.character.Name, "is" }, tokens, i);
-          ReplaceWords(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }, tokens, i);
+        Tuple.Create(new List<string> { "do", "you" }, new List<string> { "does", this.character.Name }),
+        Tuple.Create(new List<string> { "you", "are" }, new List<string> { this.character.Name, "is" }),
+        Tuple.Create(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }),
+        Tuple.Create(new List<string> { "do", "I" }, new List<string> { "does", "Watson" }),
+        Tuple.Create(new List<string> { "I", "am" }, new List<string> { "Watson", "is" }),
+        Tuple.Create(new List<string> { "I", "'m" }, new List<string> { "Watson", "is" }),
+        Tuple.Create(new List<string> { "am", "I" }, new List<string> { "is", "Watson" }),
+        Tuple.Create(new List<string> { "your" }, new List<string> { this.character.Name, "'s" }),
+        Tuple.Create(new List<string> { "you" }, new List<string> { this.character.Name }),
+        Tuple.Create(new List<string> { "I" }, new List<string> { "Watson" }),
+        Tuple.Create(new List<string> { "me" }, new List<string> { "Watson" }),
+        Tuple.Create(new List<string> { "my" }, new List<string> { "Watson", "'s" }),
+        Tuple.Create(new List<string> { "mine" }, new List<string> { "Watson", "'s" })
+      };
 
-          ReplaceWords(new List<string> { "do", "I" }, new List<string> { "does", "Watson" }, tokens, i);
-          ReplaceWords(new List<string> { "I", "am" }, new List<string> { "Watson", "is" }, tokens, i);
-          ReplaceWords(new List<string> { "I", "'m" }, new List<string> { "Watson", "is" }, tokens, i);
-          ReplaceWords(new List<string> { "am", "I" }, new List<string> { "is", "Watson" }, tokens, i);
+      if (replacingItWord)
+      {
+        replacing.Add(Tuple.Create(new List<string> { "it" }, new List<string> { "the", entity }));
+      }
+      if (inputCharacters.Any())
+      {
+        var inputCharacter = inputCharacters.First();
+        if (inputCharacter.Gender == Gender.Male)
+        {
+          replacing.Add(Tuple.Create(new List<string> { "him" }, new List<string> { inputCharacter.Name }));
+          replacing.Add(Tuple.Create(new List<string> { "his" }, new List<string> { inputCharacter.Name, "'s" }));
+          replacing.Add(Tuple.Create(new List<string> { "he" }, new List<string> { inputCharacter.Name }));
         }
-
-        ReplaceWords(new List<string> { "your" }, new List<string> { this.character.Name, "'s" }, tokens, i);
-        ReplaceWords(new List<string> { "you" }, new List<string> { this.character.Name }, tokens, i);
-        ReplaceWords(new List<string> { "I" }, new List<string> { "Watson" }, tokens, i);
-        ReplaceWords(new List<string> { "me" }, new List<string> { "Watson" }, tokens, i);
-        ReplaceWords(new List<string> { "my" }, new List<string> { "Watson", "'s" }, tokens, i);
-        ReplaceWords(new List<string> { "mine" }, new List<string> { "Watson", "'s" }, tokens, i);
-
-        if (replacingItWord)
+        if (inputCharacter.Gender == Gender.Female)
         {
-          ReplaceWords(new List<string> { "it" }, new List<string> { "the", entity }, tokens, i);
+          replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacter.Name }));
+          replacing.Add(Tuple.Create(new List<string> { "hers" }, new List<string> { inputCharacter.Name, "'s" }));
+          replacing.Add(Tuple.Create(new List<string> { "she" }, new List<string> { inputCharacter.Name }));
         }
-        if (inputCharacters.Any())
+        if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
         {
-          var inputCharacter = inputCharacters.First();
-          if (inputCharacter.Gender == Gender.Male)
+          replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string> { inputCharacter.Name }));
+          replacing.Add(Tuple.Create(new List<string> { "their" }, new List<string> { inputCharacter.Name, "'s" }));
+          replacing.Add(Tuple.Create(new List<string> { "their", "'s" }, new List<string> { inputCharacter.Name, "'s" }));
+          if (inputCharacters.Count == 1)
           {
-            ReplaceWords(new List<string> { "him" }, new List<string> { inputCharacter.Name }, tokens, i);
-            ReplaceWords(new List<string> { "his" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
-            ReplaceWords(new List<string> { "he" }, new List<string> { inputCharacter.Name }, tokens, i);
-          }
-          if (inputCharacter.Gender == Gender.Female)
-          {
-            ReplaceWords(new List<string> { "her" }, new List<string> { inputCharacter.Name }, tokens, i);
-            ReplaceWords(new List<string> { "her", "'s" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
-            ReplaceWords(new List<string> { "she" }, new List<string> { inputCharacter.Name }, tokens, i);
-          }
-          if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
-          {
-            ReplaceWords(new List<string> { "them" }, new List<string> { inputCharacter.Name }, tokens, i);
-            ReplaceWords(new List<string> { "their", "'s" }, new List<string> { inputCharacter.Name, "'s" }, tokens, i);
-            if (inputCharacters.Count == 1)
-            {
-              ReplaceWords(new List<string> { "they" }, new List<string> { inputCharacter.Name }, tokens, i);
-              ReplaceWords(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }, tokens, i);
-            }
+            replacing.Add(Tuple.Create(new List<string> { "they", "are" }, new List<string> { inputCharacter.Name, "is" }));
+            replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string> { inputCharacter.Name }));
+            replacing.Add(Tuple.Create(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }));
           }
         }
       }
-      
+      ReplaceWords(replacing, tokens);
 
       //TODO: Else here is a good place to introduce the failstate.
     }
@@ -106,26 +103,39 @@ namespace WatsonAI
     /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public void PostProcess(ref List<string> tokens)
     {
-      for (int i = 0; i < tokens.Count; i++)
+      var replacing = new List<Tuple<List<string>, List<string>>>
       {
-        ReplaceWords(new List<string> { "Watson" }, new List<string> { "you" }, tokens, i);
-        ReplaceWords(new List<string> { "the", character.Name }, new List<string> { "me" }, tokens, i);
-        ReplaceWords(new List<string> { character.Name }, new List<string> { "me" }, tokens, i);
-      }
+        Tuple.Create(new List<string> { "Watson" }, new List<string> { "you" }),
+        Tuple.Create(new List<string> { "the", character.Name }, new List<string> { "me" }),
+        Tuple.Create(new List<string> { character.Name }, new List<string> { "me" })
+      };
+
+      ReplaceWords(replacing, tokens);
     }
 
-    private void ReplaceWords(List<string> originals, List<string> replacements, List<string> tokens, int i)
+    private void ReplaceWords(List<Tuple<List<string>, List<string>>> replacements, List<string> tokens)
     {
-      if (i + originals.Count <= tokens.Count)
+      for (int i = 0; i < tokens.Count; i++)
       {
-        var originalTokens = tokens.GetRange(i, originals.Count);
-        if (originals.Zip(originalTokens, (x, y) => x.Equals(y, StringComparison.OrdinalIgnoreCase)).All(x => x))
+        foreach (var replacement in replacements)
         {
-          tokens.RemoveRange(i, originals.Count);
-          tokens.InsertRange(i, replacements);
+          var originalPhrase = replacement.Item1;
+          var replacementPhrase = replacement.Item2;
+          if (i + originalPhrase.Count < tokens.Count)
+          {
+            var tokenSection = tokens.GetRange(i, originalPhrase.Count);
+            if (AllWordsEqual(originalPhrase, tokenSection))
+            {
+              tokens.RemoveRange(i, originalPhrase.Count);
+              tokens.InsertRange(i, replacementPhrase);
+            }
+          }
         }
       }
     }
+
+    private bool AllWordsEqual(List<string> firstTokens, List<string> secondTokens)
+     => firstTokens.Zip(secondTokens, (x, y) => x.Equals(y, StringComparison.OrdinalIgnoreCase)).All(x => x);
 
     private List<Character> FindCharactersInInput(List<string> tokens)
     {

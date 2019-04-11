@@ -412,12 +412,12 @@ namespace WatsonTest
       var input = "the actress is stupid, where can I find her?";
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
-      Assert.Equal(new List<string> { "the", "actress", "is", "stupid", ",", "where", "can", "I", "find", "actress", "?" }, tokens);
+      Assert.Equal(new List<string> { "the", "actress", "is", "stupid", ",", "where", "can", "Watson", "find", "actress", "?" }, tokens);
 
       input = "the actress is ugly, but do you love her cat?";
       Stream.Tokenise(parser, input).RemainingInput(out tokens);
       pronounsProcess.PreProcess(ref tokens);
-      Assert.Equal(new List<string> { "actress", "is", "ugly", ",", "but", "do", "you", "love", "actress", "'s", "cat", "?" }, tokens);
+      Assert.Equal(new List<string> { "the", "actress", "is", "ugly", ",", "but", "does", "actress", "love", "actress", "'s", "cat", "?" }, tokens);
     }
 
     //[Fact]
@@ -576,7 +576,7 @@ namespace WatsonTest
     [Fact]
     public void HersSinglePerson()
     {
-      var input = "actress is ugly, but is this cat her's?";
+      var input = "actress is ugly, but is this cat hers?";
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "actress", "is", "ugly", ",", "but", "is", "this", "cat", "actress", "'s", "?" }, tokens);
@@ -618,7 +618,7 @@ namespace WatsonTest
       var input = "butler is cool, but does this cat belong to them?";
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
-      Assert.Equal(new List<string> { "butler", "is", "cool", ",", "but", "does", "this", "cat", "belong", "to", "bulter", "?" }, tokens);
+      Assert.Equal(new List<string> { "butler", "is", "cool", ",", "but", "does", "this", "cat", "belong", "to", "butler", "?" }, tokens);
     }
 
     [Fact]
@@ -628,7 +628,7 @@ namespace WatsonTest
       Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
       pronounsProcess.PreProcess(ref tokens);
       Assert.Equal(new List<string> { "butler", "is", "cool", "and", "actress", "is", "ugly", ",",
-        "but", "does", "this", "cat", "belong", "to", "actress", "and", "bulter", "?" }, tokens);
+        "but", "does", "this", "cat", "belong", "to", "actress", "and", "butler", "?" }, tokens);
     }
 
     //[Fact]
