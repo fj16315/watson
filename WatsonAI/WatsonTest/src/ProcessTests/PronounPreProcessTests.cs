@@ -454,11 +454,27 @@ namespace WatsonTest
         "but", "does", "actress", "love", "butler", "and", "actress", "'s", "cat", "?" }, tokens);
     }
 
-    //[Fact]
-    //public void TheirSinglePersonWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+    [Fact]
+    public void TheirMemory()
+    {
+      var memory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, characters, memory, parser);
+
+      var memoryInput = "the butler and actress are stupid";
+      memory.AppendInput(memoryInput);
+
+      var input = "do you love their cat?";
+      Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "does", "actress", "love", "butler", "and", "actress", "'s", "cat", "?" }, tokens);
+      
+      var memoryResponse = "butler, actress, dave and earl are ugly";
+      memory.AppendResponse(memoryResponse);
+
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "does", "actress", "love", "butler", ",", "actress", ",", "dave", "and", "earl", "'s", "cat", "?" }, tokens);
+    }
 
     [Fact]
     public void HisSinglePerson()
@@ -475,29 +491,27 @@ namespace WatsonTest
     //  Assert.True(false);
     //}
 
-    //[Fact]
-    //public void HisSinglePersonWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+    [Fact]
+    public void HisMemory()
+    {
+      var memory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, characters, memory, parser);
 
-    //[Fact]
-    //public void HisResponseOverridesInput()
-    //{
-    //  Assert.True(false);
-    //}
+      var memoryInput = "the earl is stupid.";
+      memory.AppendInput(memoryInput);
 
-    //[Fact]
-    //public void HisMultiplePeopleWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+      var input = "where can I find him?";
+      Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "can", "Watson", "find", "earl", "?" }, tokens);
+      
+      var memoryResponse = "dave is lame.";
+      memory.AppendResponse(memoryResponse);
 
-    //[Fact]
-    //public void HisGendersCorrectly()
-    //{
-    //  Assert.True(false);
-    //}
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "can", "Watson", "find", "dave", "?" }, tokens);
+    }
 
     [Fact]
     public void HersSinglePerson()
@@ -514,11 +528,27 @@ namespace WatsonTest
     //  Assert.True(false);
     //}
 
-    //[Fact]
-    //public void HersSinglePersonWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+    [Fact]
+    public void HersMemory()
+    {
+      var memory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, characters, memory, parser);
+
+      var memoryInput = "actress is ugly";
+      memory.AppendInput(memoryInput);
+
+      var input = "is this cat hers?";
+      Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "is", "this", "cat", "actress", "'s", "?" }, tokens);
+      
+      var memoryResponse = "countess is wicked";
+      memory.AppendResponse(memoryResponse);
+
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "is", "this", "cat", "countess", "'s", "?" }, tokens);
+    }
 
     [Fact]
     public void ThemSinglePerson()
@@ -545,17 +575,27 @@ namespace WatsonTest
         "but", "does", "this", "cat", "belong", "to", "butler", ",", "actress", ",", "dave", "and", "earl", "?" }, tokens);
     }
 
-    //[Fact]
-    //public void ThemSinglePersonWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+    [Fact]
+    public void ThemMemory()
+    {
+      var memory = new Memory(character, 3);
+      var memoryPronounsProcess = new PronounsProcess(character, characters, memory, parser);
 
-    //[Fact]
-    //public void ThemMultiplePeopleWithMemory()
-    //{
-    //  Assert.True(false);
-    //}
+      var memoryInput = "the butler and actress are stupid";
+      memory.AppendInput(memoryInput);
+
+      var input = "where can I find them?";
+      Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "can", "Watson", "find", "butler", "and", "actress", "?" }, tokens);
+      
+      var memoryResponse = "butler, actress, dave and earl are ugly";
+      memory.AppendResponse(memoryResponse);
+
+      Stream.Tokenise(parser, input).RemainingInput(out tokens);
+      memoryPronounsProcess.PreProcess(ref tokens);
+      Assert.Equal(new List<string> { "where", "can", "Watson", "find", "butler", ",", "actress", ",", "dave", "and", "earl", "?" }, tokens);
+    }
 
     //[Fact]
     //public void We()
