@@ -125,11 +125,11 @@ namespace WatsonAI
     {
       var replacing = new List<Tuple<List<string>, List<string>>>();
 
-      var inputCharacters = FindCharactersInInput(tokens);
+      var characters = FindCharactersInInputAndMemory(tokens);
 
-      if (inputCharacters.Any())
+      if (characters.Any())
       {
-        var inputCharacter = inputCharacters.First();
+        var inputCharacter = characters.First();
         if (inputCharacter.Gender == Gender.Male)
         {
           replacing.Add(Tuple.Create(new List<string> { "him" }, new List<string> { inputCharacter.Name }));
@@ -143,16 +143,16 @@ namespace WatsonAI
         }
         if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
         {
-          if (inputCharacters.Count == 1)
+          if (characters.Count == 1)
           {
             replacing.Add(Tuple.Create(new List<string> { "they", "are" }, new List<string> { inputCharacter.Name, "is" }));
             replacing.Add(Tuple.Create(new List<string> { "they", "'re" }, new List<string> { inputCharacter.Name, "is" }));
             replacing.Add(Tuple.Create(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }));
           }
         }
-        replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()))));
-        replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()))));
-        var theirReplacement = new List<string>(MultiNounSentence(inputCharacters.Select(c => c.Name).ToList()));
+        replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()))));
+        replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()))));
+        var theirReplacement = new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()));
         theirReplacement.Add("'s");
         replacing.Add(Tuple.Create(new List<string> { "their" }, theirReplacement));
         replacing.Add(Tuple.Create(new List<string> { "their", "'s" }, theirReplacement));
@@ -171,9 +171,9 @@ namespace WatsonAI
     public List<Tuple<List<string>, List<string>>> HerPronounReplacements(List<string> tokens, Parse parse)
     {
       var replacing = new List<Tuple<List<string>, List<string>>>();
-      var inputCharacters = FindCharactersInInput(tokens);
+      var characters = FindCharactersInInputAndMemory(tokens);
 
-      if (!tokens.Contains("her") || inputCharacters.Count != 1)
+      if (!tokens.Contains("her") || characters.Count != 1)
       {
         return replacing;
       }
@@ -188,17 +188,40 @@ namespace WatsonAI
         {
           if (HerIsInPosessiveForm(np))
           {
-            replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacters.First().Name, "'s" }));
+            replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { characters.First().Name, "'s" }));
           }
         }
       }
       if (replacing.Count == 0)
       {
-        replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacters.First().Name }));
+        replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { characters.First().Name }));
       }
 
       return replacing;
     }
+
+    /// <summary>
+    /// Returns a list of characters who's names are present in either the input, last response, or last input.
+    /// </summary>
+    /// <param name="tokens">The tokens of the input.</param>
+    /// <returns>The characters in either the input, last response, or last input. In that preference.</returns>
+    private List<Character> FindCharactersInInputAndMemory(IEnumerable<string> tokens)
+    {
+      var characters = FindCharactersInInput(tokens);
+      if (memory != null)
+      {
+        if (characters.Count == 0 && memory.Responses.Count() != 0)
+        {
+          characters = FindCharactersInInput(parser.Tokenize(memory.GetLastResponse()));
+        }
+        else if (characters.Count == 0 && memory.Inputs.Count() != 0)
+        {
+          characters = FindCharactersInInput(parser.Tokenize(memory.GetLastInput()));
+        }
+      }
+      return characters;
+    }
+
 
     /// <summary>
     /// Returns true if there exists a "her", followed by a noun (and some potentially adjectives).
@@ -213,7 +236,6 @@ namespace WatsonAI
                  && children.Last().Type == "NN"
                  && (children.Length <= 2 || children.Length > 2 && children.ToList().GetRange(1, children.Count()).All(c => c.Type == "JJ"));
     }
-
 
     /// <summary>
     /// Converts a list of nouns into multiple noun sentence form: eg. [eggs, bacon, ham] => "eggs, bacon and ham".
@@ -295,7 +317,7 @@ namespace WatsonAI
     /// </summary>
     /// <param name="tokens">The list of tokens to search.</param>
     /// <returns>A list of character names in the tokens.</returns>
-    private List<Character> FindCharactersInInput(List<string> tokens)
+    private List<Character> FindCharactersInInput(IEnumerable<string> tokens)
     {
       var storyCharacters = this.characters;
       var inputCharacters = new List<Character>();
