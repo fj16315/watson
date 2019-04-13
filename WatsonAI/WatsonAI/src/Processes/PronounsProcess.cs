@@ -10,6 +10,10 @@ namespace WatsonAI
   /// <summary>
   /// Implements a pre-process and post-process that remove and add, respectively, pronouns.
   /// </summary>
+  /// <remarks>
+  /// The string matching in this isn't an optimal complexity algorithm, 
+  /// but it's mostly one pass and I think it should be fast enough for the small message sizes.
+  /// </remarks>
   public class PronounsProcess : IPreProcess, IPostProcess
   {
     private readonly Character character;
