@@ -39,10 +39,17 @@ namespace WatsonAI
     /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public void PreProcess(ref List<string> tokens)
     {
+      Parse parse;
+      var parseExists = parser.Parse(tokens, out parse);
+
       var replacing = new List<Tuple<List<string>, List<string>>>();
 
       replacing.AddRange(SimplePronounReplacements());
-      replacing.AddRange(ItPronounReplacements(tokens));
+      if (parseExists)
+      {
+        replacing.AddRange(ItPronounReplacements(tokens, parse));
+        replacing.AddRange(HerPronounReplacements(tokens, parse));
+      }
       replacing.AddRange(CharacterPronounReplacements(tokens));
 
       ReplaceWords(replacing, tokens);
@@ -86,15 +93,16 @@ namespace WatsonAI
     /// Returns all the patterns for a replacing it-based pronouns in the tokens.
     /// </summary>
     /// <param name="tokens">The tokens to check for nouns in.</param>
+    /// <param name="parse">A parse of the tokens to search for the noun.</param>
     /// <returns>
     /// List of tuples containing a list of tokens to match against, and list of tokens to replace.
     /// </returns>
-    public List<Tuple<List<string>, List<string>>> ItPronounReplacements(List<string> tokens)
+    public List<Tuple<List<string>, List<string>>> ItPronounReplacements(List<string> tokens, Parse parse)
     {
       var replacing = new List<Tuple<List<string>, List<string>>>();
       
       string entity = "";
-      var replacingItWord = CheckForItWord(tokens, out entity);
+      var replacingItWord = CheckForItWord(tokens, parse, out entity);
 
       if (replacingItWord)
       {
@@ -106,6 +114,9 @@ namespace WatsonAI
     /// <summary>
     /// Returns all the patterns for a replacing character-based pronouns in the tokens.
     /// </summary>
+    /// <remarks>
+    /// Does not deal with "her", as this is a special case in the English language, so has it's own method.
+    /// </remarks>
     /// <param name="tokens">The tokens to check for characters in.</param>
     /// <returns>
     /// List of tuples containing a list of tokens to match against, and list of tokens to replace.
@@ -127,8 +138,6 @@ namespace WatsonAI
         }
         else if (inputCharacter.Gender == Gender.Female)
         {
-          // This needs to support her and hers
-          replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacter.Name }));
           replacing.Add(Tuple.Create(new List<string> { "hers" }, new List<string> { inputCharacter.Name, "'s" }));
           replacing.Add(Tuple.Create(new List<string> { "she" }, new List<string> { inputCharacter.Name }));
         }
@@ -150,6 +159,61 @@ namespace WatsonAI
       }
       return replacing;
     }
+
+    /// <summary>
+    /// Returns the patterns for "her" in the tokens.
+    /// </summary>
+    /// <param name="tokens">The tokens to check for "her" in.</param>
+    /// <param name="parse">A parse of the tokens to check for "her" in.</param>
+    /// <returns>
+    /// List of tuples containing a list of tokens to match against, and list of tokens to replace.
+    /// </returns>
+    public List<Tuple<List<string>, List<string>>> HerPronounReplacements(List<string> tokens, Parse parse)
+    {
+      var replacing = new List<Tuple<List<string>, List<string>>>();
+      var inputCharacters = FindCharactersInInput(tokens);
+
+      if (!tokens.Contains("her") || inputCharacters.Count != 1)
+      {
+        return replacing;
+      }
+
+      var top = Branch("TOP");
+      var nounPhrase = top >= Branch("NP");
+      var nounPhrases = nounPhrase.Match(parse);
+
+      if (nounPhrases.HasValue)
+      {
+        foreach (var np in nounPhrases.Value)
+        {
+          if (HerIsInPosessiveForm(np))
+          {
+            replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacters.First().Name, "'s" }));
+          }
+        }
+      }
+      if (replacing.Count == 0)
+      {
+        replacing.Add(Tuple.Create(new List<string> { "her" }, new List<string> { inputCharacters.First().Name }));
+      }
+
+      return replacing;
+    }
+
+    /// <summary>
+    /// Returns true if there exists a "her", followed by a noun (and some potentially adjectives).
+    /// </summary>
+    /// <param name="np">The noun phrase to check.</param>
+    /// <returns>True if there exists a "her" indirectly followed by a noun, false otherwise.</returns>
+    private bool HerIsInPosessiveForm(Parse np)
+    {
+      var children = np.GetChildren();
+      return children.Any()
+                 && children.First().Value.Equals("her", StringComparison.OrdinalIgnoreCase)
+                 && children.Last().Type == "NN"
+                 && (children.Length <= 2 || children.Length > 2 && children.ToList().GetRange(1, children.Count()).All(c => c.Type == "JJ"));
+    }
+
 
     /// <summary>
     /// Converts a list of nouns into multiple noun sentence form: eg. [eggs, bacon, ham] => "eggs, bacon and ham".
@@ -252,27 +316,30 @@ namespace WatsonAI
     /// Checks for "it" token and finds the correct replacement in the sentence or in memory.
     /// </summary>
     /// <param name="tokens">The list of tokens to check for "it" word.</param>
+    /// <param name="parse">A parse of the tokens to search for the noun.</param>
     /// <param name="word">Out parameter, the noun found to replace "it".</param>
     /// <returns>True if a noun replacement for "it" was found.</returns>
-    private bool CheckForItWord(List<string> tokens, out string word)
+    private bool CheckForItWord(List<string> tokens, Parse parse, out string word)
     {
+      Parse itParse = parse;
       if (tokens.Contains("it"))
       {
         var sentenceUpToIt = tokens.Take(tokens.FindIndex(x => x == "it"));
-        if (FindItWord(sentenceUpToIt, out word))
+        if (FindItWord(itParse, out word))
         {
           return true;
         }
         else if (this.memory != null)
         {
-          var response = memory.GetLastResponse();
-          var responseTokens = parser.Tokenize(response);
-          if (FindItWord(responseTokens, out word))
+          var responseTokens = parser.Tokenize(memory.GetLastResponse());
+          var parseExists = parser.Parse(responseTokens, out itParse);
+          if (parseExists && FindItWord(itParse, out word))
           {
             return true;
           }
           var inputTokens = parser.Tokenize(memory.GetLastInput());
-          if (FindItWord(inputTokens, out word))
+          parseExists = parser.Parse(inputTokens, out itParse);
+          if (parseExists && FindItWord(itParse, out word))
           {
             return true;
           }
@@ -285,27 +352,19 @@ namespace WatsonAI
     /// <summary>
     /// Finds a noun that an it references.
     /// </summary>
-    /// <param name="tokens">The tokens to search for noun.</param>
+    /// <param name="parse">A parse of the tokens to search for the noun.</param>
     /// <param name="word">Out paramater, the noun found to replace "it".</param>
     /// <returns>True if a noun was found.</returns>
-    private bool FindItWord(IEnumerable<string> tokens, out string word)
+    private bool FindItWord(Parse parse, out string word)
     {
-      Parse parse;
-      var parseExists = parser.Parse(tokens, out parse);
+      var top = Branch("TOP");
+      var subject = top >= Branch("NN");
+      var entity = subject.Match(parse);
 
-      if (parseExists)
+      if (entity.HasValue)
       {
-        var top = Branch("TOP");
-
-        var subject = top >= Branch("NN");
-
-        var entity = subject.Match(parse);
-
-        if (entity.HasValue)
-        {
-          word = entity.Value.First().Value;
-          return true;
-        }
+        word = entity.Value.First().Value;
+        return true;
       }
       word = "";
       return false;
