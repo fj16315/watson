@@ -11,9 +11,10 @@ namespace WatsonAI
     /// <summary>
     /// Construct a new DebugPronounProcess with character actress.
     /// </summary>
-    public DebugPronounProcess()
+    public DebugPronounProcess(List<Character> characters, Parser parser)
     {
-      this.pronounProcess = new PronounsProcess(new Character("actress", false));
+      this.pronounProcess = new PronounsProcess(new Character("actress", false, Gender.Female), 
+        characters, parser);
     }
 
     /// <summary>
