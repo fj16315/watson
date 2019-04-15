@@ -10,12 +10,22 @@ namespace WatsonAI
     private List<string> output;
     private int position;
 
-    // Maybe not readonly?
-    public IEnumerable<string> Output
-    {
-      get
+    public List<string> Input { get { return input; } }
+    public List<string> Output { get { return output; } }
+
+    /// <summary>
+    /// If this is defined, only this process will run.
+    /// </summary>
+    public IProcess SpecialCaseHandler { get; private set; }
+
+    /// <summary>
+    /// If this stream is a special case: one process wants to handle it.
+    /// </summary>
+    /// <returns>True if the stream is a special case.</returns>
+    public bool IsSpecialCase {
+      get 
       {
-        return output.AsReadOnly();
+        return this.SpecialCaseHandler == null;
       }
     }
 
@@ -30,10 +40,11 @@ namespace WatsonAI
       this.input = input;
       this.output = output;
       this.position = position;
+      this.SpecialCaseHandler = null;
     }
 
     public Stream Clone()
-      => new Stream(input, output.ToList(), position);
+      => new Stream(new List<string>(input), new List<string>(output), position);
 
     public static Stream Tokenise(Parser parser, string sentence) 
       => new Stream(new List<string>(parser.Tokenize(sentence)));
@@ -134,6 +145,23 @@ namespace WatsonAI
     public void ClearOutput()
     {
       output = new List<string>();
+    }
+
+    /// <summary>
+    /// Assigns this process to be a special case handler for the stream.
+    /// </summary>
+    /// <param name="process">The process to handle the special case.</param>
+    public void AssignSpecialCaseHandler(IProcess process)
+    {
+      this.SpecialCaseHandler = process;
+    }
+
+    /// <summary>
+    /// Removes the special case handler for the stream.
+    /// </summary>
+    public void RemoveSpecialCaseHandler()
+    {
+      this.SpecialCaseHandler = null;
     }
   }
 
