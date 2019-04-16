@@ -14,7 +14,7 @@ namespace WatsonAI
   /// The string matching in this isn't an optimal complexity algorithm, 
   /// but it's mostly one pass and I think it should be fast enough for the small message sizes.
   /// </remarks>
-  public class PronounsProcess : IPreProcess, IPostProcess
+  public class PronounsRemovalProcess : IProcess
   {
     private readonly Character character;
     private readonly Memory memory;
@@ -22,14 +22,14 @@ namespace WatsonAI
     private readonly List<Character> characters;
 
 
-    public PronounsProcess(Character character, List<Character> characters, Parser parser)
+    public PronounsRemovalProcess(Character character, List<Character> characters, Parser parser)
     {
       this.character = character;
       this.characters = characters;
       this.parser = parser;
     }
 
-    public PronounsProcess(Character character, List<Character> characters, Memory memory, Parser parser)
+    public PronounsRemovalProcess(Character character, List<Character> characters, Memory memory, Parser parser)
     {
       this.character = character;
       this.characters = characters;
@@ -38,25 +38,27 @@ namespace WatsonAI
     }
 
     /// <summary>
-    /// Implements a pre-process that replaces pronouns with the character name in the input stream.
+    /// Implements a process that replaces pronouns with the character name in the input stream.
     /// </summary>
     /// <param name="tokens">A reference to a list of tokens to act on.</param>
-    public void PreProcess(ref List<string> tokens)
+    public Stream Process(Stream stream)
     {
       Parse parse;
-      var parseExists = parser.Parse(tokens, out parse);
+      var parseExists = parser.Parse(stream.Input, out parse);
 
       var replacing = new List<Tuple<List<string>, List<string>>>();
 
       replacing.AddRange(SimplePronounReplacements());
       if (parseExists)
       {
-        replacing.AddRange(ItPronounReplacements(tokens, parse));
-        replacing.AddRange(HerPronounReplacements(tokens, parse));
+        replacing.AddRange(ItPronounReplacements(stream.Input, parse));
+        replacing.AddRange(HerPronounReplacements(stream.Input, parse));
       }
-      replacing.AddRange(CharacterPronounReplacements(tokens));
+      replacing.AddRange(CharacterPronounReplacements(stream.Input));
 
-      ReplaceWords(replacing, tokens);
+      ReplaceWords(replacing, stream.Input);
+
+      return stream;
 
       //TODO: Else here is a good place to introduce the failstate.
     }
@@ -260,22 +262,6 @@ namespace WatsonAI
         sentence.Insert(sentence.Count - 1, "and");
       }
       return sentence;
-    }
-
-    /// <summary>
-    /// Implements a post-process that replaces character names with pronouns in the ouput stream.
-    /// </summary>
-    /// <param name="tokens">A reference to a list of tokens to act on.</param>
-    public void PostProcess(ref List<string> tokens)
-    {
-      var replacing = new List<Tuple<List<string>, List<string>>>
-      {
-        Tuple.Create(new List<string> { "Watson" }, new List<string> { "you" }),
-        Tuple.Create(new List<string> { "the", character.Name }, new List<string> { "me" }),
-        Tuple.Create(new List<string> { character.Name }, new List<string> { "me" })
-      };
-
-      ReplaceWords(replacing, tokens);
     }
 
     /// <summary>

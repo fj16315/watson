@@ -37,25 +37,28 @@ namespace WatsonAI
       var character = Story.Characters[name];
       var characters = Story.Characters.Values.ToList();
       var knowledge = Story.Characters[name].Knowledge;
+      var memory = characterMemories[character];
 
       var stream = Stream.Tokenise(parser, input);
+      stream = memory.MaybeHandleStream(stream);
+
 
       var debugs = new DebugProcesses(characters, parser, thesaurus);
       var greetings = new GreetingsProcess(parser, thesaurus);
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var fallback = new FallbackProcess();
-      var prePronoun = new PronounsProcess(character, characters, characterMemories[character], parser);
+      var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
+      var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
 
       var output = new Processor()
-        .AddPreProcesses(prePronoun)
-        .AddProcesses(greetings, debugs, question, universeQuestion, fallback)
+        .AddProcesses(debugs, prePronoun, greetings, question, postPronoun, universeQuestion, fallback)
         .Process(stream);
 
       var response = string.Join(", ", output.Output);
 
-      characterMemories[character].AppendInput(input);
-      characterMemories[character].AppendResponse(response);
+      memory.AppendInput(input);
+      memory.AppendResponse(response);
 
       return response;
     }

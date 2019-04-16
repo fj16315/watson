@@ -17,6 +17,17 @@ namespace WatsonAI
     private readonly List<string> responses;
     private readonly int capacity;
     private readonly Character character;
+    private IProcess nextStreamHandler;
+
+    /// <summary>
+    /// If there is a process that has requested to handle the next stream.
+    /// </summary>
+    public bool IsStreamHandler {
+      get 
+      {
+        return nextStreamHandler == null;
+      }
+    }
 
     /// <summary>
     /// The inputs that the player gave to the character that are
@@ -112,5 +123,30 @@ namespace WatsonAI
       }
       return "";
     }
+
+    /// <summary>
+    /// Request that this process handles the next stream from the player.
+    /// </summary>
+    /// <param name="process">The process to handle the next stream.</param>
+    public void RequestHandleNextStream(IProcess process)
+    {
+      this.nextStreamHandler = process;
+    }
+
+    /// <summary>
+    /// Adds a process as a special case handler if one has requested to handle the next stream.
+    /// </summary>
+    /// <param name="stream">The stream.</param>
+    /// <returns>The stream that might have a special case handler.</returns>
+    public Stream MaybeHandleStream(Stream stream)
+    {
+      if (IsStreamHandler)
+      {
+        stream.AssignSpecialCaseHandler(nextStreamHandler);
+      }
+      return stream;
+    }
+
+
   }
 }
