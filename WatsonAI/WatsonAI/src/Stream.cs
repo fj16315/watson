@@ -25,7 +25,7 @@ namespace WatsonAI
     public bool IsSpecialCase {
       get 
       {
-        return this.SpecialCaseHandler == null;
+        return this.SpecialCaseHandler != null;
       }
     }
 

@@ -41,7 +41,8 @@ namespace WatsonAI
 
       foreach (var process in Processes)
       {
-        if (!stream.IsSpecialCase || stream.SpecialCaseHandler.Equals(process))
+        if (!stream.IsSpecialCase || 
+          (stream.IsSpecialCase && stream.SpecialCaseHandler.Equals(process)))
         {
           stream = process.Process(stream);
         }
