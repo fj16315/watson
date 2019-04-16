@@ -62,6 +62,7 @@ namespace WatsonAI
         {"butler", "own", "arsenic"},
         {"earl", "use", "barbital"},
         {"belonging", "contain", "nightshade"},
+        {"study", "contain", "actress"}
       };
       Associations = universeKnowledgeBuilder.Associations;
       Knowledge = universeKnowledgeBuilder.Knowledge;
@@ -82,6 +83,7 @@ namespace WatsonAI
         {Names.ACTRESS,
         new KnowledgeBuilder(entities, verbs)
         {
+          {"study", "contain", "actress"},
           {"actress", "poison", "earl"},
           {"earl", "love", "countess"},
           {"countess", "love", "earl"},
