@@ -117,7 +117,7 @@ public class DialogueScreen : MonoBehaviour {
         else
         {
             nextButton.SetActive(true);
-            if (Application.isEditor)
+            if (Application.isEditor && state.currentState == GameState.State.TUTORIAL)
             {
                 skipButton.SetActive(true);
             }
