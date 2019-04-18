@@ -71,6 +71,7 @@ namespace WatsonAI
         {Names.ACTRESS, new Character("actress", true, Gender.Female)},
         {Names.COUNTESS, new Character("countess", false, Gender.Female)},
         {Names.COLONEL, new Character("colonel", false, Gender.Male)},
+        {Names.EARL, new Character("earl", false, Gender.Male)},
         {Names.GANGSTER, new Character("gangster", false, Gender.Male)},
         {Names.POLICE, new Character("policeman", false, Gender.Male)},
         {Names.BUTLER, new Character("butler", false, Gender.Male)},

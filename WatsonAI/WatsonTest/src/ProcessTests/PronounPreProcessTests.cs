@@ -22,7 +22,8 @@ namespace WatsonTest
         new Character("butler", true, Gender.Other)
       };
       character = new Character("actress", true, Gender.Female);
-      pronounsProcess = new PronounsRemovalProcess(this.character, characters, parser);
+      var genericMemory = new Memory(character, 3);
+      pronounsProcess = new PronounsRemovalProcess(this.character, characters, genericMemory, parser);
     }
 
     [Fact]
@@ -230,6 +231,11 @@ namespace WatsonTest
       var stream = Stream.Tokenise(parser, input);
       stream = pronounsProcess.Process(stream);
       Assert.Equal(new List<string> { "the", "earl", "is", "stupid", ",", "where", "is", "earl", "?" }, stream.Input);
+
+      input = "the earl is stupid, isn't he?";
+      stream = Stream.Tokenise(parser, input);
+      stream = pronounsProcess.Process(stream);
+      Assert.Equal(new List<string> { "the", "earl", "is", "stupid", ",", "isn't", "earl", "?" }, stream.Input);
     }
 
     //[Fact]

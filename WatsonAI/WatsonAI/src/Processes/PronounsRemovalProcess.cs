@@ -20,14 +20,7 @@ namespace WatsonAI
     private readonly Memory memory;
     private readonly Parser parser;
     private readonly List<Character> characters;
-
-
-    public PronounsRemovalProcess(Character character, List<Character> characters, Parser parser)
-    {
-      this.character = character;
-      this.characters = characters;
-      this.parser = parser;
-    }
+    private PronounType awaitingClarification;
 
     public PronounsRemovalProcess(Character character, List<Character> characters, Memory memory, Parser parser)
     {
@@ -35,6 +28,7 @@ namespace WatsonAI
       this.characters = characters;
       this.memory = memory;
       this.parser = parser;
+      this.awaitingClarification = PronounType.None;
     }
 
     /// <summary>
@@ -43,25 +37,92 @@ namespace WatsonAI
     /// <param name="tokens">A reference to a list of tokens to act on.</param>
     public Stream Process(Stream stream)
     {
-      Parse parse;
-      var parseExists = parser.Parse(stream.Input, out parse);
+      var charactersInStream = new List<Character>();
+      if (awaitingClarification != PronounType.None)
+      {
+        if (JustClarificationProvided(stream.Input))
+        {
+          charactersInStream = FindCharactersInInputAndMemory(stream.Input);
+          stream = Stream.Tokenise(parser, memory.GetLastInput());
+        }
+        awaitingClarification = PronounType.None;
+      }
 
       var replacing = new List<Tuple<List<string>, List<string>>>();
+
+      Parse parse;
+      var parseExists = parser.Parse(stream.Input, out parse);
+      if (charactersInStream.Count == 0) charactersInStream = FindCharactersInInputAndMemory(stream.Input);
 
       replacing.AddRange(SimplePronounReplacements());
       if (parseExists)
       {
         replacing.AddRange(ItPronounReplacements(stream.Input, parse));
-        replacing.AddRange(HerPronounReplacements(stream.Input, parse));
+        replacing.AddRange(HerPronounReplacements(stream.Input, parse, charactersInStream));
       }
-      replacing.AddRange(CharacterPronounReplacements(stream.Input));
+      replacing.AddRange(CharacterPronounReplacements(stream.Input, charactersInStream));
 
       ReplaceWords(replacing, stream.Input);
 
-      return stream;
+      var remainingPronounType = UnsuccesfullyFiltered(stream.Input);
+      if (remainingPronounType != PronounType.None)
+      {
+        AskForClarification(stream, remainingPronounType);
+      }
 
-      //TODO: Else here is a good place to introduce the failstate.
+      return stream;
     }
+
+    private bool JustClarificationProvided(List<string> input)
+    {
+      return false;
+    }
+
+    /// <summary>
+    /// Checks to see if there are any pronouns left in the input.
+    /// </summary>
+    /// <param name="input">The input to check for pronouns.</param>
+    /// <returns>
+    /// The type (Person or Object) of the pronoun left, or None if there are no pronouns left.
+    /// </returns>
+    private PronounType UnsuccesfullyFiltered(List<string> input)
+    {
+      if (  input.Contains("he")
+         || input.Contains("she") 
+         || input.Contains("her")
+         || input.Contains("his")
+         || input.Contains("their")
+         || input.Contains("they"))
+      {
+        return PronounType.Person;
+      }
+      if (input.Contains("it")) 
+      {
+        return PronounType.Object;
+      }
+      return PronounType.None;
+    }
+
+    /// <summary>
+    /// Asks for clarification from the user.
+    /// </summary>
+    /// <param name="stream">The stream where this process is a special case handler.</param>
+    /// <param name="remainingPronounType">The type of the remaining pronoun.</param>
+    private void AskForClarification(Stream stream, PronounType remainingPronounType)
+    {
+      stream.AssignSpecialCaseHandler(this);
+      if (remainingPronounType == PronounType.Person)
+      {
+        stream.AppendOutput("I'm sorry, who do you mean?");
+        awaitingClarification = PronounType.Person;
+      }
+      else
+      {
+        stream.AppendOutput("I'm sorry, what do you mean?");
+        awaitingClarification = PronounType.Object;
+      }
+    }
+
 
     /// <summary>
     /// Returns all the simple patterns for a replacing pronouns in the tokens.
@@ -127,13 +188,11 @@ namespace WatsonAI
     /// <returns>
     /// List of tuples containing a list of tokens to match against, and list of tokens to replace.
     /// </returns>
-    public List<Tuple<List<string>, List<string>>> CharacterPronounReplacements(List<string> tokens)
+    public List<Tuple<List<string>, List<string>>> CharacterPronounReplacements(List<string> tokens, List<Character> characters)
     {
       var replacing = new List<Tuple<List<string>, List<string>>>();
 
-      var characters = FindCharactersInInputAndMemory(tokens);
-
-      if (characters.Any())
+      if (characters.Count == 1)
       {
         var inputCharacter = characters.First();
         if (inputCharacter.Gender == Gender.Male)
@@ -149,13 +208,14 @@ namespace WatsonAI
         }
         if (inputCharacter.Gender == Gender.Other || inputCharacter.Gender == Gender.Male || inputCharacter.Gender == Gender.Female)
         {
-          if (characters.Count == 1)
-          {
-            replacing.Add(Tuple.Create(new List<string> { "they", "are" }, new List<string> { inputCharacter.Name, "is" }));
-            replacing.Add(Tuple.Create(new List<string> { "they", "'re" }, new List<string> { inputCharacter.Name, "is" }));
-            replacing.Add(Tuple.Create(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }));
-          }
+          replacing.Add(Tuple.Create(new List<string> { "they", "are" }, new List<string> { inputCharacter.Name, "is" }));
+          replacing.Add(Tuple.Create(new List<string> { "they", "'re" }, new List<string> { inputCharacter.Name, "is" }));
+          replacing.Add(Tuple.Create(new List<string> { "are", "they" }, new List<string> { "is", inputCharacter.Name }));
         }
+      }
+
+      if (characters.Any())
+      {
         replacing.Add(Tuple.Create(new List<string> { "they" }, new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()))));
         replacing.Add(Tuple.Create(new List<string> { "them" }, new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()))));
         var theirReplacement = new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()));
@@ -174,10 +234,9 @@ namespace WatsonAI
     /// <returns>
     /// List of tuples containing a list of tokens to match against, and list of tokens to replace.
     /// </returns>
-    public List<Tuple<List<string>, List<string>>> HerPronounReplacements(List<string> tokens, Parse parse)
+    public List<Tuple<List<string>, List<string>>> HerPronounReplacements(List<string> tokens, Parse parse, List<Character> characters)
     {
       var replacing = new List<Tuple<List<string>, List<string>>>();
-      var characters = FindCharactersInInputAndMemory(tokens);
 
       if (!tokens.Contains("her") || characters.Count != 1)
       {
@@ -214,17 +273,16 @@ namespace WatsonAI
     private List<Character> FindCharactersInInputAndMemory(IEnumerable<string> tokens)
     {
       var characters = FindCharactersInInput(tokens);
-      if (memory != null)
+
+      if (characters.Count == 0 && memory.Responses.Count() != 0)
       {
-        if (characters.Count == 0 && memory.Responses.Count() != 0)
-        {
-          characters = FindCharactersInInput(parser.Tokenize(memory.GetLastResponse()));
-        }
-        else if (characters.Count == 0 && memory.Inputs.Count() != 0)
-        {
-          characters = FindCharactersInInput(parser.Tokenize(memory.GetLastInput()));
-        }
+        characters = FindCharactersInInput(parser.Tokenize(memory.GetLastResponse()));
       }
+      else if (characters.Count == 0 && memory.Inputs.Count() != 0)
+      {
+        characters = FindCharactersInInput(parser.Tokenize(memory.GetLastInput()));
+      }
+
       return characters;
     }
 
@@ -341,20 +399,17 @@ namespace WatsonAI
         {
           return true;
         }
-        else if (this.memory != null)
+        var responseTokens = parser.Tokenize(memory.GetLastResponse());
+        var parseExists = parser.Parse(responseTokens, out itParse);
+        if (parseExists && FindItWord(itParse, out word))
         {
-          var responseTokens = parser.Tokenize(memory.GetLastResponse());
-          var parseExists = parser.Parse(responseTokens, out itParse);
-          if (parseExists && FindItWord(itParse, out word))
-          {
-            return true;
-          }
-          var inputTokens = parser.Tokenize(memory.GetLastInput());
-          parseExists = parser.Parse(inputTokens, out itParse);
-          if (parseExists && FindItWord(itParse, out word))
-          {
-            return true;
-          }
+          return true;
+        }
+        var inputTokens = parser.Tokenize(memory.GetLastInput());
+        parseExists = parser.Parse(inputTokens, out itParse);
+        if (parseExists && FindItWord(itParse, out word))
+        {
+          return true;
         }
       }
       word = "";
@@ -380,6 +435,10 @@ namespace WatsonAI
       }
       word = "";
       return false;
+    }
+
+    private enum PronounType {
+      None, Object, Person
     }
   }
 }

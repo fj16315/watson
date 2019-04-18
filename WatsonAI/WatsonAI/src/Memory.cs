@@ -146,7 +146,5 @@ namespace WatsonAI
       }
       return stream;
     }
-
-
   }
 }
