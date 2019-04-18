@@ -25,7 +25,7 @@ namespace WatsonAI
     public bool IsStreamHandler {
       get 
       {
-        return nextStreamHandler == null;
+        return nextStreamHandler != null;
       }
     }
 
