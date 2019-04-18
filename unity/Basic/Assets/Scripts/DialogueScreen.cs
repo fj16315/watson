@@ -101,8 +101,7 @@ public class DialogueScreen : MonoBehaviour {
         */
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
-              (state.currentState == GameState.State.STORY &&
-              currentCharacter.charName == "Butler")))
+              (state.currentState == GameState.State.STORY)))
         {
             // If players choose to skip getting the story dump from the butler
             // then just change the state to PLAY.
@@ -120,6 +119,10 @@ public class DialogueScreen : MonoBehaviour {
             if (Application.isEditor && state.currentState == GameState.State.TUTORIAL)
             {
                 skipButton.SetActive(true);
+            }
+            if (state.currentState == GameState.State.STORY)
+            {
+                state.SetCharacter(currentCharacter);
             }
             UpdateReply(state.NextString());
         }
