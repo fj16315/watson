@@ -6807,7 +6807,7 @@ MonoBehaviour:
   police: {fileID: 646669894}
   dialogue: {fileID: 570466025}
   raycasting: {fileID: 1361230746}
-  notebookInteractable: {fileID: 0}
+  notebookInteractable: {fileID: 1508302238}
   controller: {fileID: 526429955}
   who: {fileID: 1196870605}
   why: {fileID: 194090793}
