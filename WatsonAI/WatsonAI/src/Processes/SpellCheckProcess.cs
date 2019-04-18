@@ -14,47 +14,34 @@ namespace WatsonAI
   /// </summary>
   public class SpellCheckProcess : IProcess
   {
- 
-    private SymSpell symSpell;
+    private static SymSpell symSpell;
 
-
-    public SpellCheckProcess() {
-  
-      //create the symspell object
+    static SpellCheckProcess() {
       int initialCapacity = 549313;
       int maxEditDistanceDictionary = 2;
-      this.symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
+      symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
 
-
-      //load dictionary
-      string directory = Path.Combine("..", "WatsonAI", "bin", "Debug", "netcoreapp2.1", "res", "dictionary", "frequency_dictionary.txt");
+      string directory = Path.Combine("..","WatsonAI", "res", "dictionary", "frequency_dictionary.txt");
       int termIndex = 0;
       int countIndex = 1;
 
       if (!symSpell.LoadDictionary(directory, termIndex, countIndex)) 
       {
-        Console.WriteLine("File not found!");
-        Console.ReadKey();
+        System.Diagnostics.Debug.WriteLine("File not found");
+
         return;
       }
-
-     
-
     }
-
     /// <summary>
-    /// and adds a greeting to the output.
+    /// checks the spelling of the input stream
     /// </summary>
     /// <param name="stream">The input stream.</param>
-    /// <returns>Mutated stream.</returns>
+    /// <returns>Stream Suggestion.</returns>
     public Stream Process(Stream stream)
     {
-
-      //lookup suggestions for multi-word input strings (supports compound splitting & merging)
-      int maxEditDistanceLookup = 2; //max edit distance per lookup (per single word, not per whole input string)
+      int maxEditDistanceLookup = 2; 
       var suggestions = symSpell.LookupCompound(stream.nonTokenisedInput, maxEditDistanceLookup);
 
-      //display suggestions, edit distance and term frequency
       foreach (var suggestion in suggestions)
       {
         if (suggestion.distance ==1 && stream.Input.Contains("?"))
@@ -64,19 +51,12 @@ namespace WatsonAI
         else if (suggestion.distance != 0)
         {
           stream.AssignSpecialCaseHandler(this);
-          if (stream.Input.Contains("?")) {
-            stream.AppendOutput(suggestion.term + "?");
-          }
-          else 
-          {
-             stream.AppendOutput(suggestion.term);
-          }
+          if (stream.Input.Contains("?")) stream.AppendOutput(suggestion.term + "?");
+          else stream.AppendOutput(suggestion.term);
 
         }
       }
-
       return stream;
-
     }
 
   }
