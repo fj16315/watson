@@ -53,7 +53,7 @@ namespace WatsonAI
       var spellCheck = new SpellCheckProcess();
 
       var output = new Processor()
-        .AddProcesses(debugs, prePronoun, greetings, question, postPronoun, universeQuestion,spellCheck, fallback)
+        .AddProcesses(debugs,spellCheck, prePronoun, greetings, question, postPronoun, universeQuestion, fallback)
         .Process(stream);
 
       var response = string.Join(", ", output.Output);
