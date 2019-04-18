@@ -6709,7 +6709,8 @@ MonoBehaviour:
   - You can save clues to your notebook by clicking Save Answer.
   - Great, you're all ready to solve the mystery.
   - Find clues by searching the house and talking to everyone you meet.
-  - I'll unlock these doors now. Come back to me when you have solved the case!
+  - 'I''ll unlock these doors now. Go and talk to someone to find out what happened '
+  - Come back to me when you have solved the case!
   storyStrings:
   - 'Thank goodness you have arrived! Let me fill you in on the terrible things that
     have happened. '
