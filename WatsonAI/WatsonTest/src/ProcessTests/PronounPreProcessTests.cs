@@ -134,20 +134,20 @@ namespace WatsonTest
       Assert.Equal(new List<string> { "the", "study", "is", "brown", ",", "where", "is", "the", "study", "?" }, stream.Input);
     }
 
-    //[Fact]
-    //public void ItMultipleEntities()
-    //{
-    //  var input = "the cat ate the dog, why did it do that?";
-    //  Stream.Tokenise(parser, input).RemainingInput(out List<string> tokens);
-    //  stream = pronounsProcess.Process(stream);
-    //  Assert.Equal(new List<string> { "the", "cat", "ate", "the", "dog", ",", "why", "did", "the", "cat", "do", "that", "?" }, stream.Input);
+    [Fact]
+    public void ItMultipleEntities()
+    {
+      var input = "the cat ate the dog, why did it do that?";
+      var stream = Stream.Tokenise(parser, input);
+      stream = pronounsProcess.Process(stream);
+      Assert.Equal(new List<string> { "the", "cat", "ate", "the", "dog", ",", "why", "did", "the", "cat", "do", "that", "?" }, stream.Input);
     
-    //  input = "the cat and the mouse ate the dog, why did it do that?";
-    //  Stream.Tokenise(parser, input).RemainingInput(out tokens);
-    //  stream = pronounsProcess.Process(stream);
-    //  //TODO: Need to do something special here.
-    //  Assert.True(false);
-    //}
+      input = "the cat and the mouse ate the dog, why did it do that?";
+      stream = Stream.Tokenise(parser, input);
+      stream = pronounsProcess.Process(stream);
+      Assert.True(stream.IsSpecialCase);
+      Assert.Equal(pronounsProcess, stream.SpecialCaseHandler);
+    }
 
     [Fact]
     public void ItSingleEntityWithMemory()
