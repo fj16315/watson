@@ -35,12 +35,13 @@ namespace WatsonAI
         new ReplacementRule(new List<string> { "I", "am" }, new List<string> { "Watson", "is" }),
         new ReplacementRule(new List<string> { "I", "'m" }, new List<string> { "Watson", "is" }),
         new ReplacementRule(new List<string> { "am", "I" }, new List<string> { "is", this.detectiveName }),
+        new ReplacementRule(new List<string> { "yours" }, new List<string> { this.character.Name, "'s" }),
         new ReplacementRule(new List<string> { "your" }, new List<string> { this.character.Name, "'s" }),
+        new ReplacementRule(new List<string> { "mine" }, new List<string> { this.detectiveName, "'s" }),
         new ReplacementRule(new List<string> { "you" }, new List<string> { this.character.Name }),
         new ReplacementRule(new List<string> { "I" }, new List<string> { this.detectiveName }),
         new ReplacementRule(new List<string> { "me" }, new List<string> { this.detectiveName }),
-        new ReplacementRule(new List<string> { "my" }, new List<string> { this.detectiveName, "'s" }),
-        new ReplacementRule(new List<string> { "mine" }, new List<string> { this.detectiveName, "'s" })
+        new ReplacementRule(new List<string> { "my" }, new List<string> { this.detectiveName, "'s" })
       };
       return replacing;
     }

@@ -19,7 +19,7 @@ namespace WatsonAI
       this.characters = characters;
       this.memory = memory;
       this.parser = parser;
-      this.awaitingClarification = true;
+      this.awaitingClarification = false;
     }
 
     /// <summary>
@@ -36,8 +36,9 @@ namespace WatsonAI
     {
       var replacing = new List<ReplacementRule>();
 
-      var characters = FindCharactersInInput(stream.Input);
-      replacing.AddRange(CharacterReplacements(characters));
+      var characters = FindCharactersInInputAndMemory(stream.Input);
+      replacing.AddRange(SingularCharacterReplacements(characters));
+      replacing.AddRange(PluralCharacterReplacements(characters));
       Parse parse;
       var parseExists = parser.Parse(stream.Input, out parse);
       if (parseExists)
@@ -56,7 +57,7 @@ namespace WatsonAI
       return replacing;
     }
 
-    public List<ReplacementRule> CharacterReplacements(List<Character> characters)
+    public List<ReplacementRule> SingularCharacterReplacements(List<Character> characters)
     {
       var replacing = new List<ReplacementRule>();
 
@@ -82,6 +83,13 @@ namespace WatsonAI
         }
       }
 
+      return replacing;
+    }
+
+    public List<ReplacementRule> PluralCharacterReplacements(List<Character> characters)
+    {
+      var replacing = new List<ReplacementRule>();
+
       if (characters.Any())
       {
         replacing.Add(new ReplacementRule(new List<string> { "they" }, new List<string>(MultiNounSentence(characters.Select(c => c.Name).ToList()))));
@@ -94,6 +102,7 @@ namespace WatsonAI
 
       return replacing;
     }
+
 
     /// <summary>
     /// Returns the patterns for "her" in the tokens.
@@ -214,7 +223,7 @@ namespace WatsonAI
 
     public bool RequiresClarification()
     {
-      throw new NotImplementedException();
+      return this.awaitingClarification;
     }
 
     public Stream RequestClarification(Stream stream)
