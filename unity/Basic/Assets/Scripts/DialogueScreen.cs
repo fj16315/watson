@@ -97,11 +97,9 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         stringToEdit = "";
         lastQuestion = "";
-        
-        /* If not in tutorial and talking to Policeman, and not in story-dump
-           and talking to Butler, launch AI session.
-        */
+
         camera.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
+        /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
               (state.currentState == GameState.State.STORY)))
@@ -115,6 +113,11 @@ public class DialogueScreen : MonoBehaviour {
             alexa.StartSession();
             ai.StartSession(currentCharacter);
             UpdateReply("");
+        }
+        else if (state.currentState == GameState.State.STORY &&
+                 currentCharacter.charName == "Police")
+        {
+            UpdateReply("Go and speak to one of the suspects to find out more about what happened.");
         }
         else
         {

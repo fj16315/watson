@@ -6800,6 +6800,7 @@ MonoBehaviour:
   - Great, you're all ready to solve the mystery.
   - Find clues by searching the house and talking to everyone you meet.
   - 'I''ll unlock these doors now. Go and talk to someone to find out what happened '
+  - Go and speak to one of the suspects to find out more about what happened.
   - Come back to me when you have solved the case!
   storyStrings:
   - 'Thank goodness you have arrived! Let me fill you in on the terrible things that
@@ -6814,8 +6815,8 @@ MonoBehaviour:
     only people in the house.
   - I cannot imagine why someone might have done this awful thing, although the Earl
     was very wealthy, so perhaps...
-  - Perhaps whoever killed him was to inherit all the money!
-  - I am sure if you find the Earl's will you'll find the killer!
+  - Perhaps someone wanted to inherit all the money!
+  - I think trying to find out details on the will would be a good place to start.
   - Now, feel free to ask us all as many questions as you like, we have been told
     we cannot leave until this is solved.
   - Good luck, Detective Watson!
