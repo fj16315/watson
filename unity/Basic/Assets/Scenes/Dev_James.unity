@@ -7263,7 +7263,7 @@ MonoBehaviour:
   fontDetective: {fileID: 12800000, guid: d878f75c795ad6a4e9effb3d682bf642, type: 3}
   fontActress: {fileID: 12800000, guid: f4c48a169a18d814d8c8dbcee337b627, type: 3}
   fontCountess: {fileID: 12800000, guid: 4a69600451964534b80f2c907bad1eb7, type: 3}
-  fontButler: {fileID: 12800000, guid: 68e5960cfc2d8df44b03fc070e0e2a7f, type: 3}
+  fontButler: {fileID: 12800000, guid: 6291a8de05e7b4c47acda5c3b7777b35, type: 3}
   fontColonel: {fileID: 12800000, guid: ee6a9cd2e4cfcc94b8cb6999a71688e5, type: 3}
   fontGangster: {fileID: 12800000, guid: 286a3ba26ffdff64c9572c152e61c77c, type: 3}
   fontPolice: {fileID: 12800000, guid: ea8c169b40542cd4ebf96f46d9ae027e, type: 3}
