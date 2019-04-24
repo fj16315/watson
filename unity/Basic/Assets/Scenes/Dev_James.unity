@@ -4407,17 +4407,17 @@ PrefabInstance:
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.17425
+      value: 11.11
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12394993
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.3745861
+      value: 1.886
       objectReference: {fileID: 0}
     - target: {fileID: 7099467208769697644, guid: 3c5798d370c1fa04382e39b56bfcf00e,
         type: 3}
@@ -6799,7 +6799,27 @@ MonoBehaviour:
   - You can save clues to your notebook by clicking Save Answer.
   - Great, you're all ready to solve the mystery.
   - Find clues by searching the house and talking to everyone you meet.
-  - I'll unlock these doors now. Come back to me when you have solved the case!
+  - 'I''ll unlock these doors now. Go and talk to someone to find out what happened '
+  - Go and speak to one of the suspects to find out more about what happened.
+  - Come back to me when you have solved the case!
+  storyStrings:
+  - 'Thank goodness you have arrived! Let me fill you in on the terrible things that
+    have happened. '
+  - The Earl had invited five guests to join him for dinner this evening.
+  - They included his wife the Countess, an old friend the Colonel, a young Actress
+    and a no good ruffian Gangster!
+  - I was the fifth guest. We enjoyed our dinner, but as the Earl got up to make an
+    announcement...
+  - He died! I will spare you the grim details, but it was obvious he was poisoned.
+  - I do not know who did it, but it must have been one of his guests. We were the
+    only people in the house.
+  - I cannot imagine why someone might have done this awful thing, although the Earl
+    was very wealthy, so perhaps...
+  - Perhaps someone wanted to inherit all the money!
+  - I think trying to find out details on the will would be a good place to start.
+  - Now, feel free to ask us all as many questions as you like, we have been told
+    we cannot leave until this is solved.
+  - Good luck, Detective Watson!
   alexa: 0
   entryDoors:
   - {fileID: 403571995}
@@ -22347,30 +22367,30 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 2300062, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 09553b9ba83af2d42984d89f9f1a9e08, type: 2}
-    - target: {fileID: 2300146, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 002a67aa073e69a4ebc04c882d34e020, type: 2}
-    - target: {fileID: 2300102, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e5bde7d688ed4714c939e5fcae5593fb, type: 2}
-    - target: {fileID: 2300148, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5198694c7c907174ea8203e9d1f676aa, type: 2}
-    - target: {fileID: 2300100, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ea4148cc13019c34a86fb3a936d3515e, type: 2}
     - target: {fileID: 2300002, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbc671e5997a4934797f1277fe75738e, type: 2}
+    - target: {fileID: 2300062, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09553b9ba83af2d42984d89f9f1a9e08, type: 2}
+    - target: {fileID: 2300100, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea4148cc13019c34a86fb3a936d3515e, type: 2}
+    - target: {fileID: 2300102, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5bde7d688ed4714c939e5fcae5593fb, type: 2}
+    - target: {fileID: 2300146, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 002a67aa073e69a4ebc04c882d34e020, type: 2}
+    - target: {fileID: 2300148, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5198694c7c907174ea8203e9d1f676aa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30ec6182a4cc36644b564675efd570ed, type: 3}
 --- !u!1 &2068716748

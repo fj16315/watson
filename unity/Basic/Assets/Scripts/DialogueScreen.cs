@@ -97,18 +97,38 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(true);
         stringToEdit = "";
         lastQuestion = "";
+
         camera.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
-        if (!(state.currentState == GameState.State.TUTORIAL))
+        /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
+        if (!((state.currentState == GameState.State.TUTORIAL &&
+              currentCharacter.charName == "Police") ||
+              (state.currentState == GameState.State.STORY)))
         {
+            // If players choose to skip getting the story dump from the butler
+            // then just change the state to PLAY.
+            if(state.currentState == GameState.State.STORY)
+            {
+                state.currentState = GameState.State.PLAY;
+            }
             alexa.StartSession();
             ai.StartSession(currentCharacter);
             UpdateReply("");
-        } else
+        }
+        else if (state.currentState == GameState.State.STORY &&
+                 currentCharacter.charName == "Police")
+        {
+            UpdateReply("Go and speak to one of the suspects to find out more about what happened.");
+        }
+        else
         {
             nextButton.SetActive(true);
-            if (Application.isEditor)
+            if (Application.isEditor && state.currentState == GameState.State.TUTORIAL)
             {
                 skipButton.SetActive(true);
+            }
+            if (state.currentState == GameState.State.STORY)
+            {
+                state.SetCharacter(currentCharacter);
             }
             UpdateReply(state.NextString());
         }
@@ -201,7 +221,15 @@ public class DialogueScreen : MonoBehaviour {
 
     public void NextButton()
     {
-        state.ContinueTutorial();
+        switch(state.currentState)
+        {
+            case GameState.State.TUTORIAL:
+                state.ContinueTutorial();
+                break;
+            case GameState.State.STORY:
+                state.ContinueStory();
+                break;
+        }
         UpdateReply(state.NextString());
     }
 
