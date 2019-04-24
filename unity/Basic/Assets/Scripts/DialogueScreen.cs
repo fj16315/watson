@@ -15,7 +15,7 @@ public class DialogueScreen : MonoBehaviour {
     string answer = "";
     string queryResponse = "";
     private AIController ai;
-    public Camera camera;
+    public Camera cam;
     public GameObject replyBubble;
     public Text answerBox;
     public GameObject saveButton;
@@ -98,7 +98,7 @@ public class DialogueScreen : MonoBehaviour {
         stringToEdit = "";
         lastQuestion = "";
 
-        camera.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
+        cam.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
         /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||

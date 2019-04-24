@@ -8,7 +8,7 @@ using System;
 
 namespace Notebook
 {
-    public enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
+    public enum Page : int { CHARACTER, INVENTORY, NOTES, MENU };
     public enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour
@@ -16,14 +16,20 @@ namespace Notebook
         public GameObject container;
         public PlayerController player;
 
+        // Colours
+        public Color colourOn;
+        public Color colourOff;
+
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum = Page.MENU;
+        Page currentPageEnum;
+
+        // Left Buttons
+        public List<Button> leftButtons;
 
         // Notebook pages
         public GameObject charPage;
-        public GameObject itemPage;
         public GameObject invtPage;
         public GameObject notePage;
         public GameObject menuPage;
@@ -63,6 +69,10 @@ namespace Notebook
         // Use this for initialization
         void Start()
         {
+            currentPage = menuPage;
+            currentPageEnum = Page.MENU;
+            leftButtons[(int)currentPageEnum].image.color = colourOn;
+
             // Character pages
             currentChar = charActress;
             charActress.SetActive(true);
@@ -77,12 +87,9 @@ namespace Notebook
             tabsEmpty.SetActive(true);
             // Notebook pages
             charPage.SetActive(false);
-            itemPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
             menuPage.SetActive(true);
-
-            currentPage = menuPage;
 
             // Add clue lists
             cluesDirectory.Add(cluesActress);
@@ -121,6 +128,9 @@ namespace Notebook
                     tabsEmpty.SetActive(true);
                 }
                 currentPage.SetActive(false);
+                // Change colour of buttons
+                leftButtons[target].image.color = colourOn;
+                leftButtons[(int)currentPageEnum].image.color = colourOff;
                 switch ((Page)target)
                 {
                     case Page.CHARACTER:
@@ -134,10 +144,6 @@ namespace Notebook
                         invtPage.SetActive(true);
                         currentPage = invtPage;
                         UpdateInventory();
-                        break;
-                    case Page.ITEM:
-                        itemPage.SetActive(true);
-                        currentPage = itemPage;
                         break;
                     case Page.NOTES:
                         notePage.SetActive(true);
