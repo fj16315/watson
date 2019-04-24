@@ -16,17 +16,14 @@ namespace Notebook
         public GameObject container;
         public PlayerController player;
 
-        // Colours
-        public Color colourOn;
-        public Color colourOff;
-
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum;
+        Page currentPageEnum = (Page)6;
 
-        // Left Buttons
+        // Buttons
         public List<Button> leftButtons;
+        public List<Button> rightButtons;
 
         // Notebook pages
         public GameObject charPage;
@@ -66,15 +63,16 @@ namespace Notebook
 
         public Text inventoryText;
 
+        private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
+
         // Use this for initialization
         void Start()
         {
             currentPage = menuPage;
-            currentPageEnum = Page.MENU;
-            leftButtons[(int)currentPageEnum].image.color = colourOn;
+            ChangePage((int)Page.MENU);
 
             // Character pages
-            currentChar = charActress;
+            currentChar = charPolice;
             charActress.SetActive(true);
             charButler.SetActive(false);
             charColonel.SetActive(false);
@@ -82,6 +80,7 @@ namespace Notebook
             charEarl.SetActive(false);
             charGangster.SetActive(false);
             charPolice.SetActive(false);
+            rightButtons[(int)currentCharEnum].image.color += pressDelta;
 
             tabsRightChars.SetActive(false);
             tabsEmpty.SetActive(true);
@@ -128,9 +127,14 @@ namespace Notebook
                     tabsEmpty.SetActive(true);
                 }
                 currentPage.SetActive(false);
+
                 // Change colour of buttons
-                leftButtons[target].image.color = colourOn;
-                leftButtons[(int)currentPageEnum].image.color = colourOff;
+                leftButtons[target].image.color += pressDelta;
+                if ((int)currentPageEnum < 4)
+                {
+                    leftButtons[(int)currentPageEnum].image.color -= pressDelta;
+                }
+
                 switch ((Page)target)
                 {
                     case Page.CHARACTER:
@@ -161,6 +165,11 @@ namespace Notebook
         public void ChangeCharacter(int target)
         {
             currentChar.SetActive(false);
+
+            // Change button colour
+            rightButtons[target].image.color += pressDelta;
+            rightButtons[(int)currentCharEnum].image.color -= pressDelta;
+
             switch ((Character)target)
             {
                 case Character.ACTRESS:
