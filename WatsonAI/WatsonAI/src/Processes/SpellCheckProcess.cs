@@ -16,22 +16,40 @@ namespace WatsonAI
   {
     private static SymSpell symSpell;
 
-    static SpellCheckProcess() {
+    public SpellCheckProcess(string path) {
+      int initialCapacity = 549313;
+      int maxEditDistanceDictionary = 2;
+      if (symSpell == null)
+      {
+        symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
+        string directory = Path.Combine(path, "res", "dictionary", "frequency_dictionary.txt");
+        int termIndex = 0;
+        int countIndex = 1;
+
+        if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
+        {
+          System.Diagnostics.Debug.WriteLine("File not found");
+          return;
+        }
+      }
+    }
+
+    public SpellCheckProcess()
+    {
       int initialCapacity = 549313;
       int maxEditDistanceDictionary = 2;
       symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
-
-      string directory = Path.Combine("..","WatsonAI", "res", "dictionary", "frequency_dictionary.txt");
+      string directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "dictionary", "frequency_dictionary.txt");
       int termIndex = 0;
       int countIndex = 1;
 
-      if (!symSpell.LoadDictionary(directory, termIndex, countIndex)) 
+      if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
       {
         System.Diagnostics.Debug.WriteLine("File not found");
-
         return;
       }
     }
+
     /// <summary>
     /// checks the spelling of the input stream
     /// </summary>
@@ -39,7 +57,8 @@ namespace WatsonAI
     /// <returns>Stream Suggestion.</returns>
     public Stream Process(Stream stream)
     {
-      int maxEditDistanceLookup = 2; 
+      int maxEditDistanceLookup = 2;
+      System.Diagnostics.Debug.WriteLine(stream.nonTokenisedInput);
       var suggestions = symSpell.LookupCompound(stream.nonTokenisedInput, maxEditDistanceLookup);
 
       foreach (var suggestion in suggestions)
@@ -53,7 +72,6 @@ namespace WatsonAI
           stream.AssignSpecialCaseHandler(this);
           if (stream.Input.Contains("?")) stream.AppendOutput(suggestion.term + "?");
           else stream.AppendOutput(suggestion.term);
-
         }
       }
       return stream;

@@ -50,7 +50,6 @@ namespace WatsonAI
 
     public static Stream Tokenise(Parser parser, string sentence)
     {
-
       Stream stream = new Stream(new List<string>(parser.Tokenize(sentence)));
       stream.nonTokenisedInput = sentence;
       return stream;
