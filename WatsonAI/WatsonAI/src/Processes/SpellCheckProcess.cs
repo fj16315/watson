@@ -2,10 +2,6 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using MSpell;
-
-
-
 
 namespace WatsonAI
 {
@@ -16,6 +12,10 @@ namespace WatsonAI
   {
     private static SymSpell symSpell;
 
+    /// <summary>
+    ///Initialises the SymSpell object and loads the dictionary into it
+    /// </summary>
+    /// <param name="path">The relative path for the dictionary</param>
     public SpellCheckProcess(string path) {
       int initialCapacity = 549313;
       int maxEditDistanceDictionary = 2;
@@ -25,7 +25,6 @@ namespace WatsonAI
         string directory = Path.Combine(path, "res", "dictionary", "frequency_dictionary.txt");
         int termIndex = 0;
         int countIndex = 1;
-
         if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
         {
           System.Diagnostics.Debug.WriteLine("File not found");
@@ -33,7 +32,9 @@ namespace WatsonAI
         }
       }
     }
-
+    /// <summary>
+    /// initialises SymSpell object and loads the dictionary
+    /// </summary>
     public SpellCheckProcess()
     {
       int initialCapacity = 549313;
@@ -42,7 +43,6 @@ namespace WatsonAI
       string directory = Path.Combine(Directory.GetCurrentDirectory(), "res", "dictionary", "frequency_dictionary.txt");
       int termIndex = 0;
       int countIndex = 1;
-
       if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
       {
         System.Diagnostics.Debug.WriteLine("File not found");
