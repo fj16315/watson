@@ -98,7 +98,7 @@ public class DialogueScreen : MonoBehaviour {
         stringToEdit = "";
         lastQuestion = "";
 
-        cam.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
+        PositionCamera(currentCharacter);
         /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
@@ -146,6 +146,11 @@ public class DialogueScreen : MonoBehaviour {
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
+    }
+
+    private void PositionCamera(NPCController character)
+    {
+        cam.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
     }
 
     private void QueryAi()
