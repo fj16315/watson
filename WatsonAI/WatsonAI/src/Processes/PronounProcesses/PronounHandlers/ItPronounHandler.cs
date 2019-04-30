@@ -41,25 +41,73 @@ namespace WatsonAI
         {
           replacing.Add(new ReplacementRule(new List<string> { "it" }, new List<string> { "the", objects.First() }));
         }
+        if (objects.Count > 1)
+        {
+          this.awaitingClarification = true;
+        }
       }
 
       return replacing;
+    }
+
+    public Stream HandleClarification(Stream stream)
+    {
+      this.awaitingClarification = false;
+
+      Parse parse;
+      var parseExists = parser.Parse(stream.Input, out parse);
+      if (parseExists)
+      {
+        var top = Branch("TOP");
+        var subject = top >= Branch("SBARQ");
+        var entity = subject.Match(parse);
+
+        var objects = CheckForItWord(stream.Input, parse);
+        if (objects.Count == 1)
+        {
+          if (entity.HasValue)
+          {
+            return new Stream(ReplaceIt(stream.Input, objects.First()));
+          }
+          else
+          {
+            var previousTokens = parser.Tokenize(this.memory.GetLastInput()).ToList();
+            return new Stream(ReplaceIt(previousTokens, objects.First()));
+          }
+        }
+      }
+      return RequestClarification(stream);
+    }
+
+    /// <summary>
+    /// Replaces the word "it" in the tokens with the specified replacement.
+    /// </summary>
+    /// <param name="tokens">The tokens to search for the "it" word.</param>
+    /// <param name="replacement">The noun that "it" refers to.</param>
+    /// <returns>The tokens with all occurences of "it" replaced.</returns>
+    private List<string> ReplaceIt(List<string> tokens, string replacement)
+    {
+      return tokens.SelectMany(s =>
+      {
+        if (s == "it")
+        {
+          return new List<string> { "the", replacement };
+        }
+        else
+        {
+          return new List<string> { s };
+        }
+      }).ToList();
     }
 
     /// <summary>
     /// Asks for clarification from the user.
     /// </summary>
     /// <param name="stream">The stream where this process is a special case handler.</param>
-    /// <param name="remainingPronounType">The type of the remaining pronoun.</param>
-    public Stream HandleClarification(Stream stream)
+    public Stream RequestClarification(Stream stream)
     {
       stream.AppendOutput("I'm sorry, what do you mean?");
       return stream;
-    }
-
-    public Stream RequestClarification(Stream stream)
-    {
-      throw new System.NotImplementedException();
     }
 
     public bool RequiresClarification()

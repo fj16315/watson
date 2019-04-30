@@ -29,7 +29,7 @@ namespace WatsonAI
       }
     }
 
-    private Stream(List<string> tokens)
+    public Stream(List<string> tokens)
       : this(tokens, new List<string>(), 0)
     {
       // Purposefully empty
