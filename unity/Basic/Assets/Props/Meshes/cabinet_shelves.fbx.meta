@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 61a49dfec81e9a840b2ceba4b325321e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: book_red_turned
+    100002: bookend_r
+    100004: cabinet
+    100006: //RootNode
+    100008: doors
+    100010: green_section
+    100012: knobs
+    100014: plates
+    100016: red_section
+    100018: shelves_short
+    100020: vase1
+    100022: yellow_section
+    400000: book_red_turned
+    400002: bookend_r
+    400004: cabinet
+    400006: //RootNode
+    400008: doors
+    400010: green_section
+    400012: knobs
+    400014: plates
+    400016: red_section
+    400018: shelves_short
+    400020: vase1
+    400022: yellow_section
+    2100000: furniture_wood
+    2100002: dark_wood
+    2100004: silver
+    2100006: generic_red_blinn
+    2100008: paper
+    2100010: generic_green_blinn
+    2100012: generic_yellow_blinn
+    2100014: porcelin_orange
+    2100016: porcelin
+    2100018: gold
+    2100020: brass
+    2300000: book_red_turned
+    2300002: bookend_r
+    2300004: cabinet
+    2300006: doors
+    2300008: green_section
+    2300010: knobs
+    2300012: plates
+    2300014: red_section
+    2300016: shelves_short
+    2300018: vase1
+    2300020: yellow_section
+    3300000: book_red_turned
+    3300002: bookend_r
+    3300004: cabinet
+    3300006: doors
+    3300008: green_section
+    3300010: knobs
+    3300012: plates
+    3300014: red_section
+    3300016: shelves_short
+    3300018: vase1
+    3300020: yellow_section
+    4300000: cabinet
+    4300002: doors
+    4300004: knobs
+    4300006: shelves_short
+    4300008: red_section
+    4300010: green_section
+    4300012: yellow_section
+    4300014: vase1
+    4300016: bookend_r
+    4300018: plates
+    4300020: book_red_turned
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brass
+    second: {fileID: 2100000, guid: 5198694c7c907174ea8203e9d1f676aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark_wood
+    second: {fileID: 2100000, guid: 26c398954f90f0d46aab5c3281bd8a9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: furniture_wood
+    second: {fileID: 2100000, guid: 09553b9ba83af2d42984d89f9f1a9e08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: generic_green_blinn
+    second: {fileID: 2100000, guid: e69d5161850248f42b7196fda224f425, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: generic_red_blinn
+    second: {fileID: 2100000, guid: 7d3717779860cd04883ec3ecdd8d71b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: generic_yellow_blinn
+    second: {fileID: 2100000, guid: e71371a1032816744b85fdaee0644acd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gold
+    second: {fileID: 2100000, guid: 5198694c7c907174ea8203e9d1f676aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: porcelin
+    second: {fileID: 2100000, guid: ea4148cc13019c34a86fb3a936d3515e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: silver
+    second: {fileID: 2100000, guid: f87e7f0e37d5a2940970cf02a871d869, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 110
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
