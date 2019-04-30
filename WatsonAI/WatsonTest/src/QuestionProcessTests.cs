@@ -7,21 +7,21 @@ namespace WatsonTest
 {
   public class QuestionProcessTests
   {
-    private readonly KnowledgeBuilder builder;
-    private readonly QuestionProcess questionProcess;
-    private readonly Associations associations;
+    static private readonly KnowledgeBuilder builder;
+    static private readonly QuestionProcess questionProcess;
+    static private readonly Associations associations;
 
-    public QuestionProcessTests()
+    static QuestionProcessTests()
     {
       var entityBuilder = new EntityBuilder()
       {
-        "actress", "earl", "murderer", "dave", "herbology"
+        "actress", "earl", "murderer", "dave", "herbology", "study"
       };
       var verbBuilder = new VerbBuilder()
       {
-        "kill", "love", "be", "study"
+        "kill", "love", "be", "study", "contain"
       };
-      this.builder = new KnowledgeBuilder(entityBuilder, verbBuilder)
+      builder = new KnowledgeBuilder(entityBuilder, verbBuilder)
       {
         { "actress" , "kill", "earl" },
         { "actress" , "study", "herbology" },
@@ -29,8 +29,8 @@ namespace WatsonTest
         { "earl" , "love", "dave" },
         { "study" , "contain", "actress" }
       };
-      this.questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(), builder.Associations);
-      this.associations = builder.Associations;
+      questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(), builder.Associations);
+      associations = builder.Associations;
     }
 
     [Fact]
