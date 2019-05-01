@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
 
 public class PlayerController : MonoBehaviour {
 
@@ -41,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         inventory.Add(obj);
         //obj.SetActive(false);
         obj.transform.Translate(0, -10, 0);
-        Thing t = obj.GetComponent<Thing>();
+        Interactable t = obj.GetComponent<Interactable>();
         if (t.description != "")
         {
             controller.Pause(true);
@@ -55,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         list = "";
         for (int i = 0; i < inventory.Count; i++)
         {
-            string itemName = inventory[i].GetComponent<Thing>().objName;
+            string itemName = inventory[i].GetComponent<Interactable>().objName;
             if (itemName != "Notebook")
             {
                 list += "- " + itemName +'\n';

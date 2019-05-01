@@ -8,7 +8,7 @@ using System;
 
 namespace Notebook
 {
-    public enum Page : int { CHARACTER, ITEM, INVENTORY, NOTES, MENU };
+    public enum Page : int { CHARACTER, INVENTORY, NOTES, MENU };
     public enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour
@@ -19,11 +19,14 @@ namespace Notebook
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum = Page.MENU;
+        Page currentPageEnum = (Page)6;
+
+        // Buttons
+        public List<Button> leftButtons;
+        public List<Button> rightButtons;
 
         // Notebook pages
         public GameObject charPage;
-        public GameObject itemPage;
         public GameObject invtPage;
         public GameObject notePage;
         public GameObject menuPage;
@@ -60,11 +63,16 @@ namespace Notebook
 
         public Text inventoryText;
 
+        private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
+
         // Use this for initialization
         void Start()
         {
+            currentPage = menuPage;
+            ChangePage((int)Page.MENU);
+
             // Character pages
-            currentChar = charActress;
+            currentChar = charPolice;
             charActress.SetActive(true);
             charButler.SetActive(false);
             charColonel.SetActive(false);
@@ -72,17 +80,15 @@ namespace Notebook
             charEarl.SetActive(false);
             charGangster.SetActive(false);
             charPolice.SetActive(false);
+            rightButtons[(int)currentCharEnum].image.color += pressDelta;
 
             tabsRightChars.SetActive(false);
             tabsEmpty.SetActive(true);
             // Notebook pages
             charPage.SetActive(false);
-            itemPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
             menuPage.SetActive(true);
-
-            currentPage = menuPage;
 
             // Add clue lists
             cluesDirectory.Add(cluesActress);
@@ -121,6 +127,14 @@ namespace Notebook
                     tabsEmpty.SetActive(true);
                 }
                 currentPage.SetActive(false);
+
+                // Change colour of buttons
+                leftButtons[target].image.color += pressDelta;
+                if ((int)currentPageEnum < 4)
+                {
+                    leftButtons[(int)currentPageEnum].image.color -= pressDelta;
+                }
+
                 switch ((Page)target)
                 {
                     case Page.CHARACTER:
@@ -134,10 +148,6 @@ namespace Notebook
                         invtPage.SetActive(true);
                         currentPage = invtPage;
                         UpdateInventory();
-                        break;
-                    case Page.ITEM:
-                        itemPage.SetActive(true);
-                        currentPage = itemPage;
                         break;
                     case Page.NOTES:
                         notePage.SetActive(true);
@@ -155,6 +165,11 @@ namespace Notebook
         public void ChangeCharacter(int target)
         {
             currentChar.SetActive(false);
+
+            // Change button colour
+            rightButtons[target].image.color += pressDelta;
+            rightButtons[(int)currentCharEnum].image.color -= pressDelta;
+
             switch ((Character)target)
             {
                 case Character.ACTRESS:

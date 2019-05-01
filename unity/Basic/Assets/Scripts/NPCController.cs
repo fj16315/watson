@@ -25,7 +25,7 @@ namespace NPC
 
         public Character GetEnum()
         {
-            switch (name.ToLower())
+            switch (charName.ToLower())
             {
                 case "actress":
                     return Character.ACTRESS;
