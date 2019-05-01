@@ -89,17 +89,19 @@ namespace WatsonAI
 
       Characters = new Dictionary<Names, Character>
       {
-        {Names.ACTRESS, new Character("actress", true)},
-        {Names.BUTLER, new Character("butler", false)},
-        {Names.COLONEL, new Character("colonel", false)},
-        {Names.COUNTESS, new Character("countess", false)},
-        {Names.GANGSTER, new Character("gangster", false)},
-        {Names.POLICE, new Character("policeman", false)},
+        {Names.ACTRESS, new Character("actress", true, Gender.Female)},
+        {Names.COUNTESS, new Character("countess", false, Gender.Female)},
+        {Names.COLONEL, new Character("colonel", false, Gender.Male)},
+        {Names.GANGSTER, new Character("gangster", false, Gender.Male)},
+        {Names.POLICE, new Character("policeman", false, Gender.Male)},
+        {Names.BUTLER, new Character("butler", false, Gender.Male)},
       };
 
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
       {
+        {Names.ACTRESS,
+        new KnowledgeBuilder(entities, verbs)
         {
           Names.ACTRESS,
           new KnowledgeBuilder(entities, verbs)
