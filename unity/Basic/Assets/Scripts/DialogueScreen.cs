@@ -150,7 +150,11 @@ public class DialogueScreen : MonoBehaviour {
 
     private void PositionCamera(NPCController character)
     {
+        Vector3 position = character.gameObject.transform.Find("Face").transform.position;
+        Debug.Log(position);
         cam.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
+
+        // HS: position in code is in world coordinates, position in editor is relative coordinates
     }
 
     private void QueryAi()
