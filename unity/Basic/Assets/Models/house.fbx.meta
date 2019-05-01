@@ -246,6 +246,26 @@ ModelImporter:
     100480: windows_billiards
     100482: windows_kitchen
     100484: understairs
+    100486: pCylinder3
+    100488: stairs 1
+    100490: billiards_floor1
+    100492: dining_floor1
+    100494: floors
+    100496: hall_floor1
+    100498: kitchen_floor1
+    100500: salon_floor1
+    100502: billiards_floor1 1
+    100504: ceilings
+    100506: dining_floor1 1
+    100508: hall_floor1 1
+    100510: kitchen_floor1 1
+    100512: salon_floor1 1
+    100514: billiards_ceiling
+    100516: dining_ceiling
+    100518: hall_ceiling
+    100520: kitchen_ceiling
+    100522: salon_ceiling
+    100524: skirting
     400000: base
     400002: base 1
     400004: billiards_door
@@ -489,6 +509,26 @@ ModelImporter:
     400480: windows_billiards
     400482: windows_kitchen
     400484: understairs
+    400486: pCylinder3
+    400488: stairs 1
+    400490: billiards_floor1
+    400492: dining_floor1
+    400494: floors
+    400496: hall_floor1
+    400498: kitchen_floor1
+    400500: salon_floor1
+    400502: billiards_floor1 1
+    400504: ceilings
+    400506: dining_floor1 1
+    400508: hall_floor1 1
+    400510: kitchen_floor1 1
+    400512: salon_floor1 1
+    400514: billiards_ceiling
+    400516: dining_ceiling
+    400518: hall_ceiling
+    400520: kitchen_ceiling
+    400522: salon_ceiling
+    400524: skirting
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -535,6 +575,7 @@ ModelImporter:
     2100086: brass
     2100088: wallpaper_yellow
     2100090: understair_mat
+    2100092: lambert22
     2300000: base
     2300002: base 1
     2300004: billiards_walls
@@ -704,6 +745,24 @@ ModelImporter:
     2300332: frame 10
     2300334: pane 10
     2300336: understairs
+    2300338: pCylinder3
+    2300340: stairs 1
+    2300342: billiards_floor1
+    2300344: dining_floor1
+    2300346: hall_floor1
+    2300348: kitchen_floor1
+    2300350: salon_floor1
+    2300352: billiards_floor1 1
+    2300354: dining_floor1 1
+    2300356: hall_floor1 1
+    2300358: kitchen_floor1 1
+    2300360: salon_floor1 1
+    2300362: billiards_ceiling
+    2300364: dining_ceiling
+    2300366: hall_ceiling
+    2300368: kitchen_ceiling
+    2300370: salon_ceiling
+    2300372: skirting
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -873,6 +932,24 @@ ModelImporter:
     3300332: frame 10
     3300334: pane 10
     3300336: understairs
+    3300338: pCylinder3
+    3300340: stairs 1
+    3300342: billiards_floor1
+    3300344: dining_floor1
+    3300346: hall_floor1
+    3300348: kitchen_floor1
+    3300350: salon_floor1
+    3300352: billiards_floor1 1
+    3300354: dining_floor1 1
+    3300356: hall_floor1 1
+    3300358: kitchen_floor1 1
+    3300360: salon_floor1 1
+    3300362: billiards_ceiling
+    3300364: dining_ceiling
+    3300366: hall_ceiling
+    3300368: kitchen_ceiling
+    3300370: salon_ceiling
+    3300372: skirting
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1040,6 +1117,23 @@ ModelImporter:
     4300328: pane
     4300330: frame
     4300332: understairs
+    4300334: pCylinder3
+    4300336: billiards_floor1
+    4300338: kitchen_floor1
+    4300340: dining_floor1
+    4300342: salon_floor1
+    4300344: hall_floor1
+    4300346: billiards_floor1
+    4300348: kitchen_floor1
+    4300350: dining_floor1
+    4300352: salon_floor1
+    4300354: hall_floor1
+    4300356: billiards_ceiling
+    4300358: kitchen_ceiling
+    4300360: dining_ceiling
+    4300362: salon_ceiling
+    4300364: hall_ceiling
+    4300366: skirting
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
