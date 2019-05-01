@@ -31,7 +31,7 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       List<string> remainingInput;
-      if (!stream.RemainingInput(out remainingInput))
+      if (!stream.RemainingInput(out remainingInput, Read.Peek))
       {
         return stream;
       }

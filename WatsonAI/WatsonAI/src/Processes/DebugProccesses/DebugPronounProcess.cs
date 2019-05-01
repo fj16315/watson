@@ -6,14 +6,17 @@ namespace WatsonAI
 {
   public class DebugPronounProcess
   {
-    private readonly PronounsProcess pronounProcess;
+    private readonly PronounsRemovalProcess pronounPreProcess;
+    private readonly PronounsAddingProcess pronounPostProcess;
 
     /// <summary>
     /// Construct a new DebugPronounProcess with character actress.
     /// </summary>
-    public DebugPronounProcess()
+    public DebugPronounProcess(List<Character> characters, Parser parser)
     {
-      this.pronounProcess = new PronounsProcess(new Character("actress", false));
+      var character = new Character("actress", false, Gender.Female);
+      this.pronounPreProcess = new PronounsRemovalProcess(character, characters, parser);
+      this.pronounPostProcess = new PronounsAddingProcess(character, parser);
     }
 
     /// <summary>
@@ -23,27 +26,19 @@ namespace WatsonAI
     /// <returns>Stream with the input sentence with the personal pronouns.</returns>
     public Stream Process(Stream stream)
     {
-      if (stream.ConsumeIf("pp".Equals))
-      {
-        List<string> remainingInput;
-        stream.RemainingInput(out remainingInput, Read.Consume);
-        pronounProcess.PreProcess(ref remainingInput);
-        pronounProcess.PostProcess(ref remainingInput);
-        stream.AppendOutput(string.Join(" ", remainingInput));
-      }
       if (stream.ConsumeIf("ppre".Equals))
       {
         List<string> remainingInput;
         stream.RemainingInput(out remainingInput, Read.Consume);
-        pronounProcess.PreProcess(ref remainingInput);
-        stream.AppendOutput(string.Join(" ", remainingInput));
+        pronounPreProcess.Process(stream);
+        stream.AppendOutput(string.Join(" ", stream.Input));
       }
       if (stream.ConsumeIf("ppos".Equals))
       {
         List<string> remainingInput;
         stream.RemainingInput(out remainingInput, Read.Consume);
-        pronounProcess.PostProcess(ref remainingInput);
-        stream.AppendOutput(string.Join(" ", remainingInput));
+        pronounPostProcess.Process(stream);
+        stream.AppendOutput(string.Join(" ", stream.Input));
       }
       return stream;
     }
