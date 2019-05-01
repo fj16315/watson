@@ -266,6 +266,36 @@ ModelImporter:
     100520: kitchen_ceiling
     100522: salon_ceiling
     100524: skirting
+    100526: banister1
+    100528: banister2
+    100530: banister3
+    100532: banister4
+    100534: banister5
+    100536: banister6
+    100538: banister7
+    100540: banisters
+    100542: billiards_walls 1
+    100544: dining_walls 1
+    100546: entry_walls 1
+    100548: hall_walls 1
+    100550: kitchen_walls 1
+    100552: lower
+    100554: post1
+    100556: post10
+    100558: post11
+    100560: post12
+    100562: post13
+    100564: post2
+    100566: post3
+    100568: post4
+    100570: post5
+    100572: post6
+    100574: post7
+    100576: post8
+    100578: post9
+    100580: posts
+    100582: salon_walls 1
+    100584: walls1
     400000: base
     400002: base 1
     400004: billiards_door
@@ -529,6 +559,36 @@ ModelImporter:
     400520: kitchen_ceiling
     400522: salon_ceiling
     400524: skirting
+    400526: banister1
+    400528: banister2
+    400530: banister3
+    400532: banister4
+    400534: banister5
+    400536: banister6
+    400538: banister7
+    400540: banisters
+    400542: billiards_walls 1
+    400544: dining_walls 1
+    400546: entry_walls 1
+    400548: hall_walls 1
+    400550: kitchen_walls 1
+    400552: lower
+    400554: post1
+    400556: post10
+    400558: post11
+    400560: post12
+    400562: post13
+    400564: post2
+    400566: post3
+    400568: post4
+    400570: post5
+    400572: post6
+    400574: post7
+    400576: post8
+    400578: post9
+    400580: posts
+    400582: salon_walls 1
+    400584: walls1
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -763,6 +823,32 @@ ModelImporter:
     2300368: kitchen_ceiling
     2300370: salon_ceiling
     2300372: skirting
+    2300374: banister1
+    2300376: banister2
+    2300378: banister3
+    2300380: banister4
+    2300382: banister5
+    2300384: banister6
+    2300386: banister7
+    2300388: billiards_walls 1
+    2300390: dining_walls 1
+    2300392: entry_walls 1
+    2300394: hall_walls 1
+    2300396: kitchen_walls 1
+    2300398: post1
+    2300400: post10
+    2300402: post11
+    2300404: post12
+    2300406: post13
+    2300408: post2
+    2300410: post3
+    2300412: post4
+    2300414: post5
+    2300416: post6
+    2300418: post7
+    2300420: post8
+    2300422: post9
+    2300424: salon_walls 1
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -950,6 +1036,32 @@ ModelImporter:
     3300368: kitchen_ceiling
     3300370: salon_ceiling
     3300372: skirting
+    3300374: banister1
+    3300376: banister2
+    3300378: banister3
+    3300380: banister4
+    3300382: banister5
+    3300384: banister6
+    3300386: banister7
+    3300388: billiards_walls 1
+    3300390: dining_walls 1
+    3300392: entry_walls 1
+    3300394: hall_walls 1
+    3300396: kitchen_walls 1
+    3300398: post1
+    3300400: post10
+    3300402: post11
+    3300404: post12
+    3300406: post13
+    3300408: post2
+    3300410: post3
+    3300412: post4
+    3300414: post5
+    3300416: post6
+    3300418: post7
+    3300420: post8
+    3300422: post9
+    3300424: salon_walls 1
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1134,6 +1246,32 @@ ModelImporter:
     4300362: salon_ceiling
     4300364: hall_ceiling
     4300366: skirting
+    4300368: post9
+    4300370: post10
+    4300372: post11
+    4300374: post12
+    4300376: post5
+    4300378: post6
+    4300380: post7
+    4300382: post8
+    4300384: post4
+    4300386: post2
+    4300388: post3
+    4300390: post1
+    4300392: post13
+    4300394: banister1
+    4300396: banister2
+    4300398: banister3
+    4300400: banister7
+    4300402: banister4
+    4300404: banister5
+    4300406: banister6
+    4300408: salon_walls
+    4300410: dining_walls
+    4300412: entry_walls
+    4300414: hall_walls
+    4300416: billiards_walls
+    4300418: kitchen_walls
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
