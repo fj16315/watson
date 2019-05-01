@@ -28,7 +28,7 @@ namespace WatsonAI
         "arsenic", /*"rat poison",*/ "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
         "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
-        "daughter", "money", "allergy",
+        "daughter", "money", "allergy", "tolerance"
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
@@ -100,8 +100,6 @@ namespace WatsonAI
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
       {
-        {Names.ACTRESS,
-        new KnowledgeBuilder(entities, verbs)
         {
           Names.ACTRESS,
           new KnowledgeBuilder(entities, verbs)
