@@ -352,6 +352,17 @@ ModelImporter:
     100692: windows_dining_room 1
     100694: windows_kitchen 1
     100696: windows_salon 1
+    100698: bathroom_walls
+    100700: guest_floor
+    100702: guest_walls
+    100704: hall_floor 1
+    100706: master_floor
+    100708: master_walls
+    100710: servant_floor
+    100712: servant_walls
+    100714: study_floor
+    100716: study_walls
+    100718: ceiling_upper
     400000: base
     400002: base 1
     400004: billiards_door
@@ -701,6 +712,17 @@ ModelImporter:
     400692: windows_dining_room 1
     400694: windows_kitchen 1
     400696: windows_salon 1
+    400698: bathroom_walls
+    400700: guest_floor
+    400702: guest_walls
+    400704: hall_floor 1
+    400706: master_floor
+    400708: master_walls
+    400710: servant_floor
+    400712: servant_walls
+    400714: study_floor
+    400716: study_walls
+    400718: ceiling_upper
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -995,6 +1017,17 @@ ModelImporter:
     2300486: pane 19
     2300488: pane 20
     2300490: pane 21
+    2300492: bathroom_walls
+    2300494: guest_floor
+    2300496: guest_walls
+    2300498: hall_floor 1
+    2300500: master_floor
+    2300502: master_walls
+    2300504: servant_floor
+    2300506: servant_walls
+    2300508: study_floor
+    2300510: study_walls
+    2300512: ceiling_upper
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -1241,6 +1274,17 @@ ModelImporter:
     3300486: pane 19
     3300488: pane 20
     3300490: pane 21
+    3300492: bathroom_walls
+    3300494: guest_floor
+    3300496: guest_walls
+    3300498: hall_floor 1
+    3300500: master_floor
+    3300502: master_walls
+    3300504: servant_floor
+    3300506: servant_walls
+    3300508: study_floor
+    3300510: study_walls
+    3300512: ceiling_upper
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1484,6 +1528,17 @@ ModelImporter:
     4300480: frame
     4300482: pane
     4300484: frame
+    4300486: bathroom_walls
+    4300488: study_floor
+    4300490: servant_floor
+    4300492: guest_floor
+    4300494: master_floor
+    4300496: hall_floor
+    4300498: master_walls
+    4300500: guest_walls
+    4300502: study_walls
+    4300504: servant_walls
+    4300506: ceiling_upper
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1

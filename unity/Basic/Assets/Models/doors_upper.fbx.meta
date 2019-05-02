@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: e6b8f8589ed04704eb47e0058e064cee
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: bathroom_door
+    100002: door
+    100004: door 1
+    100006: door 2
+    100008: door 3
+    100010: door 4
+    100012: door_frame
+    100014: door_frame 1
+    100016: door_frame 2
+    100018: door_frame 3
+    100020: door_frame 4
+    100022: door_hole
+    100024: door_hole 1
+    100026: door_hole 2
+    100028: door_hole 3
+    100030: door_hole 4
+    100032: //RootNode
+    100034: guest_door
+    100036: knobs
+    100038: knobs 1
+    100040: knobs 2
+    100042: knobs 3
+    100044: knobs 4
+    100046: master_door
+    100048: servant_door
+    100050: study_door
+    400000: bathroom_door
+    400002: door
+    400004: door 1
+    400006: door 2
+    400008: door 3
+    400010: door 4
+    400012: door_frame
+    400014: door_frame 1
+    400016: door_frame 2
+    400018: door_frame 3
+    400020: door_frame 4
+    400022: door_hole
+    400024: door_hole 1
+    400026: door_hole 2
+    400028: door_hole 3
+    400030: door_hole 4
+    400032: //RootNode
+    400034: guest_door
+    400036: knobs
+    400038: knobs 1
+    400040: knobs 2
+    400042: knobs 3
+    400044: knobs 4
+    400046: master_door
+    400048: servant_door
+    400050: study_door
+    2100000: wood_white
+    2100002: silver
+    2100004: new_house_blinn1
+    2300000: door
+    2300002: door 1
+    2300004: door 2
+    2300006: door 3
+    2300008: door 4
+    2300010: door_frame
+    2300012: door_frame 1
+    2300014: door_frame 2
+    2300016: door_frame 3
+    2300018: door_frame 4
+    2300020: door_hole
+    2300022: door_hole 1
+    2300024: door_hole 2
+    2300026: door_hole 3
+    2300028: door_hole 4
+    2300030: knobs
+    2300032: knobs 1
+    2300034: knobs 2
+    2300036: knobs 3
+    2300038: knobs 4
+    3300000: door
+    3300002: door 1
+    3300004: door 2
+    3300006: door 3
+    3300008: door 4
+    3300010: door_frame
+    3300012: door_frame 1
+    3300014: door_frame 2
+    3300016: door_frame 3
+    3300018: door_frame 4
+    3300020: door_hole
+    3300022: door_hole 1
+    3300024: door_hole 2
+    3300026: door_hole 3
+    3300028: door_hole 4
+    3300030: knobs
+    3300032: knobs 1
+    3300034: knobs 2
+    3300036: knobs 3
+    3300038: knobs 4
+    4300000: door
+    4300002: knobs
+    4300004: door_hole
+    4300006: door_frame
+    4300008: door
+    4300010: knobs
+    4300012: door_hole
+    4300014: door_frame
+    4300016: door_hole
+    4300018: knobs
+    4300020: door
+    4300022: door_frame
+    4300024: door
+    4300026: knobs
+    4300028: door_hole
+    4300030: door_frame
+    4300032: door
+    4300034: knobs
+    4300036: door_hole
+    4300038: door_frame
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: new_house_blinn1
+    second: {fileID: 2100000, guid: 8301817dad0ec1043b8d3e2f613c11d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: silver
+    second: {fileID: 2100000, guid: f87e7f0e37d5a2940970cf02a871d869, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_white
+    second: {fileID: 2100000, guid: 8301817dad0ec1043b8d3e2f613c11d7, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
