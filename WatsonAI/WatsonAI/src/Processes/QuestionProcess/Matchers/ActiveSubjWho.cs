@@ -11,48 +11,45 @@ namespace WatsonAI
   {
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
+    private readonly Associations associations;
 
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public ActiveSubjWho(CommonPatterns cp, KnowledgeQuery query) {
+    public ActiveSubjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
       this.cp = cp;
       this.query = query;
+      this.associations = associations;
     }
 
     public bool MatchOn(Parse tree)
     {
-      //var dobjQuestionNounPhrase = (Branch("VP") > cp.NounPhrase).Flatten();
-      //var dobjQuestionVerbPhrase = cp.VerbPhrase;
-      //var dobjQueryN = (cp.Top >= dobjQuestionNounPhrase).Flatten();
-      //var dobjQueryV = (cp.Top >= dobjQuestionVerbPhrase).Flatten();
-
-      var subjQuestionNounPhrase = (Branch("SQ") > cp.NounPhrase).Flatten();
-      var subjQuestionVerbPhrase = (Branch("SQ") > cp.VerbPhrase).Flatten();
-      var subjQueryN = (cp.Top >= subjQuestionNounPhrase).Flatten();
-      var subjQueryV = (cp.Top >= subjQuestionVerbPhrase).Flatten();
-      var spNs = subjQueryN.Match(tree);
-      var spVs = subjQueryV.Match(tree);
-
-      //-------
-
-      var whoQuestion = Branch("SBARQ") > Branch("WHNP");
-      Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
-      var activeSubjQuestion = (Branch("SQ") > (Branch("VP") > Branch("NP"))).Flatten();
-      Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
-      var activeSubjWho = cp.Top >= And(whoQuestion, activeSubjQuestion);
+      var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
+      //Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
+      var activeSubjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("NP"))))).Flatten().Flatten();
+      //Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
+      var activeSubjWho = And(whoQuestion, activeSubjQuestion);
 
 
       var isActiveSubjWho = activeSubjWho.Match(tree).HasValue;
+      Debug.WriteLineIf(isActiveSubjWho, "Active Subj WhoWhat Question");
 
       if (isActiveSubjWho)
       {
-        var entities = (cp.Top >= cp.NounPhrase).Match(tree).Value;
-        var verbs = (cp.Top >= cp.VerbPhrase).Match(tree).Value;
-        answers = GenerateAnswers(spNs.Value, spVs.Value);
-      }
+        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.NounPhrase))).Flatten().Flatten().Flatten();
+        var entities = entityPattern.Match(tree).Value;
 
-      Debug.WriteLineIf(isActiveSubjWho, "Active Subj WhoWhat Question");
+        var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
+        var verbs = verbPattern.Match(tree).Value;
+        answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
+        if (answers.Any())
+        {
+          var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();
+          var verbWord = verbWordPattern.Match(tree).Value.First().Value;
+          response = "The " + associations.UncheckedNameEntity(answers.First()) + " " + verbWord + ".";
+          Debug.WriteLine("Response: " + response);
+        }
+      }
 
       return isActiveSubjWho;
     }
@@ -78,7 +75,7 @@ namespace WatsonAI
       {
         var e = p.Item1;
         var v = p.Item2;
-        answers.AddRange(query.GetDobjAnswers(v, e));
+        answers.AddRange(query.GetSubjAnswers(v, e));
       }
       return answers;
     }

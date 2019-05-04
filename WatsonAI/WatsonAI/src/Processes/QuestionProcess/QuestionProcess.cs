@@ -34,7 +34,7 @@ namespace WatsonAI
       this.associations = associations;
       cp = new CommonPatterns(thesaurus, associations);
       query = new KnowledgeQuery(knowledge);
-      entityMatchers = new List<IEntityMatcher> { new ActiveSubjWho(cp, query) };
+      entityMatchers = new List<IEntityMatcher> { new ActiveSubjWho(cp, query, associations) };
       boolMatchers = new List<IBoolMatcher>();
       matchers = new List<IMatcher>();
       matchers.AddRange(entityMatchers);
