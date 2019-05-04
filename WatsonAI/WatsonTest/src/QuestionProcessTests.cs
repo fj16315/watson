@@ -5,6 +5,12 @@ using System.Linq;
 
 namespace WatsonTest
 {
+  /// <summary>
+  /// Tests for the processing of questions.
+  /// </summary>
+  /// <remarks>
+  /// Dobj or Subj in test name means a question which is looking for the respective part.
+  /// </remarks>
   public class QuestionProcessTests
   {
     static private readonly KnowledgeBuilder builder;
@@ -36,24 +42,26 @@ namespace WatsonTest
     [Fact]
     public void SubjectActiveCase()
     {
+      //(TOP (SBARQ (WHNP (WP Who)) (SQ (VP (VBZ is) (NP (DT the) (NN murderer)))) (. ?)))
       var input = "Who is the murderer?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "actress" };
       AssertEntityEquals(expectedAnswers, answers);
     }
 
-    [Fact]
-    public void UnnamedTestCase0()
-    {
-      var input = "The murderer is whom?";
-      var answers = questionProcess.GetEntityAnswers(input);
-      var expectedAnswers = new[] { "actress" };
-      AssertEntityEquals(expectedAnswers, answers);
-    }
+    //[Fact]
+    //public void UnnamedTestCase0()
+    //{
+    //  var input = "The murderer is whom?";
+    //  var answers = questionProcess.GetEntityAnswers(input);
+    //  var expectedAnswers = new[] { "actress" };
+    //  AssertEntityEquals(expectedAnswers, answers);
+    //}
 
     [Fact]
-    public void UnnamedTestCase1()
+    public void ActiveSubjWhoCase()
     {
+      //(TOP (SBARQ (WHNP (WP Who)) (SQ (VP (VBD killed) (NP (DT the) (NN earl)))) (. ?)))
       var input = "Who killed the earl?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "actress" };
@@ -66,8 +74,9 @@ namespace WatsonTest
     }
 
     [Fact]
-    public void UnnamedTestCase3()
+    public void ActiveDobjWhoCase()
     {
+      //(TOP (SBARQ (WHNP (WP Who)) (SQ (VBD did) (NP (DT the) (NN actress)) (VP (VB kill))) (. ?)))
       var input = "Who did the actress kill?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "earl" };
@@ -80,8 +89,9 @@ namespace WatsonTest
     }
 
     [Fact]
-    public void UnnamedTestCase5()
+    public void PassiveDobjWhoCase()
     {
+      //(TOP (SBARQ (WHNP (WP Who)) (SQ (VP (VBD was) (VP (VBN killed) (PP (IN by) (NP (DT the) (NN actress)))))) (. ?)))
       var input = "Who was killed by the actress?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "earl" };
@@ -93,19 +103,19 @@ namespace WatsonTest
       AssertEntityEquals(expectedAnswers, answers);
     }
 
-    [Fact]
-    public void UnnamedTestCase6()
-    {
-      var input = "The murderer of the earl is whom?";
-      var answers = questionProcess.GetEntityAnswers(input);
-      var expectedAnswers = new[] { "actress" };
-      AssertEntityEquals(expectedAnswers, answers);
+    //[Fact]
+    //public void UnnamedTestCase6()
+    //{
+    //  var input = "The murderer of the earl is whom?";
+    //  var answers = questionProcess.GetEntityAnswers(input);
+    //  var expectedAnswers = new[] { "actress" };
+    //  AssertEntityEquals(expectedAnswers, answers);
 
-      input = "The murderer of the actress is whom?";
-      answers = questionProcess.GetEntityAnswers(input);
-      expectedAnswers = new string[0];
-      AssertEntityEquals(expectedAnswers, answers);
-    }
+    //  input = "The murderer of the actress is whom?";
+    //  answers = questionProcess.GetEntityAnswers(input);
+    //  expectedAnswers = new string[0];
+    //  AssertEntityEquals(expectedAnswers, answers);
+    //}
 
     [Fact]
     public void UnnamedTestCase7()
@@ -145,17 +155,17 @@ namespace WatsonTest
       Assert.False(answer);
     }
 
-    [Fact]
-    public void UnnamedTestCase10()
-    {
-      var input = "Did the earl die at the hands of the actress?";
-      var answer = questionProcess.GetBooleanAnswer(input);
-      Assert.True(answer);
+    //[Fact]
+    //public void UnnamedTestCase10()
+    //{
+    //  var input = "Did the earl die at the hands of the actress?";
+    //  var answer = questionProcess.GetBooleanAnswer(input);
+    //  Assert.True(answer);
 
-      input = "Did the actress die at the hands of the earl?";
-      answer = questionProcess.GetBooleanAnswer(input);
-      Assert.False(answer);
-    }
+    //  input = "Did the actress die at the hands of the earl?";
+    //  answer = questionProcess.GetBooleanAnswer(input);
+    //  Assert.False(answer);
+    //}
 
     [Fact]
     public void UnnamedTestCase11()
@@ -235,34 +245,34 @@ namespace WatsonTest
       AssertEntityEquals(expectedAnswers, answers);
     }
 
-    [Fact]
-    public void AmbitiousTestCase1()
-    {
-      var input = "Where is the earl's murderer?";
-      var answers = questionProcess.GetEntityAnswers(input);
-      var expectedAnswers = new[] { "study" };
-      AssertEntityEquals(expectedAnswers, answers);
+    //[Fact]
+    //public void AmbitiousTestCase1()
+    //{
+    //  var input = "Where is the earl's murderer?";
+    //  var answers = questionProcess.GetEntityAnswers(input);
+    //  var expectedAnswers = new[] { "study" };
+    //  AssertEntityEquals(expectedAnswers, answers);
 
-      input = "Where is the actress's murderer?";
-      answers = questionProcess.GetEntityAnswers(input);
-      expectedAnswers = new string[0];
-      AssertEntityEquals(expectedAnswers, answers);
-    }
+    //  input = "Where is the actress's murderer?";
+    //  answers = questionProcess.GetEntityAnswers(input);
+    //  expectedAnswers = new string[0];
+    //  AssertEntityEquals(expectedAnswers, answers);
+    //}
 
     // Lover of means that he loves
-    [Fact]
-    public void AmbitiousTestCase2()
-    {
-      var input = "Who is the lover of dave?";
-      var answers = questionProcess.GetEntityAnswers(input);
-      var expectedAnswers = new[] { "earl" };
-      AssertEntityEquals(expectedAnswers, answers);
+    //[Fact]
+    //public void AmbitiousTestCase2()
+    //{
+    //  var input = "Who is the lover of dave?";
+    //  var answers = questionProcess.GetEntityAnswers(input);
+    //  var expectedAnswers = new[] { "earl" };
+    //  AssertEntityEquals(expectedAnswers, answers);
 
-      input = "Who is the lover of dave?";
-      answers = questionProcess.GetEntityAnswers(input);
-      expectedAnswers = new string[0];
-      AssertEntityEquals(expectedAnswers, answers);
-    }
+    //  input = "Who is the lover of dave?";
+    //  answers = questionProcess.GetEntityAnswers(input);
+    //  expectedAnswers = new string[0];
+    //  AssertEntityEquals(expectedAnswers, answers);
+    //}
 
     [Fact]
     public void Where1()
