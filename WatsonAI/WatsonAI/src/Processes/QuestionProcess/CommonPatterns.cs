@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenNLP.Tools.Parser;
+using System;
 using System.Collections.Generic;
 
 using static WatsonAI.Patterns;
@@ -33,14 +34,23 @@ namespace WatsonAI
     }
     public Pattern<IEnumerable<Entity>> NounPhrase {
       get {
-        return (Branch("NP") >= Noun).Flatten();
+        return (Branch("NP") > Noun).Flatten();
       }
     }
     public Pattern<IEnumerable<Verb>> VerbPhrase {
       get {
-        return (Branch("VP") >= Verb).Flatten();
+        return (Branch("VP") > Verb).Flatten();
       }
-
+    }
+    public Pattern<Parse> SimpleVerb {
+      get {
+        return Branch("VB")
+             | Branch("VBD")
+             | Branch("VBG")
+             | Branch("VBN")
+             | Branch("VBP")
+             | Branch("VBZ");
+      }
     }
   }
 }

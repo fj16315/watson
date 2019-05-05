@@ -35,8 +35,8 @@ namespace WatsonTest
         { "earl" , "love", "dave" },
         { "study" , "contain", "actress" }
       };
-      questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(), builder.Associations);
       associations = builder.Associations;
+      questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(associations), builder.Associations);
     }
 
     [Fact]
