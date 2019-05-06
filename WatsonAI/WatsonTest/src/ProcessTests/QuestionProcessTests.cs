@@ -150,10 +150,6 @@ namespace WatsonTest
       var answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
 
-      input = "Does the earl own the belonings?";
-      answer = questionProcess.GetBooleanAnswer(input);
-      Assert.True(answer);
-
       input = "Is the earl the murderer?";
       answer = questionProcess.GetBooleanAnswer(input);
       Assert.False(answer);
@@ -177,6 +173,11 @@ namespace WatsonTest
       //(TOP (SQ (VBD Did) (NP (DT the) (NNS actres)) (VP (VB kill) (NP (DT the) (NN earl))) (. ?)))
       var input = "Did the actress kill the earl?";
       var answer = questionProcess.GetBooleanAnswer(input);
+      Assert.True(answer);
+
+      //(TOP (SQ (VBZ Does) (NP (DT the) (NN earl)) (VP (VB own) (NP (DT the) (NNS belongings))) (. ?)))
+      input = "Does the earl own the belongings?";
+      answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
 
       input = "Did the earl kill the actress?";

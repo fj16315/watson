@@ -50,7 +50,7 @@ namespace WatsonAI
       Parse tree;
       if (!parser.Parse(remainingInput, out tree)) return stream;
 
-      foreach (var m in entityMatchers)
+      foreach (var m in matchers)
       {
         if (m.MatchOn(tree))
         {
