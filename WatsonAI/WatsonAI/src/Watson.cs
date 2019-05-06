@@ -56,7 +56,6 @@ namespace WatsonAI
       var stream = Stream.Tokenise(parser, input);
       stream = memory.MaybeHandleStream(stream);
 
-
       var debugs = new DebugProcesses(characters, parser, thesaurus);
       var greetings = new GreetingsProcess(parser, thesaurus);
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
