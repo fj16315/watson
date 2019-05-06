@@ -36,7 +36,8 @@ namespace WatsonAI
       };
       boolMatchers = new List<IBoolMatcher>
       {
-        new ActiveBoolean(cp, query, associations, thesaurus)
+        new ActiveBoolean(cp, query, associations, thesaurus),
+        new PassiveBoolean(cp, query, associations, thesaurus)
       };
       matchers = new List<IMatcher>();
       matchers.AddRange(entityMatchers);

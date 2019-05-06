@@ -74,24 +74,6 @@ namespace WatsonAI
       return response;
     }
 
-    private bool GenerateAnswer(IEnumerable<Entity> subjects, IEnumerable<Verb> verbs, IEnumerable<Entity> objects)
-    {
-      var triples = from s in subjects
-                  from v in verbs
-                  from o in objects
-                  select Tuple.Create(s, v, o);
-
-      answer = false;
-      foreach (var p in triples.Distinct())
-      {
-        var s = p.Item1;
-        var v = p.Item2;
-        var o = p.Item3;
-        answer = answer || query.GetBoolAnswer(v, s, o);
-      }
-      return answer;
-    }
-
     public bool GetAnswer()
     {
       return answer;

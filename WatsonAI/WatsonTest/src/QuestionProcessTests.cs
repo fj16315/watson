@@ -167,7 +167,7 @@ namespace WatsonTest
     }
 
     [Fact]
-    public void UnnamedTestCase9()
+    public void PassiveBoolean()
     {
       //(TOP (SQ (VBD Did) (NP (DT the) (NNS actres)) (VP (VB kill) (NP (DT the) (NN earl))) (. ?)))
       var input = "Did the actress kill the earl?";
