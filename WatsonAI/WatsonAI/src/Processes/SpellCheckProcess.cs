@@ -10,27 +10,14 @@ namespace WatsonAI
   /// </summary>
   public class SpellCheckProcess : IProcess
   {
-    private static SymSpell symSpell;
+    private SymSpell symSpell;
 
     /// <summary>
     ///Initialises the SymSpell object and loads the dictionary into it
     /// </summary>
-    /// <param name="path">The relative path for the dictionary</param>
-    public SpellCheckProcess(string path) {
-      int initialCapacity = 549313;
-      int maxEditDistanceDictionary = 2;
-      if (symSpell == null)
-      {
-        symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
-        string directory = Path.Combine(path, "res", "dictionary", "frequency_dictionary.txt");
-        int termIndex = 0;
-        int countIndex = 1;
-        if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
-        {
-          System.Diagnostics.Debug.WriteLine("File not found");
-          return;
-        }
-      }
+    /// <param name="symSpell">SymSpell object with the dictionary initialised</param>
+    public SpellCheckProcess(SymSpell symSpell) { 
+      this.symSpell = symSpell;
     }
     /// <summary>
     /// initialises SymSpell object and loads the dictionary

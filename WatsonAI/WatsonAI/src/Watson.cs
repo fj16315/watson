@@ -8,14 +8,27 @@ namespace WatsonAI
   {
     private readonly Parser parser;
     private readonly Thesaurus thesaurus;
+    private readonly SymSpell symSpell;
     private readonly Dictionary<Character, Memory> characterMemories;
     private const int memoryCapacity = 5;
-
+    private const int initialCapacity = 549313;
+    private const int maxEditDistanceDictionary = 2;
+    private const int termIndex = 0;
+    private const int countIndex = 1;
     /// <summary>
     /// Constructs a new Watson with path to the location of the data files.
     /// </summary>
     /// <param name="stringToPath"></param>
     public Watson(string stringToPath) {
+      if (symSpell == null)
+      {
+        symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
+        string directory = Path.Combine(stringToPath, "res", "dictionary", "frequency_dictionary.txt");
+        if (!symSpell.LoadDictionary(directory, termIndex, countIndex))
+        {
+          System.Diagnostics.Debug.WriteLine("File not found");
+        }
+      }
       this.parser = new Parser(stringToPath);
       this.thesaurus = new Thesaurus(stringToPath, Story.Associations);
       this.characterMemories = new Dictionary<Character, Memory>();
@@ -51,8 +64,7 @@ namespace WatsonAI
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
       var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
-      var path = Path.Combine("..", "WatsonAI");
-      var spellCheck = new SpellCheckProcess(path);
+      var spellCheck = new SpellCheckProcess(symSpell);
 
       var output = new Processor()
         .AddProcesses(debugs,spellCheck, prePronoun, greetings, question, postPronoun, universeQuestion, fallback)
