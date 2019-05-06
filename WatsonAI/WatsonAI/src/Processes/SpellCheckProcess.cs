@@ -49,8 +49,8 @@ namespace WatsonAI
       var suggestions = symSpell.LookupCompound(stream.nonTokenisedInput, maxEditDistanceLookup);
 
       foreach (var suggestion in suggestions)
-      {
-        if (suggestion.distance ==1 && stream.Input.Contains("?"))
+      { 
+      if (suggestion.distance ==1 && stream.Input.Contains("?"))
         {
           //Purposely left empty
         }
