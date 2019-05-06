@@ -1,10 +1,5 @@
 ﻿using OpenNLP.Tools.Parser;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
-using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
@@ -17,7 +12,6 @@ namespace WatsonAI
     private readonly List<IEntityMatcher> entityMatchers;
     private readonly List<IBoolMatcher> boolMatchers;
     private readonly List<IMatcher> matchers;
-
 
     /// <summary>
     /// Text engine for debuging the specified Parser.
@@ -32,7 +26,8 @@ namespace WatsonAI
       {
         new ActiveSubjWho(cp, query, associations),
         new ActiveDobjWho(cp, query, associations),
-        new PassiveDobjWho(cp, query, associations)
+        new PassiveDobjWho(cp, query, associations),
+        new Where(cp, query, associations, thesaurus)
       };
       boolMatchers = new List<IBoolMatcher>
       {

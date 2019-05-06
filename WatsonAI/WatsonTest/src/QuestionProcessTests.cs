@@ -313,6 +313,7 @@ namespace WatsonTest
     [Fact]
     public void Where1()
     {
+      //(TOP (SBARQ (WHADVP (WRB Where)) (SQ (VP (VBZ is)) (NP (DT the) (NN actress))) (. ?)))
       var input = "Where is the actress?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "study" };
@@ -322,6 +323,7 @@ namespace WatsonTest
     [Fact]
     public void Where2()
     {
+      //(TOP (SBARQ (WHADVP (WRB Where)) (SQ (MD can) (NP (PRP I)) (VP (VB find) (NP (DT the) (NN actress)))) (. ?)))
       var input = "Where can I find the actress?";
       var answers = questionProcess.GetEntityAnswers(input);
       var expectedAnswers = new[] { "study" };
