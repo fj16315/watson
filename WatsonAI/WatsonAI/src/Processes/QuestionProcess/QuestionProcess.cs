@@ -12,9 +12,6 @@ namespace WatsonAI
   {
     private Parser parser;
     private KnowledgeQuery query;
-    private Knowledge knowledge;
-    private Thesaurus thesaurus;
-    private Associations associations;
     private CommonPatterns cp;
 
     private readonly List<IEntityMatcher> entityMatchers;
@@ -29,9 +26,6 @@ namespace WatsonAI
     public QuestionProcess(Parser parser, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
     {
       this.parser = parser;
-      this.knowledge = knowledge;
-      this.thesaurus = thesaurus;
-      this.associations = associations;
       cp = new CommonPatterns(thesaurus, associations);
       query = new KnowledgeQuery(knowledge);
       entityMatchers = new List<IEntityMatcher>
@@ -40,7 +34,10 @@ namespace WatsonAI
         new ActiveDobjWho(cp, query, associations),
         new PassiveDobjWho(cp, query, associations)
       };
-      boolMatchers = new List<IBoolMatcher>();
+      boolMatchers = new List<IBoolMatcher>
+      {
+        new ActiveBoolean(cp, query, associations, thesaurus)
+      };
       matchers = new List<IMatcher>();
       matchers.AddRange(entityMatchers);
       matchers.AddRange(boolMatchers);

@@ -49,6 +49,16 @@ namespace WatsonTest
       AssertEntityEquals(expectedAnswers, answers);
     }
 
+    [Fact]
+    public void IObjActiveCase()
+    {
+      //(TOP (SBARQ (WHNP (WP Who)) (SQ (VP (VBZ is) (NP (DT the) (NN murderer)))) (. ?)))
+      var input = "Who is the murderer of the earl?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "actress" };
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
     //[Fact]
     //public void UnnamedTestCase0()
     //{
@@ -117,23 +127,24 @@ namespace WatsonTest
     //  AssertEntityEquals(expectedAnswers, answers);
     //}
 
-    [Fact]
-    public void UnnamedTestCase7()
-    {
-      var input = "Who is the killer of the earl?";
-      var answers = questionProcess.GetEntityAnswers(input);
-      var expectedAnswers = new[] { "actress" };
-      AssertEntityEquals(expectedAnswers, answers);
+    //[Fact]
+    //public void UnnamedTestCase7()
+    //{
+    //  var input = "Who is the killer of the earl?";
+    //  var answers = questionProcess.GetEntityAnswers(input);
+    //  var expectedAnswers = new[] { "actress" };
+    //  AssertEntityEquals(expectedAnswers, answers);
 
-      input = "Who is the killer of the actress?";
-      answers = questionProcess.GetEntityAnswers(input);
-      expectedAnswers = new string[0];
-      AssertEntityEquals(expectedAnswers, answers);
-    }
+    //  input = "Who is the killer of the actress?";
+    //  answers = questionProcess.GetEntityAnswers(input);
+    //  expectedAnswers = new string[0];
+    //  AssertEntityEquals(expectedAnswers, answers);
+    //}
 
     [Fact]
-    public void UnnamedTestCase8()
+    public void ActiveBoolean()
     {
+      //(TOP (SQ (VBZ Is) (NP (DT the) (NN actress)) (NP (DT the) (NN murderer)) (. ?)))
       var input = "Is the actress the murderer?";
       var answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
@@ -144,8 +155,21 @@ namespace WatsonTest
     }
 
     [Fact]
+    public void ActiveBooleanIObj()
+    {
+      var input = "Is the actress the murderer of the earl?";
+      var answer = questionProcess.GetBooleanAnswer(input);
+      Assert.True(answer);
+
+      input = "Is the earl the murderer of the actress?";
+      answer = questionProcess.GetBooleanAnswer(input);
+      Assert.False(answer);
+    }
+
+    [Fact]
     public void UnnamedTestCase9()
     {
+      //(TOP (SQ (VBD Did) (NP (DT the) (NNS actres)) (VP (VB kill) (NP (DT the) (NN earl))) (. ?)))
       var input = "Did the actress kill the earl?";
       var answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
@@ -187,6 +211,18 @@ namespace WatsonTest
       Assert.True(answer);
 
       input = "The earl killed the actress?";
+      answer = questionProcess.GetBooleanAnswer(input);
+      Assert.False(answer);
+    }
+
+    [Fact]
+    public void UnnamedTestCase10()
+    {
+      var input = "Was the earl killed?";
+      var answer = questionProcess.GetBooleanAnswer(input);
+      Assert.True(answer);
+
+      input = "Was the actress killed?";
       answer = questionProcess.GetBooleanAnswer(input);
       Assert.False(answer);
     }
