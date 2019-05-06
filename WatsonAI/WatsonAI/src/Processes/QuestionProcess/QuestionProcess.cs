@@ -37,7 +37,8 @@ namespace WatsonAI
       entityMatchers = new List<IEntityMatcher>
       {
         new ActiveSubjWho(cp, query, associations),
-        new ActiveDobjWho(cp, query, associations)
+        new ActiveDobjWho(cp, query, associations),
+        new PassiveDobjWho(cp, query, associations)
       };
       boolMatchers = new List<IBoolMatcher>();
       matchers = new List<IMatcher>();
