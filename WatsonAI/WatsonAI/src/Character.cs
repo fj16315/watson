@@ -13,25 +13,26 @@
 
     public Gender Gender { get; }
 
-    public string Mood { get; }
+    public string MoodResponse { get; set; }
 
     public string Location { get; }
 
-    public string Seen { get; }
+    public string SeenResponse { get; set; }
 
     /// <summary>
     /// Constructor for a character.
     /// </summary>
     /// <param name="name">Thier name.</param>
     /// <param name="murderer">Whether they are the murderer or not.</param>
-    public Character(string name, bool murderer, Gender gender)
+    public Character(string name, bool murderer, Gender gender, string location)
     {
       this.Name = name;
       this.Murderer = murderer;
       this.Knowledge = new Knowledge();
       this.Gender = gender;
+      this.Location = location;
 
-      switch (name)
+      /*switch (name)
       {
         case "actress":
           Mood = "I'm an actress";
@@ -63,7 +64,7 @@
           Location = "foyer";
           Seen = "I saw the earl die";
           break;
-      }
+      }*/
     }
   }
 
