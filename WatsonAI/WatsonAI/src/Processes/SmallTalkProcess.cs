@@ -30,11 +30,7 @@ namespace WatsonAI
         stream.AssignSpecialCaseHandler(this);
         stream.AppendOutput("How dare you, of course I'm not!");
       }
-      else if (!input.Contains("?"))
-      {
-        stream.AssignSpecialCaseHandler(this);
-      }
-      else
+      else if (input.Contains("?"))
       {
         if (input.Contains("what is going on"))
         {
