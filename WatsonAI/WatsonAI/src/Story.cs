@@ -25,7 +25,7 @@ namespace WatsonAI
         "actress", "butler", "countess", "earl",
         "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
         "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
-        "arsenic", "rat poison", "kitchen", "plants", "nervous", /*"barbital tolerance",*/
+        "arsenic", "rat_poison", "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
         "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
         "daughter", "money", "allergy", "tolerance"
@@ -72,8 +72,8 @@ namespace WatsonAI
         {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
         {"butler", "be", "nervous"},
         {"butler", "have", Object.Direct("allergy"), Object.Indirect("to", "plants")},
-        /*{"butler", "have", "rat poison"},*/
-        {"kitchen", "contain", "rat poison"},
+        {"butler", "have", "rat_poison"},
+        {"kitchen", "contain", "rat_poison"},
         {"earl", "owe", "gangster"},
         {"earl", "meet", "gangster"},
         {"gangster", "meet", "earl"},
@@ -149,8 +149,8 @@ namespace WatsonAI
             // {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")}, // needs hiding/omitting in this graph
             {"butler", "be", "nervous"},
             {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
-            /*{"butler", "have", "rat poison"},*/
-            /*{"kitchen", "contain", "rat poison"},*/
+            {"butler", "have", "rat_poison"},
+            {"kitchen", "contain", "rat_poison"},
             {"earl", "owe", "gangster"},
             {"earl", "meet", "gangster"},
             {"gangster", "meet", "earl"},
