@@ -134,6 +134,8 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, bool stemInput = false)
     {
+      first = first.ToLower();
+      second = second.ToLower();
       if (AreWithinAssociations(first, second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
@@ -158,6 +160,8 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
+      first = first.ToLower();
+      second = second.ToLower();
       if (AreWithinAssociations(first, second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
@@ -223,6 +227,7 @@ namespace WatsonAI
     /// <returns>The synonyms of the word.</returns>
     public IEnumerable<string> GetSynonyms(string word, bool stemInput = false)
     {
+      word = word.ToLower();
       var synonyms = GetSynonymsNoStemming(word);
       if (stemInput && !synonyms.Any())
       {
@@ -250,6 +255,7 @@ namespace WatsonAI
     /// <returns>The synonyms of the word.</returns>
     public IEnumerable<string> GetSynonyms(string word, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
+      word = word.ToLower();
       var synonyms = GetSynonymsNoStemming(word, lexicalCategory);
       if (stemInput && !synonyms.Any())
       {
@@ -280,6 +286,7 @@ namespace WatsonAI
     public IEnumerable<string> GetSynonyms(string word, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
+      word = word.ToLower();
       var synonyms = GetSynonymsNoStemming(word, lexicalCategory, relations);
       if (stemInput && !synonyms.Any())
       {
@@ -307,6 +314,8 @@ namespace WatsonAI
     /// <returns>The similarity value of two words.</returns>
     public float Similarity(string first, string second, bool stemInput = false)
     {
+      first = first.ToLower();
+      second = second.ToLower();
       if (stemInput)
       {
         first = stemmer.GetSteamWord(first);
