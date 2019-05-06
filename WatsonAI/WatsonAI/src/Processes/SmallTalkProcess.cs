@@ -34,6 +34,11 @@ namespace WatsonAI
         stream.AssignSpecialCaseHandler(this);
         stream.AppendOutput(character.Mood);
       }
+      if (input.Contains("where are we"))
+      {
+        stream.AssignSpecialCaseHandler(this);
+        stream.AppendOutput("We are in the " + character.Location);
+      }
       return stream;
     }
   }
