@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
 
 public class PlayerController : MonoBehaviour {
 
@@ -10,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public GUISkin skin;
     public GUISkin winskin;
     bool won = false;
+    public MasterControl controller;
 
 	// Use this for initialization
 	void Start () {
@@ -38,12 +38,15 @@ public class PlayerController : MonoBehaviour {
     public void PickUp(GameObject obj)
     {
         inventory.Add(obj);
-        obj.SetActive(false);
-        GenerateList();
-        if (obj.GetComponent<Thing>().objName.Equals("Prize!"))
+        //obj.SetActive(false);
+        obj.transform.Translate(0, -10, 0);
+        Interactable t = obj.GetComponent<Interactable>();
+        if (t.description != "")
         {
-            won = true;
+            controller.Pause(true);
+            t.InspectObject();
         }
+        GenerateList();
     }
 
     private void GenerateList()
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         list = "";
         for (int i = 0; i < inventory.Count; i++)
         {
-            string itemName = inventory[i].GetComponent<Thing>().objName;
+            string itemName = inventory[i].GetComponent<Interactable>().objName;
             if (itemName != "Notebook")
             {
                 list += "- " + itemName +'\n';

@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
 
-public class Book : Things.Thing {
+public class Book : Interactable {
 
 	// Use this for initialization
 	void Start () {

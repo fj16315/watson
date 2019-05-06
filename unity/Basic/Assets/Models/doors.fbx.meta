@@ -236,6 +236,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: new_house_glass
+    second: {fileID: 2100000, guid: c9a419fc54084ad46b6b5823ffb75a49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: silver
     second: {fileID: 2100000, guid: f87e7f0e37d5a2940970cf02a871d869, type: 2}
   - first:

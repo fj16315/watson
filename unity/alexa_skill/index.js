@@ -65,10 +65,40 @@ Unity.prototype.eventHandlers.onLaunch = function(launchRequest, session, respon
 };
 
 Unity.prototype.intentHandlers = {
-  AiQueryIntent: function(intent, session, response){
+  ActressQueryIntent: function(intent, session, response){
     handleUnityRequest(intent, session, response, false);
   },
-  GreetingIntent: function(intent, session, response){
+  ActressGreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
+  },
+  ButlerQueryIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, false);
+  },
+  ButlerGreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
+  },
+  ColonelQueryIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, false);
+  },
+  ColonelGreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
+  },
+  CountessQueryIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, false);
+  },
+  CountessGreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
+  },
+  GangsterQueryIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, false);
+  },
+  GangsterGreetingIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, true);
+  },
+  PoliceQueryIntent: function(intent, session, response){
+    handleUnityRequest(intent, session, response, false);
+  },
+  PoliceGreetingIntent: function(intent, session, response){
     handleUnityRequest(intent, session, response, true);
   }
 };

@@ -42,7 +42,11 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       List<string> remainingInput;
-      if (!stream.RemainingInput(out remainingInput)) return stream;
+      if (!stream.RemainingInput(out remainingInput, Read.Peek))
+      {
+        return stream;
+      }
+
       Parse tree;
       if (!parser.Parse(remainingInput, out tree)) return stream;
 

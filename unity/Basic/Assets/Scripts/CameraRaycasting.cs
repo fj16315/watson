@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using NPC;
-using Things;
 using Doors;
 using Containers;
 using UnityStandardAssets.Characters.FirstPerson;
 
 // (T)ype (o)f (M)essage
-enum ToM : int {CHARACTER, THING, DOOR};
+enum ToM : int {CHARACTER, INTERACTABLE, DOOR};
 
 public class CameraRaycasting : MonoBehaviour
 {
@@ -41,8 +40,10 @@ public class CameraRaycasting : MonoBehaviour
         if (Physics.Raycast(this.transform.position, this.transform.forward, out objectHit, raycastDistance))
         {
             entity = objectHit.collider;
-
             NPCController npc = entity.GetComponent<NPCController>();
+            Door door = entity.GetComponent<Door>();
+            Interactable obj = entity.GetComponent<Interactable>();
+
             if (npc != null)
             {
                 type = (int)ToM.CHARACTER;
@@ -53,12 +54,10 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     SpeechDialogue(npc);
                 }
-            }
-
-            Thing obj = entity.GetComponent<Thing>();
-            if (obj != null)
+            }       
+            else if (obj != null)
             {
-                type = (int)ToM.THING;
+                type = (int)ToM.INTERACTABLE;
                 Container container = entity.GetComponent<Container>();
                 if (Input.GetMouseButtonDown(0) && !controller.paused)
                 {
@@ -66,6 +65,7 @@ public class CameraRaycasting : MonoBehaviour
                     {
                         state.PickUp(entity.gameObject);
                         player.PickUp(entity.gameObject);
+                        display = false;
                     }
                     else if (container != null)
                     {
@@ -74,9 +74,7 @@ public class CameraRaycasting : MonoBehaviour
                 }
                 display = true;
             }
-
-            Door door = entity.GetComponent<Door>();
-            if (door != null)
+            else if (door != null)
             {
                 type = (int)ToM.DOOR;
                 // Interact with door
@@ -85,6 +83,10 @@ public class CameraRaycasting : MonoBehaviour
                     door.Activate();
                 }
                 display = true;
+            }
+            else
+            {
+                display = false;
             }
 
         }
@@ -122,9 +124,9 @@ public class CameraRaycasting : MonoBehaviour
                         message = "Talk to " + npc.charName;
                     }
                     break;
-                // THING
-                case (int)ToM.THING:
-                    Thing thing = entity.GetComponent<Thing>();
+                // Interactable
+                case (int)ToM.INTERACTABLE:
+                    Interactable interactable = entity.GetComponent<Interactable>();
                     Container container = entity.GetComponent<Container>();
                     if (container != null)
                     {
@@ -145,36 +147,31 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Locked ";
                         }
                     }
-                    if (thing != null)
+                    if (interactable != null)
                     {
-                        if (thing.CanPickUp())
+                        if (interactable.CanPickUp())
                         {
                             message = "Pick up ";
                         }
-                        message += thing.objName;
+                        message += interactable.objName;
                     }
                     break;
                 // DOOR
                 case (int)ToM.DOOR:
                     Door door = entity.GetComponent<Door>();
-                    string doorName = "";
-                    if (entity.GetComponent<Thing>() != null)
-                    {
-                        doorName = entity.GetComponent<Thing>().objName;
-                    }
                     if (door != null && door.locked)
                     {
-                        message = "Locked " + doorName + " door";   
+                        message = "Locked " + door.doorName + " door";   
                     }
                     else if (door != null)
                     {
                         if (door.open)
                         {
-                            message = "Close " + doorName + " door";
+                            message = "Close " + door.doorName + " door";
                         }
                         else
                         {
-                            message = "Open " + doorName + " door";
+                            message = "Open " + door.doorName + " door";
                         }
                     }
                     break;

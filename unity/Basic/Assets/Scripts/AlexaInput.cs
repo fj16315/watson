@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using SimpleJSON;
 using System.Collections;
 using System.Net;
 using System.IO;
-using SimpleJSON;
+using UnityEngine;
+using UnityEngine.Networking;
 
 public class AlexaInput : MonoBehaviour {
 
@@ -19,8 +20,10 @@ public class AlexaInput : MonoBehaviour {
         {
             if(inDialogue && state.currentState == GameState.State.PLAY && state.alexa)
             {
-                WWW w = new WWW("http://brass-monkey-watson.herokuapp.com/?command");
-                yield return w;
+                // TODO: Maybe use using block to ensure destruction of UnityWebRequest object?
+                string uri = "http://brass-monkey-watson.herokuapp.com/";
+                UnityWebRequest w = UnityWebRequest.Get(uri);
+                yield return w.SendWebRequest();
 
                 print("Waiting for webservice\n");
 
@@ -28,12 +31,13 @@ public class AlexaInput : MonoBehaviour {
 
                 print("Received webservice\n");
 
-                ExtractCommand(w.text);
+                ExtractCommand(w.downloadHandler.text);
 
                 print("Extracted information");
 
-                WWW y = new WWW("http://brass-monkey-watson.herokuapp.com/?command=empty");
-                yield return y;
+                string uriToAppend = "/?command=empty&greeting=false";
+                UnityWebRequest y = UnityWebRequest.Get(uri+uriToAppend);
+                yield return y.SendWebRequest();
 
                 print("Cleaned webservice");
 

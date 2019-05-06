@@ -1,4 +1,6 @@
-﻿namespace WatsonAI
+﻿using System.Collections.Generic;
+
+namespace WatsonAI
 {
   /// <summary>
   /// Process that applies all the debug processes.
@@ -7,16 +9,18 @@
   {
     private DebugParseProcess debugParse;
     private DebugThesaurusProcess debugThesaurus;
+    private DebugPronounProcess debugPronounProcess;
 
     /// <summary>
     /// Process that contains all debugging processes.
     /// </summary>
     /// <param name="parser">Instance of the parser to use.</param>
     /// <param name="thesaurus">Instance of the thesaurus to use.</param>
-    public DebugProcesses(Parser parser, Thesaurus thesaurus)
+    public DebugProcesses(List<Character> characters, Parser parser, Thesaurus thesaurus)
     {
       debugParse = new DebugParseProcess(parser);
       debugThesaurus = new DebugThesaurusProcess(thesaurus);
+      debugPronounProcess = new DebugPronounProcess(characters, parser);
     }
 
     /// <summary>
@@ -30,6 +34,7 @@
       {
         debugParse.Process(stream);
         debugThesaurus.Process(stream);
+        debugPronounProcess.Process(stream);
       }
       return stream;
     }

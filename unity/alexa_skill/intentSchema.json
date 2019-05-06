@@ -1,0 +1,221 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "watson",
+            "intents": [
+                {
+                    "name": "ActressQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Actress {query}",
+                        "The Actress {query}",
+                        "Miss Actress {query}",
+                        "Mrs Actress {query}",
+                        "Ms Actress {query}"
+                    ]
+                },
+                {
+                    "name": "ActressGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Actress",
+                        "Hello Miss Actress",
+                        "Hello Mrs Actress",
+                        "Hello Ms Actress",
+                        "Hello Actress {query}",
+                        "Hello Miss Actress {query}",
+                        "Hello Mrs Actress {query}",
+                        "Hello Ms Actress {query}"
+                    ]
+                },
+                {
+                    "name": "ButlerQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Butler {query}",
+                        "The Butler {query}",
+                        "Mr Butler {query}"
+                    ]
+                },
+                {
+                    "name": "ButlerGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Butler",
+                        "Hello Mr Butler",
+                        "Hello Butler {query}",
+                        "Hello Mr Butler {query}"
+                    ]
+                },
+                {
+                    "name": "ColonelQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Colonel {query}",
+                        "The Colonel {query}",
+                        "Mr Colonel {query}"
+                    ]
+                },
+                {
+                    "name": "ColonelGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Colonel",
+                        "Hello Mr Colonel",
+                        "Hello Colonel {query}",
+                        "Hello Mr Colonel {query}"
+                    ]
+                },
+                {
+                    "name": "CountessQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Countess {query}",
+                        "The Countess {query}",
+                        "Mrs Countess {query}",
+                        "Ms Countess {query}",
+                        "Miss Countess {query}"
+                    ]
+                },
+                {
+                    "name": "CountessGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Countess",
+                        "Hello Mrs Countess",
+                        "Hello Ms Countess",
+                        "Hello Miss Countess",
+                        "Hello Countess {query}",
+                        "Hello Mrs Countess {query}",
+                        "Hello Ms Countess {query}",
+                        "Hello Miss Countess {query}"
+                    ]
+                },
+                {
+                    "name": "GangsterQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Gangster {query}",
+                        "The Gangster {query}",
+                        "Mr Gangster {query}"
+                    ]
+                },
+                {
+                    "name": "GangsterGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Gangster",
+                        "Hello Mr Gangster",
+                        "Hello Gangster {query}",
+                        "Hello Mr Gangster {query}"
+                    ]
+                },
+                {
+                    "name": "PoliceQueryIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Police {query}",
+                        "Officer {query}",
+                        "Mr Officer {query}",
+                        "Police Officer {query}"
+                    ]
+                },
+                {
+                    "name": "PoliceGreetingIntent",
+                    "slots": [
+                        {
+                            "name": "query",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Hello Police",
+                        "Hello Officer",
+                        "Hello Police Officer",
+                        "Hello Mr Officer",
+                        "Hello Police {query}",
+                        "Hello Officer {query}",
+                        "Hello Police Officer {query}",
+                        "Hello Mr Officer {query}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}
