@@ -17,6 +17,8 @@
 
     public string Location { get; }
 
+    public string Seen { get; }
+
     /// <summary>
     /// Constructor for a character.
     /// </summary>
@@ -34,26 +36,32 @@
         case "actress":
           Mood = "I'm an actress";
           Location = "study";
+          Seen = "I saw the earl die";
           break;
         case "butler":
           Mood = "I'm a butler";
           Location = "dining room";
+          Seen = "I saw the earl die";
           break;
         case "colonel":
           Mood = "I'm a colonel";
           Location = "study";
+          Seen = "I saw the earl die";
           break;
         case "countess":
           Mood = "I'm a countess";
           Location = "study";
+          Seen = "I saw the earl die";
           break;
         case "gangster":
           Mood = "I'm a gangster";
           Location = "foyer";
+          Seen = "I saw the earl die";
           break;
         case "police":
           Mood = "I'm a policeman";
           Location = "foyer";
+          Seen = "I saw the earl die";
           break;
       }
     }
