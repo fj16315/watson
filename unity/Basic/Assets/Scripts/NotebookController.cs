@@ -15,6 +15,7 @@ namespace Notebook
     {
         public GameObject container;
         public PlayerController player;
+        public AudioSource pageFlip;
 
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
@@ -70,7 +71,7 @@ namespace Notebook
         void Start()
         {
             currentPage = menuPage;
-            ChangePage((int)Page.MENU);
+            //ChangePage((int)Page.MENU);
 
             // Character pages
             currentChar = charPolice;
@@ -116,6 +117,10 @@ namespace Notebook
             if (currentPageEnum == Page.CHARACTER)
             {
                 ChangeCharacter((int)currentCharEnum);
+            }
+            else if (active)
+            {
+                pageFlip.Play();
             }
         }
 
@@ -165,6 +170,7 @@ namespace Notebook
                         break;
                 }
                 currentPageEnum = (Page)target;
+                pageFlip.Play();
             }
         }
 
@@ -221,6 +227,7 @@ namespace Notebook
                     currentCharEnum = Character.POLICE;
                     break;
             }
+            pageFlip.Play();
         }
 
         public int CharToEnum(string name)

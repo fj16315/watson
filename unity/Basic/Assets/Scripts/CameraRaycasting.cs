@@ -25,7 +25,6 @@ public class CameraRaycasting : MonoBehaviour
     PlayerController player;
     public MasterControl controller;
     public GameState state;
-    private Interactable glowing = null;
 
     // Use this for initialization
     void Start()
@@ -36,7 +35,6 @@ public class CameraRaycasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.DrawRay(this.transform.position, this.transform.forward * raycastDistance, Color.yellow);
 
         if (Physics.Raycast(this.transform.position, this.transform.forward, out objectHit, raycastDistance))
         {
@@ -124,10 +122,6 @@ public class CameraRaycasting : MonoBehaviour
                     {
                         message = "Talk to " + npc.charName;
                     }
-                    //if (glowing)
-                    //{
-                    //    glowing.Glow(false);
-                    //}
                     break;
                 // Interactable
                 case (int)ToM.INTERACTABLE:
@@ -159,8 +153,6 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Pick up ";
                         }
                         message += interactable.objName;
-                        //glowing = interactable;
-                        //glowing.Glow(true);
                     }
                     break;
                 // DOOR
@@ -181,14 +173,9 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Open " + door.doorName + " door";
                         }
                     }
-                    //glowing.Glow(false);
                     break;
                 default:
                     display = false;
-                    //if (glowing)
-                    //{
-                    //    glowing.Glow(false);
-                    //}
                     
                     break;
             }

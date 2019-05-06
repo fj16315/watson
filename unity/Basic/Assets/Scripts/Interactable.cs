@@ -73,18 +73,14 @@ public class Interactable : MonoBehaviour
 
     public void Glow(bool status)
     {
-        if (status)
+        if (hover)
         {
-            //m_Material = hover.GetComponent<Renderer>().material;
+            hover.SetActive(status);
         }
     }
 
     private void OnMouseOver()
     {
-        //if (mat)
-        //{
-        //    mat.color = Color.red;
-        //}
         if (hover)
         {
             hover.SetActive(true);
@@ -94,10 +90,6 @@ public class Interactable : MonoBehaviour
 
     private void OnMouseExit()
     {
-        //if (mat)
-        //{
-        //    mat.color = Color.black;
-        //}
         if (hover)
         {
             hover.SetActive(false);
