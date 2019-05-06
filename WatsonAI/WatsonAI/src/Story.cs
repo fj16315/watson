@@ -25,7 +25,7 @@ namespace WatsonAI
         "actress", "butler", "countess", "earl",
         "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
         "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
-        "arsenic", /*"rat poison",*/ "kitchen", "plants", "nervous", /*"barbital tolerance",*/
+        "arsenic", "rat poison", "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
         "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
         "daughter", "money", "allergy", "tolerance"
@@ -44,7 +44,7 @@ namespace WatsonAI
         {"scrap", "about", "nightshade"},
         {"belongings", "contain", "nightshade"},
         {"colonel", "own", "belongings"},
-        /*{"nightshade", "is", "fast-acting"},*/
+        /*{"nightshade", "be", "fast-acting"},*/
         /*{"nightshade", "look like", "blackcurrants"},*/
         /*{"dining room", "contain", "blackcurrants"},*/
         //{"nightshade", "poison", "earl"},
@@ -73,7 +73,7 @@ namespace WatsonAI
         {"butler", "be", "nervous"},
         {"butler", "have", Object.Direct("allergy"), Object.Indirect("to", "plants")},
         /*{"butler", "have", "rat poison"},*/
-        /*{"kitchen", "contain", "rat poison"},*/
+        {"kitchen", "contain", "rat poison"},
         {"earl", "owe", "gangster"},
         {"earl", "meet", "gangster"},
         {"gangster", "meet", "earl"},
