@@ -13,6 +13,8 @@
 
     public Gender Gender { get; }
 
+    public string Mood { get; }
+
     /// <summary>
     /// Constructor for a character.
     /// </summary>
@@ -24,6 +26,28 @@
       this.Murderer = murderer;
       this.Knowledge = new Knowledge();
       this.Gender = gender;
+
+      switch (name)
+      {
+        case "actress":
+          Mood = "I'm an actress";
+          break;
+        case "butler":
+          Mood = "I'm a butler";
+          break;
+        case "colonel":
+          Mood = "I'm a colonel";
+          break;
+        case "countess":
+          Mood = "I'm a countess";
+          break;
+        case "gangster":
+          Mood = "I'm a gangster";
+          break;
+        case "police":
+          Mood = "I'm a policeman";
+          break;
+      }
     }
   }
 

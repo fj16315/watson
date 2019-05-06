@@ -50,7 +50,7 @@ namespace WatsonAI
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
       var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
-      var smallTalk = new SmallTalkProcess();
+      var smallTalk = new SmallTalkProcess(character);
 
       var output = new Processor()
         .AddProcesses(debugs, prePronoun, greetings, smallTalk, question, postPronoun, universeQuestion, fallback)

@@ -79,9 +79,7 @@ namespace WatsonAI
       var replacing = new List<Tuple<List<string>, List<string>>>
       {
         Tuple.Create(new List<string> { "do", "you" }, new List<string> { "does", this.character.Name }),
-        Tuple.Create(new List<string> { "are", "we" }, new List<string> { "is", "Watson" }),
         Tuple.Create(new List<string> { "you", "are" }, new List<string> { this.character.Name, "is" }),
-        Tuple.Create(new List<string> { "we", "are" }, new List<string> { "Watson", "is" }),
         Tuple.Create(new List<string> { "are", "you" }, new List<string> { "is", this.character.Name }),
         Tuple.Create(new List<string> { "do", "I" }, new List<string> { "does", "Watson" }),
         Tuple.Create(new List<string> { "I", "am" }, new List<string> { "Watson", "is" }),

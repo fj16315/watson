@@ -6,9 +6,11 @@ namespace WatsonAI
 {
   class SmallTalkProcess : IProcess
   {
-    public SmallTalkProcess()
-    {
+    private Character character;
 
+    public SmallTalkProcess(Character character)
+    {
+      this.character = character;
     }
 
     public Stream Process(Stream stream)
@@ -21,10 +23,16 @@ namespace WatsonAI
       {
         input = input + " " + v;
       }
-      if (input.Contains("What is going on"))
+      input = input.ToLower();
+      if (input.Contains("what is going on"))
       {
         stream.AssignSpecialCaseHandler(this);
         stream.AppendOutput("The earl has been posioned and you need to find out who did it.");
+      }
+      if (input.Contains("how is " + character.Name))
+      {
+        stream.AssignSpecialCaseHandler(this);
+        stream.AppendOutput(character.Mood);
       }
       return stream;
     }
