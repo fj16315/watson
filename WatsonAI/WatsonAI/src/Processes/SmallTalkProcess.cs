@@ -24,25 +24,38 @@ namespace WatsonAI
         input = input + " " + v;
       }
       input = input.ToLower();
-      if (input.Contains("what is going on"))
+      Console.WriteLine(input);
+      if (input.Contains(character.Name + " is the murderer"))
       {
         stream.AssignSpecialCaseHandler(this);
-        stream.AppendOutput("The earl has been posioned and you need to find out who did it.");
+        stream.AppendOutput("How dare you, of course I'm not!");
       }
-      if (input.Contains("how is " + character.Name))
+      else if (!input.Contains("?"))
       {
         stream.AssignSpecialCaseHandler(this);
-        stream.AppendOutput(character.Mood);
       }
-      if (input.Contains("where are we"))
+      else
       {
-        stream.AssignSpecialCaseHandler(this);
-        stream.AppendOutput("We are in the " + character.Location);
-      }
-      if (input.Contains("what did you see"))
-      {
-        stream.AssignSpecialCaseHandler(this);
-        stream.AppendOutput(character.Seen);
+        if (input.Contains("what is going on"))
+        {
+          stream.AssignSpecialCaseHandler(this);
+          stream.AppendOutput("The earl has been posioned and you need to find out who did it.");
+        }
+        if (input.Contains("how is " + character.Name))
+        {
+          stream.AssignSpecialCaseHandler(this);
+          stream.AppendOutput(character.Mood);
+        }
+        if (input.Contains("where are we"))
+        {
+          stream.AssignSpecialCaseHandler(this);
+          stream.AppendOutput("We are in the " + character.Location);
+        }
+        if (input.Contains("what did you see"))
+        {
+          stream.AssignSpecialCaseHandler(this);
+          stream.AppendOutput(character.Seen);
+        }
       }
       return stream;
     }

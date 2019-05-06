@@ -62,7 +62,7 @@ namespace WatsonAI
            "Wassup",
            "Good evening",
            "G'day",
-           "Salutations,"
+           "Salutations"
         };
         Random rnd = new Random();
         Random watson = new Random();
