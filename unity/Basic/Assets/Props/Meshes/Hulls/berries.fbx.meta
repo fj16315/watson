@@ -1,22 +1,17 @@
 fileFormatVersion: 2
-guid: e0f384513e60b4443884603143e39331
+guid: bf378a07dffe48d4b8ba8a596e48d5e0
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: hull
     400000: //RootNode
+    400002: hull
     2100000: lambert1
-    2100002: pages
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: pTorus14
-    4300002: pCube10
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert2
-    second: {fileID: 2100000, guid: e7c9310de19fc4f4d8a6ce57ae94fce4, type: 2}
+    2300000: hull
+    3300000: hull
+    4300000: hull
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -47,7 +42,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 20
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -78,7 +73,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

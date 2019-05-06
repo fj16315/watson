@@ -14,13 +14,20 @@ public class Interactable : MonoBehaviour
     public string description;
     public Image image = null;
     public GUISkin skin;
+    public GameObject hover = null;
+    //private Material mat;
+    //public Color colourGlowing;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 
     // Use this for initialization
     void Start()
     {
-
+        //if (hover)
+        //{
+        //    mat = hover.GetComponent<Renderer>().material;
+        //}
+        
     }
 
     // Update is called once per frame
@@ -62,6 +69,40 @@ public class Interactable : MonoBehaviour
         {
             image.gameObject.SetActive(true);
         }
+    }
+
+    public void Glow(bool status)
+    {
+        if (status)
+        {
+            //m_Material = hover.GetComponent<Renderer>().material;
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        //if (mat)
+        //{
+        //    mat.color = Color.red;
+        //}
+        if (hover)
+        {
+            hover.SetActive(true);
+        }
+        
+    }
+
+    private void OnMouseExit()
+    {
+        //if (mat)
+        //{
+        //    mat.color = Color.black;
+        //}
+        if (hover)
+        {
+            hover.SetActive(false);
+        }
+        
     }
 }
 

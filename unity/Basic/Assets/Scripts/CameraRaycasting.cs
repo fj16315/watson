@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     PlayerController player;
     public MasterControl controller;
     public GameState state;
+    private Interactable glowing = null;
 
     // Use this for initialization
     void Start()
@@ -123,6 +124,10 @@ public class CameraRaycasting : MonoBehaviour
                     {
                         message = "Talk to " + npc.charName;
                     }
+                    //if (glowing)
+                    //{
+                    //    glowing.Glow(false);
+                    //}
                     break;
                 // Interactable
                 case (int)ToM.INTERACTABLE:
@@ -154,6 +159,8 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Pick up ";
                         }
                         message += interactable.objName;
+                        //glowing = interactable;
+                        //glowing.Glow(true);
                     }
                     break;
                 // DOOR
@@ -174,9 +181,15 @@ public class CameraRaycasting : MonoBehaviour
                             message = "Open " + door.doorName + " door";
                         }
                     }
+                    //glowing.Glow(false);
                     break;
                 default:
                     display = false;
+                    //if (glowing)
+                    //{
+                    //    glowing.Glow(false);
+                    //}
+                    
                     break;
             }
             GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 25, 240, 60), message);

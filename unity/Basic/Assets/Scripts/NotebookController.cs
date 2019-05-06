@@ -8,7 +8,7 @@ using System;
 
 namespace Notebook
 {
-    public enum Page : int { CHARACTER, INVENTORY, NOTES, MENU };
+    public enum Page : int { CHARACTER, INVENTORY, NOTES, MAP, MENU };
     public enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour
@@ -29,6 +29,7 @@ namespace Notebook
         public GameObject charPage;
         public GameObject invtPage;
         public GameObject notePage;
+        public GameObject mapPage;
         public GameObject menuPage;
         GameObject currentPage;
 
@@ -73,7 +74,7 @@ namespace Notebook
 
             // Character pages
             currentChar = charPolice;
-            charActress.SetActive(true);
+            charActress.SetActive(false);
             charButler.SetActive(false);
             charColonel.SetActive(false);
             charCountess.SetActive(false);
@@ -88,6 +89,7 @@ namespace Notebook
             charPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
+            mapPage.SetActive(false);
             menuPage.SetActive(true);
 
             // Add clue lists
@@ -130,7 +132,7 @@ namespace Notebook
 
                 // Change colour of buttons
                 leftButtons[target].image.color += pressDelta;
-                if ((int)currentPageEnum < 4)
+                if ((int)currentPageEnum < 5)
                 {
                     leftButtons[(int)currentPageEnum].image.color -= pressDelta;
                 }
@@ -152,6 +154,10 @@ namespace Notebook
                     case Page.NOTES:
                         notePage.SetActive(true);
                         currentPage = notePage;
+                        break;
+                    case Page.MAP:
+                        mapPage.SetActive(true);
+                        currentPage = mapPage;
                         break;
                     case Page.MENU:
                         menuPage.SetActive(true);
