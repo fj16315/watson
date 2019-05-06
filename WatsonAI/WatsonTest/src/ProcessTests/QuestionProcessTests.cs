@@ -21,11 +21,11 @@ namespace WatsonTest
     {
       var entityBuilder = new EntityBuilder()
       {
-        "actress", "earl", "murderer", "dave", "herbology", "study"
+        "actress", "earl", "murderer", "dave", "herbology", "study", "belonging"
       };
       var verbBuilder = new VerbBuilder()
       {
-        "kill", "love", "be", "study", "contain"
+        "kill", "love", "be", "study", "contain", "own"
       };
       builder = new KnowledgeBuilder(entityBuilder, verbBuilder)
       {
@@ -33,7 +33,8 @@ namespace WatsonTest
         { "actress" , "study", "herbology" },
         { "actress" , "be", Object.Direct("murderer"), Object.Indirect("of", "earl") },
         { "earl" , "love", "dave" },
-        { "study" , "contain", "actress" }
+        { "study" , "contain", "actress" },
+        { "earl" , "own", "belonging" }
       };
       associations = builder.Associations;
       questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(associations), builder.Associations);
@@ -147,6 +148,10 @@ namespace WatsonTest
       //(TOP (SQ (VBZ Is) (NP (DT the) (NN actress)) (NP (DT the) (NN murderer)) (. ?)))
       var input = "Is the actress the murderer?";
       var answer = questionProcess.GetBooleanAnswer(input);
+      Assert.True(answer);
+
+      input = "Does the earl own the belonings?";
+      answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
 
       input = "Is the earl the murderer?";
