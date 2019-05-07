@@ -25,11 +25,11 @@ public class MasterControl : MonoBehaviour {
         notebook.Activate(false);
     }
 
-    void OpenNotebook()
+    void OpenNotebook(bool status)
     {
-        notebook.Activate(!paused);
-        Pause(!paused);
-        if (!paused)
+        notebook.Activate(status);
+        Pause(status);
+        if (status)
         {
             state.OpenNotebook();
             Cursor.visible = false;
@@ -41,40 +41,33 @@ public class MasterControl : MonoBehaviour {
         // TODO replace with switch
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenNotebook();
+            OpenNotebook(!paused);
             notebook.ChangePage((int)Page.MENU);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (!paused)
-            {
-                OpenNotebook();
-            }
+            OpenNotebook(true);
             notebook.ChangePage((int)Page.CHARACTER);
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (!paused)
-            {
-                OpenNotebook();
-            }
+            OpenNotebook(true);
             notebook.ChangePage((int)Page.INVENTORY);
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            if (!paused)
-            {
-                OpenNotebook();
-            }
+            OpenNotebook(true);
             notebook.ChangePage((int)Page.NOTES);
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if (!paused)
-            {
-                OpenNotebook();
-            }
-            notebook.ChangePage((int)Page.MENU);
+            OpenNotebook(true);
+            notebook.ChangePage((int)Page.MAP);
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            OpenNotebook(!paused);
+            notebook.ChangePage((int)notebook.currentPageEnum);
         }
     }
 
