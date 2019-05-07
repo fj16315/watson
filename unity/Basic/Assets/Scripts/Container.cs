@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Things;
 
 namespace Containers
 {
-    public abstract class Container : Thing
+    public abstract class Container : Interactable
     {
 
         public Key key;
