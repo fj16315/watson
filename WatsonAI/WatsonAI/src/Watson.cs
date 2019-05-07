@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System;
 
 namespace WatsonAI
 {
@@ -45,7 +46,7 @@ namespace WatsonAI
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    public string Run(string input, int characterInt)
+    public Tuple<string, string> Run(string input, int characterInt)
     {
       var name = (Story.Names)characterInt;
       var character = Story.Characters[name];
@@ -63,7 +64,7 @@ namespace WatsonAI
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
       var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
-      var spellCheck = new SpellCheckProcess(symSpell);
+      var spellCheck = new SpellCheckProcess(symSpell, parser);
 
       var output = new Processor()
         .AddProcesses(debugs,spellCheck, prePronoun, greetings, question, postPronoun, universeQuestion, fallback)
@@ -74,7 +75,7 @@ namespace WatsonAI
       memory.AppendInput(input);
       memory.AppendResponse(response);
 
-      return response;
+      return Tuple.Create(output.spellCorrectedInput, response);
     }
   }
 
@@ -89,6 +90,6 @@ namespace WatsonAI
     /// <param name="input">The input given by the player. </param>
     /// <param name="character">The character the player is talking to.</param>
     /// <returns>Response to the player.</returns>
-    string Run(string input,  int character);
+    Tuple<string, string> Run(string input,  int character);
   }
 }

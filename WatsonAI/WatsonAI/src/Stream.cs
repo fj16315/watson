@@ -6,6 +6,7 @@ namespace WatsonAI
 {
   public struct Stream
   {
+    public string spellCorrectedInput;
     public string nonTokenisedInput;
     private List<string> input;
     private List<string> output;
@@ -43,6 +44,7 @@ namespace WatsonAI
       this.position = position;
       this.SpecialCaseHandler = null;
       this.nonTokenisedInput = null;
+      this.spellCorrectedInput = null;
     }
 
     public Stream Clone()
@@ -52,6 +54,7 @@ namespace WatsonAI
     {
       Stream stream = new Stream(new List<string>(parser.Tokenize(sentence)));
       stream.nonTokenisedInput = sentence;
+      stream.spellCorrectedInput = sentence;
       return stream;
     }
 

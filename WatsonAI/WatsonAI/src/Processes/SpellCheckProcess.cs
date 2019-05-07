@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WatsonAI
 {
@@ -11,19 +12,25 @@ namespace WatsonAI
   public class SpellCheckProcess : IProcess
   {
     private SymSpell symSpell;
+    private readonly Parser parser;
 
     /// <summary>
     ///Initialises the SymSpell object and loads the dictionary into it
     /// </summary>
     /// <param name="symSpell">SymSpell object with the dictionary initialised</param>
-    public SpellCheckProcess(SymSpell symSpell) { 
-      this.symSpell = symSpell;
-    }
-    /// <summary>
-    /// initialises SymSpell object and loads the dictionary
-    /// </summary>
-    public SpellCheckProcess()
+    /// <param name="parser">Parser.</param>
+    public SpellCheckProcess(SymSpell symSpell, Parser parser) 
     {
+      this.symSpell = symSpell;
+      this.parser = parser;
+    }
+
+    /// <summary>
+    /// Initialises SymSpell object and loads the dictionary
+    /// </summary>
+    public SpellCheckProcess(Parser parser)
+    {
+      this.parser = parser;
       int initialCapacity = 549313;
       int maxEditDistanceDictionary = 2;
       symSpell = new SymSpell(initialCapacity, maxEditDistanceDictionary);
@@ -45,24 +52,23 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       int maxEditDistanceLookup = 2;
-      System.Diagnostics.Debug.WriteLine(stream.nonTokenisedInput);
       var suggestions = symSpell.LookupCompound(stream.nonTokenisedInput, maxEditDistanceLookup);
 
       foreach (var suggestion in suggestions)
       { 
-      if (suggestion.distance ==1 && stream.Input.Contains("?"))
+        if (suggestion.distance == 1 && stream.Input.Contains("?"))
         {
           //Purposely left empty
         }
         else if (suggestion.distance != 0)
         {
-          stream.AssignSpecialCaseHandler(this);
-          if (stream.Input.Contains("?")) stream.AppendOutput(suggestion.term + "?");
-          else stream.AppendOutput(suggestion.term);
+          string corrected = suggestion.term;
+          if (stream.Input.Contains("?")) corrected += "?";
+          corrected = corrected.First().ToString().ToUpper() + corrected.Substring(1);
+          return Stream.Tokenise(parser, corrected);
         }
       }
       return stream;
     }
-
   }
 }
