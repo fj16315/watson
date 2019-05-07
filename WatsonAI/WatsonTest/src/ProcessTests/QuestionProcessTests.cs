@@ -222,14 +222,23 @@ namespace WatsonTest
     }
 
     [Fact]
-    public void WasBoolean()
+    public void PartBoolean()
     {
       //(TOP (SQ (VBD Was) (NP (DT the) (NN earl)) (VP (VBN killed)) (. ?)))
       var input = "Was the earl killed?";
       var answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
 
+      //(TOP (SQ (VBD Did) (NP (DT the) (NN actress)) (VP (VB kill)) (. ?)))
+      input = "Did the actress kill?";
+      answer = questionProcess.GetBooleanAnswer(input);
+      Assert.True(answer);
+
       input = "Was the actress killed?";
+      answer = questionProcess.GetBooleanAnswer(input);
+      Assert.False(answer);
+
+      input = "Did the earl kill?";
       answer = questionProcess.GetBooleanAnswer(input);
       Assert.False(answer);
     }
