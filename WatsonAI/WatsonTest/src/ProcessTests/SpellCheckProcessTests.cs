@@ -1,7 +1,4 @@
 ﻿using Xunit;
-using FsCheck;
-using FsCheck.Xunit;
-
 using WatsonAI;
 using System.Collections.Generic;
 
@@ -9,9 +6,8 @@ namespace WatsonTest
 {
   public class SpellCheckProcessTests
   {
-    private Parser parser = new Parser();
-    private SpellCheckProcess spellCheckProcess = new SpellCheckProcess();
-
+    private static Parser parser = new Parser();
+    private static SpellCheckProcess spellCheckProcess = new SpellCheckProcess();
 
     [Fact]
     public void NoSpaceBetweenWordTest()
