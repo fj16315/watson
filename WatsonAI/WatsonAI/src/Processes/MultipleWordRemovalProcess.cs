@@ -10,20 +10,28 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       var clone = stream.Clone();
-      List<string> remainingInput;
-      clone.RemainingInput(out remainingInput, Read.Peek);
-      var newInput = new List<string>();
-      for( int i = 0; i< remainingInput.Count; i++)
+      if (clone.Output[0] != null)
       {
-        string[] newWords;
-        var word = remainingInput[i];
-        if (word.Contains("_")) {
-          newWords = word.Split("_");
-          newInput.AddRange(newWords);
+        var output = clone.Output[0];
+        var tokenisedOutput = output.Split(' ');
+        var newOutput = new List<string>();
+        for (int i = 0; i < tokenisedOutput.Length; i++)
+        {
+          string[] newWords;
+          var word = tokenisedOutput[i];
+
+          if (word.Contains('_'))
+          {
+            newWords = word.Split('_');
+            newOutput.AddRange(newWords);
+          }
+          else newOutput.Add(word);
         }
-        else newInput.Add(word);
+
+        var finalOutput = new List<string>();
+        finalOutput.Add(String.Join(" ", newOutput));
+        stream.SetOutput(finalOutput);
       }
-      stream.SetInput(newInput);
       return stream;
     
     }

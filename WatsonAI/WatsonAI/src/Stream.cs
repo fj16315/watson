@@ -168,6 +168,10 @@ namespace WatsonAI
     {
       input = newInput;
     }
+    public void SetOutput(List<string> newOutput)
+    {
+      output = newOutput;
+    }
   }
 
   public enum Read

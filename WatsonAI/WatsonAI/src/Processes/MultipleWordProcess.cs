@@ -13,6 +13,11 @@ namespace WatsonAI
     {
       words = new List<Tuple<string, string>>();
       words.Add(new Tuple<string, string>("rat", "poison"));
+      words.Add(new Tuple<string, string>("dining", "room"));
+      words.Add(new Tuple<string, string>("master", "bedroom"));
+      words.Add(new Tuple<string, string>("sleeping", "aid"));
+      words.Add(new Tuple<string, string>("barbital", "tolerance"));
+
     }
 
     public Stream Process(Stream stream)
