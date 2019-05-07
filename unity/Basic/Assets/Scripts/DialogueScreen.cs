@@ -52,7 +52,7 @@ public class DialogueScreen : MonoBehaviour {
         profCountess = new NPCProfile("Countess", fontCountess, 60, 0.9f);
         profButler = new NPCProfile("Butler", fontButler, 40, 1f);
         profColonel = new NPCProfile("Colonel", fontColonel, 40, 1.3f);
-        profGangster = new NPCProfile("Ganster", fontGangster, 50, 1.1f);
+        profGangster = new NPCProfile("Ganster", fontGangster, 40, 1.1f);
         profPolice = new NPCProfile("Police", fontPolice, 45, 1.1f);
     }
 

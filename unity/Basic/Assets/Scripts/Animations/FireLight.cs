@@ -12,6 +12,7 @@ public class FireLight : MonoBehaviour {
     float hop = 0.02F;
     float diff;
     public float flickerDistance = 12;
+    public bool candle = false;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class FireLight : MonoBehaviour {
             if (distance < flickerDistance)
             {
                 diff = (float)(rand.Next(110, 160));
+                if (candle) diff = diff * 0.4f;
                 l.intensity = diff / 100.0F;
             }
         }

@@ -35,7 +35,6 @@ public class CameraRaycasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.DrawRay(this.transform.position, this.transform.forward * raycastDistance, Color.yellow);
 
         if (Physics.Raycast(this.transform.position, this.transform.forward, out objectHit, raycastDistance))
         {
@@ -177,6 +176,7 @@ public class CameraRaycasting : MonoBehaviour
                     break;
                 default:
                     display = false;
+                    
                     break;
             }
             GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 25, 240, 60), message);
