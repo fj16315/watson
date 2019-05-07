@@ -32,7 +32,7 @@ public class MasterControl : MonoBehaviour {
         if (status)
         {
             state.OpenNotebook();
-            Cursor.visible = false;
+            Cursor.visible = status;
         }
     }
 	
