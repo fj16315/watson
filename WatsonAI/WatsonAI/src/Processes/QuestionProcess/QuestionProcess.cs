@@ -64,12 +64,15 @@ namespace WatsonAI
         var nouns = subjQueryN.Match(tree);
         if (nouns.HasValue && nouns.Value.Any())
         {
+          Console.WriteLine("gets here");
           var contains = associations.UncheckedGetVerb("contain");
           foreach (var n in nouns.Value.Distinct())
           {
             var answers = query.GetSubjAnswers(contains, n);
             string entityName;
             associations.TryNameEntity(n, out entityName);
+            if (entityName == null) Console.WriteLine("Couldnt find entity");
+            if (entityName != null) Console.WriteLine(entityName);
             if (answers.Count != 0)
             {
               stream.AppendOutput(GenerateActiveResponse(entityName, "is in", answers));

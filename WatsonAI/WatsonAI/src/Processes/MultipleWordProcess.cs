@@ -48,17 +48,9 @@ namespace WatsonAI
         }
         newInput.Add(s);
       }
-      /*foreach (var s in newInput)
-      {
-        Console.WriteLine(s);
-      }*/
+   
       stream.SetInput(newInput);
-      var check = new List<string>();
-      stream.RemainingInput(out check, Read.Peek);
-      foreach (var s in check)
-      {
-        Console.WriteLine(s);
-      }
+   
       return stream;
     }
   }

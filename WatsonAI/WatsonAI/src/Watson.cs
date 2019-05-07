@@ -51,9 +51,10 @@ namespace WatsonAI
       var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
       var multipleWord = new MultipleWordProcess();
+      var multipleWordRemoval = new MultipleWordRemovalProcess();
 
       var output = new Processor()
-        .AddProcesses(debugs, prePronoun, multipleWord, greetings, question, postPronoun, universeQuestion, fallback)
+        .AddProcesses(debugs, prePronoun, multipleWord, greetings, question, postPronoun, universeQuestion, multipleWordRemoval,fallback)
         .Process(stream);
 
       var response = string.Join(", ", output.Output);
