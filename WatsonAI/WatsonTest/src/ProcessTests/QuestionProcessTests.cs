@@ -222,8 +222,9 @@ namespace WatsonTest
     }
 
     [Fact]
-    public void UnnamedTestCase10()
+    public void WasBoolean()
     {
+      //(TOP (SQ (VBD Was) (NP (DT the) (NN earl)) (VP (VBN killed)) (. ?)))
       var input = "Was the earl killed?";
       var answer = questionProcess.GetBooleanAnswer(input);
       Assert.True(answer);
