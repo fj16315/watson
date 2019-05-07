@@ -33,9 +33,13 @@ namespace WatsonAI
     /// A Result of IEnumerable containing all verbs that are matched in the tree.
     /// </returns>
     public override Result<IEnumerable<Verb>> Match(Parse tree)
-      => new Result<IEnumerable<Verb>>(associations
-      .VerbNames()
-      .Where(name => thesaurus.Describes(tree.Value, name, PartOfSpeech.Verb, true))
-      .Select(name => associations.UncheckedGetVerb(name)));
+    {
+      var results = associations
+           .VerbNames()
+           .Where(name => thesaurus.Describes(tree.Value, name, PartOfSpeech.Verb, true))
+           .Select(name => associations.UncheckedGetVerb(name));
+      if (results.Any()) return new Result<IEnumerable<Verb>>(results);
+      else return Result<IEnumerable<Verb>>.Fail;
+    }
   }
 }
