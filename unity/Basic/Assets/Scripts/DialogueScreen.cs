@@ -161,15 +161,19 @@ public class DialogueScreen : MonoBehaviour {
 
         // 5. Look at face - vector from 4
 
+        Transform face = character.gameObject.transform.Find("Face");
+        
         Vector3 desiredPosition = new Vector3(0.75f*cam.pixelWidth, 0.66f*cam.pixelHeight,1);
-        Vector3 facePosition = character.gameObject.transform.Find("Face").transform.position;
-        Vector3 facePositionOnScreen = cam.WorldToScreenPoint(facePosition);
-        Debug.Log("Player rotation: " + player.transform.rotation.eulerAngles);
-        Debug.Log("Face rotation: " + character.gameObject.transform.Find("Face").transform.rotation.eulerAngles);
-        cam.transform.LookAt(facePosition);
+        
+        Vector3 facePosition = face.position;
+        
+        Vector3 playerRotation = player.transform.rotation.eulerAngles;
+        Vector3 faceRotation = face.rotation.eulerAngles;
         Vector3 halfTurn = new Vector3(0,180.0f,0);
-        player.transform.Rotate(character.gameObject.transform.Find("Face").transform.rotation.eulerAngles - player.transform.rotation.eulerAngles + halfTurn, Space.World);
-        Vector3 position = facePosition;
+        
+        character.transform.Rotate(playerRotation - faceRotation + halfTurn, Space.World);
+        
+        cam.transform.LookAt(facePosition);
 
         // HS: position in code is in world coordinates, position in editor is relative coordinates
     }
