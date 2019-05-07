@@ -64,10 +64,11 @@ namespace WatsonAI
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
       var postPronoun = new PronounsAddingProcess(character, parser);
       var universeQuestion = new UniverseQuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
+      var smallTalk = new SmallTalkProcess(character);
       var spellCheck = new SpellCheckProcess(symSpell, parser);
 
       var output = new Processor()
-        .AddProcesses(debugs,spellCheck, prePronoun, greetings, question, postPronoun, universeQuestion, fallback)
+        .AddProcesses(debugs,spellCheck, prePronoun, greetings, smallTalk, question, postPronoun, universeQuestion, fallback)
         .Process(stream);
 
       var response = string.Join(", ", output.Output);

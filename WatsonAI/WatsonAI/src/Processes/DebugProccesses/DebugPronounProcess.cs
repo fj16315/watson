@@ -14,7 +14,7 @@ namespace WatsonAI
     /// </summary>
     public DebugPronounProcess(List<Character> characters, Parser parser)
     {
-      var character = new Character("actress", false, Gender.Female);
+      var character = new Character("actress", false, Gender.Female, "study");
       this.pronounPreProcess = new PronounsRemovalProcess(character, characters, parser);
       this.pronounPostProcess = new PronounsAddingProcess(character, parser);
     }

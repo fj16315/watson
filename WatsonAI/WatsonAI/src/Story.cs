@@ -89,13 +89,31 @@ namespace WatsonAI
 
       Characters = new Dictionary<Names, Character>
       {
-        {Names.ACTRESS, new Character("actress", true, Gender.Female)},
-        {Names.COUNTESS, new Character("countess", false, Gender.Female)},
-        {Names.COLONEL, new Character("colonel", false, Gender.Male)},
-        {Names.GANGSTER, new Character("gangster", false, Gender.Male)},
-        {Names.POLICE, new Character("policeman", false, Gender.Male)},
-        {Names.BUTLER, new Character("butler", false, Gender.Male)},
+        {Names.ACTRESS, new Character("actress", true, Gender.Female, "study")},
+        {Names.COUNTESS, new Character("countess", false, Gender.Female, "study")},
+        {Names.COLONEL, new Character("colonel", false, Gender.Male, "study")},
+        {Names.GANGSTER, new Character("gangster", false, Gender.Male, "foyer")},
+        {Names.POLICE, new Character("policeman", false, Gender.Male, "foyer")},
+        {Names.BUTLER, new Character("butler", false, Gender.Male, "dining room")},
       };
+
+      Characters[Names.ACTRESS].MoodResponse = "I'm an actress";
+      Characters[Names.ACTRESS].SeenResponse = "I saw the earl die";
+
+      Characters[Names.COUNTESS].MoodResponse = "I'm a countess";
+      Characters[Names.COUNTESS].SeenResponse = "I saw the earl die";
+
+      Characters[Names.COLONEL].MoodResponse = "I'm a colonel";
+      Characters[Names.COLONEL].SeenResponse = "I saw the earl die";
+
+      Characters[Names.GANGSTER].MoodResponse = "I'm a gangster";
+      Characters[Names.GANGSTER].SeenResponse = "I saw the earl die";
+
+      Characters[Names.POLICE].MoodResponse = "I'm a policeman";
+      Characters[Names.POLICE].SeenResponse = "I saw the earl die";
+
+      Characters[Names.BUTLER].MoodResponse = "I'm a butler";
+      Characters[Names.BUTLER].SeenResponse = "I saw the earl die";
 
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>

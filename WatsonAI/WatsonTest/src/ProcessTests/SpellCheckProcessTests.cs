@@ -22,17 +22,17 @@ namespace WatsonTest
       string input = "howare you";
       var stream = Stream.Tokenise(parser,input);
       var output = spellCheckProcess.Process(stream);
-      Assert.Equal("how are you", output.spellCorrectedInput);
+      Assert.Equal("How are you", output.spellCorrectedInput);
 
       input = "Didthe actress kill the earl?";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("did the actress kill the earl?", output.spellCorrectedInput);
+      Assert.Equal("Did the actress kill the earl?", output.spellCorrectedInput);
 
       input = "hellothere";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("hello there", output.spellCorrectedInput);
+      Assert.Equal("Hello there", output.spellCorrectedInput);
     }
 
     [Fact]
@@ -41,17 +41,17 @@ namespace WatsonTest
       string input = "teh colonel";
       var stream = Stream.Tokenise(parser, input);
       var output = spellCheckProcess.Process(stream);
-      Assert.Equal("the colonel", output.spellCorrectedInput);
+      Assert.Equal("The colonel", output.spellCorrectedInput);
 
       input = "it's neccessary";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("it's necessary", output.spellCorrectedInput);
+      Assert.Equal("It's necessary", output.spellCorrectedInput);
 
       input = "that is definately true";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("that is definitely true", output.spellCorrectedInput);
+      Assert.Equal("That is definitely true", output.spellCorrectedInput);
     }
     [Fact]
     public void SingleWordCommonTyposTest()
@@ -60,82 +60,82 @@ namespace WatsonTest
       string input = "seperate";
       var stream = Stream.Tokenise(parser, input);
       var output = spellCheckProcess.Process(stream);
-      Assert.Equal("separate", output.spellCorrectedInput);
+      Assert.Equal("Separate", output.spellCorrectedInput);
 
       input = "transexual";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("transsexual", output.spellCorrectedInput);
+      Assert.Equal("Transsexual", output.spellCorrectedInput);
 
       input = "calender";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("calendar", output.spellCorrectedInput);
+      Assert.Equal("Calendar", output.spellCorrectedInput);
 
       input = "definately";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("definitely", output.spellCorrectedInput);
+      Assert.Equal("Definitely", output.spellCorrectedInput);
 
       input = "recieve";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("receive", output.spellCorrectedInput);
+      Assert.Equal("Receive", output.spellCorrectedInput);
 
       input = "offical";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("official", output.spellCorrectedInput);
+      Assert.Equal("Official", output.spellCorrectedInput);
 
       input = "managment";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("management", output.spellCorrectedInput);
+      Assert.Equal("Management", output.spellCorrectedInput);
 
       input = "goverment";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("government", output.spellCorrectedInput);
+      Assert.Equal("Government", output.spellCorrectedInput);
 
-      input = "commerical";
+      input = "Commerical";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("commercial", output.spellCorrectedInput);
+      Assert.Equal("Commercial", output.spellCorrectedInput);
 
       input = "Febuary";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("february", output.spellCorrectedInput);
+      Assert.Equal("February", output.spellCorrectedInput);
 
-      input = "enviroment";
+      input = "Enviroment";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("environment", output.spellCorrectedInput);
+      Assert.Equal("Environment", output.spellCorrectedInput);
 
       input = "occurence";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("occurrence", output.spellCorrectedInput);
+      Assert.Equal("Occurrence", output.spellCorrectedInput);
 
       input = "commision";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("commission", output.spellCorrectedInput);
+      Assert.Equal("Commission", output.spellCorrectedInput);
 
       input = "calender";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("calendar", output.spellCorrectedInput);
+      Assert.Equal("Calendar", output.spellCorrectedInput);
 
       input = "assocation";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("association", output.spellCorrectedInput);
+      Assert.Equal("Association", output.spellCorrectedInput);
 
       input = "milennium";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("millennium", output.spellCorrectedInput);
+      Assert.Equal("Millennium", output.spellCorrectedInput);
 
 
     }
@@ -146,22 +146,22 @@ namespace WatsonTest
       string input = "where is the colonell?";
       var stream = Stream.Tokenise(parser, input);
       var output = spellCheckProcess.Process(stream);
-      Assert.Equal("where is the colonel?", output.spellCorrectedInput);
+      Assert.Equal("Where is the colonel?", output.spellCorrectedInput);
 
       input = "who is the countesss related to?";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("who is the countess related to?", output.spellCorrectedInput);
+      Assert.Equal("Who is the countess related to?", output.spellCorrectedInput);
         
       input = "where is the bultler?";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("where is the butler?", output.spellCorrectedInput);
+      Assert.Equal("Where is the butler?", output.spellCorrectedInput);
 
       input = "where is the bultler?";
       stream = Stream.Tokenise(parser, input);
       output = spellCheckProcess.Process(stream);
-      Assert.Equal("where is the butler?", output.spellCorrectedInput);
+      Assert.Equal("Where is the butler?", output.spellCorrectedInput);
     }
 
   }
