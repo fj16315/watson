@@ -20,7 +20,7 @@ namespace Notebook
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum = (Page)6;
+        public Page currentPageEnum = (Page)6;
 
         // Buttons
         public List<Button> leftButtons;
