@@ -40,7 +40,7 @@ namespace WatsonAI
         if (input.Contains("how is " + character.Name))
         {
           stream.AssignSpecialCaseHandler(this);
-          stream.AppendOutput(character.Mood);
+          stream.AppendOutput(character.MoodResponse);
         }
         if (input.Contains("where are we"))
         {
@@ -50,7 +50,7 @@ namespace WatsonAI
         if (input.Contains("what did you see"))
         {
           stream.AssignSpecialCaseHandler(this);
-          stream.AppendOutput(character.Seen);
+          stream.AppendOutput(character.SeenResponse);
         }
       }
       return stream;
