@@ -72,6 +72,8 @@ public class DialogueScreen : MonoBehaviour {
             {
                 repositionCamera = false;
                 player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = false;
+                player.GetComponent<CapsuleCollider>().enabled = true;
+                player.GetComponent<Rigidbody>().useGravity = true;
             }
         }
     }
@@ -152,6 +154,8 @@ public class DialogueScreen : MonoBehaviour {
 
     public void HideScreen()
     {
+        player.GetComponent<CapsuleCollider>().enabled = false;
+        player.GetComponent<Rigidbody>().useGravity = false;
         repositionCamera = true;
         player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = true;
         show = false;
