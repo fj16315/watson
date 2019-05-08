@@ -8,18 +8,19 @@ using System;
 
 namespace Notebook
 {
-    public enum Page : int { CHARACTER, INVENTORY, NOTES, MENU };
+    public enum Page : int { CHARACTER, INVENTORY, NOTES, MAP, MENU };
     public enum Item : int { KEY, BOOK, POISON };
 
     public class NotebookController : MonoBehaviour
     {
         public GameObject container;
         public PlayerController player;
+        public AudioSource pageFlip;
 
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum = (Page)6;
+        public Page currentPageEnum = (Page)6;
 
         // Buttons
         public List<Button> leftButtons;
@@ -29,6 +30,7 @@ namespace Notebook
         public GameObject charPage;
         public GameObject invtPage;
         public GameObject notePage;
+        public GameObject mapPage;
         public GameObject menuPage;
         GameObject currentPage;
 
@@ -69,11 +71,11 @@ namespace Notebook
         void Start()
         {
             currentPage = menuPage;
-            ChangePage((int)Page.MENU);
+            //ChangePage((int)Page.MENU);
 
             // Character pages
             currentChar = charPolice;
-            charActress.SetActive(true);
+            charActress.SetActive(false);
             charButler.SetActive(false);
             charColonel.SetActive(false);
             charCountess.SetActive(false);
@@ -88,6 +90,7 @@ namespace Notebook
             charPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
+            mapPage.SetActive(false);
             menuPage.SetActive(true);
 
             // Add clue lists
@@ -115,6 +118,10 @@ namespace Notebook
             {
                 ChangeCharacter((int)currentCharEnum);
             }
+            else if (active)
+            {
+                pageFlip.Play();
+            }
         }
 
         public void ChangePage(int target)
@@ -130,7 +137,7 @@ namespace Notebook
 
                 // Change colour of buttons
                 leftButtons[target].image.color += pressDelta;
-                if ((int)currentPageEnum < 4)
+                if ((int)currentPageEnum < 5)
                 {
                     leftButtons[(int)currentPageEnum].image.color -= pressDelta;
                 }
@@ -153,12 +160,17 @@ namespace Notebook
                         notePage.SetActive(true);
                         currentPage = notePage;
                         break;
+                    case Page.MAP:
+                        mapPage.SetActive(true);
+                        currentPage = mapPage;
+                        break;
                     case Page.MENU:
                         menuPage.SetActive(true);
                         currentPage = menuPage;
                         break;
                 }
                 currentPageEnum = (Page)target;
+                pageFlip.Play();
             }
         }
 
@@ -215,6 +227,7 @@ namespace Notebook
                     currentCharEnum = Character.POLICE;
                     break;
             }
+            pageFlip.Play();
         }
 
         public int CharToEnum(string name)

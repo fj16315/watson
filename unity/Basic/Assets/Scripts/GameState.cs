@@ -66,7 +66,7 @@ public class GameState : MonoBehaviour {
 
     public string NextString()
     {
-        Debug.Log("currentString = " + currentString);
+        //Debug.Log("currentString = " + currentString);
         if( currentState == State.TUTORIAL )
         {
             if (currentString < tutorialStrings.Capacity)

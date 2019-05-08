@@ -711,12 +711,14 @@
     <Compile Include="Assets\Scripts\Box.cs" />
     <Compile Include="Assets\Scripts\CameraRaycasting.cs" />
     <Compile Include="Assets\Scripts\CharacterAnimations\NPCAnimationControl.cs" />
+    <Compile Include="Assets\Scripts\CharacterAnimations\Smoking.cs" />
     <Compile Include="Assets\Scripts\CharacterAnimations\SmokingAnimationControl.cs" />
     <Compile Include="Assets\Scripts\Container.cs" />
     <Compile Include="Assets\Scripts\DialogueScreen.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\EndController.cs" />
     <Compile Include="Assets\Scripts\GameState.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Key.cs" />
     <Compile Include="Assets\Scripts\MasterControl.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
@@ -727,7 +729,6 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\SamplePlayerController.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
-    <Compile Include="Assets\Scripts\Thing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox Cubemap Extended\Shaders\Skybox Cubemap Extended.shader" />

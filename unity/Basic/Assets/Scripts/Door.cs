@@ -12,6 +12,8 @@ namespace Doors
         public bool locked = false;
         public int direction = 1;
         public string doorName = "";
+        public AudioSource openSound;
+        public AudioSource closeSound;
         int step = 3;
         int rounds;
         int counter = 0;
@@ -56,6 +58,14 @@ namespace Doors
             if (!locked)
             {
                 activate = true;
+                if (open)
+                {
+                    closeSound.Play();
+                }
+                else
+                {
+                    openSound.Play();
+                }
             }
         }
     }
