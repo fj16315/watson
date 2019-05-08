@@ -56,7 +56,7 @@ namespace WatsonAI
         }
       }
 
-      return isWhereQuestion;
+      return isWhereQuestion && answers.Any();
     }
 
     public string GenerateResponse()

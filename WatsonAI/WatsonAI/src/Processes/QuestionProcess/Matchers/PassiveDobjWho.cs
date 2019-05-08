@@ -55,7 +55,7 @@ namespace WatsonAI
         }
       }
 
-      return isPassiveDobjWho;
+      return isPassiveDobjWho && answers.Any();
     }
 
     public string GenerateResponse()
