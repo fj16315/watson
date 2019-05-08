@@ -64,7 +64,7 @@ public class DialogueScreen : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if(repositionCamera){
-            float speed = 1.5f;
+            float speed = 2.5f;
 
             player.transform.position = Vector3.MoveTowards(player.transform.position, playerPositionBeforeDialogue, speed*Time.deltaTime);;
             
