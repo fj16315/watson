@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 using NPC;
 using Notebook;
 
@@ -29,7 +30,7 @@ public class DialogueScreen : MonoBehaviour {
     private bool freshReply = true;
     private Vector3 playerPositionBeforeDialogue;
     private Vector3 playerPositionAfterDialogue;
-    private bool repositionCamera = false;
+    public bool repositionCamera = false;
 
     // Character Fonts
     public Font fontDetective;
@@ -67,7 +68,11 @@ public class DialogueScreen : MonoBehaviour {
 
             player.transform.position = Vector3.MoveTowards(player.transform.position, playerPositionBeforeDialogue, speed*Time.deltaTime);;
             
-            if(player.transform.position == playerPositionBeforeDialogue) repositionCamera = false;
+            if(player.transform.position == playerPositionBeforeDialogue) 
+            {
+                repositionCamera = false;
+                player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = false;
+            }
         }
     }
 
@@ -148,6 +153,7 @@ public class DialogueScreen : MonoBehaviour {
     public void HideScreen()
     {
         repositionCamera = true;
+        player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = true;
         show = false;
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
