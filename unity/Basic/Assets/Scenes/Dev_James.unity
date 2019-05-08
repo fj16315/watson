@@ -4802,6 +4802,7 @@ MonoBehaviour:
   pageFlip: {fileID: 613389846}
   tabsRightChars: {fileID: 1577431541}
   tabsEmpty: {fileID: 667365836}
+  currentPageEnum: 6
   leftButtons:
   - {fileID: 1970614777}
   - {fileID: 959874779}
@@ -9272,6 +9273,7 @@ MonoBehaviour:
   nextButton: {fileID: 989266849}
   skipButton: {fileID: 963414655}
   textBubble: {fileID: 55839341}
+  player: {fileID: 1826286831}
   notebook: {fileID: 325249721}
   alexa: {fileID: 526429961}
   fontDetective: {fileID: 12800000, guid: d878f75c795ad6a4e9effb3d682bf642, type: 3}
