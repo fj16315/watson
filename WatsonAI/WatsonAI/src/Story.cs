@@ -24,7 +24,7 @@ namespace WatsonAI
       entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
         "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
-        "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
+        "blackcurrants", "dining_room", "letter", /*"master bedroom",*/
         "arsenic", "rat_poison", "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
         "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
@@ -81,6 +81,7 @@ namespace WatsonAI
         /*{"arsenic", "is", "slow-acting"},*/
         /*{"arsenic, "used as", "rat poison"},*/
         /*{"master bedroom", "contain", "letter"},*/
+        {"dining_room", "contain", "butler"},
         {"gangster", "send", "letter"},
         {"earl", "receive", "letter"}
       };
@@ -132,6 +133,7 @@ namespace WatsonAI
           {
             /*{"nightshade", "look like", "blackcurrants"},*/
             /*{"dining room", "contain", "blackcurrants"},*/
+            {"dining_room", "contain", "butler"},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
             {"study", "contain", "will"},
