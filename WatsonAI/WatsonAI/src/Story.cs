@@ -23,12 +23,12 @@ namespace WatsonAI
     {
       entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
-        "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
+        "gangster", "colonel", "scrap", "nightshade", "belongings", "fast_acting",
         "blackcurrants", "dining_room", "letter", /*"master bedroom",*/
         "arsenic", "rat_poison", "kitchen", "plants", "nervous", /*"barbital tolerance",*/
         "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
-        "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
-        "daughter", "money", "allergy", "tolerance"
+        "war", "note", "contents", "will", "desk", "study", "slow_acting","herbology", 
+        "daughter", "money", "allergy", "tolerance",
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
@@ -44,7 +44,8 @@ namespace WatsonAI
         {"scrap", "about", "nightshade"},
         {"belongings", "contain", "nightshade"},
         {"colonel", "own", "belongings"},
-        /*{"nightshade", "be", "fast-acting"},*/
+        {"nightshade", "be", "fast_acting"},
+        {"arsenic", "be", "slow_acting"},
         /*{"nightshade", "look like", "blackcurrants"},*/
         /*{"dining room", "contain", "blackcurrants"},*/
         //{"nightshade", "poison", "earl"},
@@ -78,12 +79,13 @@ namespace WatsonAI
         {"earl", "meet", "gangster"},
         {"gangster", "meet", "earl"},
         /*{"gangster", "kill with", "arsenic"},*/
-        /*{"arsenic", "is", "slow-acting"},*/
+
         /*{"arsenic, "used as", "rat poison"},*/
         /*{"master bedroom", "contain", "letter"},*/
         {"dining_room", "contain", "butler"},
         {"gangster", "send", "letter"},
-        {"earl", "receive", "letter"}
+        {"earl", "receive", "letter"},
+
       };
       Associations = universeKnowledgeBuilder.Associations;
       Knowledge = universeKnowledgeBuilder.Knowledge;
@@ -133,6 +135,8 @@ namespace WatsonAI
           {
             /*{"nightshade", "look like", "blackcurrants"},*/
             /*{"dining room", "contain", "blackcurrants"},*/
+            {"nightshade", "be", "fast_acting"},
+            {"arsenic", "be", "slow_acting"},
             {"dining_room", "contain", "butler"},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},

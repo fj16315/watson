@@ -17,6 +17,8 @@ namespace WatsonAI
       words.Add(new Tuple<string, string>("master", "bedroom"));
       words.Add(new Tuple<string, string>("sleeping", "aid"));
       words.Add(new Tuple<string, string>("barbital", "tolerance"));
+      words.Add(new Tuple<string, string>("fast", "acting"));
+      words.Add(new Tuple<string, string>("slow", "acting"));
 
     }
 
@@ -31,6 +33,12 @@ namespace WatsonAI
         var s = remainingInput[i];
         if (i != remainingInput.Count-1)
         {
+          if (s.Contains("-"))
+          {
+            string secondWord = s.Split('-')[1];
+            s = s.Split('-')[0];
+            remainingInput.Insert(i + 1, secondWord);
+          }
           //Loop through list of multiple words
           foreach (var w in words)
           {
@@ -41,6 +49,7 @@ namespace WatsonAI
               {
                 //remainingInput[remainingInput.IndexOf(s)] = s + "_" + nextS;
                 s = s + "_" + nextS;
+                Console.WriteLine(s);
                 //remainingInput.RemoveAt(remainingInput.IndexOf(s) + 1);
                 i++;
                 
