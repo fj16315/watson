@@ -27,6 +27,9 @@ public class DialogueScreen : MonoBehaviour {
     public NotebookController notebook;
     public AlexaInput alexa;
     private bool freshReply = true;
+    private Vector3 playerPositionBeforeDialogue;
+    private Vector3 playerPositionAfterDialogue;
+    private bool repositionCamera = false;
 
     // Character Fonts
     public Font fontDetective;
@@ -59,7 +62,13 @@ public class DialogueScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if(repositionCamera){
+            float speed = 1.5f;
 
+            player.transform.position = Vector3.MoveTowards(player.transform.position, playerPositionBeforeDialogue, speed*Time.deltaTime);;
+            
+            if(player.transform.position == playerPositionBeforeDialogue) repositionCamera = false;
+        }
     }
 
     void OnGUI()
@@ -138,6 +147,7 @@ public class DialogueScreen : MonoBehaviour {
 
     public void HideScreen()
     {
+        repositionCamera = true;
         show = false;
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
@@ -156,11 +166,13 @@ public class DialogueScreen : MonoBehaviour {
         
         // Magic numbers, these are things we just want to set.
         float desiredDistance = 0.8544f; // Calculated through trial and error
+
         // TODO: Calculate this better based on where the face is in the screen
         Vector3 desiredPosition = new Vector3(0.25f*cam.pixelWidth, 0.5f*cam.pixelHeight,desiredDistance);
         
         Vector3 facePosition = face.position;
         Vector3 playerPosition = player.transform.position;
+        playerPositionBeforeDialogue = playerPosition;
         
         Vector3 playerRotation = player.transform.rotation.eulerAngles;
         Vector3 faceRotation = face.rotation.eulerAngles;
@@ -176,6 +188,7 @@ public class DialogueScreen : MonoBehaviour {
         Vector3 desiredPoint = fromCharacter.GetPoint(desiredDistance);
 
         player.transform.position = new Vector3(desiredPoint.x, playerPosition.y, desiredPoint.z);
+        playerPositionAfterDialogue = player.transform.position; 
 
         // Re-centre camera on face, then move to desiredPosition
         cam.transform.LookAt(facePosition);
