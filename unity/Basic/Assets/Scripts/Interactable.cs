@@ -15,8 +15,7 @@ public class Interactable : MonoBehaviour
     public Image image = null;
     public GUISkin skin;
     public GameObject hover = null;
-    //private Material mat;
-    //public Color colourGlowing;
+    private bool glowing = false;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 
@@ -75,26 +74,35 @@ public class Interactable : MonoBehaviour
     {
         if (hover)
         {
-            hover.SetActive(status);
+            if (!glowing)
+            {
+                hover.SetActive(status);
+                glowing = status;
+            }
+            else if (glowing && !status)
+            {
+                hover.SetActive(status);
+                glowing = status;
+            }
         }
     }
 
-    private void OnMouseOver()
-    {
-        if (hover)
-        {
-            hover.SetActive(true);
-        }
+    //private void OnMouseOver()
+    //{
+    //    if (hover)
+    //    {
+    //        hover.SetActive(true);
+    //    }
         
-    }
+    //}
 
-    private void OnMouseExit()
-    {
-        if (hover)
-        {
-            hover.SetActive(false);
-        }
+    //private void OnMouseExit()
+    //{
+    //    if (hover)
+    //    {
+    //        hover.SetActive(false);
+    //    }
         
-    }
+    //}
 }
 
