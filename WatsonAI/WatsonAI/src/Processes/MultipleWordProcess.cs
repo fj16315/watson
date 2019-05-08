@@ -35,8 +35,8 @@ namespace WatsonAI
         {
           if (s.Contains("-"))
           {
-            string secondWord = s.Split('-')[1];
-            s = s.Split('-')[0];
+            string secondWord = s.Split(new string[] { "-" }, StringSplitOptions.None)[1];
+            s = s.Split(new string[] { "-" }, StringSplitOptions.None)[0];
             remainingInput.Insert(i + 1, secondWord);
           }
           //Loop through list of multiple words
