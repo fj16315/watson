@@ -22,7 +22,7 @@ namespace WatsonAI
 
           if (word.Contains('_'))
           {
-            newWords = word.Split('_');
+            newWords = word.Split("_");
             newOutput.AddRange(newWords);
           }
           else newOutput.Add(word);
