@@ -172,6 +172,15 @@ namespace WatsonAI
     {
       this.SpecialCaseHandler = null;
     }
+
+    public void SetInput(List<string> newInput)
+    {
+      input = newInput;
+    }
+    public void SetOutput(List<string> newOutput)
+    {
+      output = newOutput;
+    }
   }
 
   public enum Read

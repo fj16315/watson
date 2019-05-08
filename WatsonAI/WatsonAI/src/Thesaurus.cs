@@ -136,6 +136,7 @@ namespace WatsonAI
     {
       first = first.ToLower();
       second = second.ToLower();
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       if (AreWithinAssociations(first, second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
@@ -163,6 +164,7 @@ namespace WatsonAI
       first = first.ToLower();
       second = second.ToLower();
       if (AreWithinAssociations(first, second)) return false;
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
@@ -197,6 +199,7 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       if (AreWithinAssociations(first, second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory, relations);
       if (stemInput)

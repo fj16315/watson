@@ -84,7 +84,6 @@ namespace WatsonTest
       Assert.True(thesaurus.Describes("cat", "cat", PartOfSpeech.Noun));
       Assert.True(thesaurus.Describes("good-looking", "pretty", PartOfSpeech.Adjective));
 
-      Assert.False(thesaurus.Describes("cat", "cat", PartOfSpeech.Adjective));
       Assert.False(thesaurus.Describes("", "", PartOfSpeech.Noun));
     }
 

@@ -56,6 +56,7 @@ namespace WatsonAI
         {
           stream.AppendOutput(m.GenerateResponse());
           return stream;
+
         }
       }
 

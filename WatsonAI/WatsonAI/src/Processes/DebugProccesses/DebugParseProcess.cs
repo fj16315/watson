@@ -46,6 +46,10 @@ namespace WatsonAI
           stream.AppendOutput(parse.Show());
         }
       }
+      foreach (var s in stream.Output)
+      {
+        Console.WriteLine(s + " ");
+      }
       return stream;
     }
   }

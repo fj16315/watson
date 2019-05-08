@@ -22,4 +22,7 @@
       <HintPath>..\WatsonAI\libs\OpenNLP.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="src\ProcessTests\ThesaurusTests.cs" />
+  </ItemGroup>
 </Project>
