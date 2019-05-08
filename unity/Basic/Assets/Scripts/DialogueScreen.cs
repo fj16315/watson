@@ -151,16 +151,16 @@ public class DialogueScreen : MonoBehaviour {
 
     private void PositionCamera(NPCController character)
     {
+        // HS: position in code is in world coordinates, position in editor is relative coordinates
         Transform face = character.gameObject.transform.Find("Face");
         
-        Vector3 desiredPosition = new Vector3(0.25f*cam.pixelWidth, 0.33f*cam.pixelHeight,1);
+        // Magic numbers, these are things we just want to set.
         float desiredDistance = 0.8544f; // Calculated through trial and error
+        // TODO: Calculate this better based on where the face is in the screen
+        Vector3 desiredPosition = new Vector3(0.25f*cam.pixelWidth, 0.5f*cam.pixelHeight,desiredDistance);
         
         Vector3 facePosition = face.position;
         Vector3 playerPosition = player.transform.position;
-
-        Debug.Log("facePosition: " + facePosition);
-        Debug.Log("playerPosition: " + playerPosition);
         
         Vector3 playerRotation = player.transform.rotation.eulerAngles;
         Vector3 faceRotation = face.rotation.eulerAngles;
@@ -171,14 +171,16 @@ public class DialogueScreen : MonoBehaviour {
         
         // Centre the camera on the face, then move the player forwards to desired distance.
         cam.transform.LookAt(facePosition);
+
         Ray fromCharacter = new Ray(facePosition, face.forward);
         Vector3 desiredPoint = fromCharacter.GetPoint(desiredDistance);
 
         player.transform.position = new Vector3(desiredPoint.x, playerPosition.y, desiredPoint.z);
 
+        // Re-centre camera on face, then move to desiredPosition
+        cam.transform.LookAt(facePosition);
         cam.transform.LookAt(cam.ScreenToWorldPoint(desiredPosition));
 
-        // HS: position in code is in world coordinates, position in editor is relative coordinates
     }
 
     private void QueryAi()
