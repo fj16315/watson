@@ -15,13 +15,13 @@ namespace WatsonTest
     {
       characters = new List<Character>
       {
-        new Character("actress", true, Gender.Female),
-        new Character("countess", true, Gender.Female),
-        new Character("earl", true, Gender.Male),
-        new Character("dave", true, Gender.Male),
-        new Character("butler", true, Gender.Other)
+        new Character("actress", true, Gender.Female, "study"),
+        new Character("countess", true, Gender.Female, "study"),
+        new Character("earl", true, Gender.Male, "study"),
+        new Character("dave", true, Gender.Male, "study"),
+        new Character("butler", true, Gender.Other, "study")
       };
-      character = new Character("actress", true, Gender.Female);
+      character = new Character("actress", true, Gender.Female, "study");
       pronounsProcess = new PronounsRemovalProcess(this.character, characters, parser);
     }
 

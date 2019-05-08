@@ -45,11 +45,11 @@ public class AIController : MonoBehaviour
         loaded = true;
     }
 
-    public string Run(string input, int character) 
+    public Tuple<string, string> Run(string input, int character) 
     {
-        string aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
+        Tuple<string, string> aiResponse = watson.Run(input, (int)currentCharacter.GetEnum());
         //string aiResponse = watson.Run(input);
-        SaveFile(input, aiResponse);
+        SaveFile(input, aiResponse.Item2);
         this.newSession = false;
         return aiResponse; 
     }
