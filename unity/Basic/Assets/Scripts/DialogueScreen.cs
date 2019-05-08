@@ -151,29 +151,32 @@ public class DialogueScreen : MonoBehaviour {
 
     private void PositionCamera(NPCController character)
     {
-        // 2. Rotate/move player so they are facing face and desired distance away (might need to move to distance first then move on radius based on x and z)
-
-        // 2.5. Make everything I need screen space for the calculations then put them back into world space for the look at
-
-        // 3. Calculate vectors from camera to desired point and camera to face (v - camera)
-
-        // 4. Calculate vector from face to desired point
-
-        // 5. Look at face - vector from 4
-
         Transform face = character.gameObject.transform.Find("Face");
         
-        Vector3 desiredPosition = new Vector3(0.75f*cam.pixelWidth, 0.66f*cam.pixelHeight,1);
+        Vector3 desiredPosition = new Vector3(0.25f*cam.pixelWidth, 0.33f*cam.pixelHeight,1);
+        float desiredDistance = 0.8544f; // Calculated through trial and error
         
         Vector3 facePosition = face.position;
+        Vector3 playerPosition = player.transform.position;
+
+        Debug.Log("facePosition: " + facePosition);
+        Debug.Log("playerPosition: " + playerPosition);
         
         Vector3 playerRotation = player.transform.rotation.eulerAngles;
         Vector3 faceRotation = face.rotation.eulerAngles;
         Vector3 halfTurn = new Vector3(0,180.0f,0);
         
+        // Rotate the character to face the player
         character.transform.Rotate(playerRotation - faceRotation + halfTurn, Space.World);
         
+        // Centre the camera on the face, then move the player forwards to desired distance.
         cam.transform.LookAt(facePosition);
+        Ray fromCharacter = new Ray(facePosition, face.forward);
+        Vector3 desiredPoint = fromCharacter.GetPoint(desiredDistance);
+
+        player.transform.position = new Vector3(desiredPoint.x, playerPosition.y, desiredPoint.z);
+
+        cam.transform.LookAt(cam.ScreenToWorldPoint(desiredPosition));
 
         // HS: position in code is in world coordinates, position in editor is relative coordinates
     }
