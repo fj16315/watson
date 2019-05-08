@@ -62,7 +62,7 @@ namespace WatsonAI
         }
       }
 
-      return isActiveDobjWho;
+      return isActiveDobjWho && answers.Any();
     }
 
     public string GenerateResponse()

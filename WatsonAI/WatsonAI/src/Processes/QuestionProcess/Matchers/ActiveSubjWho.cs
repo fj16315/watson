@@ -51,7 +51,7 @@ namespace WatsonAI
         }
       }
 
-      return isActiveSubjWho;
+      return isActiveSubjWho && answers.Any();
     }
 
     public string GenerateResponse()
