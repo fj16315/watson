@@ -134,7 +134,7 @@ namespace WatsonAI
     /// <returns>True if the first describes the second.</returns>
     public bool Describes(string first, string second, bool stemInput = false)
     {
-      if (first == second) return true;
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       if (AreWithinAssociations(first, second)) return false;
       bool similar = wordNet.GetWordSimilarity(first, second) > 0.25;
       if (stemInput)
@@ -160,7 +160,7 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, bool stemInput = false)
     {
       if (AreWithinAssociations(first, second)) return false;
-      if (first == second) return true;
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       bool describes = DescribesNoStemming(first, second, lexicalCategory);
       if (stemInput)
       { 
@@ -195,7 +195,7 @@ namespace WatsonAI
     public bool Describes(string first, string second, PartOfSpeech lexicalCategory, 
       SynSetRelation[] relations, bool stemInput = false)
     {
-      if (first == second) return true;
+      if (first == second && !string.IsNullOrEmpty(first) && !string.IsNullOrEmpty(second)) return true;
       if (AreWithinAssociations(first, second)) return false;
       bool describes = DescribesNoStemming(first, second, lexicalCategory, relations);
       if (stemInput)

@@ -49,7 +49,6 @@ namespace WatsonAI
               {
                 //remainingInput[remainingInput.IndexOf(s)] = s + "_" + nextS;
                 s = s + "_" + nextS;
-                Console.WriteLine(s);
                 //remainingInput.RemoveAt(remainingInput.IndexOf(s) + 1);
                 i++;
                 
