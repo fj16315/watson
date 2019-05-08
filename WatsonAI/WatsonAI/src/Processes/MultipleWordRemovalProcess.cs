@@ -13,16 +13,16 @@ namespace WatsonAI
       if (clone.Output[0] != null)
       {
         var output = clone.Output[0];
-        var tokenisedOutput = output.Split(' ');
+        var tokenisedOutput = output.Split(new string[] { " " }, StringSplitOptions.None);
         var newOutput = new List<string>();
         for (int i = 0; i < tokenisedOutput.Length; i++)
         {
           string[] newWords;
           var word = tokenisedOutput[i];
 
-          if (word.Contains('_'))
+          if (word.Contains("_"))
           {
-            newWords = word.Split("_");
+            newWords = word.Split(new string[] { "_" }, StringSplitOptions.None);
             newOutput.AddRange(newWords);
           }
           else newOutput.Add(word);
