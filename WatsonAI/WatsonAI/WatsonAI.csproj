@@ -24,6 +24,7 @@
     <PackageReference Include="Annytab.Stemmer" Version="1.2.3" />
     <PackageReference Include="Syn.WordNet" Version="1.0.5" />
     <PackageReference Include="System.Runtime.Caching" Version="4.5.0" />
+    <PackageReference Include="SymSpell" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -217,6 +218,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="res\WordNet\dict\verb.Framestext">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\dictionary\frequency_dictionary.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -34,13 +34,14 @@ namespace WatsonAI
       var newTree = branch.Match(tree);
       if (newTree.HasValue)
       {
-        return new Result<IEnumerable<a>>(newTree.Value
+        var results = newTree.Value
           .GetChildren()
           .Select(t => child.Match(t))
           .Where(r => r.HasValue)
-          .Select(r => r.Value));
+          .Select(r => r.Value);
+        if (results.Any()) return new Result<IEnumerable<a>>(results);
       }
-      return new Result<IEnumerable<a>>();
+      return Result<IEnumerable<a>>.Fail;
     }
   }
 }

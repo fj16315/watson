@@ -206,10 +206,12 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (stringToEdit != lastQuestion)
         {
-            queryResponse = ai.Run(stringToEdit, 2);
+            var aiRun = ai.Run(stringToEdit, 2);
+            queryResponse = aiRun.Item2;
             UpdateReply(queryResponse);
             freshReply = true;
             Debug.Log(answer);
+            stringToEdit = aiRun.Item1;
             lastQuestion = stringToEdit;
         }
     }

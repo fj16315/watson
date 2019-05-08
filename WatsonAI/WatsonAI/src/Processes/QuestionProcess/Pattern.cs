@@ -103,5 +103,23 @@ namespace WatsonAI
     /// <typeparam name="b">The return type.</typeparam>
     public static Pattern<b> Map<a, b>(this Pattern<a> pattern, Func<a, b> func)
       => new Map<a, b>(pattern, func);
+
+    /// <summary>
+    /// Returns a new pattern containing the first element of
+    /// <paramref name="pattern"/>.
+    /// </summary>
+    /// <returns>A pattern containing the first element.</returns>
+    /// <param name="pattern">A pattern containing a tuple.</param>
+    public static Pattern<a> First<a, b>(this Pattern<Tuple<a, b>> pattern)
+      => pattern.Map(t => t.Item1);
+
+    /// <summary>
+    /// Returns a new pattern containing the second element of
+    /// <paramref name="pattern"/>.
+    /// </summary>
+    /// <returns>A pattern containing the second element.</returns>
+    /// <param name="pattern">A pattern containing a tuple.</param>
+    public static Pattern<b> Second<a, b>(this Pattern<Tuple<a, b>> pattern)
+      => pattern.Map(t => t.Item2);
   }
 }

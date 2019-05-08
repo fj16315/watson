@@ -83,6 +83,14 @@ namespace WatsonAI
       => entityNames[word];
 
     /// <summary>
+    /// Gets the name of a given entity (unsafe).
+    /// </summary>
+    /// <param name="entity">The entity to get the name of.</param>
+    /// <returns>The name of the entity.</returns>
+    public string UncheckedNameEntity(Entity entity)
+      => entities[entity];
+
+    /// <summary>
     /// Tries to get the <see cref="WatsonAI.Verb"/> associated with
     /// <paramref name="word"/>.
     /// </summary>
@@ -101,6 +109,14 @@ namespace WatsonAI
     /// <param name="word">The word to look up.</param>
     public Verb UncheckedGetVerb(string word)
       => verbNames[word];
+
+    /// <summary>
+    /// Gets the name of a given verb (unsafe).
+    /// </summary>
+    /// <param name="verb">The verb to get the name of.</param>
+    /// <returns>The name of the verb.</returns>
+    public string UncheckedNameVerb(Verb verb)
+      => verbs[verb];
 
     /// <summary>
     /// Tries to name the <see cref="WatsonAI.Entity"/>.

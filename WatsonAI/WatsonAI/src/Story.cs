@@ -23,12 +23,12 @@ namespace WatsonAI
     {
       entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
-        "gangster", "colonel", "scrap", "nightshade", "belongings", /*"fast-acting",*/
-        "blackcurrants", /*"dining room",*/ "letter", /*"master bedroom",*/
-        "arsenic", /*"rat poison",*/ "kitchen", "plants", "nervous", /*"barbital tolerance",*/
-        "barbital", /*"sleeping aid",*/ "bathroom", "book", "estate", "promotion",
-        "war", "note", "contents", "will", "desk", "study", /*"slow-acting",*/"herbology", 
-        "daughter", "money", "allergy", "tolerance"
+        "gangster", "colonel", "scrap", "nightshade", "belongings", "fast_acting",
+        "blackcurrants", "dining_room", "letter", "master_bedroom",
+        "arsenic", "rat_poison", "kitchen", "plants", "nervous", "barbital_tolerance",
+        "barbital", "sleeping_aid", "bathroom", "book", "estate", "promotion",
+        "war", "note", "contents", "will", "desk", "study", "slow_acting","herbology", 
+        "daughter", "money", "allergy", "tolerance","murderer",
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
@@ -37,17 +37,18 @@ namespace WatsonAI
       };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
-        //{"actress", "be", "murderer"},
+        {"actress", "be", "murderer"},
         {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
         {"actress", "study", "herbology"},
         {"actress", "have", "scrap"},
         {"scrap", "about", "nightshade"},
         {"belongings", "contain", "nightshade"},
         {"colonel", "own", "belongings"},
-        /*{"nightshade", "is", "fast-acting"},*/
+        {"nightshade", "be", "fast_acting"},
+        {"arsenic", "be", "slow_acting"},
         /*{"nightshade", "look like", "blackcurrants"},*/
-        /*{"dining room", "contain", "blackcurrants"},*/
-        //{"nightshade", "poison", "earl"},
+        {"dining_room", "contain", "blackcurrants"},
+        {"nightshade", "poison", "earl"},
         {"actress", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
         {"will", "on", "desk"},
         {"study", "contain", "desk"},
@@ -65,37 +66,57 @@ namespace WatsonAI
         {"earl", "use", "barbital"},
         {"book", "about", "barbital"},
         {"study", "contain", "book"},
-        /*{"barbital", "is", "sleeping aid"},*/
+        {"barbital", "be", "sleeping_aid"},
         {"bathroom", "contain", "barbital"},
         {"earl", "have", Object.Direct("tolerance"), Object.Indirect("to", "barbital")},
         {"earl", "employ", "butler"},
         {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
         {"butler", "be", "nervous"},
         {"butler", "have", Object.Direct("allergy"), Object.Indirect("to", "plants")},
-        /*{"butler", "have", "rat poison"},*/
-        /*{"kitchen", "contain", "rat poison"},*/
+        {"butler", "have", "rat_poison"},
+        {"kitchen", "contain", "rat_poison"},
         {"earl", "owe", "gangster"},
         {"earl", "meet", "gangster"},
         {"gangster", "meet", "earl"},
         /*{"gangster", "kill with", "arsenic"},*/
-        /*{"arsenic", "is", "slow-acting"},*/
         /*{"arsenic, "used as", "rat poison"},*/
-        /*{"master bedroom", "contain", "letter"},*/
+        {"master_bedroom", "contain", "letter"},
+        {"dining_room", "contain", "butler"},
         {"gangster", "send", "letter"},
-        {"earl", "receive", "letter"}
+        {"earl", "receive", "letter"},
+
+
       };
       Associations = universeKnowledgeBuilder.Associations;
       Knowledge = universeKnowledgeBuilder.Knowledge;
 
       Characters = new Dictionary<Names, Character>
       {
-        {Names.ACTRESS, new Character("actress", true, Gender.Female)},
-        {Names.COUNTESS, new Character("countess", false, Gender.Female)},
-        {Names.COLONEL, new Character("colonel", false, Gender.Male)},
-        {Names.GANGSTER, new Character("gangster", false, Gender.Male)},
-        {Names.POLICE, new Character("policeman", false, Gender.Male)},
-        {Names.BUTLER, new Character("butler", false, Gender.Male)},
+        {Names.ACTRESS, new Character("actress", true, Gender.Female, "study")},
+        {Names.COUNTESS, new Character("countess", false, Gender.Female, "study")},
+        {Names.COLONEL, new Character("colonel", false, Gender.Male, "study")},
+        {Names.GANGSTER, new Character("gangster", false, Gender.Male, "foyer")},
+        {Names.POLICE, new Character("policeman", false, Gender.Male, "foyer")},
+        {Names.BUTLER, new Character("butler", false, Gender.Male, "dining room")},
       };
+
+      Characters[Names.ACTRESS].MoodResponse = "I'm an actress";
+      Characters[Names.ACTRESS].SeenResponse = "I saw the earl die";
+
+      Characters[Names.COUNTESS].MoodResponse = "I'm a countess";
+      Characters[Names.COUNTESS].SeenResponse = "I saw the earl die";
+
+      Characters[Names.COLONEL].MoodResponse = "I'm a colonel";
+      Characters[Names.COLONEL].SeenResponse = "I saw the earl die";
+
+      Characters[Names.GANGSTER].MoodResponse = "I'm a gangster";
+      Characters[Names.GANGSTER].SeenResponse = "I saw the earl die";
+
+      Characters[Names.POLICE].MoodResponse = "I'm a policeman";
+      Characters[Names.POLICE].SeenResponse = "I saw the earl die";
+
+      Characters[Names.BUTLER].MoodResponse = "I'm a butler";
+      Characters[Names.BUTLER].SeenResponse = "I saw the earl die";
 
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
@@ -104,25 +125,25 @@ namespace WatsonAI
           Names.ACTRESS,
           new KnowledgeBuilder(entities, verbs)
           {
-            //{"actress", "be", "murderer"},
+
             {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
             {"actress", "study", "herbology"},
             {"actress", "have", "scrap"},
             {"scrap", "about", "nightshade"},
             {"belongings", "contain", "nightshade"},
             {"colonel", "own", "belongings"},
-            /*{"nightshade", "is", "fast-acting"},*/
+            {"nightshade", "be", "fast_acting"},
             /*{"nightshade", "look like", "blackcurrants"},*/
-            /*{"dining room", "contain", "blackcurrants"},*/
-            //{"nightshade", "poison", "earl"},
+            {"dining_room", "contain", "blackcurrants"},
+            {"nightshade", "poison", "earl"},
             {"actress", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"earl", "fight", "war"},
             /*{"earl", "friends with", "colonel"},*/ //Probably just a like relation
             {"colonel", "fight", "war"},
             {"earl", "marry", "countess"},
             {"countess", "marry", "earl"},
-            /*{"barbital", "is", "sleeping aid"},*/
-            /*{"arsenic, "used as", "rat poison"},*/
+            {"barbital", "be", "sleeping_aid"},
+            //{"arsenic, "used as", "rat poison"},*/
             {"earl", "employ", "butler"}
           }
         },
@@ -131,7 +152,10 @@ namespace WatsonAI
           new KnowledgeBuilder(entities, verbs)
           {
             /*{"nightshade", "look like", "blackcurrants"},*/
-            /*{"dining room", "contain", "blackcurrants"},*/
+            {"dining_room", "contain", "blackcurrants"},
+            {"nightshade", "be", "fast_acting"},
+            {"arsenic", "be", "slow_acting"},
+            {"dining_room", "contain", "butler"},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
             {"study", "contain", "will"},
@@ -149,16 +173,17 @@ namespace WatsonAI
             // {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")}, // needs hiding/omitting in this graph
             {"butler", "be", "nervous"},
             {"butler", "steal", Object.Direct("money"), Object.Indirect("from", "earl")},
-            /*{"butler", "have", "rat poison"},*/
-            /*{"kitchen", "contain", "rat poison"},*/
+            {"butler", "have", "rat_poison"},
+            {"kitchen", "contain", "rat_poison"},
             {"earl", "owe", "gangster"},
             {"earl", "meet", "gangster"},
             {"gangster", "meet", "earl"},
             /*{"gangster", "kill with", "arsenic"},*/
             /*{"arsenic, "used as", "rat poison"},*/
-            /*{"master bedroom", "contain", "letter"},*/
+            {"master_bedroom", "contain", "letter"},
             {"gangster", "send", "letter"},
-            {"earl", "receive", "letter"}
+            {"earl", "receive", "letter"},
+
           }
         },
         {
@@ -167,7 +192,7 @@ namespace WatsonAI
           {
             {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
             {"colonel", "own", "belongings"},
-            /*{"nightshade", "is", "fast-acting"},*/
+            {"nightshade", "be", "fast_acting"},
             /*{"dining room", "contain", "blackcurrants"},*/
             {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"will", "on", "desk"},
@@ -182,7 +207,7 @@ namespace WatsonAI
             {"earl", "marry", "countess"},
             {"countess", "marry", "earl"},
             {"earl", "employ", "butler"},
-            /*{"butler", "have", "rat poison"},*/
+            {"butler", "have", "rat_poison"},
              /*{"arsenic, "used as", "rat poison"},*/
             {"earl", "owe", "gangster"}
           }
@@ -192,7 +217,7 @@ namespace WatsonAI
           new KnowledgeBuilder(entities, verbs)
           {
             {"actress", "study", "herbology"},
-            /*{"dining room", "contain", "blackcurrants"},*/
+            {"dining_room", "contain", "blackcurrants"},
             {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
@@ -208,7 +233,7 @@ namespace WatsonAI
             {"countess", "marry", "earl"},
             /*{"countess", "wants to sell", "estate"},*/
             {"earl", "use", "barbital"},
-            /*{"barbital", "is", "sleeping aid"},*/
+            {"barbital", "be", "sleeping_aid"},
             {"earl", "have", Object.Direct("tolerance"), Object.Indirect("to", "barbital")},
             {"earl", "employ", "butler"},
             {"butler", "be", "nervous"},
@@ -217,7 +242,7 @@ namespace WatsonAI
             {"earl", "meet", "gangster"},
             {"gangster", "meet", "earl"},
             /*{"arsenic, "used as", "rat poison"},*/
-            /*{"master bedroom", "contain", "letter"},*/
+            {"master_bedroom", "contain", "letter"},
             {"earl", "receive", "letter"}
           }
         },
@@ -229,8 +254,8 @@ namespace WatsonAI
           Names.GANGSTER,
           new KnowledgeBuilder(entities, verbs)
           {
-            /*{"nightshade", "is", "fast-acting"},*/
-            /*{"dining room", "contain", "blackcurrants"},*/
+            {"nightshade", "be", "fast_acting"},
+            {"dining_room", "contain", "blackcurrants"},
             /*{"earl", "friends with", "colonel"},*/ //Probably just a like relation
             {"colonel", "fight", "war"},
             {"earl", "marry", "countess"},
@@ -241,9 +266,9 @@ namespace WatsonAI
             {"earl", "meet", "gangster"},
             {"gangster", "meet", "earl"},
             /*{"gangster", "kill with", "arsenic"},*/
-            /*{"arsenic", "is", "slow-acting"},*/
+            {"arsenic", "be", "slow_acting"},
             /*{"arsenic, "used as", "rat poison"},*/
-            /*{"master bedroom", "contain", "letter"},*/
+            {"master_bedroom", "contain", "letter"},
             {"gangster", "send", "letter"},
             {"earl", "receive", "letter"}
           }

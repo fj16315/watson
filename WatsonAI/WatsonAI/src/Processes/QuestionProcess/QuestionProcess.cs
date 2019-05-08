@@ -1,9 +1,5 @@
 ﻿using OpenNLP.Tools.Parser;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-
-using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
@@ -11,21 +7,36 @@ namespace WatsonAI
   {
     private Parser parser;
     private KnowledgeQuery query;
-    private Knowledge knowledge;
-    private Thesaurus thesaurus;
-    private Associations associations;
+    private CommonPatterns cp;
+
+    private readonly List<IEntityMatcher> entityMatchers;
+    private readonly List<IBoolMatcher> boolMatchers;
+    private readonly List<IMatcher> matchers;
 
     /// <summary>
     /// Text engine for debuging the specified Parser.
     /// </summary>
-    /// <param name="parse">The parser to use.</param>
-    public QuestionProcess(Parser parse, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
+    /// <param name="parser">The parser to use.</param>
+    public QuestionProcess(Parser parser, Knowledge knowledge, Thesaurus thesaurus, Associations associations)
     {
-      this.parser = parse;
-      this.knowledge = knowledge;
-      this.thesaurus = thesaurus;
-      this.associations = associations;
-      this.query = new KnowledgeQuery(knowledge);
+      this.parser = parser;
+      cp = new CommonPatterns(thesaurus, associations);
+      query = new KnowledgeQuery(knowledge);
+      entityMatchers = new List<IEntityMatcher>
+      {
+        new ActiveSubjWho(cp, query, associations),
+        new ActiveDobjWho(cp, query, associations),
+        new PassiveDobjWho(cp, query, associations),
+        new Where(cp, query, associations, thesaurus)
+      };
+      boolMatchers = new List<IBoolMatcher>
+      {
+        new ActiveBoolean(cp, query, associations, thesaurus),
+        new PassiveBoolean(cp, query, associations, thesaurus)
+      };
+      matchers = new List<IMatcher>();
+      matchers.AddRange(entityMatchers);
+      matchers.AddRange(boolMatchers);
     }
 
     public Stream Process(Stream stream)
@@ -37,198 +48,55 @@ namespace WatsonAI
       }
 
       Parse tree;
-      if (!parser.Parse(remainingInput, out tree))
+      if (!parser.Parse(remainingInput, out tree)) return stream;
+
+      foreach (var m in matchers)
       {
-        return stream;
-      }
-
-      var noun = new EntityName(associations, thesaurus);
-      var verb = new VerbName(associations, thesaurus);
-      var nounPhrase = (Branch("NP") >= noun).Flatten();
-      var verbPhrase = (Branch("VP") >= verb).Flatten();
-
-
-      var top = Branch("TOP");
-
-      var subjQuestionNounPhrase = (Branch("SQ") > nounPhrase).Flatten();
-      var subjQuestionVerbPhrase = (Branch("SQ") > verbPhrase).Flatten();
-
-      var subjQueryN = (top >= subjQuestionNounPhrase).Flatten();
-      var subjQueryV = (top >= subjQuestionVerbPhrase).Flatten();
-
-      var whoWhatQ = top >= (Word(thesaurus, "who") | Word(thesaurus, "what"));
-      var whereQ = top >= Word(thesaurus, "where");
-
-      if (whereQ.Match(tree).HasValue)
-      {
-        var nouns = subjQueryN.Match(tree);
-        if (nouns.HasValue && nouns.Value.Any())
+        if (m.MatchOn(tree))
         {
-          var contains = associations.UncheckedGetVerb("contain");
-          foreach (var n in nouns.Value.Distinct())
-          {
-            var answers = query.GetSubjAnswers(contains, n);
-            string entityName;
-            associations.TryNameEntity(n, out entityName);
-            if (answers.Count != 0)
-            {
-              stream.AppendOutput(GenerateActiveResponse(entityName, "is in", answers));
-            }
-          }
+          stream.AppendOutput(m.GenerateResponse());
+          return stream;
+
         }
       }
-      if (whoWhatQ.Match(tree).HasValue)
-      {
-        var dobjQuestionNounPhrase = (Branch("VP") > nounPhrase).Flatten();
-        var dobjQuestionVerbPhrase = verbPhrase;
 
-        var dobjQueryN = (top >= dobjQuestionNounPhrase).Flatten();
-        var dobjQueryV = (top >= dobjQuestionVerbPhrase).Flatten();
-
-        // Deal with active case
-        var spNs = subjQueryN.Match(tree);
-        var spVs = subjQueryV.Match(tree);
-        if (spNs.HasValue && spVs.HasValue && spNs.Value.Any() && spVs.Value.Any())
-        {
-          var pairs = from n in spNs.Value
-                      from v in spVs.Value
-                      select Tuple.Create(n, v);
-
-          foreach (var p in pairs.Distinct())
-          {
-            var e = p.Item1;
-            var v = p.Item2;
-            var answers = query.GetDobjAnswers(v, e);
-            string verbName;
-            associations.TryNameVerb(v, out verbName);
-            string entityName;
-            associations.TryNameEntity(e, out entityName);
-            if (answers.Count != 0)
-            {
-              stream.AppendOutput(GenerateActiveResponse(entityName, verbName, answers));
-            }
-          }
-        }
-
-        // Deal with passive case
-        var dpNs = dobjQueryN.Match(tree);
-        var dpVs = dobjQueryV.Match(tree);
-        if (dpNs.HasValue && dpVs.HasValue && dpNs.Value.Any() && dpVs.Value.Any())
-        {
-          var pairs = from n in dpNs.Value
-                      from v in dpVs.Value
-                      select Tuple.Create(n, v);
-
-          foreach (var p in pairs.Distinct())
-          {
-            var e = p.Item1;
-            var v = p.Item2;
-            var answers = query.GetSubjAnswers(v, e);
-            string verbName;
-            associations.TryNameVerb(v, out verbName);
-            string entityName;
-            associations.TryNameEntity(e, out entityName);
-            if (answers.Any())
-            {
-              stream.AppendOutput(GeneratePassiveResponse(entityName, verbName, answers));
-            }
-          }
-        }
-      }
       return stream;
     }
 
-    private void PrintVerbs(Stream stream)
+    public IEnumerable<Entity> GetEntityAnswers(string input)
     {
-      List<string> remainingInput;
-      if (!stream.RemainingInput(out remainingInput, Read.Peek))
-      {
-        return;
-      }
+      var answers = new List<Entity>();
 
       Parse tree;
-      if (parser.Parse(remainingInput, out tree))
+      if (parser.Parse(input, out tree))
       {
-        var verb = new VerbName(associations, thesaurus);
-        var top = new Branch("TOP");
-
-        var query = (top >= verb).Flatten();
-
-        var verbs = query.Match(tree);
-
-        Console.WriteLine("Verbs: ");
-        if (verbs.HasValue)
+        foreach (var m in entityMatchers)
         {
-          foreach (var v in verbs.Value.Distinct())
+          if (m.MatchOn(tree))
           {
-            string verbName;
-            associations.TryNameVerb(v, out verbName);
-            Console.WriteLine($"{v} {verbName}");
+            answers.AddRange(m.GetAnswers());
           }
         }
       }
+      return answers;
     }
-    
-    private void PrintEntities(Stream stream)
+
+    public bool GetBooleanAnswer(string input)
     {
-      List<string> remainingInput;
-      if (!stream.RemainingInput(out remainingInput, Read.Peek))
-      {
-        return;
-      }
+      var answer = false;
 
       Parse tree;
-      if (parser.Parse(remainingInput, out tree))
+      if (parser.Parse(input, out tree))
       {
-        var entity = new EntityName(associations, thesaurus);
-        var top = new Branch("TOP");
-
-        var query = (top >= entity).Flatten();
-
-        var entities = query.Match(tree);
-
-        Console.WriteLine("Entities: ");
-        if (entities.HasValue)
+        foreach (var m in boolMatchers)
         {
-          foreach (var e in entities.Value.Distinct())
+          if (m.MatchOn(tree))
           {
-            string entityName;
-            associations.TryNameEntity(e, out entityName);
-            Console.WriteLine($"{e} {entityName}");
+            answer = answer || m.GetAnswer();
           }
         }
       }
-    }
-
-    private string GeneratePassiveResponse(string noun, string verb, List<Entity> answers)
-    {
-      string entityName;
-      associations.TryNameEntity(answers.FirstOrDefault(), out entityName);
-      var response = "The " + entityName + " " + verb;
-      response += " the " + noun;
-      return response;
-    }
-
-    private string GenerateActiveResponse(string noun, string verb, List<Entity> answers)
-    {
-      var response = "The " + noun + " " + verb;
-      foreach (Entity entityAnswer in answers.Distinct())
-      {
-        if (answers.IndexOf(entityAnswer) == 0)
-        {
-          string entityName;
-          associations.TryNameEntity(entityAnswer, out entityName);
-          response += " the " + entityName;
-        }
-        else
-        {
-          string entityName;
-          associations.TryNameEntity(entityAnswer, out entityName);
-          response += " and the " + entityName;
-        }
-      }
-      return response;
+      return answer;
     }
   }
-
 }
