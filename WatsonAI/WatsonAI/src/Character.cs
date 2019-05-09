@@ -22,6 +22,8 @@ namespace WatsonAI
 
     public List<string> SeenResponses;
 
+    public List<string> Greetings;
+
     /// <summary>
     /// Constructor for a character.
     /// </summary>
@@ -36,6 +38,7 @@ namespace WatsonAI
       this.Location = location;
       MoodResponses = new List<string>();
       SeenResponses = new List<string>();
+      Greetings = new List<string>();
     }
 
     public void AddMood(string mood)
@@ -60,6 +63,18 @@ namespace WatsonAI
       var rnd = new Random();
       var index = rnd.Next(SeenResponses.Count);
       return SeenResponses[index];
+    }
+
+    public void AddGreeting(string greeting)
+    {
+      Greetings.Add(greeting);
+    }
+
+    public string GetGreeting()
+    {
+      var rnd = new Random();
+      var index = rnd.Next(Greetings.Count);
+      return Greetings[index];
     }
   }
 

@@ -119,6 +119,9 @@ namespace WatsonAI
       Characters[Names.BUTLER].AddMood("I'm frightened");
       Characters[Names.BUTLER].AddSeen("I saw the earl die");
       Characters[Names.BUTLER].AddSeen("I saw the earl collapse");
+      Characters[Names.BUTLER].AddGreeting("Good day sir");
+      Characters[Names.BUTLER].AddGreeting("Good afternoon detective");
+
 
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
