@@ -11,14 +11,6 @@ namespace WatsonAI
 
     public MultipleWordProcess()
     {
-      /*words = new List<Tuple<string, string>>();
-      words.Add(new Tuple<string, string>("rat", "poison"));
-      words.Add(new Tuple<string, string>("dining", "room"));
-      words.Add(new Tuple<string, string>("master", "bedroom"));
-      words.Add(new Tuple<string, string>("sleeping", "aid"));
-      words.Add(new Tuple<string, string>("barbital", "tolerance"));
-      words.Add(new Tuple<string, string>("fast", "acting"));
-      words.Add(new Tuple<string, string>("slow", "acting"));*/
       words = new List<List<string>>()
       {
         new List<string>()
@@ -96,23 +88,25 @@ namespace WatsonAI
                     newS = "";
                   }
                   j = ws.Count;
-                  //newS = s;
-                  //Console.WriteLine("newS: " + newS);
                 }
                 else //If the current word matches the current word in the word set
                 {
                   if (j == ws.Count-1)
                   {
                     newS = newS + remainingInput[i + j];
-                    //Console.WriteLine("Last word: " + newS);
                     found = true;
                     increment = ws.Count-1;
                   }
                   else
                   {
-                    //Console.WriteLine("newS: " + newS);
-                    newS = newS + remainingInput[i + j] + "_";
-                    //Console.WriteLine("Middle word: " + newS);
+                    if ((words.IndexOf(ws) == 5) || (words.IndexOf(ws) == 6))
+                    {
+                      newS = newS + remainingInput[i + j] + "-";
+                    }
+                    else
+                    {
+                      newS = newS + remainingInput[i + j] + "_";
+                    }
                   }
                 }
               }
@@ -130,7 +124,6 @@ namespace WatsonAI
       {
         Console.WriteLine(t);
       }
-   
       stream.SetInput(newInput);
    
       return stream;
