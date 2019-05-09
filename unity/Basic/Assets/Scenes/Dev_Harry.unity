@@ -8845,6 +8845,7 @@ MonoBehaviour:
   notebook: {fileID: 952494623}
   fpc: {fileID: 1826286832}
   state: {fileID: 526429962}
+  notesInput: {fileID: 1038184782}
   paused: 0
 --- !u!65 &526429956
 BoxCollider:

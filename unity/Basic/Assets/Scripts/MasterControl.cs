@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 using Notebook;
@@ -12,6 +13,7 @@ public class MasterControl : MonoBehaviour {
     public NotebookController notebook;
     public RigidbodyFirstPersonController fpc;
     public GameState state;
+    public InputField notesInput;
 
     // State variables
     public bool paused = false;
@@ -39,32 +41,33 @@ public class MasterControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
+        // Debug.Log(notesInput.isFocused);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenNotebook(!paused);
             notebook.ChangePage((int)Page.MENU);
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && !notesInput.isFocused)
         {
             OpenNotebook(true);
             notebook.ChangePage((int)Page.CHARACTER);
         }
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && !notesInput.isFocused)
         {
             OpenNotebook(true);
             notebook.ChangePage((int)Page.INVENTORY);
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.N) && !notesInput.isFocused)
         {
             OpenNotebook(true);
             notebook.ChangePage((int)Page.NOTES);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && !notesInput.isFocused)
         {
             OpenNotebook(true);
             notebook.ChangePage((int)Page.MAP);
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && !notesInput.isFocused)
         {
             OpenNotebook(!paused);
             notebook.ChangePage((int)notebook.currentPageEnum);
