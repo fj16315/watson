@@ -10,9 +10,15 @@ namespace Notebook
 {
     public enum Page : int { CHARACTER, INVENTORY, NOTES, MAP, MENU };
     public enum Item : int { KEY, BOOK, POISON };
+    public enum Prop : int { RATPOISON, NIGHTSHADE, BARBITAL, WILL, THREATLETER, HERBSCRAP, MILITARYNOTE, MEDICALBOOK, REDHERRING, NOTEPAD }
 
     public class NotebookController : MonoBehaviour
     {
+
+        public List<GameObject> propPictures;
+
+        public bool[] ownedProps = new bool[9];
+
         public GameObject container;
         public PlayerController player;
         public AudioSource pageFlip;
@@ -63,7 +69,7 @@ namespace Notebook
         public Text gangsterClueBox;
         public Text policeClueBox;
 
-        public Text inventoryText;
+        //public Text inventoryText;
 
         private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
 
@@ -101,6 +107,12 @@ namespace Notebook
             cluesDirectory.Add(cluesEarl);
             cluesDirectory.Add(cluesGangster);
             cluesDirectory.Add(cluesPolice);
+
+            for (int i = 0; i < ownedProps.Length; i++)
+            {
+                ownedProps[i] = false;
+            }
+            Debug.Log(ownedProps);
 
         }
 
@@ -254,6 +266,8 @@ namespace Notebook
 
         public void LogResponse(NPCController character, string question, string clue)
         {
+            //Debug.Log(question);
+            //Debug.Log(clue);
             cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
@@ -262,7 +276,7 @@ namespace Notebook
             string result = "";
             foreach (Tuple<string, string> exchange in cluesDirectory[character])
             {
-                result += "<b>>  </b>";
+                //result += "<b>";
                 if (exchange.Item1 != "")
                 {
                     result += "<i>\"" + exchange.Item1 + "</i>\"<b>  ~  ";
@@ -274,7 +288,7 @@ namespace Notebook
 
         public void UpdateInventory()
         {
-            inventoryText.text = player.list;
+            //inventoryText.text = player.list;
         }
 
     }

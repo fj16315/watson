@@ -107,7 +107,7 @@ public class GameState : MonoBehaviour {
         if ( currentString == 2)
         {
             int charIndex = GetIndexFromCharacter();
-            Debug.Log("charIndex = " + charIndex);
+            //Debug.Log("charIndex = " + charIndex);
             List<string> stringsToUse = GetStringsToUse(charIndex);
             storyStrings[2] = GenerateResponse(stringsToUse);
         }
