@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Notebook;
 
 public class PlayerController : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public GUISkin winskin;
     bool won = false;
     public MasterControl controller;
+    public NotebookController notebook;
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +47,10 @@ public class PlayerController : MonoBehaviour {
         {
             controller.Pause(true);
             t.InspectObject();
+        }
+        if (t.propEnum < 9)
+        {
+            notebook.ownedProps[t.propEnum] = true;
         }
         GenerateList();
     }
