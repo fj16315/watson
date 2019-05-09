@@ -50,10 +50,6 @@ namespace WatsonAI
       var clone = stream.Clone();
       List<string> remainingInput;
       clone.RemainingInput(out remainingInput, Read.Peek);
-      foreach (var t in remainingInput)
-      {
-        Console.WriteLine(t);
-      }
       var newInput = new List<string>();
       var newS = "";
       for (int i = 0; i < remainingInput.Count; i++) //For each word in the input
@@ -119,10 +115,6 @@ namespace WatsonAI
         {
           newInput.Add(remainingInput[i]);
         }
-      }
-      foreach (var t in newInput)
-      {
-        Console.WriteLine(t);
       }
       stream.SetInput(newInput);
    

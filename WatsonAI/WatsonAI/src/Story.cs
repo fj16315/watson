@@ -23,11 +23,11 @@ namespace WatsonAI
     {
       entities = new EntityBuilder {
         "actress", "butler", "countess", "earl",
-        "gangster", "colonel", "scrap", "nightshade", "belongings", "fast_acting",
+        "gangster", "colonel", "scrap", "nightshade", "belongings", "fast-acting",
         "blackcurrants", "dining_room", "letter", "master_bedroom",
         "arsenic", "rat_poison", "kitchen", "plants", "nervous", "barbital_tolerance",
         "barbital", "sleeping_aid", "bathroom", "book", "estate", "promotion",
-        "war", "note", "contents", "will", "desk", "study", "slow_acting","herbology", 
+        "war", "note", "contents", "will", "desk", "study", "slow-acting","herbology", 
         "daughter", "money", "allergy", "tolerance","murderer"
       };
       var verbs = new VerbBuilder {
@@ -44,8 +44,8 @@ namespace WatsonAI
         {"scrap", "about", "nightshade"},
         {"belongings", "contain", "nightshade"},
         {"colonel", "own", "belongings"},
-        {"nightshade", "be", "fast_acting"},
-        {"arsenic", "be", "slow_acting"},
+        {"nightshade", "be", "fast-acting"},
+        {"arsenic", "be", "slow-acting"},
         /*{"nightshade", "look like", "blackcurrants"},*/
         {"dining_room", "contain", "blackcurrants"},
         {"nightshade", "poison", "earl"},
@@ -137,7 +137,7 @@ namespace WatsonAI
             {"scrap", "about", "nightshade"},
             {"belongings", "contain", "nightshade"},
             {"colonel", "own", "belongings"},
-            {"nightshade", "be", "fast_acting"},
+            {"nightshade", "be", "fast-acting"},
             /*{"nightshade", "look like", "blackcurrants"},*/
             {"dining_room", "contain", "blackcurrants"},
             {"nightshade", "poison", "earl"},
@@ -158,8 +158,8 @@ namespace WatsonAI
           {
             /*{"nightshade", "look like", "blackcurrants"},*/
             {"dining_room", "contain", "blackcurrants"},
-            {"nightshade", "be", "fast_acting"},
-            {"arsenic", "be", "slow_acting"},
+            {"nightshade", "be", "fast-acting"},
+            {"arsenic", "be", "slow-acting"},
             {"dining_room", "contain", "butler"},
             {"will", "on", "desk"},
             {"study", "contain", "desk"},
@@ -197,7 +197,7 @@ namespace WatsonAI
           {
             {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
             {"colonel", "own", "belongings"},
-            {"nightshade", "be", "fast_acting"},
+            {"nightshade", "be", "fast-acting"},
             /*{"dining room", "contain", "blackcurrants"},*/
             {"countess", "get", Object.Direct("contents"), Object.Indirect("of", "will")},
             {"will", "on", "desk"},
@@ -259,7 +259,7 @@ namespace WatsonAI
           Names.GANGSTER,
           new KnowledgeBuilder(entities, verbs)
           {
-            {"nightshade", "be", "fast_acting"},
+            {"nightshade", "be", "fast-acting"},
             {"dining_room", "contain", "blackcurrants"},
             /*{"earl", "friends with", "colonel"},*/ //Probably just a like relation
             {"colonel", "fight", "war"},
@@ -271,7 +271,7 @@ namespace WatsonAI
             {"earl", "meet", "gangster"},
             {"gangster", "meet", "earl"},
             /*{"gangster", "kill with", "arsenic"},*/
-            {"arsenic", "be", "slow_acting"},
+            {"arsenic", "be", "slow-acting"},
             /*{"arsenic, "used as", "rat poison"},*/
             {"master_bedroom", "contain", "letter"},
             {"gangster", "send", "letter"},
