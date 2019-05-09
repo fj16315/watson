@@ -16,6 +16,7 @@ public class Interactable : MonoBehaviour
     public GUISkin skin;
     public GameObject hover = null;
     private bool glowing = false;
+    public int propEnum;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 

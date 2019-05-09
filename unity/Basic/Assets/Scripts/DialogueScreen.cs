@@ -5,12 +5,14 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using NPC;
 using Notebook;
+using System.IO;
 
 public class DialogueScreen : MonoBehaviour {
 
     public GUISkin skin;
     bool show = false;
     public GameState state;
+    public EndFormControl finalForm;
     public string stringToEdit = "";
     private string lastQuestion = "";
     string answer = "";
@@ -22,6 +24,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject saveButton;
     public GameObject nextButton;
     public GameObject skipButton;
+    public GameObject solveButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
@@ -51,6 +54,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         skipButton.SetActive(false);
+        solveButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -110,20 +114,30 @@ public class DialogueScreen : MonoBehaviour {
         show = true;
         replyBubble.SetActive(true);
         currentCharacter = character;
-        textBubble.SetActive(true);
-        saveButton.SetActive(true);
+        textBubble.SetActive(false);
+        saveButton.SetActive(false);
+        solveButton.SetActive(false);
         stringToEdit = "";
         lastQuestion = "";
 
         PositionCamera(currentCharacter);
+        //If in the tutorial, show the save answer button
+        if (state.currentState == GameState.State.TUTORIAL)
+        {
+            saveButton.SetActive(true);
+        }
+
         /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
+
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
               (state.currentState == GameState.State.STORY)))
         {
+            saveButton.SetActive(true);
+            textBubble.SetActive(true);
             // If players choose to skip getting the story dump from the butler
             // then just change the state to PLAY.
-            if(state.currentState == GameState.State.STORY)
+            if (state.currentState == GameState.State.STORY)
             {
                 state.currentState = GameState.State.PLAY;
             }
@@ -134,6 +148,7 @@ public class DialogueScreen : MonoBehaviour {
         else if (state.currentState == GameState.State.STORY &&
                  currentCharacter.charName == "Police")
         {
+            solveButton.SetActive(true);
             UpdateReply("Go and speak to one of the suspects to find out more about what happened.");
         }
         else
@@ -163,6 +178,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
+        solveButton.SetActive(false);
         skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
@@ -210,13 +226,13 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (stringToEdit != lastQuestion)
         {
-            var aiRun = ai.Run(stringToEdit, 2);
+            System.Tuple<string, string> aiRun = ai.Run(stringToEdit, 2);
             queryResponse = aiRun.Item2;
-            UpdateReply(queryResponse);
             freshReply = true;
-            Debug.Log(answer);
+            //Debug.Log(aiRun.Item1);
             stringToEdit = aiRun.Item1;
             lastQuestion = stringToEdit;
+            UpdateReply(queryResponse);
         }
     }
 
@@ -262,7 +278,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (freshReply)
         {
-            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            if (state.currentState == GameState.State.TUTORIAL)
             {
                 queryResponse = "My first clue!";
             }
@@ -296,6 +312,22 @@ public class DialogueScreen : MonoBehaviour {
     public void SkipButton()
     {
         state.EndTutorial();
+    }
+
+    public void ShowFailScreen()
+    {
+        show = true;
+        replyBubble.SetActive(true);
+        solveButton.SetActive(true);
+        answerBox.text = "";
+        UpdateReply("Better luck next time");
+    }
+
+    public void SolveButton()
+    {
+        HideScreen();
+        Cursor.visible = true;
+        finalForm.OpenForm();
     }
 
 }
