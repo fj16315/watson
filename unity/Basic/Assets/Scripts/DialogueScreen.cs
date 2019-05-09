@@ -121,7 +121,14 @@ public class DialogueScreen : MonoBehaviour {
         lastQuestion = "";
 
         PositionCamera(currentCharacter);
+        //If in the tutorial, show the save answer button
+        if (state.currentState == GameState.State.TUTORIAL)
+        {
+            saveButton.SetActive(true);
+        }
+
         /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
+
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
               (state.currentState == GameState.State.STORY)))

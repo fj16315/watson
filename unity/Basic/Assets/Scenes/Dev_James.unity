@@ -1859,7 +1859,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 267.665, y: -25}
-  m_SizeDelta: {x: 535.33, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &99175897
 MonoBehaviour:
@@ -1904,7 +1904,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.7019608, g: 0.54509807, b: 0.3764706, a: 0}
+    m_NormalColor: {r: 0.77647066, g: 0.19607845, b: 0.19215688, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.4627451}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -19835,7 +19835,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 267.665, y: -95}
-  m_SizeDelta: {x: 535.33, y: 50}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934780760
 MonoBehaviour:
@@ -25865,8 +25865,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526429962}
-        m_MethodName: CheckBoxes
+      - m_Target: {fileID: 1356878057}
+        m_MethodName: EndingSubmit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29201,6 +29201,7 @@ MonoBehaviour:
   form: {fileID: 1384584278}
   state: {fileID: 526429962}
   raycast: {fileID: 1361230746}
+  dialogue: {fileID: 570466025}
 --- !u!1 &1361230744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: c6453f8e1f814744d8b94e5a6d1f9942,
@@ -35815,7 +35816,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1356878057}
-        m_MethodName: HideForm
+        m_MethodName: CloseForm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -48107,7 +48108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2131068271
 RectTransform:
   m_ObjectHideFlags: 0
