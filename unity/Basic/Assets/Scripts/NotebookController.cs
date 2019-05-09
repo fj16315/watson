@@ -55,6 +55,9 @@ namespace Notebook
         List<Tuple<string, string>> cluesPolice = new List<Tuple<string, string>>();
         List<List<Tuple<string, string>>> cluesDirectory = new List<List<Tuple<string, string>>>();
 
+        // Player notes
+        List<string> playerNotes = new List<string>();
+
         public Text actressClueBox;
         public Text butlerClueBox;
         public Text colonelClueBox;
@@ -64,6 +67,7 @@ namespace Notebook
         public Text policeClueBox;
 
         public Text inventoryText;
+        public Text notesText;
 
         private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
 
@@ -158,6 +162,7 @@ namespace Notebook
                         break;
                     case Page.NOTES:
                         notePage.SetActive(true);
+                        UpdateNotes();
                         currentPage = notePage;
                         break;
                     case Page.MAP:
@@ -257,6 +262,11 @@ namespace Notebook
             cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
+        public void MakeNote(string note)
+        {
+            playerNotes.Add(note);
+        }
+
         public string UpdateClues(int character)
         {
             string result = "";
@@ -275,6 +285,21 @@ namespace Notebook
         public void UpdateInventory()
         {
             inventoryText.text = player.list;
+        }
+
+        public void UpdateNotes()
+        {
+            string result = "";
+            foreach(string note in playerNotes)
+            {
+                result += "<b> </b>";
+                if(note != "")
+                {
+                    result += "<i>" + note + "</i>\n";
+                }
+            }
+
+            notesText.text = result;
         }
 
     }
