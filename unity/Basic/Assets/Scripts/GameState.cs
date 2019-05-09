@@ -215,7 +215,7 @@ public class GameState : MonoBehaviour {
         alexa = !alexa;
     }
 
-    public void CheckBoxes()
+    public bool CheckBoxes()
     {
         foreach (Toggle clue in checkboxes)
         {
@@ -243,6 +243,11 @@ public class GameState : MonoBehaviour {
         {
             score = CalculateScore();
             controller.EndGame(score);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

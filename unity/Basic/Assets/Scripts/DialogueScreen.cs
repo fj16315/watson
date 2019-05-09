@@ -307,11 +307,20 @@ public class DialogueScreen : MonoBehaviour {
         state.EndTutorial();
     }
 
+    public void ShowFailScreen()
+    {
+        show = true;
+        replyBubble.SetActive(true);
+        solveButton.SetActive(true);
+        answerBox.text = "";
+        UpdateReply("Better luck next time");
+    }
+
     public void SolveButton()
     {
         HideScreen();
         Cursor.visible = true;
-        finalForm.ShowForm();
+        finalForm.OpenForm();
     }
 
 }

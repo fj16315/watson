@@ -8,11 +8,12 @@ public class EndFormControl : MonoBehaviour
     public GameObject form;
     public GameState state;
     public CameraRaycasting raycast;
+    public DialogueScreen dialogue;
 
     // Start is called before the first frame update
     void Start()
     {
-        firstTimeHide();
+        FirstTimeHide();
     }
 
     // Update is called once per frame
@@ -21,9 +22,15 @@ public class EndFormControl : MonoBehaviour
         
     }
 
-    public void firstTimeHide()
+    private void FirstTimeHide()
     {
         form.SetActive(false);
+    }
+
+    public void HideForm()
+    {
+        form.SetActive(false);
+        state.finalForm = false;
     }
 
     public void ShowForm()
@@ -32,7 +39,21 @@ public class EndFormControl : MonoBehaviour
         state.finalForm = true;
     }
 
-    public void HideForm()
+    public void EndingSubmit()
+    {
+        HideForm();
+        if (!state.CheckBoxes())
+        { 
+            dialogue.ShowFailScreen();
+        }
+    }
+
+    public void OpenForm()
+    {
+        ShowForm();
+    }
+
+    public void CloseForm()
     {
         form.SetActive(false);
         state.finalForm = false;
