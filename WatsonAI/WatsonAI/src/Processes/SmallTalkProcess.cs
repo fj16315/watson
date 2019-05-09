@@ -24,7 +24,7 @@ namespace WatsonAI
         input = input + " " + v;
       }
       input = input.ToLower();
-      Console.WriteLine(input);
+      //Console.WriteLine(input);
       if (input.Contains(character.Name + " is the murderer"))
       {
         stream.AssignSpecialCaseHandler(this);
@@ -40,17 +40,17 @@ namespace WatsonAI
         if (input.Contains("how is " + character.Name))
         {
           stream.AssignSpecialCaseHandler(this);
-          stream.AppendOutput(character.MoodResponse);
+          stream.AppendOutput(character.GetMood());
         }
         if (input.Contains("where are we"))
         {
           stream.AssignSpecialCaseHandler(this);
           stream.AppendOutput("We are in the " + character.Location);
         }
-        if (input.Contains("what did you see"))
+        if (input.Contains("what did " + character.Name + " see"))
         {
           stream.AssignSpecialCaseHandler(this);
-          stream.AppendOutput(character.SeenResponse);
+          stream.AppendOutput(character.GetSeen());
         }
       }
       return stream;

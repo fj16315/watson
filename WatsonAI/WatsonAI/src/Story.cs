@@ -100,23 +100,25 @@ namespace WatsonAI
         {Names.BUTLER, new Character("butler", false, Gender.Male, "dining room")},
       };
 
-      Characters[Names.ACTRESS].MoodResponse = "I'm an actress";
-      Characters[Names.ACTRESS].SeenResponse = "I saw the earl die";
+      Characters[Names.ACTRESS].AddMood("I'm an actress");
+      Characters[Names.ACTRESS].AddSeen("I saw the earl die");
 
-      Characters[Names.COUNTESS].MoodResponse = "I'm a countess";
-      Characters[Names.COUNTESS].SeenResponse = "I saw the earl die";
+      Characters[Names.COUNTESS].AddMood("I'm a countess");
+      Characters[Names.COUNTESS].AddSeen("I saw the earl die");
 
-      Characters[Names.COLONEL].MoodResponse = "I'm a colonel";
-      Characters[Names.COLONEL].SeenResponse = "I saw the earl die";
+      Characters[Names.COLONEL].AddMood("I'm a colonel");
+      Characters[Names.COLONEL].AddSeen("I saw the earl die");
 
-      Characters[Names.GANGSTER].MoodResponse = "I'm a gangster";
-      Characters[Names.GANGSTER].SeenResponse = "I saw the earl die";
+      Characters[Names.GANGSTER].AddMood("I'm a gangster");
+      Characters[Names.GANGSTER].AddSeen("I saw the earl die");
 
-      Characters[Names.POLICE].MoodResponse = "I'm a policeman";
-      Characters[Names.POLICE].SeenResponse = "I saw the earl die";
+      Characters[Names.POLICE].AddMood("I'm a policeman");
+      Characters[Names.POLICE].AddSeen("I saw the earl die");
 
-      Characters[Names.BUTLER].MoodResponse = "I'm a butler";
-      Characters[Names.BUTLER].SeenResponse = "I saw the earl die";
+      Characters[Names.BUTLER].AddMood("I'm scared");
+      Characters[Names.BUTLER].AddMood("I'm frightened");
+      Characters[Names.BUTLER].AddSeen("I saw the earl die");
+      Characters[Names.BUTLER].AddSeen("I saw the earl collapse");
 
       //var characterKnowledgeBuilders = new List<KnowledgeBuilder>
       var characterKnowledgeBuilders = new Dictionary<Names, KnowledgeBuilder>
