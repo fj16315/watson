@@ -23,6 +23,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject saveButton;
     public GameObject nextButton;
     public GameObject skipButton;
+    public GameObject solveButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
@@ -52,6 +53,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         skipButton.SetActive(false);
+        solveButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -111,8 +113,9 @@ public class DialogueScreen : MonoBehaviour {
         show = true;
         replyBubble.SetActive(true);
         currentCharacter = character;
-        textBubble.SetActive(true);
+        textBubble.SetActive(false);
         saveButton.SetActive(true);
+        solveButton.SetActive(false);
         stringToEdit = "";
         lastQuestion = "";
 
@@ -122,9 +125,10 @@ public class DialogueScreen : MonoBehaviour {
               currentCharacter.charName == "Police") ||
               (state.currentState == GameState.State.STORY)))
         {
+            textBubble.SetActive(true);
             // If players choose to skip getting the story dump from the butler
             // then just change the state to PLAY.
-            if(state.currentState == GameState.State.STORY)
+            if (state.currentState == GameState.State.STORY)
             {
                 state.currentState = GameState.State.PLAY;
             }
@@ -135,6 +139,7 @@ public class DialogueScreen : MonoBehaviour {
         else if (state.currentState == GameState.State.STORY &&
                  currentCharacter.charName == "Police")
         {
+            solveButton.SetActive(true);
             UpdateReply("Go and speak to one of the suspects to find out more about what happened.");
         }
         else
@@ -164,6 +169,7 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
+        solveButton.SetActive(false);
         skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
