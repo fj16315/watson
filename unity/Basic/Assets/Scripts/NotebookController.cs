@@ -276,12 +276,12 @@ namespace Notebook
             string result = "";
             foreach (Tuple<string, string> exchange in cluesDirectory[character])
             {
-                //result += "<b>";
+                Debug.Log(exchange.Item1);
                 if (exchange.Item1 != "")
                 {
-                    result += "<i>\"" + exchange.Item1 + "</i>\"<b>  ~  ";
+                    result += "<i>\"" + exchange.Item1 + "</i>\"  ~  ";
                 }
-                result += "\"" + exchange.Item2 + "\"</b>\n";
+                result += "\"" + exchange.Item2 + "\"\n";
             }
             return result;
         }

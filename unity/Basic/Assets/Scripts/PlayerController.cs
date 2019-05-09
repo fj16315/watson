@@ -48,7 +48,10 @@ public class PlayerController : MonoBehaviour {
             controller.Pause(true);
             t.InspectObject();
         }
-        notebook.ownedProps[t.propEnum] = true;
+        if (t.propEnum < 9)
+        {
+            notebook.ownedProps[t.propEnum] = true;
+        }
         GenerateList();
     }
 
