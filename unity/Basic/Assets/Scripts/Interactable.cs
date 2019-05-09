@@ -23,10 +23,6 @@ public class Interactable : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //if (hover)
-        //{
-        //    mat = hover.GetComponent<Renderer>().material;
-        //}
         
     }
 
@@ -88,22 +84,5 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    //private void OnMouseOver()
-    //{
-    //    if (hover)
-    //    {
-    //        hover.SetActive(true);
-    //    }
-        
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    if (hover)
-    //    {
-    //        hover.SetActive(false);
-    //    }
-        
-    //}
 }
 
