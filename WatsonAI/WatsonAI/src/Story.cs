@@ -28,7 +28,7 @@ namespace WatsonAI
         "arsenic", "rat_poison", "kitchen", "plants", "nervous", "barbital_tolerance",
         "barbital", "sleeping_aid", "bathroom", "book", "estate", "promotion",
         "war", "note", "contents", "will", "desk", "study", "slow_acting","herbology", 
-        "daughter", "money", "allergy", "tolerance","murderer",
+        "daughter", "money", "allergy", "tolerance","murderer"
       };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",

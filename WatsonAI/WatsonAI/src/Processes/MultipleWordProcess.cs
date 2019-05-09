@@ -58,6 +58,10 @@ namespace WatsonAI
       var clone = stream.Clone();
       List<string> remainingInput;
       clone.RemainingInput(out remainingInput, Read.Peek);
+      foreach (var t in remainingInput)
+      {
+        Console.WriteLine(t);
+      }
       var newInput = new List<string>();
       var newS = "";
       for (int i = 0; i < remainingInput.Count; i++) //For each word in the input
@@ -77,49 +81,50 @@ namespace WatsonAI
           int increment = 0;
           foreach (var ws in words) //For each set of words we want to underscore
           {
-            /*if (s.Equals(w.Item1))
-            {
-              var nextS = remainingInput[i + 1];
-              if (nextS.Equals(w.Item2))
-              {
-                //remainingInput[remainingInput.IndexOf(s)] = s + "_" + nextS;
-                s = s + "_" + nextS;
-                //remainingInput.RemoveAt(remainingInput.IndexOf(s) + 1);
-                i++;
-                
-              }
-            }*/
             if (!found)
             {
               for (int j = 0; j < ws.Count; j++) //For each word in the multiple word set
               {
                 if ((i + j >= remainingInput.Count) || (!remainingInput[i + j].Equals(ws[j])))
                 {
+                  if (words.IndexOf(ws) == words.Count-1)
+                  {
+                    newS = s;
+                  }
+                  else
+                  {
+                    newS = "";
+                  }
                   j = ws.Count;
-                  newS = s;
+                  //newS = s;
+                  //Console.WriteLine("newS: " + newS);
                 }
                 else //If the current word matches the current word in the word set
                 {
                   if (j == ws.Count-1)
                   {
                     newS = newS + remainingInput[i + j];
+                    //Console.WriteLine("Last word: " + newS);
                     found = true;
-                    increment = ws.Count;
+                    increment = ws.Count-1;
                   }
                   else
                   {
+                    //Console.WriteLine("newS: " + newS);
                     newS = newS + remainingInput[i + j] + "_";
+                    //Console.WriteLine("Middle word: " + newS);
                   }
                 }
               }
             }
           }
           i += increment;
-            //If current string = first word of current word
-              //If next string = second word of current word
-                //Replace whitespace between words with underscore
+          newInput.Add(newS);
         }
-        newInput.Add(newS);
+        else
+        {
+          newInput.Add(remainingInput[i]);
+        }
       }
       foreach (var t in newInput)
       {
