@@ -12,6 +12,7 @@ public class DialogueScreen : MonoBehaviour {
     public GUISkin skin;
     bool show = false;
     public GameState state;
+    public EndFormControl finalForm;
     public string stringToEdit = "";
     private string lastQuestion = "";
     string answer = "";
@@ -114,7 +115,7 @@ public class DialogueScreen : MonoBehaviour {
         replyBubble.SetActive(true);
         currentCharacter = character;
         textBubble.SetActive(false);
-        saveButton.SetActive(true);
+        saveButton.SetActive(false);
         solveButton.SetActive(false);
         stringToEdit = "";
         lastQuestion = "";
@@ -125,6 +126,7 @@ public class DialogueScreen : MonoBehaviour {
               currentCharacter.charName == "Police") ||
               (state.currentState == GameState.State.STORY)))
         {
+            saveButton.SetActive(true);
             textBubble.SetActive(true);
             // If players choose to skip getting the story dump from the butler
             // then just change the state to PLAY.
@@ -303,6 +305,13 @@ public class DialogueScreen : MonoBehaviour {
     public void SkipButton()
     {
         state.EndTutorial();
+    }
+
+    public void SolveButton()
+    {
+        HideScreen();
+        Cursor.visible = true;
+        finalForm.ShowForm();
     }
 
 }

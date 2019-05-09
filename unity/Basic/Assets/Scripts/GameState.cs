@@ -36,6 +36,9 @@ public class GameState : MonoBehaviour {
     bool pickup = false;
     bool notebook = false;
 
+    //Final game state
+    public bool finalForm = false;
+
     // Solution variables
     public Toggle who;
     public Toggle why;
@@ -63,6 +66,11 @@ public class GameState : MonoBehaviour {
             started = true;
         }
 	}
+
+    public bool submit()
+    {
+        return false;
+    }
 
     public string NextString()
     {

@@ -17,6 +17,7 @@ public class MasterControl : MonoBehaviour {
     public bool paused = false;
     private float launch;
     private float end;
+    public bool finalForm = false;
 
     // Use this for initialization
     void Start () {
@@ -35,39 +36,42 @@ public class MasterControl : MonoBehaviour {
             Cursor.visible = status;
         }
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!state.finalForm)
         {
-            OpenNotebook(!paused);
-            notebook.ChangePage((int)Page.MENU);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.CHARACTER);
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.INVENTORY);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.NOTES);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.MAP);
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            OpenNotebook(!paused);
-            notebook.ChangePage((int)notebook.currentPageEnum);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OpenNotebook(!paused);
+                notebook.ChangePage((int)Page.MENU);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.CHARACTER);
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.INVENTORY);
+            }
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.NOTES);
+            }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.MAP);
+            }
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                OpenNotebook(!paused);
+                notebook.ChangePage((int)notebook.currentPageEnum);
+            }
         }
     }
 
