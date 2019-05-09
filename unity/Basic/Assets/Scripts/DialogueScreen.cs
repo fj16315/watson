@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using NPC;
 using Notebook;
+using System.IO;
 
 public class DialogueScreen : MonoBehaviour {
 
@@ -64,7 +65,7 @@ public class DialogueScreen : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if(repositionCamera){
-            float speed = 1.5f;
+            float speed = 2.5f;
 
             player.transform.position = Vector3.MoveTowards(player.transform.position, playerPositionBeforeDialogue, speed*Time.deltaTime);;
             
@@ -210,13 +211,13 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (stringToEdit != lastQuestion)
         {
-            var aiRun = ai.Run(stringToEdit, 2);
+            System.Tuple<string, string> aiRun = ai.Run(stringToEdit, 2);
             queryResponse = aiRun.Item2;
-            UpdateReply(queryResponse);
             freshReply = true;
-            Debug.Log(answer);
+            //Debug.Log(aiRun.Item1);
             stringToEdit = aiRun.Item1;
             lastQuestion = stringToEdit;
+            UpdateReply(queryResponse);
         }
     }
 
@@ -262,7 +263,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (freshReply)
         {
-            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            if (state.currentState == GameState.State.TUTORIAL)
             {
                 queryResponse = "My first clue!";
             }

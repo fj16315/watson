@@ -51,7 +51,13 @@ public class AIController : MonoBehaviour
         //string aiResponse = watson.Run(input);
         SaveFile(input, aiResponse.Item2);
         this.newSession = false;
-        return aiResponse; 
+        string question = input;
+        if (!(aiResponse.Item1 == null))
+        {
+            question = aiResponse.Item1;
+        }
+        Tuple<string, string> returned = new Tuple<string, string>(question, aiResponse.Item2);
+        return returned; 
     }
 
     public void StartSession(NPCController character) {

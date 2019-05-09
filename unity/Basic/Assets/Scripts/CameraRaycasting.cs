@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     PlayerController player;
     public MasterControl controller;
     public GameState state;
+    private Interactable lastGlowing = null;
 
     // Use this for initialization
     void Start()
@@ -53,6 +54,7 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     SpeechDialogue(npc);
                 }
+                CheckGlow(false);
             }       
             else if (obj != null)
             {
@@ -71,6 +73,8 @@ public class CameraRaycasting : MonoBehaviour
                         container.Activate();
                     }
                 }
+                lastGlowing = obj;
+                CheckGlow(true);
                 display = true;
             }
             else if (door != null)
@@ -82,18 +86,29 @@ public class CameraRaycasting : MonoBehaviour
                     door.Activate();
                 }
                 display = true;
+                CheckGlow(false);
             }
             else
             {
                 display = false;
+                CheckGlow(false);
             }
 
         }
         else
         {
             display = false;
+            CheckGlow(false);
         }
 
+    }
+
+    void CheckGlow(bool status)
+    {
+        if (lastGlowing)
+        {
+            lastGlowing.Glow(status);
+        }
     }
 
     void OnGUI()
