@@ -109,6 +109,11 @@ public class DialogueScreen : MonoBehaviour {
         }
     }
 
+    public void ShowSaveButton()
+    {
+        saveButton.SetActive(true);
+    }
+
     public void ShowScreen(NPCController character)
     {
         show = true;
@@ -122,12 +127,12 @@ public class DialogueScreen : MonoBehaviour {
 
         PositionCamera(currentCharacter);
         //If in the tutorial, show the save answer button
-        if (state.currentState == GameState.State.TUTORIAL)
+        if ((state.currentState == GameState.State.TUTORIAL) && (state.currentString > 5))
         {
             saveButton.SetActive(true);
         }
 
-        /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
+        /* If not in play mode and not talking to Policeman, launch AI session.*/
 
         if ((state.currentState == GameState.State.PLAY) && (currentCharacter.charName != "Police"))
         {

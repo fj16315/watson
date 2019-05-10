@@ -12,7 +12,7 @@ public class GameState : MonoBehaviour {
 
     public List<string> tutorialStrings;
     public List<string> storyStrings;
-    private int currentString = 0;
+    public int currentString = 0;
 
     private List<string> storyCharacters = new List<string>
             { "his wife the Countess", "an old friend the Colonel",
@@ -98,7 +98,7 @@ public class GameState : MonoBehaviour {
         if (RuleSatisfied(currentString))
         {
             currentString++;
-            if (currentString == 2)
+            if (currentString == 4)
             {
                 notebookInteractable.pickup = true;
             }
