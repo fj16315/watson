@@ -58,7 +58,7 @@ public class MasterControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
-        if (!state.finalForm && !notebook.inspect && !inspect)
+        if (!state.finalForm && !notebook.inspect && !inspect && state.pickup)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
