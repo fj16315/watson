@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NPC;
 using UnityEngine.UI;
+using Notebook;
 
 public class Interactable : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Interactable : MonoBehaviour
     public GameObject hover = null;
     private bool glowing = false;
     public int propEnum;
+    public NotebookController notebook;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 

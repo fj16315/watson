@@ -16,8 +16,8 @@ namespace Notebook
     {
 
         public List<GameObject> propPictures;
-
-        public bool[] ownedProps = new bool[9];
+        public Interactable[] interactables = new Interactable[9];
+        public bool inspect = false;
 
         public GameObject container;
         public PlayerController player;
@@ -112,11 +112,11 @@ namespace Notebook
             cluesDirectory.Add(cluesGangster);
             cluesDirectory.Add(cluesPolice);
 
-            for (int i = 0; i < ownedProps.Length; i++)
+            for (int i = 0; i < player.ownedProps.Length; i++)
             {
-                ownedProps[i] = false;
+                player.ownedProps[i] = false;
             }
-            Debug.Log(ownedProps);
+            Debug.Log(player.ownedProps);
 
         }
 
@@ -128,21 +128,29 @@ namespace Notebook
 
         public void Activate(bool active)
         {
-            container.SetActive(active);
-            UpdateInventory();
-            if (currentPageEnum == Page.CHARACTER)
+            if (!inspect)
             {
-                ChangeCharacter((int)currentCharEnum);
+                container.SetActive(active);
+                UpdateInventory();
+                if (currentPageEnum == Page.CHARACTER)
+                {
+                    ChangeCharacter((int)currentCharEnum);
+                }
+                else if (active)
+                {
+                    pageFlip.Play();
+                }
             }
-            else if (active)
+            else
             {
-                pageFlip.Play();
+                inspect = false;
             }
+
         }
 
         public void ChangePage(int target)
         {
-            if (target != (int)currentPageEnum)
+            if ((target != (int)currentPageEnum) && (!inspect)) 
             {
                 if (currentPageEnum == Page.CHARACTER)
                 {
@@ -298,7 +306,16 @@ namespace Notebook
 
         public void UpdateInventory()
         {
-            //inventoryText.text = player.list;
+            for (int i = 0; i < (int)Prop.NOTEPAD; i++)
+            {
+                propPictures[i].SetActive(player.ownedProps[i]);
+            }
+        }
+
+        public void InspectObject(int propEnum)
+        {
+            inspect = true;
+            interactables[propEnum].InspectObject();
         }
 
         public void UpdateNotes()

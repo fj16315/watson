@@ -6,10 +6,9 @@ using Notebook;
 public class PlayerController : MonoBehaviour {
 
     public List<GameObject> inventory;
+    public GameObject[] propObjects = new GameObject[9];
+    public bool[] ownedProps = new bool[9];
     public string list = "";
-    public GUISkin skin;
-    public GUISkin winskin;
-    bool won = false;
     public MasterControl controller;
     public NotebookController notebook;
 
@@ -25,22 +24,12 @@ public class PlayerController : MonoBehaviour {
 
     void OnGUI()
     {
-        if (won)
-        {
-            GUI.skin = winskin;
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "You found my son!");
-        }
-        else
-        {
-            GUI.skin = skin;
-            //GUI.Box(new Rect(10, 10, 400, 200), "Inventory:\n\n" + list);
-        }
+
     }
 
     public void PickUp(GameObject obj)
     {
         inventory.Add(obj);
-        //obj.SetActive(false);
         obj.transform.Translate(0, -10, 0);
         Interactable t = obj.GetComponent<Interactable>();
         if (t.description != "")
@@ -50,22 +39,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (t.propEnum < 9)
         {
-            notebook.ownedProps[t.propEnum] = true;
-        }
-        GenerateList();
-    }
-
-    private void GenerateList()
-    {
-        list = "";
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            string itemName = inventory[i].GetComponent<Interactable>().objName;
-            if (itemName != "Notebook")
-            {
-                list += "- " + itemName +'\n';
-            }
-            
+            ownedProps[t.propEnum] = true;
         }
     }
 
