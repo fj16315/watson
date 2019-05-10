@@ -85,7 +85,7 @@ public class DialogueScreen : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = skin;
-        if (show)
+        if (show && (state.currentState != GameState.State.TUTORIAL) && (state.currentState != GameState.State.STORY) && (currentCharacter.charName != "Police"))
         {
             int width = 750;
             int height = 215;
