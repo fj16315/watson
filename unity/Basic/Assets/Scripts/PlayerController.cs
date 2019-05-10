@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
         {
             controller.Pause(true);
             t.InspectObject();
+            controller.inspect = true;
         }
         if (t.propEnum < 9)
         {

@@ -18,6 +18,7 @@ namespace Notebook
         public List<GameObject> propPictures;
         public Interactable[] interactables = new Interactable[9];
         public bool inspect = false;
+        public GameObject currentInspect = null;
 
         public GameObject container;
         public PlayerController player;
@@ -77,6 +78,8 @@ namespace Notebook
 
         private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
 
+        public bool showing = false;
+
         // Use this for initialization
         void Start()
         {
@@ -124,6 +127,11 @@ namespace Notebook
         void Update()
         {
 
+        }
+
+        public void NewInspect(GameObject prop)
+        {
+            currentInspect = prop;
         }
 
         public void Activate(bool active)

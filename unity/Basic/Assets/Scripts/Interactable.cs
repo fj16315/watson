@@ -19,6 +19,7 @@ public class Interactable : MonoBehaviour
     private bool glowing = false;
     public int propEnum;
     public NotebookController notebook;
+    public Button close;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 
@@ -47,26 +48,28 @@ public class Interactable : MonoBehaviour
         {
             //Draw the GUI layer
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), description);
-
-            //show until escape pressed
-            if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
-            {
-                if (image)
-                {
-                    image.gameObject.SetActive(false);
-                }
-                show = false;
-            }
         }
+    }
+
+    public void HideInspect()
+    {
+        if (image)
+        {
+            image.gameObject.SetActive(false);
+        }
+        show = false;
     }
 
     public void InspectObject()
     {
         show = true;
+        close.gameObject.SetActive(true);
         if (image)
         {
             image.gameObject.SetActive(true);
         }
+        notebook.currentInspect = transform.gameObject;
+        notebook.inspect = true;
     }
 
     public void Glow(bool status)

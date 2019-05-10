@@ -14,6 +14,8 @@ public class MasterControl : MonoBehaviour {
     public RigidbodyFirstPersonController fpc;
     public GameState state;
     public InputField notesInput;
+    public bool inspect = false;
+    public GameObject inspectClose;
 
     // State variables
     public bool paused = false;
@@ -32,6 +34,7 @@ public class MasterControl : MonoBehaviour {
     {
         notebook.Activate(status);
         Pause(status);
+        notebook.showing = status;
         if (status)
         {
             state.OpenNotebook();
@@ -39,18 +42,28 @@ public class MasterControl : MonoBehaviour {
         }
     }
 
+    public void CloseInspect()
+    {
+        if (!notebook.showing)
+        {
+            TogglePaused();
+        }
+        Debug.Log(notebook.showing);
+        inspectClose.SetActive(false);
+        notebook.currentInspect.GetComponent<Interactable>().HideInspect();
+        notebook.inspect = false;
+        inspect = false;
+    }
+
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
-        if (!state.finalForm)
+        if (!state.finalForm && !notebook.inspect && !inspect)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!notebook.inspect)
-                {
-                    OpenNotebook(!paused);
-                    notebook.ChangePage((int)Page.MENU);
-                }
+                OpenNotebook(!paused);
+                notebook.ChangePage((int)Page.MENU);
             }
             if (Input.GetKeyDown(KeyCode.C) && !notesInput.isFocused)
             {
