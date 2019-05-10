@@ -85,6 +85,11 @@ public class DialogueScreen : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = skin;
+        GUI.SetNextControlName("");
+        string emptyFocus = "";
+        emptyFocus = GUI.TextField(new Rect(0,0,0,0), emptyFocus);
+        GUI.FocusControl("");
+        
         if (show && (state.currentState != GameState.State.TUTORIAL) && (state.currentState != GameState.State.STORY) && (currentCharacter.charName != "Police"))
         {
             int width = 750;
