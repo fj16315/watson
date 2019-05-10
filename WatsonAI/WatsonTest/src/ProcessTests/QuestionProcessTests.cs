@@ -21,7 +21,7 @@ namespace WatsonTest
     {
       var entityBuilder = new EntityBuilder()
       {
-        "actress", "earl", "murderer", "dave", "herbology", "study", "belonging"
+        "actress", "earl", "murderer", "dave", "herbology", "study", "belonging", "nightshade", "fast-acting", "nervous", "butler"
       };
       var verbBuilder = new VerbBuilder()
       {
@@ -34,7 +34,9 @@ namespace WatsonTest
         { "actress" , "be", Object.Direct("murderer"), Object.Indirect("of", "earl") },
         { "earl" , "love", "dave" },
         { "study" , "contain", "actress" },
-        { "earl" , "own", "belonging" }
+        { "earl" , "own", "belonging" },
+        { "nightshade", "be", "fast-acting"},
+        { "butler", "be", "nervous"}
       };
       associations = builder.Associations;
       questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(associations), builder.Associations);
@@ -403,6 +405,24 @@ namespace WatsonTest
       input = "What does the earl study?";
       answers = questionProcess.GetEntityAnswers(input);
       expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
+    public void Adj1()
+    {
+      var input = "What is fast-acting?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "nightshade" };
+      AssertEntityEquals(expectedAnswers, answers);
+    }
+
+    [Fact]
+    public void Adj2()
+    {
+      var input = "who is nervous?";
+      var answers = questionProcess.GetEntityAnswers(input);
+      var expectedAnswers = new[] { "butler" };
       AssertEntityEquals(expectedAnswers, answers);
     }
 
