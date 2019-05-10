@@ -33,7 +33,7 @@ public class GameState : MonoBehaviour {
     // Tutorial variables
     bool saved = false;
     bool exited = false;
-    bool pickup = false;
+    public bool pickup = false;
     bool notebook = false;
 
     //Final game state
@@ -132,6 +132,7 @@ public class GameState : MonoBehaviour {
         currentString = 0;
         entryDoors[0].locked = false;
         entryDoors[1].locked = false;
+        pickup = true;
         entryDoors[0].Activate();
         entryDoors[1].Activate();
         raycasting.CloseDialogue();
