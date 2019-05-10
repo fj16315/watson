@@ -29,7 +29,7 @@ public class NewNoteButton : MonoBehaviour
     public void onClick()
     {
     	Debug.Log("Clicked");
-    	notebook.MakeNote(inputText.text);
+    	notebook.MakeNote(input.text);
     	notebook.UpdateNotes();
     	inputText.text = "";
     }

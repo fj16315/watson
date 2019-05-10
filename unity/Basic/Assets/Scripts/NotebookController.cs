@@ -294,7 +294,8 @@ namespace Notebook
 
         public void MakeNote(string note)
         {
-            playerNotes.Add(note);
+            // If notes is empty or the new note is not the same as the previous
+            if(!playerNotes.Any() || playerNotes[playerNotes.Count-1] != note) playerNotes.Add(note);
         }
 
         public string UpdateClues(int character)
