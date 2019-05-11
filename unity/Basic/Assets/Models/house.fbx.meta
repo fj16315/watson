@@ -375,6 +375,71 @@ ModelImporter:
     100738: tie1
     100740: ties 1
     100742: wide 4
+    100744: billiards
+    100746: billiards 1
+    100748: butlerbedroom
+    100750: curtain_closed 3
+    100752: curtain_closed 4
+    100754: curtain_closed 5
+    100756: curtain_closed 6
+    100758: curtain_closed1 1
+    100760: curtain_closed2
+    100762: curtain_closed3
+    100764: curtain_closed4
+    100766: curtain_narrow1
+    100768: curtain_open1 1
+    100770: curtain_open2
+    100772: curtain_open3
+    100774: curtain_top 10
+    100776: curtain_top 11
+    100778: curtain_top 12
+    100780: curtain_top 13
+    100782: curtain_top 14
+    100784: curtain_top 6
+    100786: curtain_top 7
+    100788: curtain_top 8
+    100790: curtain_top 9
+    100792: curtain_wide1
+    100794: curtain_wide1 1
+    100796: curtains 3
+    100798: curtains 4
+    100800: curtains 5
+    100802: curtains_salon_narrow_l 1
+    100804: curtains_salon_narrow_r 1
+    100806: curtains_salon_wide 1
+    100808: guestbedroom
+    100810: holders 2
+    100812: holders 3
+    100814: masterbedroom
+    100816: metal 10
+    100818: metal 4
+    100820: metal 5
+    100822: metal 6
+    100824: metal 7
+    100826: metal 8
+    100828: metal 9
+    100830: narrow_l 5
+    100832: narrow_r 5
+    100834: pCylinder2 1
+    100836: tassels 10
+    100838: tassels 11
+    100840: tassels 12
+    100842: tassels 13
+    100844: tassels 6
+    100846: tassels 7
+    100848: tassels 8
+    100850: tassels 9
+    100852: tie 10
+    100854: tie 4
+    100856: tie 5
+    100858: tie 6
+    100860: tie 7
+    100862: tie 8
+    100864: tie 9
+    100866: tie1 1
+    100868: ties 2
+    100870: ties 3
+    100872: wide 5
     400000: base
     400002: base 1
     400004: billiards_door
@@ -747,6 +812,71 @@ ModelImporter:
     400738: tie1
     400740: ties 1
     400742: wide 4
+    400744: billiards
+    400746: billiards 1
+    400748: butlerbedroom
+    400750: curtain_closed 3
+    400752: curtain_closed 4
+    400754: curtain_closed 5
+    400756: curtain_closed 6
+    400758: curtain_closed1 1
+    400760: curtain_closed2
+    400762: curtain_closed3
+    400764: curtain_closed4
+    400766: curtain_narrow1
+    400768: curtain_open1 1
+    400770: curtain_open2
+    400772: curtain_open3
+    400774: curtain_top 10
+    400776: curtain_top 11
+    400778: curtain_top 12
+    400780: curtain_top 13
+    400782: curtain_top 14
+    400784: curtain_top 6
+    400786: curtain_top 7
+    400788: curtain_top 8
+    400790: curtain_top 9
+    400792: curtain_wide1
+    400794: curtain_wide1 1
+    400796: curtains 3
+    400798: curtains 4
+    400800: curtains 5
+    400802: curtains_salon_narrow_l 1
+    400804: curtains_salon_narrow_r 1
+    400806: curtains_salon_wide 1
+    400808: guestbedroom
+    400810: holders 2
+    400812: holders 3
+    400814: masterbedroom
+    400816: metal 10
+    400818: metal 4
+    400820: metal 5
+    400822: metal 6
+    400824: metal 7
+    400826: metal 8
+    400828: metal 9
+    400830: narrow_l 5
+    400832: narrow_r 5
+    400834: pCylinder2 1
+    400836: tassels 10
+    400838: tassels 11
+    400840: tassels 12
+    400842: tassels 13
+    400844: tassels 6
+    400846: tassels 7
+    400848: tassels 8
+    400850: tassels 9
+    400852: tie 10
+    400854: tie 4
+    400856: tie 5
+    400858: tie 6
+    400860: tie 7
+    400862: tie 8
+    400864: tie 9
+    400866: tie1 1
+    400868: ties 2
+    400870: ties 3
+    400872: wide 5
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -1060,6 +1190,52 @@ ModelImporter:
     2300524: tassels 5
     2300526: tie1
     2300528: ties 1
+    2300530: curtain_closed 3
+    2300532: curtain_closed 4
+    2300534: curtain_closed 5
+    2300536: curtain_closed 6
+    2300538: curtain_closed1 1
+    2300540: curtain_open1 1
+    2300542: curtain_top 10
+    2300544: curtain_top 11
+    2300546: curtain_top 12
+    2300548: curtain_top 13
+    2300550: curtain_top 14
+    2300552: curtain_top 6
+    2300554: curtain_top 7
+    2300556: curtain_top 8
+    2300558: curtain_top 9
+    2300560: curtains 3
+    2300562: curtains 4
+    2300564: curtains 5
+    2300566: holders 2
+    2300568: holders 3
+    2300570: metal 10
+    2300572: metal 4
+    2300574: metal 5
+    2300576: metal 6
+    2300578: metal 7
+    2300580: metal 8
+    2300582: metal 9
+    2300584: pCylinder2 1
+    2300586: tassels 10
+    2300588: tassels 11
+    2300590: tassels 12
+    2300592: tassels 13
+    2300594: tassels 6
+    2300596: tassels 7
+    2300598: tassels 8
+    2300600: tassels 9
+    2300602: tie 10
+    2300604: tie 4
+    2300606: tie 5
+    2300608: tie 6
+    2300610: tie 7
+    2300612: tie 8
+    2300614: tie 9
+    2300616: tie1 1
+    2300618: ties 2
+    2300620: ties 3
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -1325,6 +1501,52 @@ ModelImporter:
     3300524: tassels 5
     3300526: tie1
     3300528: ties 1
+    3300530: curtain_closed 3
+    3300532: curtain_closed 4
+    3300534: curtain_closed 5
+    3300536: curtain_closed 6
+    3300538: curtain_closed1 1
+    3300540: curtain_open1 1
+    3300542: curtain_top 10
+    3300544: curtain_top 11
+    3300546: curtain_top 12
+    3300548: curtain_top 13
+    3300550: curtain_top 14
+    3300552: curtain_top 6
+    3300554: curtain_top 7
+    3300556: curtain_top 8
+    3300558: curtain_top 9
+    3300560: curtains 3
+    3300562: curtains 4
+    3300564: curtains 5
+    3300566: holders 2
+    3300568: holders 3
+    3300570: metal 10
+    3300572: metal 4
+    3300574: metal 5
+    3300576: metal 6
+    3300578: metal 7
+    3300580: metal 8
+    3300582: metal 9
+    3300584: pCylinder2 1
+    3300586: tassels 10
+    3300588: tassels 11
+    3300590: tassels 12
+    3300592: tassels 13
+    3300594: tassels 6
+    3300596: tassels 7
+    3300598: tassels 8
+    3300600: tassels 9
+    3300602: tie 10
+    3300604: tie 4
+    3300606: tie 5
+    3300608: tie 6
+    3300610: tie 7
+    3300612: tie 8
+    3300614: tie 9
+    3300616: tie1 1
+    3300618: ties 2
+    3300620: ties 3
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1587,6 +1809,53 @@ ModelImporter:
     4300518: metal
     4300520: curtain_top
     4300522: tassels
+    4300524: curtain_closed
+    4300526: metal
+    4300528: curtain_top
+    4300530: tassels
+    4300532: curtain_closed
+    4300534: metal
+    4300536: tie
+    4300538: holders
+    4300540: ties
+    4300542: curtains
+    4300544: curtain_top
+    4300546: tassels
+    4300548: tie
+    4300550: curtain_open
+    4300552: metal
+    4300554: curtain_top
+    4300556: tassels
+    4300558: curtain_closed
+    4300560: metal
+    4300562: tie
+    4300564: curtain_top
+    4300566: tassels
+    4300568: holders
+    4300570: ties
+    4300572: curtains
+    4300574: curtain_top
+    4300576: tassels
+    4300578: metal
+    4300580: curtain_top
+    4300582: tassels
+    4300584: curtain_closed1
+    4300586: tie1
+    4300588: curtain_closed
+    4300590: metal
+    4300592: tie
+    4300594: curtain_top
+    4300596: tassels
+    4300598: curtain_top
+    4300600: tassels
+    4300602: tie
+    4300604: curtain_open1
+    4300606: pCylinder2
+    4300608: tie
+    4300610: curtain_top
+    4300612: curtain_closed
+    4300614: metal
+    4300616: tie
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
