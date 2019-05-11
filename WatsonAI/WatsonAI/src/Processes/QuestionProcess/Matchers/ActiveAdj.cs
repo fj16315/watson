@@ -7,7 +7,7 @@ using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
-  public class ActiveSubjWho : IEntityMatcher
+  public class ActiveAdj : IEntityMatcher
   {
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
@@ -16,7 +16,7 @@ namespace WatsonAI
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public ActiveSubjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
+    public ActiveAdj(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
@@ -25,27 +25,27 @@ namespace WatsonAI
     public bool MatchOn(Parse tree)
     {
       var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
-      var activeSubjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("NP"))))).Flatten().Flatten();
+      var activeAdjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("ADJP"))))).Flatten().Flatten();
 
       var isWho = whoQuestion.Match(tree).HasValue;
-      var isActive = activeSubjQuestion.Match(tree).HasValue;
+      var isActive = activeAdjQuestion.Match(tree).HasValue;
       Console.WriteLine("isWho: " + isWho);
       Console.WriteLine("isActive: " + isActive);
-      var activeSubjWho = And(whoQuestion, activeSubjQuestion);
+      var activeAdjWho = And(whoQuestion, activeAdjQuestion);
 
 
-      var isActiveSubjWho = activeSubjWho.Match(tree).HasValue;
-      Debug.WriteLineIf(isActiveSubjWho, "Active Subj WhoWhat Question");
+      var isActiveAdjWho = activeAdjWho.Match(tree).HasValue;
+      Debug.WriteLineIf(isActiveAdjWho, "Active Adj WhoWhat Question");
 
-      if (isActiveSubjWho)
+      if (isActiveAdjWho)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.NounPhrase))).Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.AdjPhrase))).Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
         foreach (var e in entities)
         {
           string answer = "";
           associations.TryNameEntity(e, out answer);
-          Console.WriteLine("Entities for activesubjwho: " + answer);
+          Console.WriteLine("Entities for activeAdjwho: " + answer);
         }
 
         var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
@@ -54,7 +54,7 @@ namespace WatsonAI
         {
           string answer = "";
           associations.TryNameVerb(v, out answer);
-          Console.WriteLine("Verbs for activesubjwho: " + answer);
+          Console.WriteLine("Verbs for activeAdjwho: " + answer);
         }
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
         foreach (var a in answers)
@@ -72,7 +72,7 @@ namespace WatsonAI
         }
       }
 
-      return isActiveSubjWho && answers.Any();
+      return isActiveAdjWho && answers.Any();
     }
 
     public string GenerateResponse()

@@ -10,7 +10,7 @@ namespace WatsonAI
     public Stream Process(Stream stream)
     {
       var clone = stream.Clone();
-      if (clone.Output != null)
+      if (clone.Output.Count !=0 )
       {
         var output = clone.Output[0];
         var tokenisedOutput = output.Split(new string[] { " " }, StringSplitOptions.None);
