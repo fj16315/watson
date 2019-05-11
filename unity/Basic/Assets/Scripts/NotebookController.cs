@@ -323,8 +323,11 @@ namespace Notebook
 
         public void InspectObject(int propEnum)
         {
-            inspect = true;
-            interactables[propEnum].InspectObject();
+            if (!inspect)
+            {
+                inspect = true;
+                interactables[propEnum].InspectObject();
+            }
         }
 
         public void UpdateNotes()
