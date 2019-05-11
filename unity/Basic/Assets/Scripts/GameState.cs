@@ -12,7 +12,9 @@ public class GameState : MonoBehaviour {
 
     public List<string> tutorialStrings;
     public List<string> storyStrings;
+    public List<string> hintStrings;
     public int currentString = 0;
+    private int currentHint = 0;
 
     private List<string> storyCharacters = new List<string>
             { "his wife the Countess", "an old friend the Colonel",
@@ -56,6 +58,7 @@ public class GameState : MonoBehaviour {
     void Start () {
         currentState = State.TUTORIAL;
         currentString = 0;
+        currentHint = 0;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +73,18 @@ public class GameState : MonoBehaviour {
     public bool submit()
     {
         return false;
+    }
+
+    public string GetHint()
+    {
+        string returnString = "";
+        if(currentHint > hintStrings.Capacity)
+        { 
+            currentHint = 0;
+        }
+        returnString = hintStrings[currentHint];
+        currentHint++;
+        return returnString;
     }
 
     public string NextString()

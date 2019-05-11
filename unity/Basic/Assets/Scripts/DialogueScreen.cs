@@ -25,6 +25,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject nextButton;
     public GameObject skipButton;
     public GameObject solveButton;
+    //public GameObject hintButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
@@ -341,6 +342,12 @@ public class DialogueScreen : MonoBehaviour {
         finalForm.OpenForm();
     }
 
+    public void HintButton()
+    {
+        UpdateReply(state.GetHint());
+        //if time < amount:
+        //hintButton.SetActive(false);
+    }
 }
 
 public class NPCProfile
