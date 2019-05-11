@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NPC;
+using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour
 {
@@ -11,14 +12,22 @@ public class Interactable : MonoBehaviour
     public string objName;
     public int category;
     public string description;
+    public Image image = null;
     public GUISkin skin;
+    public GameObject hover = null;
+    private bool glowing = false;
+    public int propEnum;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 
     // Use this for initialization
     void Start()
     {
-
+        //if (hover)
+        //{
+        //    mat = hover.GetComponent<Renderer>().material;
+        //}
+        
     }
 
     // Update is called once per frame
@@ -38,13 +47,16 @@ public class Interactable : MonoBehaviour
         GUI.skin = skin;
         if (show)
         {
-            //Debug.Log(description);
             //Draw the GUI layer
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), description);
 
             //show until escape pressed
             if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
             {
+                if (image)
+                {
+                    image.gameObject.SetActive(false);
+                }
                 show = false;
             }
         }
@@ -53,6 +65,45 @@ public class Interactable : MonoBehaviour
     public void InspectObject()
     {
         show = true;
+        if (image)
+        {
+            image.gameObject.SetActive(true);
+        }
     }
+
+    public void Glow(bool status)
+    {
+        if (hover)
+        {
+            if (!glowing)
+            {
+                hover.SetActive(status);
+                glowing = status;
+            }
+            else if (glowing && !status)
+            {
+                hover.SetActive(status);
+                glowing = status;
+            }
+        }
+    }
+
+    //private void OnMouseOver()
+    //{
+    //    if (hover)
+    //    {
+    //        hover.SetActive(true);
+    //    }
+        
+    //}
+
+    //private void OnMouseExit()
+    //{
+    //    if (hover)
+    //    {
+    //        hover.SetActive(false);
+    //    }
+        
+    //}
 }
 

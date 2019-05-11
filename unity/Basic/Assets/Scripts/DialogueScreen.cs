@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 using NPC;
 using Notebook;
+using System.IO;
 
 public class DialogueScreen : MonoBehaviour {
 
@@ -22,10 +24,14 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject nextButton;
     public GameObject skipButton;
     public GameObject textBubble;
+    public GameObject player;
     private NPCController currentCharacter;
     public NotebookController notebook;
     public AlexaInput alexa;
     private bool freshReply = true;
+    private Vector3 playerPositionBeforeDialogue;
+    private Vector3 playerPositionAfterDialogue;
+    public bool repositionCamera = false;
 
     // Character Fonts
     public Font fontDetective;
@@ -52,13 +58,25 @@ public class DialogueScreen : MonoBehaviour {
         profCountess = new NPCProfile("Countess", fontCountess, 60, 0.9f);
         profButler = new NPCProfile("Butler", fontButler, 40, 1f);
         profColonel = new NPCProfile("Colonel", fontColonel, 40, 1.3f);
-        profGangster = new NPCProfile("Ganster", fontGangster, 50, 1.1f);
+        profGangster = new NPCProfile("Ganster", fontGangster, 40, 1.1f);
         profPolice = new NPCProfile("Police", fontPolice, 45, 1.1f);
     }
 
     // Update is called once per frame
     void Update () {
+        if(repositionCamera){
+            float speed = 2.5f;
 
+            player.transform.position = Vector3.MoveTowards(player.transform.position, playerPositionBeforeDialogue, speed*Time.deltaTime);;
+            
+            if(player.transform.position == playerPositionBeforeDialogue) 
+            {
+                repositionCamera = false;
+                player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = false;
+                player.GetComponent<CapsuleCollider>().enabled = true;
+                player.GetComponent<Rigidbody>().useGravity = true;
+            }
+        }
     }
 
     void OnGUI()
@@ -98,7 +116,7 @@ public class DialogueScreen : MonoBehaviour {
         stringToEdit = "";
         lastQuestion = "";
 
-        cam.transform.LookAt(character.gameObject.transform.Find("Face").transform.position);
+        PositionCamera(currentCharacter);
         /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
         if (!((state.currentState == GameState.State.TUTORIAL &&
               currentCharacter.charName == "Police") ||
@@ -137,6 +155,10 @@ public class DialogueScreen : MonoBehaviour {
 
     public void HideScreen()
     {
+        player.GetComponent<CapsuleCollider>().enabled = false;
+        player.GetComponent<Rigidbody>().useGravity = false;
+        repositionCamera = true;
+        player.GetComponent<RigidbodyFirstPersonController>().advancedSettings.repositionCamera = true;
         show = false;
         replyBubble.SetActive(false);
         textBubble.SetActive(false);
@@ -148,17 +170,54 @@ public class DialogueScreen : MonoBehaviour {
         Cursor.visible = false;
     }
 
+    private void PositionCamera(NPCController character)
+    {
+        // HS: position in code is in world coordinates, position in editor is relative coordinates
+        Transform face = character.gameObject.transform.Find("Face");
+        
+        // Magic numbers, these are things we just want to set.
+        float desiredDistance = 0.8544f; // Calculated through trial and error
+
+        // TODO: Calculate this better based on where the face is in the screen
+        Vector3 desiredPosition = new Vector3(0.25f*cam.pixelWidth, 0.5f*cam.pixelHeight,desiredDistance);
+        
+        Vector3 facePosition = face.position;
+        Vector3 playerPosition = player.transform.position;
+        playerPositionBeforeDialogue = playerPosition;
+        
+        Vector3 playerRotation = player.transform.rotation.eulerAngles;
+        Vector3 faceRotation = face.rotation.eulerAngles;
+        Vector3 halfTurn = new Vector3(0,180.0f,0);
+        
+        // Rotate the character to face the player
+        character.transform.Rotate(playerRotation - faceRotation + halfTurn, Space.World);
+        
+        // Centre the camera on the face, then move the player forwards to desired distance.
+        cam.transform.LookAt(facePosition);
+
+        Ray fromCharacter = new Ray(facePosition, face.forward);
+        Vector3 desiredPoint = fromCharacter.GetPoint(desiredDistance);
+
+        player.transform.position = new Vector3(desiredPoint.x, playerPosition.y, desiredPoint.z);
+        playerPositionAfterDialogue = player.transform.position; 
+
+        // Re-centre camera on face, then move to desiredPosition
+        cam.transform.LookAt(facePosition);
+        cam.transform.LookAt(cam.ScreenToWorldPoint(desiredPosition));
+
+    }
+
     private void QueryAi()
     {
         if (stringToEdit != lastQuestion)
         {
-            var aiRun = ai.Run(stringToEdit, 2);
+            System.Tuple<string, string> aiRun = ai.Run(stringToEdit, 2);
             queryResponse = aiRun.Item2;
-            UpdateReply(queryResponse);
             freshReply = true;
-            Debug.Log(answer);
+            //Debug.Log(aiRun.Item1);
             stringToEdit = aiRun.Item1;
             lastQuestion = stringToEdit;
+            UpdateReply(queryResponse);
         }
     }
 
@@ -204,7 +263,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         if (freshReply)
         {
-            if (queryResponse == "" && state.currentState == GameState.State.TUTORIAL)
+            if (state.currentState == GameState.State.TUTORIAL)
             {
                 queryResponse = "My first clue!";
             }

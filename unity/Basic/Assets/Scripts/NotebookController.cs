@@ -8,18 +8,25 @@ using System;
 
 namespace Notebook
 {
-    public enum Page : int { CHARACTER, INVENTORY, NOTES, MENU };
+    public enum Page : int { CHARACTER, INVENTORY, NOTES, MAP, MENU };
     public enum Item : int { KEY, BOOK, POISON };
+    public enum Prop : int { RATPOISON, NIGHTSHADE, BARBITAL, WILL, THREATLETER, HERBSCRAP, MILITARYNOTE, MEDICALBOOK, REDHERRING, NOTEPAD }
 
     public class NotebookController : MonoBehaviour
     {
+
+        public List<GameObject> propPictures;
+
+        public bool[] ownedProps = new bool[9];
+
         public GameObject container;
         public PlayerController player;
+        public AudioSource pageFlip;
 
         //GameObject tabsLeft;
         public GameObject tabsRightChars;
         public GameObject tabsEmpty;
-        Page currentPageEnum = (Page)6;
+        public Page currentPageEnum = (Page)6;
 
         // Buttons
         public List<Button> leftButtons;
@@ -29,6 +36,7 @@ namespace Notebook
         public GameObject charPage;
         public GameObject invtPage;
         public GameObject notePage;
+        public GameObject mapPage;
         public GameObject menuPage;
         GameObject currentPage;
 
@@ -61,7 +69,7 @@ namespace Notebook
         public Text gangsterClueBox;
         public Text policeClueBox;
 
-        public Text inventoryText;
+        //public Text inventoryText;
 
         private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
 
@@ -69,11 +77,11 @@ namespace Notebook
         void Start()
         {
             currentPage = menuPage;
-            ChangePage((int)Page.MENU);
+            //ChangePage((int)Page.MENU);
 
             // Character pages
             currentChar = charPolice;
-            charActress.SetActive(true);
+            charActress.SetActive(false);
             charButler.SetActive(false);
             charColonel.SetActive(false);
             charCountess.SetActive(false);
@@ -88,6 +96,7 @@ namespace Notebook
             charPage.SetActive(false);
             invtPage.SetActive(false);
             notePage.SetActive(false);
+            mapPage.SetActive(false);
             menuPage.SetActive(true);
 
             // Add clue lists
@@ -98,6 +107,12 @@ namespace Notebook
             cluesDirectory.Add(cluesEarl);
             cluesDirectory.Add(cluesGangster);
             cluesDirectory.Add(cluesPolice);
+
+            for (int i = 0; i < ownedProps.Length; i++)
+            {
+                ownedProps[i] = false;
+            }
+            Debug.Log(ownedProps);
 
         }
 
@@ -115,6 +130,10 @@ namespace Notebook
             {
                 ChangeCharacter((int)currentCharEnum);
             }
+            else if (active)
+            {
+                pageFlip.Play();
+            }
         }
 
         public void ChangePage(int target)
@@ -130,7 +149,7 @@ namespace Notebook
 
                 // Change colour of buttons
                 leftButtons[target].image.color += pressDelta;
-                if ((int)currentPageEnum < 4)
+                if ((int)currentPageEnum < 5)
                 {
                     leftButtons[(int)currentPageEnum].image.color -= pressDelta;
                 }
@@ -153,12 +172,17 @@ namespace Notebook
                         notePage.SetActive(true);
                         currentPage = notePage;
                         break;
+                    case Page.MAP:
+                        mapPage.SetActive(true);
+                        currentPage = mapPage;
+                        break;
                     case Page.MENU:
                         menuPage.SetActive(true);
                         currentPage = menuPage;
                         break;
                 }
                 currentPageEnum = (Page)target;
+                pageFlip.Play();
             }
         }
 
@@ -215,6 +239,7 @@ namespace Notebook
                     currentCharEnum = Character.POLICE;
                     break;
             }
+            pageFlip.Play();
         }
 
         public int CharToEnum(string name)
@@ -241,6 +266,8 @@ namespace Notebook
 
         public void LogResponse(NPCController character, string question, string clue)
         {
+            //Debug.Log(question);
+            //Debug.Log(clue);
             cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
@@ -249,19 +276,19 @@ namespace Notebook
             string result = "";
             foreach (Tuple<string, string> exchange in cluesDirectory[character])
             {
-                result += "<b>>  </b>";
+                Debug.Log(exchange.Item1);
                 if (exchange.Item1 != "")
                 {
-                    result += "<i>\"" + exchange.Item1 + "</i>\"<b>  ~  ";
+                    result += "<i>\"" + exchange.Item1 + "</i>\"  ~  ";
                 }
-                result += "\"" + exchange.Item2 + "\"</b>\n";
+                result += "\"" + exchange.Item2 + "\"\n";
             }
             return result;
         }
 
         public void UpdateInventory()
         {
-            inventoryText.text = player.list;
+            //inventoryText.text = player.list;
         }
 
     }

@@ -25,6 +25,7 @@ public class CameraRaycasting : MonoBehaviour
     PlayerController player;
     public MasterControl controller;
     public GameState state;
+    private Interactable lastGlowing = null;
 
     // Use this for initialization
     void Start()
@@ -35,7 +36,6 @@ public class CameraRaycasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.DrawRay(this.transform.position, this.transform.forward * raycastDistance, Color.yellow);
 
         if (Physics.Raycast(this.transform.position, this.transform.forward, out objectHit, raycastDistance))
         {
@@ -54,6 +54,7 @@ public class CameraRaycasting : MonoBehaviour
                 {
                     SpeechDialogue(npc);
                 }
+                CheckGlow(false);
             }       
             else if (obj != null)
             {
@@ -72,6 +73,8 @@ public class CameraRaycasting : MonoBehaviour
                         container.Activate();
                     }
                 }
+                lastGlowing = obj;
+                CheckGlow(true);
                 display = true;
             }
             else if (door != null)
@@ -83,18 +86,29 @@ public class CameraRaycasting : MonoBehaviour
                     door.Activate();
                 }
                 display = true;
+                CheckGlow(false);
             }
             else
             {
                 display = false;
+                CheckGlow(false);
             }
 
         }
         else
         {
             display = false;
+            CheckGlow(false);
         }
 
+    }
+
+    void CheckGlow(bool status)
+    {
+        if (lastGlowing)
+        {
+            lastGlowing.Glow(status);
+        }
     }
 
     void OnGUI()
@@ -177,6 +191,7 @@ public class CameraRaycasting : MonoBehaviour
                     break;
                 default:
                     display = false;
+                    
                     break;
             }
             GUI.Box(new Rect(Screen.width / 2 + 20, Screen.height / 2 - 25, 240, 60), message);

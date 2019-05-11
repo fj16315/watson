@@ -74,6 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public bool airControl; // can the user control the direction that is being moved in the air
             [Tooltip("set it to 0.1 or more if you get stuck in wall")]
             public float shellOffset; //reduce the radius by that ratio to avoid getting stuck in wall (a value of 0.1f is nice)
+            public bool repositionCamera = false;
         }
 
 
@@ -81,7 +82,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public MovementSettings movementSettings = new MovementSettings();
         public MouseLook mouseLook = new MouseLook();
         public AdvancedSettings advancedSettings = new AdvancedSettings();
-
 
         private Rigidbody m_RigidBody;
         private CapsuleCollider m_Capsule;
@@ -141,49 +141,52 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             GroundCheck();
             Vector2 input = GetInput();
+            if(!advancedSettings.repositionCamera){
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
-            {
-                // always move along the camera forward as it is the direction that it being aimed at
-                Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
-                desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
-
-                desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
-                desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
-                desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
-                if (m_RigidBody.velocity.sqrMagnitude <
-                    (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
+                if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
+                    // always move along the camera forward as it is the direction that it being aimed at
+                    Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
+                    desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
+
+                    desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
+                
+                    desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
+                    desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
+                    if (m_RigidBody.velocity.sqrMagnitude <
+                        (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
+                    {
+                        m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
+                    }
                 }
-            }
 
-            if (m_IsGrounded)
-            {
-                m_RigidBody.drag = 5f;
+                if (m_IsGrounded)
+                {
+                    m_RigidBody.drag = 5f;
 
-                if (m_Jump)
+                    if (m_Jump)
+                    {
+                        m_RigidBody.drag = 0f;
+                        m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
+                        m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+                        m_Jumping = true;
+                    }
+
+                    if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
+                    {
+                        m_RigidBody.Sleep();
+                    }
+                }
+                else
                 {
                     m_RigidBody.drag = 0f;
-                    m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                    m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
-                    m_Jumping = true;
+                    if (m_PreviouslyGrounded && !m_Jumping)
+                    {
+                        StickToGroundHelper();
+                    }
                 }
-
-                if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
-                {
-                    m_RigidBody.Sleep();
-                }
+                m_Jump = false;
             }
-            else
-            {
-                m_RigidBody.drag = 0f;
-                if (m_PreviouslyGrounded && !m_Jumping)
-                {
-                    StickToGroundHelper();
-                }
-            }
-            m_Jump = false;
         }
 
 

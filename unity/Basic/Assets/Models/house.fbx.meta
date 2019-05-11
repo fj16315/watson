@@ -296,6 +296,73 @@ ModelImporter:
     100580: posts
     100582: salon_walls 1
     100584: walls1
+    100586: banisters 1
+    100588: ceilings_lower
+    100590: landing
+    100592: posts_big
+    100594: posts_large
+    100596: posts_small
+    100598: posts_small 1
+    100600: walls 1
+    100602: billiards_ceiling 1
+    100604: ceilings_upper
+    100606: dining_ceiling 1
+    100608: hall_ceiling 1
+    100610: kitchen_ceiling 1
+    100612: salon_ceiling 1
+    100614: frame 11
+    100616: frame 12
+    100618: frame 13
+    100620: frame 14
+    100622: frame 15
+    100624: frame 16
+    100626: frame 17
+    100628: frame 18
+    100630: frame 19
+    100632: frame 20
+    100634: frame 21
+    100636: narrow 1
+    100638: narrow_cl 3
+    100640: narrow_cl 4
+    100642: narrow_cl 5
+    100644: narrow_cr 3
+    100646: narrow_cr 4
+    100648: narrow_cr 5
+    100650: narrow_l 2
+    100652: narrow_l 3
+    100654: narrow_r 2
+    100656: narrow_r 3
+    100658: pane 11
+    100660: pane 12
+    100662: pane 13
+    100664: pane 14
+    100666: pane 15
+    100668: pane 16
+    100670: pane 17
+    100672: pane 18
+    100674: pane 19
+    100676: pane 20
+    100678: pane 21
+    100680: pane1 1
+    100682: wide 2
+    100684: wide 3
+    100686: wide1 1
+    100688: windows 1
+    100690: windows_billiards 1
+    100692: windows_dining_room 1
+    100694: windows_kitchen 1
+    100696: windows_salon 1
+    100698: bathroom_walls
+    100700: guest_floor
+    100702: guest_walls
+    100704: hall_floor 1
+    100706: master_floor
+    100708: master_walls
+    100710: servant_floor
+    100712: servant_walls
+    100714: study_floor
+    100716: study_walls
+    100718: ceiling_upper
     400000: base
     400002: base 1
     400004: billiards_door
@@ -589,6 +656,73 @@ ModelImporter:
     400580: posts
     400582: salon_walls 1
     400584: walls1
+    400586: banisters 1
+    400588: ceilings_lower
+    400590: landing
+    400592: posts_big
+    400594: posts_large
+    400596: posts_small
+    400598: posts_small 1
+    400600: walls 1
+    400602: billiards_ceiling 1
+    400604: ceilings_upper
+    400606: dining_ceiling 1
+    400608: hall_ceiling 1
+    400610: kitchen_ceiling 1
+    400612: salon_ceiling 1
+    400614: frame 11
+    400616: frame 12
+    400618: frame 13
+    400620: frame 14
+    400622: frame 15
+    400624: frame 16
+    400626: frame 17
+    400628: frame 18
+    400630: frame 19
+    400632: frame 20
+    400634: frame 21
+    400636: narrow 1
+    400638: narrow_cl 3
+    400640: narrow_cl 4
+    400642: narrow_cl 5
+    400644: narrow_cr 3
+    400646: narrow_cr 4
+    400648: narrow_cr 5
+    400650: narrow_l 2
+    400652: narrow_l 3
+    400654: narrow_r 2
+    400656: narrow_r 3
+    400658: pane 11
+    400660: pane 12
+    400662: pane 13
+    400664: pane 14
+    400666: pane 15
+    400668: pane 16
+    400670: pane 17
+    400672: pane 18
+    400674: pane 19
+    400676: pane 20
+    400678: pane 21
+    400680: pane1 1
+    400682: wide 2
+    400684: wide 3
+    400686: wide1 1
+    400688: windows 1
+    400690: windows_billiards 1
+    400692: windows_dining_room 1
+    400694: windows_kitchen 1
+    400696: windows_salon 1
+    400698: bathroom_walls
+    400700: guest_floor
+    400702: guest_walls
+    400704: hall_floor 1
+    400706: master_floor
+    400708: master_walls
+    400710: servant_floor
+    400712: servant_walls
+    400714: study_floor
+    400716: study_walls
+    400718: ceiling_upper
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -636,6 +770,7 @@ ModelImporter:
     2100088: wallpaper_yellow
     2100090: understair_mat
     2100092: lambert22
+    2100094: ceilings
     2300000: base
     2300002: base 1
     2300004: billiards_walls
@@ -849,6 +984,50 @@ ModelImporter:
     2300420: post8
     2300422: post9
     2300424: salon_walls 1
+    2300426: banisters
+    2300428: banisters 1
+    2300430: posts_big
+    2300432: posts_large
+    2300434: posts_small
+    2300436: posts_small 1
+    2300438: billiards_ceiling 1
+    2300440: dining_ceiling 1
+    2300442: hall_ceiling 1
+    2300444: kitchen_ceiling 1
+    2300446: salon_ceiling 1
+    2300448: frame 11
+    2300450: frame 12
+    2300452: frame 13
+    2300454: frame 14
+    2300456: frame 15
+    2300458: frame 16
+    2300460: frame 17
+    2300462: frame 18
+    2300464: frame 19
+    2300466: frame 20
+    2300468: frame 21
+    2300470: pane 11
+    2300472: pane 12
+    2300474: pane 13
+    2300476: pane 14
+    2300478: pane 15
+    2300480: pane 16
+    2300482: pane 17
+    2300484: pane 18
+    2300486: pane 19
+    2300488: pane 20
+    2300490: pane 21
+    2300492: bathroom_walls
+    2300494: guest_floor
+    2300496: guest_walls
+    2300498: hall_floor 1
+    2300500: master_floor
+    2300502: master_walls
+    2300504: servant_floor
+    2300506: servant_walls
+    2300508: study_floor
+    2300510: study_walls
+    2300512: ceiling_upper
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -1062,6 +1241,50 @@ ModelImporter:
     3300420: post8
     3300422: post9
     3300424: salon_walls 1
+    3300426: banisters
+    3300428: banisters 1
+    3300430: posts_big
+    3300432: posts_large
+    3300434: posts_small
+    3300436: posts_small 1
+    3300438: billiards_ceiling 1
+    3300440: dining_ceiling 1
+    3300442: hall_ceiling 1
+    3300444: kitchen_ceiling 1
+    3300446: salon_ceiling 1
+    3300448: frame 11
+    3300450: frame 12
+    3300452: frame 13
+    3300454: frame 14
+    3300456: frame 15
+    3300458: frame 16
+    3300460: frame 17
+    3300462: frame 18
+    3300464: frame 19
+    3300466: frame 20
+    3300468: frame 21
+    3300470: pane 11
+    3300472: pane 12
+    3300474: pane 13
+    3300476: pane 14
+    3300478: pane 15
+    3300480: pane 16
+    3300482: pane 17
+    3300484: pane 18
+    3300486: pane 19
+    3300488: pane 20
+    3300490: pane 21
+    3300492: bathroom_walls
+    3300494: guest_floor
+    3300496: guest_walls
+    3300498: hall_floor 1
+    3300500: master_floor
+    3300502: master_walls
+    3300504: servant_floor
+    3300506: servant_walls
+    3300508: study_floor
+    3300510: study_walls
+    3300512: ceiling_upper
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1272,6 +1495,50 @@ ModelImporter:
     4300414: hall_walls
     4300416: billiards_walls
     4300418: kitchen_walls
+    4300420: banisters
+    4300422: posts_small
+    4300424: posts_big
+    4300426: posts_small
+    4300428: banisters
+    4300430: posts_large
+    4300432: billiards_ceiling
+    4300434: kitchen_ceiling
+    4300436: dining_ceiling
+    4300438: salon_ceiling
+    4300440: hall_ceiling
+    4300442: pane
+    4300444: frame
+    4300446: pane
+    4300448: frame
+    4300450: pane
+    4300452: frame
+    4300454: pane
+    4300456: frame
+    4300458: pane
+    4300460: frame
+    4300462: pane
+    4300464: frame
+    4300466: pane
+    4300468: frame
+    4300470: pane
+    4300472: frame
+    4300474: pane
+    4300476: frame
+    4300478: pane
+    4300480: frame
+    4300482: pane
+    4300484: frame
+    4300486: bathroom_walls
+    4300488: study_floor
+    4300490: servant_floor
+    4300492: guest_floor
+    4300494: master_floor
+    4300496: hall_floor
+    4300498: master_walls
+    4300500: guest_walls
+    4300502: study_walls
+    4300504: servant_walls
+    4300506: ceiling_upper
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1

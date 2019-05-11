@@ -66,7 +66,7 @@ public class GameState : MonoBehaviour {
 
     public string NextString()
     {
-        Debug.Log("currentString = " + currentString);
+        //Debug.Log("currentString = " + currentString);
         if( currentState == State.TUTORIAL )
         {
             if (currentString < tutorialStrings.Capacity)
@@ -107,7 +107,7 @@ public class GameState : MonoBehaviour {
         if ( currentString == 2)
         {
             int charIndex = GetIndexFromCharacter();
-            Debug.Log("charIndex = " + charIndex);
+            //Debug.Log("charIndex = " + charIndex);
             List<string> stringsToUse = GetStringsToUse(charIndex);
             storyStrings[2] = GenerateResponse(stringsToUse);
         }
