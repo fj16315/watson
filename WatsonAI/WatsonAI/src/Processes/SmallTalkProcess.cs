@@ -25,11 +25,12 @@ namespace WatsonAI
       }
       input = input.ToLower();
       Console.WriteLine(input);
-      if (input.Contains(character.Name + " is the murderer"))
+      if (input.Contains(character.Name + " is the murderer") || input.Contains("is " +character.Name + " the murderer") || input.Contains("did " + character.Name + " kill"))
       {
         stream.AssignSpecialCaseHandler(this);
-        stream.AppendOutput("How dare you, of course I'm not!");
+        stream.AppendOutput("How dare you, of course not!");
       }
+
       else if (input.Contains("?"))
       {
         if (input.Contains("what is going on"))
