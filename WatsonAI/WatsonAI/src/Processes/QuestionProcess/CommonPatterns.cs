@@ -39,6 +39,13 @@ namespace WatsonAI
         return new AdjName(associations, thesaurus);
       }
     }
+    public AdvName Adv
+    {
+      get
+      {
+        return new AdvName(associations, thesaurus);
+      }
+    }
     public Pattern<IEnumerable<Entity>> NounPhrase {
       get {
         return (Branch("NP") > Noun).Flatten();
@@ -54,6 +61,13 @@ namespace WatsonAI
       get
       {
         return (Branch("ADJP") > Adj).Flatten();
+      }
+    }
+    public Pattern<IEnumerable<Verb>> AdvPhrase
+    {
+      get
+      {
+        return (Branch("ADVP") > Adv).Flatten();
       }
     }
     public Pattern<Parse> SimpleVerb {
