@@ -25,6 +25,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject nextButton;
     public GameObject skipButton;
     public GameObject solveButton;
+    public GameObject hintButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
@@ -55,6 +56,7 @@ public class DialogueScreen : MonoBehaviour {
         saveButton.SetActive(false);
         skipButton.SetActive(false);
         solveButton.SetActive(false);
+        hintButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
