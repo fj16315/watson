@@ -32,7 +32,8 @@ namespace WatsonAI
         new ActiveAdj(cp,query,associations),
         new PassiveNoun(cp,query,associations,thesaurus),
         new PassivePrep(cp, query, associations),
-        new AdverbDobj(cp, query, associations)
+        new AdverbDobj(cp, query, associations),
+        new PassiveDobjAdj(cp, query, associations, thesaurus)
       };
       boolMatchers = new List<IBoolMatcher>
       {
