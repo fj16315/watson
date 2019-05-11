@@ -25,7 +25,7 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject nextButton;
     public GameObject skipButton;
     public GameObject solveButton;
-    //public GameObject hintButton;
+    public GameObject hintButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
