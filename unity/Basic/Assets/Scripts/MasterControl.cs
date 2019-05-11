@@ -108,7 +108,7 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = true;
                 break;
             default:
-                paused = false;
+                StartCoroutine(WaitThenUnpause());
                 masterCanvas.SetActive(true);
                 Time.timeScale = 1;
                 //fpc.mouseLook.SetCursorLock(true);
@@ -117,6 +117,12 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = false;
                 break;
         }
+    }
+
+    public IEnumerator WaitThenUnpause()
+    {
+        yield return new WaitForEndOfFrame();
+        paused = false;
     }
 
     public void EndGame(int score)
