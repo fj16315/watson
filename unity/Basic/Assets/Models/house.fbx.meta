@@ -363,6 +363,18 @@ ModelImporter:
     100714: study_floor
     100716: study_walls
     100718: ceiling_upper
+    100720: curtain_closed1
+    100722: curtain_top 5
+    100724: curtains 2
+    100726: dining
+    100728: holders 1
+    100730: metal 3
+    100732: narrow_l 4
+    100734: narrow_r 4
+    100736: tassels 5
+    100738: tie1
+    100740: ties 1
+    100742: wide 4
     400000: base
     400002: base 1
     400004: billiards_door
@@ -723,6 +735,18 @@ ModelImporter:
     400714: study_floor
     400716: study_walls
     400718: ceiling_upper
+    400720: curtain_closed1
+    400722: curtain_top 5
+    400724: curtains 2
+    400726: dining
+    400728: holders 1
+    400730: metal 3
+    400732: narrow_l 4
+    400734: narrow_r 4
+    400736: tassels 5
+    400738: tie1
+    400740: ties 1
+    400742: wide 4
     2100000: new_house_ground
     2100002: lambert1
     2100004: new_house_floor
@@ -1028,6 +1052,14 @@ ModelImporter:
     2300508: study_floor
     2300510: study_walls
     2300512: ceiling_upper
+    2300514: curtain_closed1
+    2300516: curtain_top 5
+    2300518: curtains 2
+    2300520: holders 1
+    2300522: metal 3
+    2300524: tassels 5
+    2300526: tie1
+    2300528: ties 1
     3300000: base
     3300002: base 1
     3300004: billiards_walls
@@ -1285,6 +1317,14 @@ ModelImporter:
     3300508: study_floor
     3300510: study_walls
     3300512: ceiling_upper
+    3300514: curtain_closed1
+    3300516: curtain_top 5
+    3300518: curtains 2
+    3300520: holders 1
+    3300522: metal 3
+    3300524: tassels 5
+    3300526: tie1
+    3300528: ties 1
     4300000: terrain
     4300002: floor
     4300004: salon_walls
@@ -1539,6 +1579,14 @@ ModelImporter:
     4300502: study_walls
     4300504: servant_walls
     4300506: ceiling_upper
+    4300508: holders
+    4300510: ties
+    4300512: curtains
+    4300514: curtain_closed1
+    4300516: tie1
+    4300518: metal
+    4300520: curtain_top
+    4300522: tassels
     10800000: bulb_light
     10800002: bulb_light 1
     10800004: bulb_light1
