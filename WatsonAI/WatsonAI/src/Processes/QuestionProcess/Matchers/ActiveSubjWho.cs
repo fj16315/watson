@@ -28,6 +28,10 @@ namespace WatsonAI
       //Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
       var activeSubjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("NP"))))).Flatten().Flatten();
       //Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
+      var isWho = whoQuestion.Match(tree).HasValue;
+      var isActive = activeSubjQuestion.Match(tree).HasValue;
+      Console.WriteLine("isWho: " + isWho);
+      Console.WriteLine("isActive: " + isActive);
       var activeSubjWho = And(whoQuestion, activeSubjQuestion);
 
 
