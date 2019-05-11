@@ -191,6 +191,11 @@ public class DialogueScreen : MonoBehaviour {
         Cursor.visible = false;
     }
 
+    public bool isShowing()
+    {
+        return show;
+    }
+
     private void PositionCamera(NPCController character)
     {
         // HS: position in code is in world coordinates, position in editor is relative coordinates

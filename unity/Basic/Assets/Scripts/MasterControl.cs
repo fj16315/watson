@@ -16,6 +16,7 @@ public class MasterControl : MonoBehaviour {
     public InputField notesInput;
     public bool inspect = false;
     public GameObject inspectClose;
+    public DialogueScreen dialogue;
 
     // State variables
     public bool paused = false;
@@ -58,7 +59,7 @@ public class MasterControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
-        if (!state.finalForm && !notebook.inspect && !inspect && state.pickup)
+        if (!state.finalForm && !notebook.inspect && !inspect && state.pickup && !dialogue.isShowing())
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
