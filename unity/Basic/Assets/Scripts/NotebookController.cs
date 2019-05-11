@@ -83,7 +83,7 @@ namespace Notebook
         // Use this for initialization
         void Start()
         {
-            currentPage = menuPage;
+            currentPage = charPage;
             //ChangePage((int)Page.MENU);
 
             // Character pages
@@ -100,11 +100,11 @@ namespace Notebook
             tabsRightChars.SetActive(false);
             tabsEmpty.SetActive(true);
             // Notebook pages
-            charPage.SetActive(false);
+            charPage.SetActive(true);
             invtPage.SetActive(false);
             notePage.SetActive(false);
             mapPage.SetActive(false);
-            menuPage.SetActive(true);
+            menuPage.SetActive(false);
 
             // Add clue lists
             cluesDirectory.Add(cluesActress);
