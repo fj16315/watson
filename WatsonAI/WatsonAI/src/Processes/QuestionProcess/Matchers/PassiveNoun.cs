@@ -53,7 +53,7 @@ namespace WatsonAI
           var answer = associations.UncheckedNameEntity(answers.First());
           //var responseParts = new string[] { "the", answer };
           //response = string.Join(" ", responseParts);
-          response = "the " + answer + " " + verbWord + " ";
+          response = "The " + answer + " " + verbWord + " ";
           Debug.WriteLine("Response: " + response);
         }
       }
