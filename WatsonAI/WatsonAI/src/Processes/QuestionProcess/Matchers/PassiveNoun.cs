@@ -45,7 +45,7 @@ namespace WatsonAI
           var verbWordPattern = (cp.Top >= (Branch("S") > Branch("VP"))).Flatten();
           var verbWord = verbWordPattern.Match(tree).Value.First().Value;
 
-          var entityWordPattern = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("ADJP")))).Flatten().Flatten();
+          var entityWordPattern = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("NP")))).Flatten().Flatten();
           var entityWord = entityWordPattern.Match(tree).Value.First().Value;
 
           var answer = associations.UncheckedNameEntity(answers.First());
