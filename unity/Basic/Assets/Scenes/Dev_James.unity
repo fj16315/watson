@@ -9296,7 +9296,7 @@ MonoBehaviour:
   pickup: 1
   objName: Medicine
   category: 0
-  description: 'Label reads: Perscribed - a while ago.'
+  description: I need to find out who uses this.
   image: {fileID: 1169012539}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1143875237}
@@ -19621,7 +19621,7 @@ MonoBehaviour:
   pickup: 1
   objName: Threatening Letter
   category: 0
-  description: A threatening letter from the Gangster to the Earl.
+  description: Sounds like the Earl owed someone money. I should find out who.
   image: {fileID: 144755120}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1594467028}
@@ -20176,7 +20176,7 @@ MonoBehaviour:
   pickup: 1
   objName: Rat Poison
   category: 0
-  description: 'Label reads: Warning, contains arsenic'
+  description: Arsenic? I should find out what this is and who uses it.
   image: {fileID: 400913835}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1054861852}
@@ -23063,7 +23063,7 @@ MonoBehaviour:
   pickup: 1
   objName: Earl's Will
   category: 0
-  description: 'Will reads: I leave all of my possesions to my child'
+  description: I should see if anyone knows who the Earl's daughter is.
   image: {fileID: 310857040}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 755793179}
@@ -28044,7 +28044,7 @@ MonoBehaviour:
   pickup: 1
   objName: Scrap of a herbology book
   category: 0
-  description: A passage on Nightshade berries.
+  description: Interesting. Someone must study herbology, and I need to find out who.
   image: {fileID: 337612998}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1386166171}
@@ -39976,9 +39976,9 @@ RectTransform:
   m_Father: {fileID: 1617150310}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 530, y: -210}
   m_SizeDelta: {x: 20, y: 420}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1627887969
@@ -41087,10 +41087,10 @@ RectTransform:
   m_Father: {fileID: 1617150310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 260, y: 0}
-  m_SizeDelta: {x: 520, y: 0}
+  m_SizeDelta: {x: 520, y: 25}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1673839739
 GameObject:
@@ -41651,7 +41651,7 @@ MonoBehaviour:
   pickup: 1
   objName: Berries
   category: 0
-  description: They look like blueberries
+  description: These look like blueberries to me
   image: {fileID: 0}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1074391896}
@@ -43362,7 +43362,7 @@ MonoBehaviour:
   pickup: 1
   objName: Red Herring
   category: 0
-  description: A herring of the red variety.
+  description: I'm convinced this clue is vitally important!
   image: {fileID: 0}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 1563820476}
@@ -43481,7 +43481,8 @@ MonoBehaviour:
   pickup: 1
   objName: Medical Book
   category: 0
-  description: A medical book with information on Barbital.
+  description: So Barbital can kill someone, unless they have a tolerance to it. I
+    should find out more about what Barbital is.
   image: {fileID: 402627904}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 720023548}
@@ -44077,7 +44078,8 @@ MonoBehaviour:
   pickup: 1
   objName: Military Note
   category: 0
-  description: A note about the Earl ruining the Colonel's chances for promotion.
+  description: Looks like someone prevented the Colonel getting a promotion. I doubt
+    he was too happy about that. I should find out who.
   image: {fileID: 553901895}
   skin: {fileID: 11400000, guid: 9861e2f7e6771ab4093c584e92d480d1, type: 2}
   hover: {fileID: 2057252754}
