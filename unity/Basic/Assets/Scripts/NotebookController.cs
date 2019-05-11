@@ -94,11 +94,11 @@ namespace Notebook
             charCountess.SetActive(false);
             charEarl.SetActive(false);
             charGangster.SetActive(false);
-            charPolice.SetActive(false);
+            charPolice.SetActive(true);
             rightButtons[(int)currentCharEnum].image.color += pressDelta;
 
-            tabsRightChars.SetActive(false);
-            tabsEmpty.SetActive(true);
+            tabsRightChars.SetActive(true);
+            tabsEmpty.SetActive(false);
             // Notebook pages
             charPage.SetActive(true);
             invtPage.SetActive(false);
@@ -160,11 +160,6 @@ namespace Notebook
         {
             if ((target != (int)currentPageEnum) && (!inspect)) 
             {
-                if (currentPageEnum == Page.CHARACTER)
-                {
-                    tabsRightChars.SetActive(false);
-                    tabsEmpty.SetActive(true);
-                }
                 currentPage.SetActive(false);
 
                 // Change colour of buttons
@@ -204,6 +199,12 @@ namespace Notebook
                 }
                 currentPageEnum = (Page)target;
                 pageFlip.Play();
+
+                if (currentPageEnum != Page.CHARACTER)
+                {
+                    tabsRightChars.SetActive(false);
+                    tabsEmpty.SetActive(true);
+                }
             }
         }
 
