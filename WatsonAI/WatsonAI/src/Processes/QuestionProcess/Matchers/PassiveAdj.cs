@@ -1,4 +1,5 @@
-﻿using OpenNLP.Tools.Parser;
+﻿using System.Text;
+using OpenNLP.Tools.Parser;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,54 +8,55 @@ using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
-  public class ActiveSubjWho : IEntityMatcher
+  public class PassiveAdj : IEntityMatcher
   {
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
     private readonly Associations associations;
+    private readonly Thesaurus thesaurus;
 
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public ActiveSubjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
+    public PassiveAdj(CommonPatterns cp, KnowledgeQuery query, Associations associations, Thesaurus thesaurus)
+    {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
+      this.thesaurus = thesaurus;
     }
 
     public bool MatchOn(Parse tree)
     {
-      var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
-      var activeSubjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("NP"))))).Flatten().Flatten();
+      var question = (cp.Top >= (Branch("S") > (Branch("SBAR")))).Flatten();
+      var adjQuestion = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("ADJP")))).Flatten().Flatten();
+      var adjQuestionPattern = And(question, adjQuestion);
+      var isAdjQuestion = adjQuestionPattern.Match(tree).HasValue;
 
-      var isWho = whoQuestion.Match(tree).HasValue;
-      var isActive = activeSubjQuestion.Match(tree).HasValue;
-      //Console.WriteLine("isWho: " + isWho);
-      //Console.WriteLine("isActive: " + isActive);
-      var activeSubjWho = And(whoQuestion, activeSubjQuestion);
-
-
-      var isActiveSubjWho = activeSubjWho.Match(tree).HasValue;
-      Debug.WriteLineIf(isActiveSubjWho, "Active Subj WhoWhat Question");
-
-      if (isActiveSubjWho)
+      if (isAdjQuestion)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.NounPhrase))).Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("S") > (Branch("VP") > cp.AdjPhrase))).Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
+        var verbPattern = (cp.Top >= (Branch("S") > cp.VerbPhrase)).Flatten().Flatten();
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
         if (answers.Any())
         {
-          var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();
+          var verbWordPattern = (cp.Top >= (Branch("S") > Branch("VP"))).Flatten();
           var verbWord = verbWordPattern.Match(tree).Value.First().Value;
-          response = "The " + associations.UncheckedNameEntity(answers.First()) + " " + verbWord + ".";
+
+          var entityWordPattern = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("ADJP")))).Flatten().Flatten();
+          var entityWord = entityWordPattern.Match(tree).Value.First().Value;
+
+          var answer = associations.UncheckedNameEntity(answers.First());
+          //var responseParts = new string[] { "the", answer };
+          //response = string.Join(" ", responseParts);
+          response = "the " + answer + " " + verbWord + " ";
           Debug.WriteLine("Response: " + response);
         }
       }
-
-      return isActiveSubjWho && answers.Any();
+      return isAdjQuestion && answers.Any();
     }
 
     public string GenerateResponse()

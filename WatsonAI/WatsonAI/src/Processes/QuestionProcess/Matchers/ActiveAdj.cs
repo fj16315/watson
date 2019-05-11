@@ -26,11 +26,6 @@ namespace WatsonAI
     {
       var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
       var activeAdjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("ADJP"))))).Flatten().Flatten();
-
-      var isWho = whoQuestion.Match(tree).HasValue;
-      var isActive = activeAdjQuestion.Match(tree).HasValue;
-      Console.WriteLine("isWho: " + isWho);
-      Console.WriteLine("isActive: " + isActive);
       var activeAdjWho = And(whoQuestion, activeAdjQuestion);
 
 

@@ -28,8 +28,10 @@ namespace WatsonAI
 
     public bool MatchOn(Parse tree)
     {
+      var question = (cp.Top >= (Branch("S") > (Branch("SBAR")))).Flatten();
       var nounQuestion = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("NP")))).Flatten().Flatten();
-      var isNounQuestion = nounQuestion.Match(tree).HasValue;
+      var nounQuestionPattern = And(question, nounQuestion);
+      var isNounQuestion = nounQuestionPattern.Match(tree).HasValue;
 
 
       if (isNounQuestion)

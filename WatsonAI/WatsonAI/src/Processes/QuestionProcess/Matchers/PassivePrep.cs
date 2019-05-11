@@ -40,7 +40,7 @@ namespace WatsonAI
         var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("PP") > cp.NounPhrase)))).Flatten().Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
+        var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
 
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
@@ -80,7 +80,7 @@ namespace WatsonAI
       {
         var e = p.Item1;
         var v = p.Item2;
-        answers.AddRange(query.GetDobjAnswers(v, e));
+        answers.AddRange(query.GetSubjAnswers(v, e));
       }
       return answers;
     }
