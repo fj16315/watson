@@ -49,7 +49,6 @@ namespace WatsonAI
         if (answers.Any()) { 
           var answer = associations.UncheckedNameEntity(answers.First());
           var entity = associations.UncheckedNameEntity(entities.First());
-          //var responseParts = new string[] { entityWord, preVerbWord, verbWord, "the", answer };
           var responseParts = new string[0];
           if (entity.EndsWith('s'))
           {

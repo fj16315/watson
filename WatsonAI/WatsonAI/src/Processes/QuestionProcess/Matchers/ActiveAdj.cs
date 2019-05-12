@@ -36,28 +36,10 @@ namespace WatsonAI
       {
         var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.AdjPhrase))).Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
-        foreach (var e in entities)
-        {
-          string answer = "";
-          associations.TryNameEntity(e, out answer);
-          Console.WriteLine("Entities for activeAdjwho: " + answer);
-        }
 
         var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
         var verbs = verbPattern.Match(tree).Value;
-        foreach (var v in verbs)
-        {
-          string answer = "";
-          associations.TryNameVerb(v, out answer);
-          Console.WriteLine("Verbs for activeAdjwho: " + answer);
-        }
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
-        foreach (var a in answers)
-        {
-          string answer = "";
-          associations.TryNameEntity(a, out answer);
-          Console.WriteLine("Answers for activesubjwho: " + answer);
-        }
         if (answers.Any())
         {
           var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();

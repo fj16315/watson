@@ -39,7 +39,7 @@ namespace WatsonAI
 
       if (isActiveSubjWho)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.NounPhrase))).Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") >= cp.NounPhrase))).Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
         var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();

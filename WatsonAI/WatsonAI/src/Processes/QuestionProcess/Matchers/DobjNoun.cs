@@ -7,7 +7,7 @@ using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
-  public class PassiveDobjWho : IEntityMatcher
+  public class DobjNoun : IEntityMatcher
   {
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
@@ -16,7 +16,8 @@ namespace WatsonAI
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public PassiveDobjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
+    public DobjNoun(CommonPatterns cp, KnowledgeQuery query, Associations associations)
+    {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
@@ -26,30 +27,40 @@ namespace WatsonAI
     {
       var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
       //Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
-      var passiveDobjQuestion = cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > Branch("NP"))))).Flatten().Flatten().Flatten();
+      var passiveDobjQuestion = cp.Top >= (And(Branch("SQ") > cp.SimpleVerb, Branch("SQ") > Branch("NP")));
       //Debug.WriteLineIf(passiveSubjQuestion.Match(tree).HasValue, "Active Subj Question");
       var passiveDobjWho = And(whoQuestion, passiveDobjQuestion);
+      var notVerb = cp.Top >= (Branch("SQ") > Branch("VP"));
 
 
-      var isPassiveDobjWho = passiveDobjWho.Match(tree).HasValue;
+      var isPassiveDobjWho = passiveDobjWho.Match(tree).HasValue && !notVerb.Match(tree).HasValue;
       Debug.WriteLineIf(isPassiveDobjWho, "Passive Dobj WhoWhat Question");
 
       if (isPassiveDobjWho)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > cp.NounPhrase))))).Flatten().Flatten().Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("SQ") > cp.NounPhrase)).Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
-
-        var verbs = verbPattern.Match(tree).Value;
+        var verbs = new List<Verb>();
+        foreach (var e in entities)
+        {
+          var temp = "";
+          var tempVerb = new Verb();
+          associations.TryNameEntity(e, out temp);
+          if (associations.TryGetVerb(temp, out tempVerb))
+          {
+            verbs.Add(tempVerb);
+          }
+        }
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
         if (answers.Any())
         {
-          var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();
-          var restOfQuestion = verbWordPattern.Match(tree).Value.First().Value;
-
+          var entity = "";
+          var verb = "";
+          associations.TryNameEntity(entities.First(), out entity);
+          associations.TryNameVerb(verbs.First(), out verb);
           var answer = associations.UncheckedNameEntity(answers.First());
-          var responseParts = new string[] { "The", answer, restOfQuestion };
+          var responseParts = new string[] { "The", entity, verb, answer };
           response = string.Join(" ", responseParts);
           Debug.WriteLine("Response: " + response);
         }

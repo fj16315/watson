@@ -50,9 +50,8 @@ namespace WatsonAI
           var entityWord = entityWordPattern.Match(tree).Value.First().Value;
 
           var answer = associations.UncheckedNameEntity(answers.First());
-          //var responseParts = new string[] { "the", answer };
-          //response = string.Join(" ", responseParts);
-          response = "The " + answer + " " + verbWord + " ";
+          var responseParts = new string[] { "The", answer, verbWord };
+          response = string.Join(" ", responseParts);
           Debug.WriteLine("Response: " + response);
         }
       }
