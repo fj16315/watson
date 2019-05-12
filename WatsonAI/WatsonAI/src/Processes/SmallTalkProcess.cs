@@ -19,10 +19,7 @@ namespace WatsonAI
       var remainingInput = new List<string>();
       clone.RemainingInput(out remainingInput);
       var input = "";
-      foreach (var v in remainingInput)
-      {
-        input = input + " " + v;
-      }
+
       input = input.ToLower();
       Console.WriteLine(input);
       if (input.Contains(character.Name + " is the murderer") || input.Contains("is " +character.Name + " the murderer") || input.Contains("did " + character.Name + " kill"))

@@ -37,8 +37,8 @@ namespace WatsonAI
 
       var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
       var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
-      Debug.WriteLineIf(isWhoQuestion, "isWhoQuestion");
-      Debug.WriteLineIf(isWhatQuestion, "isWhatQuestion");
+      //Debug.WriteLineIf(isWhoQuestion, "isWhoQuestion");
+      //Debug.WriteLineIf(isWhatQuestion, "isWhatQuestion");
       var isWho = whoQuestion.Match(tree).HasValue;
       var isActive = activeSubjQuestion.Match(tree).HasValue;
 

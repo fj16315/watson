@@ -55,6 +55,8 @@ namespace WatsonAI
 
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
+        if (isWhoQuestion) { answers = Story.WhoEntityFilter(answers); }
+        if (isWhatQuestion) { answers = Story.WhatEntityFilter(answers); }
         if (answers.Any())
         {
           var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();

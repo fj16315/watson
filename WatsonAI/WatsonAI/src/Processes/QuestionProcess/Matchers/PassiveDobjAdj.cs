@@ -32,6 +32,15 @@ namespace WatsonAI
       var adjQuestion = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("ADJP")))).Flatten().Flatten();
       var adjQuestionPattern = And(question, adjQuestion);
       var isAdjQuestion = adjQuestionPattern.Match(tree).HasValue;
+      var containsWho = cp.Top >= Word(thesaurus, "who");
+      var containsWhat = cp.Top >= Word(thesaurus, "what");
+
+      var patternWhoQuestion = And(containsWho, question);
+      var patternWhatQuestion = And(containsWhat, question);
+
+      var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
+      var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
+
       Debug.WriteLineIf(isAdjQuestion, "Passive Adjective Question");
 
       if (isAdjQuestion)
@@ -42,6 +51,9 @@ namespace WatsonAI
         var verbPattern = (cp.Top >= (Branch("S") > cp.VerbPhrase)).Flatten().Flatten();
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
+        if (isWhoQuestion) { answers = Story.WhoEntityFilter(answers); }
+        if (isWhatQuestion) { answers = Story.WhatEntityFilter(answers); }
+
         if (answers.Any())
         {
           var verbWordPattern = (cp.Top >= (Branch("S") > (Branch("VP") > cp.SimpleVerb))).Flatten().Flatten();

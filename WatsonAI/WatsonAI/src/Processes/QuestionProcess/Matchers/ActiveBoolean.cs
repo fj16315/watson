@@ -38,7 +38,7 @@ namespace WatsonAI
       {
         var entityPattern = (cp.Top >= (Branch("SQ") > cp.NounPhrase)).Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value.ToList();
-
+       
         var verbPattern = (cp.Top >= (Branch("SQ") > cp.SimpleVerb)).Flatten();
         var verbString = verbPattern.Match(tree).Value.FirstOrDefault().Value;
 

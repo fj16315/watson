@@ -53,6 +53,9 @@ namespace WatsonAI
     {
       int maxEditDistanceLookup = 2;
       var suggestions = symSpell.LookupCompound(stream.nonTokenisedInput, maxEditDistanceLookup);
+      List<string> input = stream.Input;
+      if (input.Count != 0) input[0] = input[0].First().ToString().ToUpper() + input[0].Substring(1);
+      stream.SetInput(input);
 
       foreach (var suggestion in suggestions)
       { 

@@ -27,9 +27,9 @@ namespace WatsonAI
     public bool MatchOn(Parse tree)
     {
       var whereQuestion = cp.Top >= Word(thesaurus, "where");
-      //Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
+
       var question = cp.Top >= (Branch("SQ") >= Branch("VP"));
-      //Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
+
       var whereQuestionPattern = And(whereQuestion, question);
 
 
@@ -40,12 +40,22 @@ namespace WatsonAI
       {
         var entityPattern = (cp.Top >= (Branch("SQ") >= cp.NounPhrase)).Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
-
+        foreach (var entity in entities)
+        {
+          string entityName;
+          associations.TryNameEntity(entity, out entityName);
+          Debug.WriteLine("Entity: " + entityName);
+        }
         Verb verb;
         var containsInAssociations = associations.TryGetVerb("contain", out verb);
 
         if (!containsInAssociations) return false;
         answers = GenerateAnswers(entities.Distinct(), new List<Verb> { verb });
+        foreach( var answer in answers) {
+          string entityName;
+          associations.TryNameEntity(answer, out entityName);
+          Debug.WriteLine("answers: " + entityName);
+        }
         if (answers.Any()) { 
           var answer = associations.UncheckedNameEntity(answers.First());
           var entity = associations.UncheckedNameEntity(entities.First());

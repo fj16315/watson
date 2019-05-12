@@ -12,15 +12,17 @@ namespace WatsonAI
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
     private readonly Associations associations;
+    private readonly Thesaurus thesaurus;
 
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public PassivePrep(CommonPatterns cp, KnowledgeQuery query, Associations associations)
+    public PassivePrep(CommonPatterns cp, KnowledgeQuery query, Associations associations, Thesaurus thesaurus)
     {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
+      this.thesaurus = thesaurus;
     }
 
     public bool MatchOn(Parse tree)
@@ -30,7 +32,14 @@ namespace WatsonAI
       var passiveDobjQuestion = cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("PP") > Branch("NP")))).Flatten().Flatten();
       //Debug.WriteLineIf(passiveSubjQuestion.Match(tree).HasValue, "Active Subj Question");
       var passiveDobjWho = And(whoQuestion, passiveDobjQuestion);
+      var containsWho = cp.Top >= Word(thesaurus, "who");
+      var containsWhat = cp.Top >= Word(thesaurus, "what");
 
+      var patternWhoQuestion = And(containsWho, question);
+      var patternWhatQuestion = And(containsWhat, question);
+
+      var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
+      var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
 
       var isPassiveDobjWho = passiveDobjWho.Match(tree).HasValue;
       Debug.WriteLineIf(isPassiveDobjWho, "Passive Prep");
@@ -44,6 +53,8 @@ namespace WatsonAI
 
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
+        if (isWhoQuestion) { answers = Story.WhoEntityFilter(answers); }
+        if (isWhatQuestion) { answers = Story.WhatEntityFilter(answers); }
         if (answers.Any())
         {
           var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();
