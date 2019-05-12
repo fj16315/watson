@@ -25,9 +25,12 @@ namespace WatsonAI
     public bool MatchOn(Parse tree)
     {
       var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
-      //Debug.WriteLineIf(whoQuestion.Match(tree).HasValue, "Who Question");
       var activeSubjQuestion = (cp.Top >= ((Branch("SQ") > (Branch("VP") > Branch("NP"))))).Flatten().Flatten();
-      //Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
+
+      var isWho = whoQuestion.Match(tree).HasValue;
+      var isActive = activeSubjQuestion.Match(tree).HasValue;
+      //Console.WriteLine("isWho: " + isWho);
+      //Console.WriteLine("isActive: " + isActive);
       var activeSubjWho = And(whoQuestion, activeSubjQuestion);
 
 
@@ -36,7 +39,7 @@ namespace WatsonAI
 
       if (isActiveSubjWho)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.NounPhrase))).Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") >= cp.NounPhrase))).Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
         var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();

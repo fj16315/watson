@@ -11,25 +11,14 @@ namespace WatsonAI
   {
     private Parser parser;
     private Character character;
-    private Knowledge kg;
     private Thesaurus thesaurus;
-    private Associations associations;
 
 
-    public GreetingsProcess(Parser parse, Thesaurus thesaurus) 
+    public GreetingsProcess(Parser parse, Thesaurus thesaurus, Character character) 
     {
       this.parser = parse;
       this.thesaurus = thesaurus;
-
-    }
-
-    public GreetingsProcess(Parser parse, Character character, Knowledge kg, Thesaurus thesaurus, Associations associations) 
-    {
-      this.parser = parse;
       this.character = character;
-      this.kg = kg;
-      this.thesaurus = thesaurus;
-      this.associations = associations;
     }
 
     /// <summary>
@@ -56,26 +45,7 @@ namespace WatsonAI
 
       if (result.HasValue)
       {
-        var listOfGreetings = new List<string>
-          {"Hey", 
-           "Hi",
-           "Wassup",
-           "Good evening",
-           "G'day",
-           "Salutations"
-        };
-        Random rnd = new Random();
-        Random watson = new Random();
-
-        var index = rnd.Next(listOfGreetings.Count);
-        if (watson.Next(2) == 1) 
-        { 
-          streamNew.AppendOutput(listOfGreetings[index] + ", Watson" );
-        }
-        else 
-        {
-          streamNew.AppendOutput(listOfGreetings[index]);
-        }
+        streamNew.AppendOutput(character.GetGreeting());
         return streamNew;
       }
       return stream;

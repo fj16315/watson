@@ -35,6 +35,7 @@ namespace WatsonAI
         debugParse.Process(stream);
         debugThesaurus.Process(stream);
         debugPronounProcess.Process(stream);
+        stream.AssignSpecialCaseHandler(this);
       }
       return stream;
     }
