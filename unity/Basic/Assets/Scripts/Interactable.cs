@@ -47,8 +47,7 @@ public class Interactable : MonoBehaviour
         if (show)
         {
             //Draw the GUI layer
-            GUI.skin.box.wordWrap = true;
-            GUI.Box(new Rect(3*Screen.width/4, Screen.height/4, Screen.width/5, Screen.height/2), '\n' + description);   
+            GUI.Box(new Rect(3*Screen.width/4, Screen.height/4, Screen.width/5, Screen.height/2), description);   
         }
     }
 
