@@ -9,13 +9,14 @@ namespace WatsonAI
   public class Character
   {
     public string Name { get; }
-    
+
     public bool Murderer { get; }
 
     public Knowledge Knowledge { get; set; }
 
     public Gender Gender { get; }
 
+    public List<string> KnowledgeResponses { get; set; }
     public List<string> MoodResponses;
 
     public string Location { get; }
@@ -39,6 +40,17 @@ namespace WatsonAI
       MoodResponses = new List<string>();
       SeenResponses = new List<string>();
       Greetings = new List<string>();
+      KnowledgeResponses = new List<string>();
+    }
+
+    public void AddKnowledgeResponse(string knowledge)
+    => KnowledgeResponses.Add(knowledge);
+
+    public string GetKnowledgeResponse()
+    {
+      var rnd = new Random();
+      var index = rnd.Next(KnowledgeResponses.Count);
+      return KnowledgeResponses[index];
     }
 
     public void AddMood(string mood)

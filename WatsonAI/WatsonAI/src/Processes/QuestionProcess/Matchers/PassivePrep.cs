@@ -35,8 +35,8 @@ namespace WatsonAI
       var containsWho = cp.Top >= Word(thesaurus, "who");
       var containsWhat = cp.Top >= Word(thesaurus, "what");
 
-      var patternWhoQuestion = And(containsWho, question);
-      var patternWhatQuestion = And(containsWhat, question);
+      var patternWhoQuestion = And(containsWho, whoQuestion);
+      var patternWhatQuestion = And(containsWhat, whoQuestion);
 
       var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
       var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
