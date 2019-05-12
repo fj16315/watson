@@ -13,6 +13,7 @@ namespace WatsonAI
     public static Knowledge Knowledge;
     public static Associations Associations;
     public static EntityBuilder entities;
+    public static List<string> whoEntities;
     public static VerbBuilder verbs;
 
     // HS: Single line comments are entities/verbs/relations that I think
@@ -30,6 +31,11 @@ namespace WatsonAI
         "war", "note", "contents", "will", "desk", "study", "slow-acting","herbology", 
         "daughter", "money", "allergy", "tolerance","murderer"
       };
+
+      whoEntities = new List<string> {
+        "actress", "butler" , "countess", "earl", "gangster", "colonel", "earl"
+      };
+
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
         "resent", "want", "prevent", "marry", "use", "employ", "owe", "meet",
@@ -288,6 +294,21 @@ namespace WatsonAI
       {
         c.Value.Knowledge = characterKnowledgeBuilders[c.Key].Knowledge;
       }
+    }
+
+    public static List<Entity> WhoEntityFilter(IEnumerable<Entity> entities) 
+    {
+      List<Entity> whoFilteredEntities = new List<Entity>();
+      foreach (var entity in entities) 
+      {
+        foreach(var name in whoEntities)
+        {
+          string entityName;
+          Associations.TryNameEntity(entity,out entityName);
+          if (entityName == name) { Console.WriteLine(name); whoFilteredEntities.Add(entity); }
+        }
+      }
+      return whoFilteredEntities;
     }
   }
 }

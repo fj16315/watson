@@ -26,7 +26,7 @@ namespace WatsonAI
       {
         new ActiveSubjWho(cp, query, associations),
         new ActiveDobjWho(cp, query, associations),
-        new PassiveDobjWho(cp, query, associations),
+        new PassiveDobjWho(cp, query, associations,thesaurus),
         new Where(cp, query, associations, thesaurus),
         new PassiveAdj(cp, query, associations, thesaurus),
         new ActiveAdj(cp,query,associations),
