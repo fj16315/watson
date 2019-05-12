@@ -33,7 +33,7 @@ namespace WatsonAI
 
 
       var isPassiveDobjWho = passiveDobjWho.Match(tree).HasValue;
-      Debug.WriteLineIf(isPassiveDobjWho, "Passive Dobj WhoWhat Question");
+      Debug.WriteLineIf(isPassiveDobjWho, "Passive Prep");
 
       if (isPassiveDobjWho)
       {

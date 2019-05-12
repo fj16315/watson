@@ -33,6 +33,8 @@ namespace WatsonAI
       var nounQuestionPattern = And(question, nounQuestion);
       var isNounQuestion = nounQuestionPattern.Match(tree).HasValue;
 
+      Debug.WriteLineIf(isNounQuestion, "Passive Noun");
+
 
       if (isNounQuestion)
       {

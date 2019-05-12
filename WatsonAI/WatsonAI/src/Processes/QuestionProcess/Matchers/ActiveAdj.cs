@@ -30,7 +30,7 @@ namespace WatsonAI
 
 
       var isActiveAdjWho = activeAdjWho.Match(tree).HasValue;
-      Debug.WriteLineIf(isActiveAdjWho, "Active Adj WhoWhat Question");
+      Debug.WriteLineIf(isActiveAdjWho, "Active Adj");
 
       if (isActiveAdjWho)
       {
