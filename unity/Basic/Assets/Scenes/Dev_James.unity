@@ -28732,11 +28732,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: aga
       objectReference: {fileID: 0}
-    - target: {fileID: -7865086224189722918, guid: 68201e9c122720248bbb6c2120fc1af2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b67281b0f8a574e4face1e2158a581b8, type: 2}
     - target: {fileID: -4216859302048453862, guid: 68201e9c122720248bbb6c2120fc1af2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28797,6 +28792,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.98384
       objectReference: {fileID: 0}
+    - target: {fileID: -7865086224189722918, guid: 68201e9c122720248bbb6c2120fc1af2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b67281b0f8a574e4face1e2158a581b8, type: 2}
     - target: {fileID: -2160538185192768936, guid: 68201e9c122720248bbb6c2120fc1af2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
