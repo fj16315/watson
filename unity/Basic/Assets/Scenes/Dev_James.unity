@@ -5381,6 +5381,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100086, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100062, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5393,25 +5409,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100024, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 100046, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100062, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100084, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100086, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: fee05fbc1a7b541408dab7f2df49c089, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12913,6 +12913,8 @@ MonoBehaviour:
   - Now, feel free to ask us all as many questions as you like. Keep them simple though,
     we're all a bit shaken up.
   - Good luck, Detective Watson!
+  hintStrings:
+  - This is a hint!
   currentString: 0
   alexa: 0
   entryDoors:
@@ -22214,7 +22216,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Solve Mystery
+  m_Text: Hint
 --- !u!222 &936970614
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25997,7 +25999,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 570466025}
-        m_MethodName: SolveButton
+        m_MethodName: HintButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

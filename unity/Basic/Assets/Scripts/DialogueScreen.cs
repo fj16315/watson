@@ -158,6 +158,7 @@ public class DialogueScreen : MonoBehaviour {
         {
             UpdateReply("Have you solved the case?");
             solveButton.SetActive(true);
+            hintButton.SetActive(true);
         }
         else
         {
@@ -347,7 +348,7 @@ public class DialogueScreen : MonoBehaviour {
     {
         UpdateReply(state.GetHint());
         //if time < amount:
-        //hintButton.SetActive(false);
+        hintButton.SetActive(false);
     }
 }
 
