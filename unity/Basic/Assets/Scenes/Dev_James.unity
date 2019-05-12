@@ -12979,9 +12979,9 @@ MonoBehaviour:
   - They included his wife the Countess, an old friend the Colonel, a young Actress
     and a no good ruffian Gangster!
   - I was the fifth guest. We enjoyed our dinner, but towards the end the Earl got
-    up looking very ill...
-  - He started spouting nonsense in some sort of delerious state then died! It was
-    obvious he was poisoned.
+    up to make an announcement...
+  - He started spouting nonsense in some sort of delerious state then suddenly died!
+    It was obvious he was poisoned.
   - I do not know who did it, but it must have been one of his guests. We were the
     only people in the house.
   - I cannot imagine why someone might have done this awful thing, although the Earl
@@ -42507,7 +42507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 260, y: 0}
   m_SizeDelta: {x: 520, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1673839739
