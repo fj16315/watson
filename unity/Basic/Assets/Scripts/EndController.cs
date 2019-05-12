@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static System.Math;
 
 public class EndController : MonoBehaviour {
 
@@ -13,10 +13,11 @@ public class EndController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        score.text = Stats.Score.ToString() + "%";
 
-        int minutes = (int)(Stats.Score / 60);
-        int seconds = Stats.Score - (minutes * 60);
+        score.text = Math.Max(Stats.Score, 0).ToString() + "%";
+
+        int minutes = (int)(Stats.Time / 60);
+        int seconds = (int)Stats.Time%60;
         time.text = minutes.ToString() + ":" + seconds.ToString();
         
 	}

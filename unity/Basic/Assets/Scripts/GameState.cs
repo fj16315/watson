@@ -12,7 +12,9 @@ public class GameState : MonoBehaviour {
 
     public List<string> tutorialStrings;
     public List<string> storyStrings;
-    private int currentString = 0;
+    public List<string> hintStrings;
+    public int currentString = 0;
+    private int currentHint = 0;
 
     private List<string> storyCharacters = new List<string>
             { "his wife the Countess", "an old friend the Colonel",
@@ -33,8 +35,11 @@ public class GameState : MonoBehaviour {
     // Tutorial variables
     bool saved = false;
     bool exited = false;
-    bool pickup = false;
+    public bool pickup = false;
     bool notebook = false;
+
+    //Final game state
+    public bool finalForm = false;
 
     // Solution variables
     public Toggle who;
@@ -53,6 +58,7 @@ public class GameState : MonoBehaviour {
     void Start () {
         currentState = State.TUTORIAL;
         currentString = 0;
+        currentHint = 0;
 	}
 	
 	// Update is called once per frame
@@ -63,6 +69,23 @@ public class GameState : MonoBehaviour {
             started = true;
         }
 	}
+
+    public bool submit()
+    {
+        return false;
+    }
+
+    public string GetHint()
+    {
+        string returnString = "";
+        if(currentHint > hintStrings.Capacity)
+        { 
+            currentHint = 0;
+        }
+        returnString = hintStrings[currentHint];
+        currentHint++;
+        return returnString;
+    }
 
     public string NextString()
     {
@@ -90,7 +113,7 @@ public class GameState : MonoBehaviour {
         if (RuleSatisfied(currentString))
         {
             currentString++;
-            if (currentString == 2)
+            if (currentString == 4)
             {
                 notebookInteractable.pickup = true;
             }
@@ -124,6 +147,7 @@ public class GameState : MonoBehaviour {
         currentString = 0;
         entryDoors[0].locked = false;
         entryDoors[1].locked = false;
+        pickup = true;
         entryDoors[0].Activate();
         entryDoors[1].Activate();
         raycasting.CloseDialogue();
@@ -207,7 +231,7 @@ public class GameState : MonoBehaviour {
         alexa = !alexa;
     }
 
-    public void CheckBoxes()
+    public bool CheckBoxes()
     {
         foreach (Toggle clue in checkboxes)
         {
@@ -235,6 +259,11 @@ public class GameState : MonoBehaviour {
         {
             score = CalculateScore();
             controller.EndGame(score);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

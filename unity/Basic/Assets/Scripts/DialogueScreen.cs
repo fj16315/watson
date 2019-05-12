@@ -12,6 +12,7 @@ public class DialogueScreen : MonoBehaviour {
     public GUISkin skin;
     bool show = false;
     public GameState state;
+    public EndFormControl finalForm;
     public string stringToEdit = "";
     private string lastQuestion = "";
     string answer = "";
@@ -23,6 +24,8 @@ public class DialogueScreen : MonoBehaviour {
     public GameObject saveButton;
     public GameObject nextButton;
     public GameObject skipButton;
+    public GameObject solveButton;
+    public GameObject hintButton;
     public GameObject textBubble;
     public GameObject player;
     private NPCController currentCharacter;
@@ -52,6 +55,8 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         skipButton.SetActive(false);
+        solveButton.SetActive(false);
+        hintButton.SetActive(false);
 
         // Set profiles
         profActress = new NPCProfile("Actress", fontActress, 50, 1f);
@@ -82,7 +87,7 @@ public class DialogueScreen : MonoBehaviour {
     void OnGUI()
     {
         GUI.skin = skin;
-        if (show)
+        if (show && (state.currentState != GameState.State.TUTORIAL) && (state.currentState != GameState.State.STORY) && (currentCharacter.charName != "Police"))
         {
             int width = 750;
             int height = 215;
@@ -106,25 +111,38 @@ public class DialogueScreen : MonoBehaviour {
         }
     }
 
+    public void ShowSaveButton()
+    {
+        saveButton.SetActive(true);
+    }
+
     public void ShowScreen(NPCController character)
     {
         show = true;
         replyBubble.SetActive(true);
         currentCharacter = character;
-        textBubble.SetActive(true);
-        saveButton.SetActive(true);
+        textBubble.SetActive(false);
+        saveButton.SetActive(false);
+        solveButton.SetActive(false);
         stringToEdit = "";
         lastQuestion = "";
 
         PositionCamera(currentCharacter);
-        /* If not in tutorial and talking to Policeman, and not in story-dump, launch AI session.*/
-        if (!((state.currentState == GameState.State.TUTORIAL &&
-              currentCharacter.charName == "Police") ||
-              (state.currentState == GameState.State.STORY)))
+        //If in the tutorial, show the save answer button
+        if ((state.currentState == GameState.State.TUTORIAL) && (state.currentString > 5))
         {
+            saveButton.SetActive(true);
+        }
+
+        /* If not in play mode and not talking to Policeman, launch AI session.*/
+
+        if ((state.currentState == GameState.State.PLAY) && (currentCharacter.charName != "Police"))
+        {
+            saveButton.SetActive(true);
+            textBubble.SetActive(true);
             // If players choose to skip getting the story dump from the butler
             // then just change the state to PLAY.
-            if(state.currentState == GameState.State.STORY)
+            if (state.currentState == GameState.State.STORY)
             {
                 state.currentState = GameState.State.PLAY;
             }
@@ -132,10 +150,15 @@ public class DialogueScreen : MonoBehaviour {
             ai.StartSession(currentCharacter);
             UpdateReply("");
         }
-        else if (state.currentState == GameState.State.STORY &&
-                 currentCharacter.charName == "Police")
+        else if ((state.currentState == GameState.State.STORY) && (currentCharacter.charName == "Police"))
         {
             UpdateReply("Go and speak to one of the suspects to find out more about what happened.");
+        }
+        else if ((state.currentState == GameState.State.PLAY) && (currentCharacter.charName == "Police"))
+        {
+            UpdateReply("Have you solved the case?");
+            solveButton.SetActive(true);
+            hintButton.SetActive(true);
         }
         else
         {
@@ -164,10 +187,16 @@ public class DialogueScreen : MonoBehaviour {
         textBubble.SetActive(false);
         saveButton.SetActive(false);
         nextButton.SetActive(false);
+        solveButton.SetActive(false);
         skipButton.SetActive(false);
         answerBox.text = "";
         alexa.StopSession();
         Cursor.visible = false;
+    }
+
+    public bool isShowing()
+    {
+        return show;
     }
 
     private void PositionCamera(NPCController character)
@@ -299,6 +328,28 @@ public class DialogueScreen : MonoBehaviour {
         state.EndTutorial();
     }
 
+    public void ShowFailScreen()
+    {
+        show = true;
+        replyBubble.SetActive(true);
+        solveButton.SetActive(true);
+        answerBox.text = "";
+        UpdateReply("Better luck next time");
+    }
+
+    public void SolveButton()
+    {
+        HideScreen();
+        Cursor.visible = true;
+        finalForm.OpenForm();
+    }
+
+    public void HintButton()
+    {
+        UpdateReply(state.GetHint());
+        //if time < amount:
+        hintButton.SetActive(false);
+    }
 }
 
 public class NPCProfile

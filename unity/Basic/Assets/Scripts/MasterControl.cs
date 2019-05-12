@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 using Notebook;
@@ -12,11 +13,16 @@ public class MasterControl : MonoBehaviour {
     public NotebookController notebook;
     public RigidbodyFirstPersonController fpc;
     public GameState state;
+    public InputField notesInput;
+    public bool inspect = false;
+    public GameObject inspectClose;
+    public DialogueScreen dialogue;
 
     // State variables
     public bool paused = false;
     private float launch;
     private float end;
+    public bool finalForm = false;
 
     // Use this for initialization
     void Start () {
@@ -29,47 +35,65 @@ public class MasterControl : MonoBehaviour {
     {
         notebook.Activate(status);
         Pause(status);
+        notebook.showing = status;
         if (status)
         {
             state.OpenNotebook();
             Cursor.visible = status;
         }
     }
-	
+
+    public void CloseInspect()
+    {
+        if (!notebook.showing)
+        {
+            TogglePaused();
+        }
+        Debug.Log(notebook.showing);
+        inspectClose.SetActive(false);
+        notebook.currentInspect.GetComponent<Interactable>().HideInspect();
+        notebook.inspect = false;
+        inspect = false;
+    }
+
 	// Update is called once per frame
 	void Update () {
         // TODO replace with switch
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!state.finalForm && !notebook.inspect && !inspect && state.pickup && !dialogue.isShowing())
         {
-            OpenNotebook(!paused);
-            notebook.ChangePage((int)Page.MENU);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.CHARACTER);
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.INVENTORY);
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.NOTES);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            OpenNotebook(true);
-            notebook.ChangePage((int)Page.MAP);
-        }
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            OpenNotebook(!paused);
-            notebook.ChangePage((int)notebook.currentPageEnum);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OpenNotebook(!paused);
+                notebook.ChangePage((int)Page.MENU);
+            }
+            if (Input.GetKeyDown(KeyCode.C) && !notesInput.isFocused)
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.CHARACTER);
+            }
+            if (Input.GetKeyDown(KeyCode.I) && !notesInput.isFocused)
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.INVENTORY);
+            }
+            if (Input.GetKeyDown(KeyCode.N) && !notesInput.isFocused)
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.NOTES);
+            }
+            if (Input.GetKeyDown(KeyCode.M) && !notesInput.isFocused)
+            {
+                OpenNotebook(true);
+                notebook.ChangePage((int)Page.MAP);
+            }
+            if (Input.GetKeyDown(KeyCode.Tab) && !notesInput.isFocused)
+            {
+                OpenNotebook(!paused);
+                notebook.ChangePage((int)notebook.currentPageEnum);
+            }
         }
     }
+
 
     public void Pause(bool pause)
     {
@@ -85,7 +109,7 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = true;
                 break;
             default:
-                paused = false;
+                StartCoroutine(WaitThenUnpause());
                 masterCanvas.SetActive(true);
                 Time.timeScale = 1;
                 //fpc.mouseLook.SetCursorLock(true);
@@ -94,6 +118,12 @@ public class MasterControl : MonoBehaviour {
                 Cursor.visible = false;
                 break;
         }
+    }
+
+    public IEnumerator WaitThenUnpause()
+    {
+        yield return new WaitForEndOfFrame();
+        paused = false;
     }
 
     public void EndGame(int score)

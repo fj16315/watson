@@ -16,8 +16,9 @@ namespace Notebook
     {
 
         public List<GameObject> propPictures;
-
-        public bool[] ownedProps = new bool[9];
+        public Interactable[] interactables = new Interactable[9];
+        public bool inspect = false;
+        public GameObject currentInspect = null;
 
         public GameObject container;
         public PlayerController player;
@@ -61,6 +62,9 @@ namespace Notebook
         List<Tuple<string, string>> cluesPolice = new List<Tuple<string, string>>();
         List<List<Tuple<string, string>>> cluesDirectory = new List<List<Tuple<string, string>>>();
 
+        // Player notes
+        List<string> playerNotes = new List<string>();
+
         public Text actressClueBox;
         public Text butlerClueBox;
         public Text colonelClueBox;
@@ -69,14 +73,17 @@ namespace Notebook
         public Text gangsterClueBox;
         public Text policeClueBox;
 
-        //public Text inventoryText;
+        public Text inventoryText;
+        public Text notesText;
 
         private Color pressDelta = new Color(0.2f, 0.2f, 0.2f);
+
+        public bool showing = false;
 
         // Use this for initialization
         void Start()
         {
-            currentPage = menuPage;
+            currentPage = charPage;
             //ChangePage((int)Page.MENU);
 
             // Character pages
@@ -87,17 +94,17 @@ namespace Notebook
             charCountess.SetActive(false);
             charEarl.SetActive(false);
             charGangster.SetActive(false);
-            charPolice.SetActive(false);
+            charPolice.SetActive(true);
             rightButtons[(int)currentCharEnum].image.color += pressDelta;
 
-            tabsRightChars.SetActive(false);
-            tabsEmpty.SetActive(true);
+            tabsRightChars.SetActive(true);
+            tabsEmpty.SetActive(false);
             // Notebook pages
-            charPage.SetActive(false);
+            charPage.SetActive(true);
             invtPage.SetActive(false);
             notePage.SetActive(false);
             mapPage.SetActive(false);
-            menuPage.SetActive(true);
+            menuPage.SetActive(false);
 
             // Add clue lists
             cluesDirectory.Add(cluesActress);
@@ -108,11 +115,11 @@ namespace Notebook
             cluesDirectory.Add(cluesGangster);
             cluesDirectory.Add(cluesPolice);
 
-            for (int i = 0; i < ownedProps.Length; i++)
+            for (int i = 0; i < player.ownedProps.Length; i++)
             {
-                ownedProps[i] = false;
+                player.ownedProps[i] = false;
             }
-            Debug.Log(ownedProps);
+            Debug.Log(player.ownedProps);
 
         }
 
@@ -122,29 +129,37 @@ namespace Notebook
 
         }
 
+        public void NewInspect(GameObject prop)
+        {
+            currentInspect = prop;
+        }
+
         public void Activate(bool active)
         {
-            container.SetActive(active);
-            UpdateInventory();
-            if (currentPageEnum == Page.CHARACTER)
+            if (!inspect)
             {
-                ChangeCharacter((int)currentCharEnum);
+                container.SetActive(active);
+                UpdateInventory();
+                if (currentPageEnum == Page.CHARACTER)
+                {
+                    ChangeCharacter((int)currentCharEnum);
+                }
+                else if (active)
+                {
+                    pageFlip.Play();
+                }
             }
-            else if (active)
+            else
             {
-                pageFlip.Play();
+                inspect = false;
             }
+
         }
 
         public void ChangePage(int target)
         {
-            if (target != (int)currentPageEnum)
+            if ((target != (int)currentPageEnum) && (!inspect)) 
             {
-                if (currentPageEnum == Page.CHARACTER)
-                {
-                    tabsRightChars.SetActive(false);
-                    tabsEmpty.SetActive(true);
-                }
                 currentPage.SetActive(false);
 
                 // Change colour of buttons
@@ -170,6 +185,7 @@ namespace Notebook
                         break;
                     case Page.NOTES:
                         notePage.SetActive(true);
+                        UpdateNotes();
                         currentPage = notePage;
                         break;
                     case Page.MAP:
@@ -183,6 +199,12 @@ namespace Notebook
                 }
                 currentPageEnum = (Page)target;
                 pageFlip.Play();
+
+                if (currentPageEnum != Page.CHARACTER)
+                {
+                    tabsRightChars.SetActive(false);
+                    tabsEmpty.SetActive(true);
+                }
             }
         }
 
@@ -271,6 +293,12 @@ namespace Notebook
             cluesDirectory[(int)character.GetEnum()].Add(new Tuple<string, string>(question, clue));
         }
 
+        public void MakeNote(string note)
+        {
+            // If notes is empty or the new note is not the same as the previous
+            if(!playerNotes.Any() || playerNotes[playerNotes.Count-1] != note) playerNotes.Add(note);
+        }
+
         public string UpdateClues(int character)
         {
             string result = "";
@@ -288,7 +316,34 @@ namespace Notebook
 
         public void UpdateInventory()
         {
-            //inventoryText.text = player.list;
+            for (int i = 0; i < (int)Prop.NOTEPAD; i++)
+            {
+                propPictures[i].SetActive(player.ownedProps[i]);
+            }
+        }
+
+        public void InspectObject(int propEnum)
+        {
+            if (!inspect)
+            {
+                inspect = true;
+                interactables[propEnum].InspectObject();
+            }
+        }
+
+        public void UpdateNotes()
+        {
+            string result = "";
+            foreach(string note in playerNotes)
+            {
+                result += "<b> </b>";
+                if(note != "")
+                {
+                    result += "<i>" + note + "</i>\n";
+                }
+            }
+
+            notesText.text = result;
         }
 
     }

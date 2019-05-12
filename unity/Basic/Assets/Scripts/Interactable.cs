@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NPC;
 using UnityEngine.UI;
+using Notebook;
 
 public class Interactable : MonoBehaviour
 {
@@ -17,16 +18,14 @@ public class Interactable : MonoBehaviour
     public GameObject hover = null;
     private bool glowing = false;
     public int propEnum;
+    public NotebookController notebook;
+    public Button close;
 
     public enum Category : int {BOOK, KEY, CONTAINER, OBJECT};
 
     // Use this for initialization
     void Start()
     {
-        //if (hover)
-        //{
-        //    mat = hover.GetComponent<Renderer>().material;
-        //}
         
     }
 
@@ -48,27 +47,29 @@ public class Interactable : MonoBehaviour
         if (show)
         {
             //Draw the GUI layer
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), description);
-
-            //show until escape pressed
-            if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
-            {
-                if (image)
-                {
-                    image.gameObject.SetActive(false);
-                }
-                show = false;
-            }
+            GUI.Box(new Rect(3*Screen.width/4, Screen.height/4, Screen.width/5, Screen.height/2), description);   
         }
+    }
+
+    public void HideInspect()
+    {
+        if (image)
+        {
+            image.gameObject.SetActive(false);
+        }
+        show = false;
     }
 
     public void InspectObject()
     {
         show = true;
+        close.gameObject.SetActive(true);
         if (image)
         {
             image.gameObject.SetActive(true);
         }
+        notebook.currentInspect = transform.gameObject;
+        notebook.inspect = true;
     }
 
     public void Glow(bool status)
@@ -88,22 +89,5 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    //private void OnMouseOver()
-    //{
-    //    if (hover)
-    //    {
-    //        hover.SetActive(true);
-    //    }
-        
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    if (hover)
-    //    {
-    //        hover.SetActive(false);
-    //    }
-        
-    //}
 }
 
