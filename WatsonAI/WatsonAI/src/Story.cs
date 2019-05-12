@@ -33,7 +33,7 @@ namespace WatsonAI
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
         "resent", "want", "prevent", "marry", "use", "employ", "owe", "meet",
-        "send", "receive", "be", "steal", "get"
+        "send", "receive", "be", "steal", "get", "murder", "gave"
       };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
