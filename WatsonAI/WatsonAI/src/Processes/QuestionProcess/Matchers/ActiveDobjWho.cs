@@ -12,14 +12,15 @@ namespace WatsonAI
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
     private readonly Associations associations;
-
+    private readonly Thesaurus thesaurus;
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public ActiveDobjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations) {
+    public ActiveDobjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations, Thesaurus thesaurus) {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
+      this.thesaurus = thesaurus;
     }
 
     public bool MatchOn(Parse tree)
@@ -30,6 +31,15 @@ namespace WatsonAI
       //Debug.WriteLineIf(activeSubjQuestion.Match(tree).HasValue, "Active Subj Question");
       var activeDobjWho = And(whoQuestion, activeDobjQuestion);
 
+      var containsWho = cp.Top >= Word(thesaurus, "who");
+      var containsWhat = cp.Top >= Word(thesaurus, "what");
+
+      var patternWhoQuestion = And(containsWho, whoQuestion);
+      var patternWhatQuestion = And(containsWhat, whoQuestion);
+
+
+      var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
+      var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
 
       var isActiveDobjWho = activeDobjWho.Match(tree).HasValue;
       Debug.WriteLineIf(isActiveDobjWho, "Active Dobj WhoWhat Question");

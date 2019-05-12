@@ -24,8 +24,8 @@ namespace WatsonAI
       query = new KnowledgeQuery(knowledge);
       entityMatchers = new List<IEntityMatcher>
       {
-        new ActiveSubjWho(cp, query, associations),
-        new ActiveDobjWho(cp, query, associations),
+        new ActiveSubjWho(cp, query, associations, thesaurus),
+        new ActiveDobjWho(cp, query, associations,thesaurus),
         new PassiveDobjWho(cp, query, associations,thesaurus),
         new Where(cp, query, associations, thesaurus),
         new PassiveAdj(cp, query, associations, thesaurus),

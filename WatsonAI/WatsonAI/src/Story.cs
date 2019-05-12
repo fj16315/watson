@@ -14,6 +14,7 @@ namespace WatsonAI
     public static Associations Associations;
     public static EntityBuilder entities;
     public static List<string> whoEntities;
+    public static List<string> whatEntities;
     public static VerbBuilder verbs;
 
     // HS: Single line comments are entities/verbs/relations that I think
@@ -33,21 +34,31 @@ namespace WatsonAI
       };
 
       whoEntities = new List<string> {
-        "actress", "butler" , "countess", "earl", "gangster", "colonel", "earl"
+        "actress", "butler" , "countess", "earl", "gangster", "colonel", "earl", "murderer", "daughter"
       };
-
+      whatEntities = new List<string>
+      {
+        "scrap", "nightshade", "belongings", "fast-acting",
+        "blackcurrants", "dining_room", "letter", "master_bedroom",
+        "arsenic", "rat_poison", "kitchen", "plants", "nervous", "barbital_tolerance",
+        "barbital", "sleeping_aid", "bathroom", "book", "estate", "promotion",
+        "war", "note", "contents", "will", "desk", "study", "slow-acting","herbology",
+        "money", "allergy", "tolerance",
+      };
       var verbs = new VerbBuilder {
         "study", "have", "about", "contain", "own", "poison", "on", "fight",
         "resent", "want", "prevent", "marry", "use", "employ", "owe", "meet",
-        "send", "receive", "be", "steal", "get"
+        "send", "receive", "be", "steal", "get", "kill", "murder", 
       };
       var universeKnowledgeBuilder = new KnowledgeBuilder(entities, verbs)
       {
+        {"actress", "kill","earl"},
         {"actress", "be", "murderer"},
         {"actress", "be", Object.Direct("daughter"), Object.Indirect("of", "earl")},
         {"actress", "study", "herbology"},
         {"actress", "have", "scrap"},
         {"scrap", "about", "nightshade"},
+        {"nightshade", "kill", "earl"},
         {"belongings", "contain", "nightshade"},
         {"colonel", "own", "belongings"},
         {"nightshade", "be", "fast-acting"},
@@ -305,10 +316,26 @@ namespace WatsonAI
         {
           string entityName;
           Associations.TryNameEntity(entity,out entityName);
-          if (entityName == name) { Console.WriteLine(name); whoFilteredEntities.Add(entity); }
+          if (entityName == name) { Console.WriteLine("Answer filtered: " + name); whoFilteredEntities.Add(entity); }
         }
       }
       return whoFilteredEntities;
+    }
+
+    public static List<Entity> WhatEntityFilter(IEnumerable<Entity> entities)
+    {
+      List<Entity> whatFilteredEntities = new List<Entity>();
+      foreach (var entity in entities)
+      {
+        foreach (var name in whatEntities)
+        {
+          string entityName;
+          Associations.TryNameEntity(entity, out entityName);
+
+          if (entityName == name) { Console.WriteLine("Answer filtered: " + name); whatFilteredEntities.Add(entity); }
+        }
+      }
+      return whatFilteredEntities;
     }
   }
 }

@@ -28,15 +28,14 @@ namespace WatsonAI
     public bool MatchOn(Parse tree)
     {
       var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
+
       var containsWho= cp.Top >= Word(thesaurus, "who");
       var containsWhat = cp.Top >= Word(thesaurus, "what");
-      
       var patternWhoQuestion = And(containsWho, whoQuestion);
       var patternWhatQuestion = And(containsWhat, whoQuestion);
-      
-      
       var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
       var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
+
       var passiveDobjQuestion = cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > Branch("NP"))))).Flatten().Flatten().Flatten();
       var isPassiveDobjQuestion = passiveDobjQuestion.Match(tree).HasValue;
       Debug.WriteLineIf(isPassiveDobjQuestion, "Passive Dobj Question");
@@ -50,12 +49,13 @@ namespace WatsonAI
       {
         var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > cp.NounPhrase))))).Flatten().Flatten().Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
-        if (isWhoQuestion) { Console.WriteLine("is passive who question"); entities = Story.WhoEntityFilter(entities); }
 
         var verbPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
 
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
+        if (isWhoQuestion) { entities = Story.WhoEntityFilter(answers); }
+        if (isWhatQuestion) { entities = Story.WhatEntityFilter(answers); }
         if (answers.Any())
         {
           var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();

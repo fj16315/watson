@@ -59,7 +59,7 @@ namespace WatsonAI
 
       var debugs = new DebugProcesses(characters, parser, thesaurus);
       var greetings = new GreetingsProcess(parser, thesaurus, character);
-      var question = new QuestionProcess(parser, Story.Knowledge, thesaurus, Story.Associations);
+      var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var fallback = new FallbackProcess();
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);
       var postPronoun = new PronounsAddingProcess(character, parser);
