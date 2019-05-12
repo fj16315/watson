@@ -146,6 +146,7 @@ lost lose
 made make 
 matrices matrix 
 matrixes matrix 
+married marry
 means means 
 meant mean 
 media medium 
@@ -230,6 +231,7 @@ struck strike
 stuck stick 
 stung sting 
 stunk stink 
+studies study
 sung sing 
 sunk sink 
 swam swim 

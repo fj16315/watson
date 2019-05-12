@@ -7,7 +7,7 @@ using static WatsonAI.Patterns;
 
 namespace WatsonAI
 {
-  public class PassiveDobjWho : IEntityMatcher
+  public class PassiveDobjIndirWho : IEntityMatcher
   {
     private readonly CommonPatterns cp;
     private readonly KnowledgeQuery query;
@@ -17,7 +17,8 @@ namespace WatsonAI
     private IEnumerable<Entity> answers = null;
     private string response = null;
 
-    public PassiveDobjWho(CommonPatterns cp, KnowledgeQuery query, Associations associations, Thesaurus thesaurus) {
+    public PassiveDobjIndirWho(CommonPatterns cp, KnowledgeQuery query, Associations associations, Thesaurus thesaurus)
+    {
       this.cp = cp;
       this.query = query;
       this.associations = associations;
@@ -27,16 +28,16 @@ namespace WatsonAI
 
     public bool MatchOn(Parse tree)
     {
-      var whoQuestion = (cp.Top >= (Branch("SBARQ") > Branch("WHNP"))).Flatten();
+      var whoQuestion = (cp.Top >= (Branch("SBAR") > Branch("WHNP"))).Flatten();
 
-      var containsWho= cp.Top >= Word(thesaurus, "who");
+      var containsWho = cp.Top >= Word(thesaurus, "who");
       var containsWhat = cp.Top >= Word(thesaurus, "what");
       var patternWhoQuestion = And(containsWho, whoQuestion);
       var patternWhatQuestion = And(containsWhat, whoQuestion);
       var isWhoQuestion = patternWhoQuestion.Match(tree).HasValue;
       var isWhatQuestion = patternWhatQuestion.Match(tree).HasValue;
 
-      var passiveDobjQuestion = cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > Branch("NP"))))).Flatten().Flatten().Flatten();
+      var passiveDobjQuestion = cp.Top >= (Branch("S") > (Branch("VP") > (Branch("VP") > (Branch("PP") > Branch("NP"))))).Flatten().Flatten().Flatten();
       var isPassiveDobjQuestion = passiveDobjQuestion.Match(tree).HasValue;
       Debug.WriteLineIf(isPassiveDobjQuestion, "Passive Dobj Question");
 
@@ -47,10 +48,10 @@ namespace WatsonAI
 
       if (isPassiveDobjWho)
       {
-        var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > cp.NounPhrase))))).Flatten().Flatten().Flatten().Flatten().Flatten();
+        var entityPattern = (cp.Top >= (Branch("S") > (Branch("VP") > (Branch("VP") > (Branch("PP") > cp.NounPhrase))))).Flatten().Flatten().Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
+        var verbPattern = (cp.Top >= (Branch("S") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
 
         var verbs = verbPattern.Match(tree).Value;
         foreach (var v in verbs)
@@ -64,7 +65,7 @@ namespace WatsonAI
         if (isWhatQuestion) { entities = Story.WhatEntityFilter(answers); }
         if (answers.Any())
         {
-          var verbWordPattern = (cp.Top >= (Branch("SQ") > Branch("VP"))).Flatten();
+          var verbWordPattern = (cp.Top >= (Branch("S") > (Branch("VP") > Branch("VP")))).Flatten().Flatten();
           var restOfQuestion = verbWordPattern.Match(tree).Value.First().Value;
 
           var answer = associations.UncheckedNameEntity(answers.First());
