@@ -15,8 +15,8 @@ public class EndController : MonoBehaviour {
 
         score.text = Stats.Score.ToString() + "%";
 
-        int minutes = (int)(Stats.Score / 60);
-        int seconds = Stats.Score - (minutes * 60);
+        int minutes = (int)(Stats.Time / 60);
+        int seconds = (int)Stats.Time%60;
         time.text = minutes.ToString() + ":" + seconds.ToString();
         
 	}
