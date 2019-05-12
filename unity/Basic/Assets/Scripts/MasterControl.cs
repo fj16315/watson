@@ -63,8 +63,11 @@ public class MasterControl : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                if (!paused)
+                {
+                    notebook.ChangePage((int)Page.MENU);
+                }
                 OpenNotebook(!paused);
-                notebook.ChangePage((int)Page.MENU);
             }
             if (Input.GetKeyDown(KeyCode.C) && !notesInput.isFocused)
             {
