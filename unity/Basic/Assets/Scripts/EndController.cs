@@ -13,7 +13,8 @@ public class EndController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        score.text = Stats.Score.ToString() + "%";
+
+        score.text = max(Stats.Score, 0).ToString() + "%";
 
         int minutes = (int)(Stats.Time / 60);
         int seconds = (int)Stats.Time%60;
