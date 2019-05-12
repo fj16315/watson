@@ -24,10 +24,17 @@ namespace WatsonAI
       query = new KnowledgeQuery(knowledge);
       entityMatchers = new List<IEntityMatcher>
       {
-        new ActiveSubjWho(cp, query, associations),
-        new ActiveDobjWho(cp, query, associations),
-        new PassiveDobjWho(cp, query, associations),
-        new Where(cp, query, associations, thesaurus)
+        new ActiveSubjWho(cp, query, associations, thesaurus),
+        new ActiveDobjWho(cp, query, associations,thesaurus),
+        new PassiveDobjWho(cp, query, associations,thesaurus),
+        new Where(cp, query, associations, thesaurus),
+        new PassiveAdj(cp, query, associations, thesaurus),
+        new ActiveAdj(cp,query,associations),
+        new PassiveNoun(cp,query,associations,thesaurus),
+        new PassivePrep(cp, query, associations),
+        new AdverbDobj(cp, query, associations),
+        new PassiveDobjAdj(cp, query, associations, thesaurus),
+        new DobjNoun(cp, query, associations)
       };
       boolMatchers = new List<IBoolMatcher>
       {

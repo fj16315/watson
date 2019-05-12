@@ -58,7 +58,7 @@ namespace WatsonAI
       stream = memory.MaybeHandleStream(stream);
 
       var debugs = new DebugProcesses(characters, parser, thesaurus);
-      var greetings = new GreetingsProcess(parser, thesaurus);
+      var greetings = new GreetingsProcess(parser, thesaurus, character);
       var question = new QuestionProcess(parser, knowledge, thesaurus, Story.Associations);
       var fallback = new FallbackProcess();
       var prePronoun = new PronounsRemovalProcess(character, characters, memory, parser);

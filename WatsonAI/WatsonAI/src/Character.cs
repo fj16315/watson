@@ -1,4 +1,7 @@
-﻿namespace WatsonAI
+﻿using System;
+using System.Collections.Generic;
+
+namespace WatsonAI
 {
   /// <summary>
   /// Basic overview of character containing information for game mechanics.
@@ -13,11 +16,13 @@
 
     public Gender Gender { get; }
 
-    public string MoodResponse { get; set; }
+    public List<string> MoodResponses;
 
     public string Location { get; }
 
-    public string SeenResponse { get; set; }
+    public List<string> SeenResponses;
+
+    public List<string> Greetings;
 
     /// <summary>
     /// Constructor for a character.
@@ -31,6 +36,45 @@
       this.Knowledge = new Knowledge();
       this.Gender = gender;
       this.Location = location;
+      MoodResponses = new List<string>();
+      SeenResponses = new List<string>();
+      Greetings = new List<string>();
+    }
+
+    public void AddMood(string mood)
+    {
+      MoodResponses.Add(mood);
+    }
+
+    public string GetMood()
+    {
+      var rnd = new Random();
+      var index = rnd.Next(MoodResponses.Count);
+      return MoodResponses[index];
+    }
+
+    public void AddSeen(string seen)
+    {
+      SeenResponses.Add(seen);
+    }
+
+    public string GetSeen()
+    {
+      var rnd = new Random();
+      var index = rnd.Next(SeenResponses.Count);
+      return SeenResponses[index];
+    }
+
+    public void AddGreeting(string greeting)
+    {
+      Greetings.Add(greeting);
+    }
+
+    public string GetGreeting()
+    {
+      var rnd = new Random();
+      var index = rnd.Next(Greetings.Count);
+      return Greetings[index];
     }
   }
 

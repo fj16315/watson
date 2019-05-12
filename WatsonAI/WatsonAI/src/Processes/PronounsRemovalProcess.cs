@@ -90,7 +90,9 @@ namespace WatsonAI
         Tuple.Create(new List<string> { "I" }, new List<string> { "Watson" }),
         Tuple.Create(new List<string> { "me" }, new List<string> { "Watson" }),
         Tuple.Create(new List<string> { "my" }, new List<string> { "Watson", "'s" }),
-        Tuple.Create(new List<string> { "mine" }, new List<string> { "Watson", "'s" })
+        Tuple.Create(new List<string> { "studies" }, new List<string> { "study" }),
+        Tuple.Create(new List<string> { "mine" }, new List<string> { "Watson", "'s" }),
+        Tuple.Create(new List<string> { "'s" }, new List<string> { "is" })
       };
       return replacing;
     }

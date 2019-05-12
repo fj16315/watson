@@ -7,18 +7,41 @@ namespace WatsonAI
   public class MultipleWordProcess : IProcess
   {
 
-    private List<Tuple<string, string>> words;
+    private List<List<string>> words;
 
     public MultipleWordProcess()
     {
-      words = new List<Tuple<string, string>>();
-      words.Add(new Tuple<string, string>("rat", "poison"));
-      words.Add(new Tuple<string, string>("dining", "room"));
-      words.Add(new Tuple<string, string>("master", "bedroom"));
-      words.Add(new Tuple<string, string>("sleeping", "aid"));
-      words.Add(new Tuple<string, string>("barbital", "tolerance"));
-      words.Add(new Tuple<string, string>("fast", "acting"));
-      words.Add(new Tuple<string, string>("slow", "acting"));
+      words = new List<List<string>>()
+      {
+        new List<string>()
+        {
+          "rat", "poison"
+        },
+        new List<string>()
+        {
+          "dining", "room"
+        },
+        new List<string>()
+        {
+          "master", "bedroom"
+        },
+        new List<string>()
+        {
+          "sleeping", "aid"
+        },
+        new List<string>()
+        {
+          "barbital", "tolerance"
+        },
+        new List<string>()
+        {
+          "fast", "acting"
+        },
+        new List<string>()
+        {
+          "slow", "acting"
+        }
+      };
 
     }
 
@@ -28,40 +51,71 @@ namespace WatsonAI
       List<string> remainingInput;
       clone.RemainingInput(out remainingInput, Read.Peek);
       var newInput = new List<string>();
-      for (int i = 0; i < remainingInput.Count; i++)
+      var newS = "";
+      for (int i = 0; i < remainingInput.Count; i++) //For each word in the input
       {
         var s = remainingInput[i];
-        if (i != remainingInput.Count-1)
+        newS = "";
+        if (i != remainingInput.Count-1) //If it's not the last one
         {
-          if (s.Contains("-"))
+          if (s.Contains("-")) // If it contains a hyphen
           {
-            string secondWord = s.Split(new string[] { "-" }, StringSplitOptions.None)[1];
-            s = s.Split(new string[] { "-" }, StringSplitOptions.None)[0];
+            //Split the hyphenated word into two different words
+            string secondWord = s.Split('-')[1];
+            s = s.Split('-')[0];
             remainingInput.Insert(i + 1, secondWord);
           }
-          //Loop through list of multiple words
-          foreach (var w in words)
+          bool found = false;
+          int increment = 0;
+          foreach (var ws in words) //For each set of words we want to underscore
           {
-            if (s.Equals(w.Item1))
+            if (!found)
             {
-              var nextS = remainingInput[i + 1];
-              if (nextS.Equals(w.Item2))
+              for (int j = 0; j < ws.Count; j++) //For each word in the multiple word set
               {
-                //remainingInput[remainingInput.IndexOf(s)] = s + "_" + nextS;
-                s = s + "_" + nextS;
-                //remainingInput.RemoveAt(remainingInput.IndexOf(s) + 1);
-                i++;
-                
+                if ((i + j >= remainingInput.Count) || (!remainingInput[i + j].Equals(ws[j])))
+                {
+                  if (words.IndexOf(ws) == words.Count-1)
+                  {
+                    newS = s;
+                  }
+                  else
+                  {
+                    newS = "";
+                  }
+                  j = ws.Count;
+                }
+                else //If the current word matches the current word in the word set
+                {
+                  if (j == ws.Count-1)
+                  {
+                    newS = newS + remainingInput[i + j];
+                    found = true;
+                    increment = ws.Count-1;
+                  }
+                  else
+                  {
+                    if ((words.IndexOf(ws) == 5) || (words.IndexOf(ws) == 6))
+                    {
+                      newS = newS + remainingInput[i + j] + "-";
+                    }
+                    else
+                    {
+                      newS = newS + remainingInput[i + j] + "_";
+                    }
+                  }
+                }
               }
             }
           }
-            //If current string = first word of current word
-              //If next string = second word of current word
-                //Replace whitespace between words with underscore
+          i += increment;
+          newInput.Add(newS);
         }
-        newInput.Add(s);
+        else
+        {
+          newInput.Add(remainingInput[i]);
+        }
       }
-   
       stream.SetInput(newInput);
    
       return stream;
