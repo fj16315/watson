@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syn.WordNet;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -73,6 +74,22 @@ namespace WatsonAI
         stream.NextToken(out word1);
         stream.NextToken(out word2);
         stream.AppendOutput($"{thesaurus.Describes(word1, word2, true)}");
+      }
+
+      if (stream.ConsumeIf("dsverb".Equals))
+      {
+        string word1, word2;
+        stream.NextToken(out word1);
+        stream.NextToken(out word2);
+        stream.AppendOutput($"{thesaurus.Describes(word1, word2, PartOfSpeech.Verb, true)}");
+      }
+
+      if (stream.ConsumeIf("dsnoun".Equals))
+      {
+        string word1, word2;
+        stream.NextToken(out word1);
+        stream.NextToken(out word2);
+        stream.AppendOutput($"{thesaurus.Describes(word1, word2, PartOfSpeech.Noun, true)}");
       }
 
       if (stream.ConsumeIf("s".Equals))
