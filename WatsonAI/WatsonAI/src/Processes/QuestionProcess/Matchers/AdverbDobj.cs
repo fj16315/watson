@@ -33,7 +33,7 @@ namespace WatsonAI
 
 
       var isActiveDobjWho = activeDobjWho.Match(tree).HasValue;
-      Debug.WriteLineIf(isActiveDobjWho, "Active Dobj WhoWhat Question");
+      Debug.WriteLineIf(isActiveDobjWho, "Adverb Dobj");
 
       if (isActiveDobjWho)
       {

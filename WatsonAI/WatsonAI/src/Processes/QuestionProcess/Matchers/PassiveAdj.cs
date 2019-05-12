@@ -33,6 +33,8 @@ namespace WatsonAI
       var adjQuestionPattern = And(question, adjQuestion);
       var isAdjQuestion = adjQuestionPattern.Match(tree).HasValue;
 
+      Debug.WriteLineIf(isAdjQuestion, "Passive Adjective");
+
       if (isAdjQuestion)
       {
         var entityPattern = (cp.Top >= (Branch("S") > (Branch("VP") > cp.AdjPhrase))).Flatten().Flatten().Flatten();

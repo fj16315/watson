@@ -15,6 +15,7 @@ namespace WatsonTest
   {
     static private readonly KnowledgeBuilder builder;
     static private readonly QuestionProcess questionProcess;
+    static private readonly QuestionProcess storyQuestionProcess;
     static private readonly Associations associations;
 
     static QuestionProcessTests()
@@ -39,7 +40,10 @@ namespace WatsonTest
         { "butler", "be", "nervous"}
       };
       associations = builder.Associations;
-      questionProcess = new QuestionProcess(new Parser(), builder.Knowledge, new Thesaurus(associations), builder.Associations);
+      var parser = new Parser();
+      var thesaurus = new Thesaurus(associations);
+      questionProcess = new QuestionProcess(parser, builder.Knowledge, thesaurus, builder.Associations);
+      storyQuestionProcess = new QuestionProcess(parser, Story.Knowledge, new Thesaurus(Story.Associations), Story.Associations);
     }
 
     [Fact]
@@ -155,6 +159,16 @@ namespace WatsonTest
       input = "Is the earl the murderer?";
       answer = questionProcess.GetBooleanAnswer(input);
       Assert.False(answer);
+    }
+
+    [Fact]
+    public void ColonelDidNotMurderEarl()
+    {
+      var input = "Who murdered the earl?";
+      var answers = storyQuestionProcess.GetEntityAnswers(input);
+
+      var expectedAnswers = new string[0];
+      AssertEntityEquals(expectedAnswers, answers);
     }
 
     [Fact]

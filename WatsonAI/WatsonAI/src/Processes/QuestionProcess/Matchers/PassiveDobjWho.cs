@@ -52,7 +52,7 @@ namespace WatsonAI
         var entities = entityPattern.Match(tree).Value;
         if (isWhoQuestion) { Console.WriteLine("is passive who question"); entities = Story.WhoEntityFilter(entities); }
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > cp.VerbPhrase)).Flatten().Flatten();
+        var verbPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
 
         var verbs = verbPattern.Match(tree).Value;
         answers = GenerateAnswers(entities.Distinct(), verbs.Distinct());
