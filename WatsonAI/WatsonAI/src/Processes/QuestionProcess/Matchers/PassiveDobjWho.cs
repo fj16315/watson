@@ -50,7 +50,7 @@ namespace WatsonAI
         var entityPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > (Branch("VP") > (Branch("PP") > cp.NounPhrase))))).Flatten().Flatten().Flatten().Flatten().Flatten();
         var entities = entityPattern.Match(tree).Value;
 
-        var verbPattern = (cp.Top >= (Branch("SQ") > (Branch("VP") > cp.VerbPhrase))).Flatten().Flatten().Flatten();
+        var verbPattern = (cp.Top >= (Branch("SQ") >= cp.VerbPhrase)).Flatten().Flatten();
 
         var verbs = verbPattern.Match(tree).Value;
         foreach (var v in verbs)
